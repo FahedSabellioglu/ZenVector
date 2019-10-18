@@ -1,12 +1,21 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.navbar-brand {
+    width: 400px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    content: none;
+}
+
+
+
+
+
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
-
-
-
-
-
-
-
-
 
 
 
@@ -67,8 +76,7 @@ figure {
 
 
 
-
-/*
+/* NOTE FOR SELF
 Extra small (xs) devices (portrait phones, less than 576px)
 No media query since this is the default in Bootstrap
 
