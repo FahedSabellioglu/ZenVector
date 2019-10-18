@@ -1,136 +1,86 @@
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+
+
+
+
+
+
+
+
+
+
+/*---Media Queries --*/
+@media (max-width: 992px) {}
+
+@media (max-width: 768px) {}
+
+@media (max-width: 576px) {}
+
+
+/*---Firefox Bug Fix --*/
+.carousel-item {
+    transition: -webkit-transform 0.5s ease;
+    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
 }
 
-nav {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    min-height: 8vh;
-    background-color: white;
-    font-family: 'Poppins', sans-serif;
-
-
-
+/*--- Fixed Background Image --*/
+figure {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    margin: 0 !important;
 }
 
-
-
-.logo {
-    color: #75D701;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    font-size: 20px;
-
-
+.fixed-wrap {
+    clip: rect(0, auto, auto, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.nav-links {
-    display: flex;
-    justify-content: space-around;
-    width: 50%;
-
+#fixed {
+    background-image: url('img/mac.png');
+    position: fixed;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
 }
 
-.nav-links li {
-    list-style: none;
-}
-
-.nav-links a {
-    color: #75D701;
-    text-decoration: none;
-    letter-spacing: 3px;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-
-.burger {
-    display: none;
-}
-
-.burger div {
-    width: 25px;
-    height: 2px;
-    background-color: #75D701;
-    margin: 5px;
-}
-
-
-
-
-@media screen and (max-width: 1024px) {
-    .nav-links {
-        width: 60%;
-        color: white;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    body {
-        overflow-x: hidden;
-    }
-
-
-    .nav-links {
-        position: absolute;
-        right: 0px;
-        height: 92vh;
-        top: 8vh;
-        background-color: white;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 30%;
-        transform: translateX(100%);
-        transition: transform 0.5s ease-in;
-
-    }
-
-    .nav-links li {
-        opacity: 0;
-
-    }
-
-    .burger {
-        display: block;
-        cursor: pointer;
-    }
-
-}
-
-.nav-active {
-    transform: translateX(0%);
-
+/*--- Bootstrap Padding Fix --*/
+[class*="col-"] {
+    padding: 1rem;
 }
 
 
-@keyframes navLinkFade {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
 
-    }
 
-    to {
-        opacity: 1;
-        transform: translateX(0px);
 
-    }
-}
+/*
+Extra small (xs) devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap
 
-.toggle .line1 {
-    transform: rotate(-45 translate(-5px, 6px));
-}
+Small (sm) devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
 
-.toggle .line2 {
-    opacity: 0;
-}
+Medium (md) devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
 
-.toggle .line3 {
-    transform: rotate(45 translate(-5px, -6px));
+Large (lg) devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
 
-}
+Extra (xl) large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+*/
