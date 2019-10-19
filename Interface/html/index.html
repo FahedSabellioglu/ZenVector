@@ -6,64 +6,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Put Together</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <link href="../../material-kit-master/assets/css/material-kit.css" rel="stylesheet" />
+
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    <link href="/CSS/style.css" rel="stylesheet">
+    <!-- <link href="../../CSS/style.css" rel="stylesheet"> -->
+
+    <style>
+    .logo-image {
+    width: 46px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+
+.input-group .input-group-text{
+padding: 0px 14px 1px 0px
+}
+
+.modal-header .close{
+    padding-top: 26.2px
+}
+    
+    </style>
 
 </head>
 
-<body>
+<body style="background-color:white">
 
     <!------------- Navigation ---------------->
-    <nav class="navbar navbar-light navbar-expand-md navbar-light bg-light sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"> <img src="/img/logo.png" width="10%" alt=""> </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                <span class="navbar-toggler-icon"> </span>
-            </button>
-            <div class="collapse navbar-collapse" id=navbarResponsive">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Team">Team</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Connect">Connect</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#About">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Pricing">Pricing</a>
-                    </li>
+    <!-- navbar-color-on-scroll -->
 
-                </ul>
+    <nav class="navbar  fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+            <div class="container">
+              <div class="navbar-translate">
+                <a class="navbar-brand">
+                    <div class="logo-image">
+                            <img src="../../img/logo.png" class="img-fluid">
+                    </div>
+                </a>
+              </div>
+
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                      <ul class="navbar-nav ml-big">
+    
+                        <li class="nav-item active">
+                          <a class="nav-link" href="#">About<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">The Team</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                        <!-- <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown link
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                                </li> -->
+ 
+                      </ul>
+                      
+                    </div>
             </div>
-        </div>
-    </nav>
+          </nav>
+  
     <!---------- Image Slider WILL CHANGE THIS COMPONENT BECAUSE WE ONLY HAVE ONE PICTURE ----------->
     <div id="slides" class="carousel slide" data-ride="carousel">
-        <ul class="carousel-indicators">
-            <li data-target="#slides" data-slide-to="0" class="active"></li>
-            <li data-target="#slides" data-slide-to="1" class="active"></li>
-            <li data-target="#slides" data-slide-to="2" class="active"></li>
-        </ul>
+        <!-- <ul class="carousel-indicators">
+            <li data-target="#slides"  class="active"></li>
+            <li data-target="#slides"  class="active"></li>
+            <li data-target="#slides"  class="active"></li>
+        </ul> --> -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="/img/Top_bg.png" width="100%" alt="">
+                <img src="../../img/Top_bg.png" width="100%" height="50%" alt="">
                 <div class=" carousel-caption">
                     <button type="button" class="btn btn-secondary .btn-block">VIEW DEMO</button>
-                    <button type="button" class="btn btn-primary-success btn-success .btn-block">SING UP - IT'S
+                    <button type="button" data-toggle="modal" data-target="#signupModal" class="btn btn-primary-success btn-success .btn-block">
+                            <i class="fas fa-user-plus"></i>
+                        SING UP - IT'S
                         FREE</button>
-
                 </div>
             </div>
 
             <!--- Jumbotron -->
-            <div class="container-fluid padding">
+
+
+            <!-- <div class="container-fluid padding">
                 <div class="row jumbotron">
                     <div class="col-cs-12 col-sm-12 col-md-4 col-lg-0 col-xl-10">
                     </div>
@@ -85,50 +125,185 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
 
             <!--- Welcome Section -->
-            <div class="container-fluid padding">
-                <div class="row welcome text-center">
-                    <div class="col-12">
-                        <h1 class="display-4">Built By Developers, For Developers.</h1>
-                    </div>
-                    <hr>
-                    <div class="col-12">
-                        <p class="lead"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos
-                            asperiores ex
-                            consectetur consequuntur eveniet provident, laudantium culpa veniam odit expedita minus!
-                            Itaque
-                            quibusdam eligendi magni?</p>
-                    </div>
+            <div class="row" style="padding:5%; padding-right: 0% ">
+                <div class=" col-md-4 col-xs-12">
+                        <img src="../../img/developer.jpg" width="100%" class="rounded">
 
                 </div>
-            </div>
+                <div class="col mr-auto ml-auto text-center">
+                        <h1 class="display-4">By Developers, For Developers.</h1>
 
-            <!--- Three Column Section -->
-            <div class="container-fluid padding">
+                        <p class="lead text-muted"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos
+                                asperiores ex
+                                consectetur consequuntur eveniet provident, laudantium culpa veniam odit expedita minus!
+                                Itaque
+                                quibusdam eligendi magni?</p>
+                </div>
+
+            </div>
+            <hr class="my-4">
+
+                
+
+            <!-- - Three Column Section --> 
+
+            
+            <!-- <div class="row justify-content-center">
+
+                <div class="col-auto ml-auto mr-auto">
+                        <div class="info">
+                                <div class="icon icon-primary">
+                                    <i class="material-icons">chat</i>
+                                </div>
+                                <h4 class="info-title">Free Chat</h4>
+                                <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
+                            </div>
+
+                </div>
+                <div class="col-auto">
+                        <div class="info">
+                                <div class="icon icon-primary">
+                                    <i class="material-icons">chat</i>
+                                </div>
+                                <h4 class="info-title">Free Chat</h4>
+                                <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
+                            </div>
+
+                </div>
+                <div class="col-auto">
+                        <div class="info">
+                                <div class="icon icon-primary">
+                                    <i class="material-icons">chat</i>
+                                </div>
+                                <h4 class="info-title">Free Chat</h4>
+                                <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
+                            </div>
+
+                </div>
+                </div> -->
+
+                
+
+            <div class="container-fluid padding" style="margin-top: 7%; margin-bottom: 5%">
                 <div class="row text-center padding''">
                     <div class="col-xs-12 col-sm-6 col-md-4">
-                        <i class="fas fa-sync"></i>
-                        <h3>PLATFORM SYNC</h3>
-                        <p>Have your tasks everywhere you go!</p>
+                        <img src="../../img/responsive-design-symbol.svg" width="10%">
+                        <h3>Responsive</h3>
+                        <p>Fastest, most responsive experience!</p>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-4">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <h3>RESPONSIVE</h3>
+                            <img src="../../img/Cross.jpeg" width="10%">
+                            <h3>Platform Sync</h3>
                         <p>Fastest, most responsive experience!</p>
                     </div>
                     <div class="col-sm-12 col-md-4">
-                        <i class="fas fa-paperclip"></i>
-                        <h3>USER FRIENDLY</h3>
+                            <img src="../../img/responsive-design-symbol.svg" width="10%">
+                            <h3>USER FRIENDLY</h3>
                         <p>Most intuitive tool!</p>
                     </div>
                 </div>
-                <hr class="my-4">
+                <!-- <hr class="my-4"> -->
             </div>
 
+            <div class="container-fluid padding">
+       
+                    <div class="sharing-area text-center" style="margin-top: 17px;">
+                            <div class="row justify-content-center">
+                                <h3>Reash us!</h3>
+                            </div>
+                            <button id="twitter" class="btn btn-raised btn-twitter sharrre">
+                                <i class="fab fa-twitter"></i> Tweet
+                            </button>
+                            <button id="facebook" class="btn btn-raised btn-facebook sharrre">
+                                <i class="fab fa-facebook-square"></i> Share
+                            </button>
+                            <button id="googlePlus" class="btn btn-raised btn-google-plus sharrre">
+                                <i class="fab fa-google-plus"></i> Share
+                            </button>
+                            <a id="github" href="https://github.com/creativetimofficial/material-kit" target="_blank" class="btn btn-raised btn-github">
+                                <i class="fab fa-github"></i> Star
+                            </a>
+                            </div>
+            </div>
+
+            <div class="section text-center">
+                    <h2 class="title">Here is our team</h2>
+                    <div class="team">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="team-player">
+                            <div class="card card-plain">
+                              <div class="col-md-6 ml-auto mr-auto">
+                                <img src="../../img/Fahed_team_pic.jpg" width="75%" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+                              </div>
+                              <h4 class="card-title">Fahed
+                                <br>
+                                <small class="card-description text-muted">Database</small>
+                              </h4>
+                              <div class="card-body">
+                                <p class="card-description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
+                                  <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                              </div>
+                              <div class="card-footer justify-content-center">
+                                <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-instagram"></i></a>
+                                <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-facebook-square"></i></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="team-player">
+                            <div class="card card-plain">
+                              <div class="col-md-6 ml-auto mr-auto">
+                                <img src="../../img/Khaled_team_pic.JPG" height="50%" width="50%" alt="Thumbnail Image" class="img-raised rounded img-fluid">
+                              </div>
+                              <h4 class="card-title">Khaled
+                                <br>
+                                <small class="card-description text-muted">Designer</small>
+                              </h4>
+                              <div class="card-body">
+                                <p class="card-description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
+                                  <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                              </div>
+                              <div class="card-footer justify-content-center">
+                                <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-linkedin"></i></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="team-player">
+                            <div class="card card-plain">
+                              <div class="col-md-6 ml-auto mr-auto">
+                                <img src="../../img/Fahed_team_pic.jpg" height="100%" width="75%" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+                              </div>
+                              <h4 class="card-title">Kendall Jenner
+                                <br>
+                                <small class="card-description text-muted">Model</small>
+                              </h4>
+                              <div class="card-body">
+                                <p class="card-description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
+                                  <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                              </div>
+                              <div class="card-footer justify-content-center">
+                                <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-instagram"></i></a>
+                                <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-facebook-square"></i></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
             <!--- Two Column Section -->
-            <div id="" class="container-fluid padding">
+            <!-- <div id="" class="container-fluid padding">
                 <div class="row text-center padding">
                     <div class="col-md-12 col-lg-12">
                         <h2>Autonomous Teams Are The Future!</h2>
@@ -136,20 +311,20 @@
                             environment for your team to standout and deliever on time.</p>
                         <p>Put Together's awesome environment keeps the workflow smooth and soft.</p>
                         <p>Put Together's awesome environment keeps the workflow smooth and soft.</p>
-                        <a href="#" class="btn btn-primary">Learn How!</a>
+                        <a href="#" class="btn btn-">Learn How!</a>
                         <br>
                         <br>
                     </div>
 
                     <div class="col-xl-12">
-                        <img src="/img/potenial-slider1.png" class="img-fluid" width="100%" alt="">
+                        <img src="../../img/potenial-slider1.png" class="img-fluid" width="100%" alt="">
                     </div>
                 </div>
 
             </div>
             <br>
             <br>
-            <hr class="my-4">
+            <hr class="my-4"> -->
             <!-- - Fixed background
             <figure>
                 <div class="fixed-wrap">
@@ -160,7 +335,7 @@
             </figure> -->
 
             <!--- Meet the team -->
-            <div class="container-fluid padding" id="Team">
+            <!-- <div class="container-fluid padding" id="Team">
                 <div class="row welcome text-center">
                     <div class="col-12">
                         <h1 class="display-4">MEET THE TEAM</h1>
@@ -168,13 +343,13 @@
                     <hr class="my-4">
 
                 </div>
-            </div>
+            </div> -->
             <!--- Cards -->
-            <div class="container-fluid padding">
+            <!-- <div class="container-fluid padding">
                 <div class="row padding">
                     <div class="col-md-4">
                         <div class="card">
-                            <img class="card-img-top" src="/img/Khaled_team_pic.JPG" alt="">
+                            <img class="card-img-top" src="../../img/Khaled_team_pic.JPG" alt="">
                             <div class="card-body">
                                 <h4 class="card-title">Khaled</h4>
                                 <p>Interface Design</p>
@@ -184,7 +359,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card">
-                            <img class="card-img-top" src="/img/Fahed_team_pic.jpg" alt="">
+                            <img class="card-img-top" src="../../img/Fahed_team_pic.jpg" alt="">
                             <div class="card-body">
                                 <h4 class="card-title">Fahed</h4>
                                 <p>Database</p>
@@ -194,7 +369,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card">
-                            <img class="card-img-top" src="/img/team_pic.jpg" alt="">
+                            <img class="card-img-top" src="../../img/team_pic.jpg" alt="">
                             <div class="card-body">
                                 <h4 class="card-title">Zeynep</h4>
                                 <p>Back-End</p>
@@ -205,10 +380,10 @@
                 </div>
             </div>
             <br>
-            <br>
+            <br> -->
 
             <!--- Two Column Section -->
-            <hr>
+            <!-- <hr>
             <div class="container-fluid padding" id="About">
                 <div class="row text-center padding">
                     <div class="col-md-12 col-lg-12">
@@ -219,12 +394,12 @@
                     </div>
 
                     <div class="col-xl-12">
-                        <img src="/img/potenial-slider2.png" class="img-fluid" width="100%" alt="">
+                        <img src="../../img/potenial-slider2.png" class="img-fluid" width="100%" alt="">
                     </div>
                 </div>
                 <hr>
                 <br>
-            </div>
+            </div> -->
 
             <!-- - Connect
 
@@ -239,6 +414,107 @@
 
 
             <!--- Footer -->
+
+
+            <div class="modal fade" id="signupModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-signup" role="document">
+                      <div class="modal-content">
+                        <div class="card card-signup card-plain">
+                          <div class="modal-header">
+
+                            <h5 class="modal-title card-title">Register</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <i class="far fa-window-close" style="color: red"></i>
+
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="row">
+                  
+                              <div class="col mr-auto">
+                  
+                                <form class="form" method="" action="">
+                                  <div class="card-body">
+                                    <div class="form-group">
+                                      <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                        </div>
+                                          <input type="text" class="form-control" placeholder="First Name...">
+                                      </div>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                            <div class="input-group">
+                                              <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                        <i class="fas fa-user"></i>                                                </div>
+                                              </div>
+                                                <input type="text" class="form-control" placeholder="Last Name...">
+                                            </div>
+                                          </div> -->
+                  
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                    <i class="fas fa-envelope"></i>  
+                                            </div>
+                                        </div>
+                                            <input type="text" class="form-control" placeholder="Email...">
+                                        </div>
+                                    </div>
+                  
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                    <i class="fa fa-key" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                            <input type="password" placeholder="Password..." class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                            <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                        <i class="fa fa-key" aria-hidden="true"></i>
+                                                    </div>
+                                            </div>
+                                                <input type="password" placeholder="Repeat Password..." class="form-control" />
+                                            </div>
+                                        </div>
+                  
+                                  <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" value="" checked>
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                        I agree to the <a href="#something">terms and conditions</a>.
+                                    </label>
+                                  </div>
+                                  </div>
+                                <div class="modal-footer justify-content-center">
+                                <a href="#pablo" class="btn btn-primary btn-round">Get Started</a>
+                                </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
 
 
 
@@ -286,6 +562,20 @@
                         }
                     });
             </script>
+            <script src="../../material-kit-master/assets/js/core/jquery.min.js" type="text/javascript"></script>
+            <script src="../../material-kit-master/assets/js/core/popper.min.js" type="text/javascript"></script>
+            <script src="../../material-kit-master/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+            <script src="../../material-kit-master/assets/js/plugins/moment.min.js"></script>
+            <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+            <script src="../../material-kit-master/assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+            <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+            <script src="../../material-kit-master/assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+            <!--  Google Maps Plugin  -->
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+            <!-- Place this tag in your head or just before your close body tag. -->
+            <script async defer src="https://buttons.github.io/buttons.js"></script>
+            <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+            <script src="../../material-kit-master/assets/js/material-kit.js?v=2.0.4" type="text/javascript"></script>
 </body>
 
 </html>
