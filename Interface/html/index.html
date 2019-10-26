@@ -14,6 +14,7 @@
   <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
   <style>
+
     .logo-image {
       width: 134px;
       height: 64px;
@@ -29,6 +30,68 @@
     .modal-header .close {
       padding-top: 26.2px
     }
+    
+    .Socials{
+      color: #59A61E;
+    }
+    
+    .footer{ 
+      background: white;
+      /* color: green; */
+      height: 100px;
+    }
+    .pricing-2{
+      align-content: center;
+      align-items: center;
+      text-align: center;
+  
+    }
+    .text-info {
+    color: #CDCDCE !important;
+
+    }
+
+    .card .card-header-rose, .card.bg-rose, .card.card-rotate.bg-rose .front, .card.card-rotate.bg-rose .back {
+    background: linear-gradient(60deg, #59A61E, rgb(101, 158, 57));
+}
+.title{
+  font-family: 'Raleway', sans-serif;
+}
+.card-title{
+
+  font-family: 'Roboto', sans-serif;
+
+}
+.btn.btn-rose {
+    color: #fff;
+    background-color: rgb(136, 136, 136);
+    border-color: #fff;
+    box-shadow: linear-gradient(60deg, #59A61E, rgb(101, 158, 57));
+}
+.btn.btn-rose:hover {
+    color: #fff;
+    background-color: #59A61E;
+    border-color: #59A61E;
+}
+.btn.btn-white, .btn.btn-white:focus, .btn.btn-white:hover {
+    background-color: white;;
+    color: rgb(136, 136, 136);
+}
+.btn.btn-rose:focus, .btn.btn-rose:active, .btn.btn-rose:hover {
+    box-shadow: 0 14px 26px -12px rgba(0, 0, 0, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px #59A61E;
+}
+    .btn.btn-rose {
+    color: #fff;
+    background-color: #59A61E;
+    border-color: #59A61E;
+    }
+    .btn.btn-rose {
+    color: #fff;
+    border-color: #CDCDCE;
+    box-shadow: 0 2px 2px 0 rgba(233, 30, 99, 0.14), 0 3px 1px -2px rgba(233, 30, 99, 0.2), 0 1px 5px 0 rgba(233, 30, 99, 0.12);
+
+    }  
+
   </style>
 
 </head>
@@ -60,16 +123,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
           </li>
-          <!-- <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Dropdown link
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                                </li> -->
+
 
         </ul>
 
@@ -79,14 +133,10 @@
 
   <!---------- Image Slider WILL CHANGE THIS COMPONENT BECAUSE WE ONLY HAVE ONE PICTURE ----------->
   <div id="slides" class="carousel slide" data-ride="carousel">
-    <!-- <ul class="carousel-indicators">
-            <li data-target="#slides"  class="active"></li>
-            <li data-target="#slides"  class="active"></li>
-            <li data-target="#slides"  class="active"></li>
-        </ul> -->
-    <div class="carousel-inner">
+
+    <div id="Top" class="carousel-inner">
       <div class="carousel-item active">
-        <img src="../../img/Top_bg.png" width="100%" height="50%" alt="">
+        <img class="background-image-top" src="../../img/Potenial_BG.png" width="50%"  alt="">
         <div class=" carousel-caption">
           <button type="button" class="btn btn-secondary .btn-block">VIEW DEMO</button>
           <button type="button" data-toggle="modal" data-target="#signupModal"
@@ -97,33 +147,7 @@
         </div>
       </div>
 
-      <!--- Jumbotron -->
-
-
-      <!-- <div class="container-fluid padding">
-                <div class="row jumbotron">
-                    <div class="col-cs-12 col-sm-12 col-md-4 col-lg-0 col-xl-10">
-                    </div>
-                    <div class="crow text-center padding">
-                        <a href="#"> <button type="button" class="btn btn-warning .btn-block">
-                                <h4 class="container-fluid padding">Connect with
-                                    Us!</h4>
-                            </button></a>
-                        <br>
-                        <br>
-                        <div id="Connect" class="crow text-center padding">
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-google-plus-g"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-youtube"></i></a>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div> -->
-
+  
       <!--- Welcome Section -->
       <div class="container-fluid padding" style="margin-top: 7%; margin-bottom: 5%">
         <div class="row text-center padding''">
@@ -148,21 +172,21 @@
 
       <hr>
       <div class="row" >
-        <div class="col-md-4 col-xs-12">
-          <img src="../../img/potenial-slider2.png" width="100%" class="rounded">
-        </div>
-        <div class="col-md-8 col-xs-12 mr-auto ml-auto text-center" style="margin-top: 12%;">
+        <div class="col-md-11 col-xs-5 mr-auto ml-auto text-center">
           <div class="row">
-            <div class="col-md-12">
-                <h1 class="display-4">By Developers, For Developers.</h1>
-
+            <div class="col-md-8 col-xs-12 mr-auto ml-auto text-center">
+              <br>
+                <h1 class="display-2">By Developers, For Developers.</h1>
+                <br>
             </div>
-            <div class="col-md-8 col-xs-12 ml-auto mr-auto">
+            <div class="col-md-12 col-xs-12 ml-auto mr-auto">
                 <p class="lead text-muted"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos
                     asperiores ex
                     consectetur consequuntur eveniet provident, laudantium culpa veniam odit expedita minus!
                     Itaque
                     quibusdam eligendi magni?</p>
+                    <br>
+                    <br>
             </div>
 
           </div>
@@ -172,93 +196,108 @@
 
       </div>
       <hr class="my-4">
-
-
-      <!-- <div class="row justify-content-center">
-
-                <div class="col-auto ml-auto mr-auto">
-                        <div class="info">
-                                <div class="icon icon-primary">
-                                    <i class="material-icons">chat</i>
-                                </div>
-                                <h4 class="info-title">Free Chat</h4>
-                                <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
-                            </div>
-
-                </div>
-                <div class="col-auto">
-                        <div class="info">
-                                <div class="icon icon-primary">
-                                    <i class="material-icons">chat</i>
-                                </div>
-                                <h4 class="info-title">Free Chat</h4>
-                                <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
-                            </div>
-
-                </div>
-                <div class="col-auto">
-                        <div class="info">
-                                <div class="icon icon-primary">
-                                    <i class="material-icons">chat</i>
-                                </div>
-                                <h4 class="info-title">Free Chat</h4>
-                                <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
-                            </div>
-
-                </div>
-                </div> -->
-
-
-
-
-
-      <div class="container-fluid padding">
-
-        <div class="sharing-area text-center" style="margin-top: 17px;">
-          <div class="row justify-content-center">
-            <h3>Reash us!</h3>
-          </div>
-          <button id="twitter" class="btn btn-raised btn-twitter sharrre">
-            <i class="fab fa-twitter"></i> Tweet
-          </button>
-          <button id="facebook" class="btn btn-raised btn-facebook sharrre">
-            <i class="fab fa-facebook-square"></i> Share
-          </button>
-          <button id="googlePlus" class="btn btn-raised btn-google-plus sharrre">
-            <i class="fab fa-google-plus"></i> Share
-          </button>
-          <a id="github" href="https://github.com/creativetimofficial/material-kit" target="_blank"
-            class="btn btn-raised btn-github">
-            <i class="fab fa-github"></i> Star
-          </a>
-        </div>
+      
       </div>
 
       <div id="Team" class="section text-center">
+        <h2 class="title">Our Plans</h2>
+        <br>
+        <div class="pricing-2">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-pricing card-plain">
+                        <div class="card-body">
+                            <h6 class="card-category text-info">Free</h6>
+                            <h1 class="card-title">
+                                <small>$</small>0
+                                <small>/mo</small>
+                            </h1>
+                            <ul>
+                                <li>
+                                    <b>1</b> Project</li>
+                                <li>
+                                    <b>5</b> Team Members</li>
+                                <li>
+                                    <b>55</b> Personal Contacts</li>
+                                <li>
+                                    <b>5.000</b> Messages</li>
+                            </ul>
+                            <a href="#pablo" class="btn btn-rose btn-raised btn-round">
+                                Get Started
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-pricing card-raised bg-rose">
+                        <div class="card-body">
+                            <h6 class="card-category text-info">Premium</h6>
+                            <h1 class="card-title">
+                                <small>$</small>89
+                                <small>/mo</small>
+                            </h1>
+                            <ul>
+                                <li>
+                                    <b>500</b> Projects</li>
+                                <li>
+                                    <b>50</b> Team Members</li>
+                                <li>
+                                    <b>125</b> Personal Contacts</li>
+                                <li>
+                                    <b>15.000</b> Messages</li>
+                            </ul>
+                            <a href="#pablo" class="btn btn-white btn-raised btn-round">
+                                Get Started
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-pricing card-plain">
+                        <div class="card-body">
+                            <h6 class="card-category text-info">Platinum</h6>
+                            <h1 class="card-title">
+                                <small>$</small>199
+                                <small>/mo</small>
+                            </h1>
+                            <ul>
+                                <li>
+                                    <b>1000</b> Projects</li>
+                                <li>
+                                    <b>100</b> Team Members</li>
+                                <li>
+                                    <b>550</b> Personal Contacts</li>
+                                <li>
+                                    <b>50.000</b> Messages</li>
+                            </ul>
+                            <a href="#pablo" class="btn btn-rose btn-raised btn-round">
+                                Get Started
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div id="Team" class="section text-center">
         <h2 class="title">Our Team</h2>
+        <br>
         <div class="team">
           <div class="row">
             <div class="col-md-4">
               <div class="team-player">
                 <div class="card card-plain">
                   <div class="col-md-6 ml-auto mr-auto">
-                    <img src="../../img/Fahed_team_pic.jpg" height="100%" width="75%" alt="Thumbnail Image"
+                    <img src="../../img/Fahed_team_pic.jpg" height="100%" width="70%" alt="Thumbnail Image"
                       class="img-raised rounded-circle img-fluid">
                   </div>
                   <h4 class="card-title">Fahed
                     <br>
-                    <small class="card-description text-muted">Databases</small>
+                    <small class="card-description text-muted">Databases & Functionality</small>
                   </h4>
-                  <div class="card-body">
-                    <p class="card-description">You can write here details about one of your team members. You can give
-                      more details about what they do. Feel free to add some
-                      <a href="#">links</a> for people to be able to follow them outside the site.</p>
-                  </div>
-                  <div class="card-footer justify-content-center">
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-facebook-square"></i></a>
-                  </div>
+                  
+                  <div class="card-footer justify-content-center"></div>
                 </div>
               </div>
             </div>
@@ -271,16 +310,10 @@
                   </div>
                   <h4 class="card-title">Khaled
                     <br>
-                    <small class="card-description text-muted">User Interface & Experience</small>
+                    <small class="card-description text-muted">User Interface & User Experience</small>
                   </h4>
-                  <div class="card-body">
-                    <p class="card-description">You can write here details about one of your team members. You can give
-                      more details about what they do. Feel free to add some
-                      <a href="#">links</a> for people to be able to follow them outside the site.</p>
-                  </div>
+
                   <div class="card-footer justify-content-center">
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-linkedin"></i></a>
                   </div>
                 </div>
               </div>
@@ -289,31 +322,24 @@
               <div class="team-player">
                 <div class="card card-plain">
                   <div class="col-md-6 ml-auto mr-auto">
-                    <img src="../../img/Zeynep_teampic.jpg" width="75%" alt="Thumbnail Image"
+                    <img src="../../img/Zeynep_teampic.jpg" width="59%" alt="Thumbnail Image"
                       class="img-raised rounded-circle img-fluid">
                   </div>
                   <h4 class="card-title">Zeynep
                     <br>
-                    <small class="card-description text-muted">Back-end</small>
+                    <small class="card-description text-muted">Backend & Jinga</small>
                   </h4>
-                  <div class="card-body">
-                    <p class="card-description">You can write here details about one of your team members. You can give
-                      more details about what they do. Feel free to add some
-                      <a href="#">links</a> for people to be able to follow them outside the site.</p>
-                  </div>
-                  <div class="card-footer justify-content-center">
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fab fa-facebook-square"></i></a>
-                  </div>
+                  
+                  <div class="card-footer justify-content-center"></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <hr class="my-4">
 
-      <!--- Two Column Section -->
+      <!-- - Two Column Section -->
       <!-- <div id="" class="container-fluid padding">
                 <div class="row text-center padding">
                     <div class="col-md-12 col-lg-12">
@@ -336,95 +362,6 @@
             <br>
             <br>
             <hr class="my-4"> -->
-      <!-- - Fixed background
-            <figure>
-                <div class="fixed-wrap">
-                    <div id="fixed">
-
-                    </div>
-                </div>
-            </figure> -->
-
-      <!--- Meet the team -->
-      <!-- <div class="container-fluid padding" id="Team">
-                <div class="row welcome text-center">
-                    <div class="col-12">
-                        <h1 class="display-4">MEET THE TEAM</h1>
-                    </div>
-                    <hr class="my-4">
-
-                </div>
-            </div> -->
-      <!--- Cards -->
-      <!-- <div class="container-fluid padding">
-                <div class="row padding">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img class="card-img-top" src="../../img/Khaled_team_pic.JPG" alt="">
-                            <div class="card-body">
-                                <h4 class="card-title">Khaled</h4>
-                                <p>Interface Design</p>
-                                <a href="#" class="btn btn-outline-secondary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img class="card-img-top" src="../../img/Fahed_team_pic.jpg" alt="">
-                            <div class="card-body">
-                                <h4 class="card-title">Fahed</h4>
-                                <p>Database</p>
-                                <a href="#" class="btn btn-outline-secondary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img class="card-img-top" src="../../img/team_pic.jpg" alt="">
-                            <div class="card-body">
-                                <h4 class="card-title">Zeynep</h4>
-                                <p>Back-End</p>
-                                <a href="#" class="btn btn-outline-secondary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <br> -->
-
-      <!--- Two Column Section -->
-      <!-- <hr>
-            <div class="container-fluid padding" id="About">
-                <div class="row text-center padding">
-                    <div class="col-md-12 col-lg-12">
-                        <h2>Our Why</h2>
-                        <p>Put Together helps you create a cross-fucntional, transcendent, and an autonomous
-                        </p>
-                        <br>
-                    </div>
-
-                    <div class="col-xl-12">
-                        <img src="../../img/potenial-slider2.png" class="img-fluid" width="100%" alt="">
-                    </div>
-                </div>
-                <hr>
-                <br>
-            </div> -->
-
-      <!-- - Connect
-
-            <div class="container-fluid padding">
-                <div class="row text-center padding">
-                    <div class="col-12">
-                        <h2>Connect</h2>
-                    </div>
-
-                </div>
-            </div> -->
-
-
-      <!--- Footer -->
 
 
       <div class="modal fade" id="signupModal" tabindex="-1" role="dialog">
@@ -456,16 +393,10 @@
                             <input type="text" class="form-control" placeholder="Name...">
                           </div>
                         </div>
-                        <!-- <div class="form-group">
-                                            <div class="input-group">
-                                              <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                        <i class="fas fa-user"></i>                                                </div>
-                                              </div>
-                                                <input type="text" class="form-control" placeholder="Last Name...">
-                                            </div>
-                                          </div> -->
 
+
+                      
+                           <!-- MODAL FOR SIGNING UP! -->
                         <div class="form-group">
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -519,6 +450,44 @@
           </div>
         </div>
       </div>
+
+     
+    <footer class="footer footer-default" >
+        <div class="container">
+          <nav class="float-left">
+            <ul>
+              <li>
+                <a href="#Top">
+                    <img src="/img/Actual_logos/PNG_FORM/puttogether1-04.png" width="20%" alt="">
+                </a>
+              </li>
+            </ul>
+          </nav>
+          
+          <div class="footer">
+
+
+      <div class="footer-content">
+
+        <div class="footer-section about">
+          <!-- <div class="socials"> -->
+              <a class="Socials" href="#"><i class="fab fa-facebook fa-lg"></i></a>
+              <a class="Socials" href="#"><i class="fab fa-twitter fa-lg"></i></a>
+              <a class="Socials" href="#"><i class="fab fa-google fa-lg "></i></a>
+              <a class="Socials" href="#"><i class="fab fa-linkedin fa-lg"></i></a>
+              <hr class="my-4">
+          <p>
+            PutTogether is built with passion, transcendency, and most importantly, user-based satisfaction. This is where everything gets a bit easier to organize. This is where all of your opportunities start and end. This is PutTogether.
+          </p>
+          <hr class="my-4">
+          </div>
+        </div>
+        <div class="footer-section links"></div>
+        <div class="footer-section contact-form"></div>
+
+
+        </div>
+      </footer>
 
 
 
