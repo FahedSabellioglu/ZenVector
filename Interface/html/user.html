@@ -16,14 +16,43 @@
                     }
 
               .vl {
-              border-left: 2px solid green;
+              border-left: 2px solid #59A61E;
               height: 490px;
-              /* margin-top: 3%; */
           }
+
+          /* html { overflow-y: hidden; } */
+
           .form-control, .is-focused .form-control div {
             background-image:  linear-gradient(to top, #2aa134 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
           }
-                                      
+
+          .btn.btn-primary {
+              color: #fff;
+              background-color: #59A61E;
+              border-color: #59A61E;
+              box-shadow: 0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12);
+          }
+
+          .card .card-header-danger{
+            background: linear-gradient(60deg, #59A61E, #59A61E);
+          }
+
+          .list-group{
+            align-items: center;
+          }
+
+          .card .card-header-danger {
+                /* box-shadow: 0 5px 20px 0px rgba(89, 166, 30, 1), 0 13px 24px -11px rgba(89, 166, 30, 1); */
+                box-shadow: 0 5px 20px 0px rgb(250, 250, 250), 0 13px 24px -11px rgb(237, 238, 236)
+
+            }
+
+            .scroll-box {
+            overflow-y: scroll;
+            height: 100px;
+            padding: 1rem
+        }
+                                                  
             </style>
           
           
@@ -74,7 +103,7 @@
                       </div>
                       <h4 class="card-title">Fahed
                         <br>
-                        <small class="card-description text-muted">Databases</small>
+                        <!-- <small class="card-description text-muted">Databases</small> -->
                       </h4>
                       <h4 class="mr-auto card-title" >Bio:
                       </h4>
@@ -117,17 +146,68 @@
 
                 </div>
 
-
-
-
+                
+                <div class="vl"></div>
                 <div class="col-sm-12 col-md-4">
-                  <img src="../../img/responsive-design-symbol.svg" width="10%">
-                  <h3>USER FRIENDLY</h3>
-                  <p>Most intuitive tool!</p>
+                    <div class="card card-nav-tabs" style="width: 26rem;">
+                        <div class="card-header card-header-danger">
+                          Last Activities:
+                        </div>
+                        <ul class="list-group list-group-flush sectionsNav">
+                          <li class="list-group-item">Login: Thur 24,Oct </li>
+                          <li class="list-group-item">Login: Thur 24,Oct</li>
+                          <li class="list-group-item">Login: Thur 24,Oct</li>
+                          <li class="list-group-item">Login: Thur 24,Oct </li>
+                          <li class="list-group-item">Login: Thur 24,Oct</li>
+                          <li class="list-group-item">Login: Thur 24,Oct</li>
+                          <li class="list-group-item">Login: Thur 24,Oct </li>
+                          <li class="list-group-item">Login: Thur 24,Oct</li>
+
+ 
+                        </ul>
+                    </div>
+                   
                 </div>
               </div>
             </div>
       
+
+            <footer class="footer footer-default" >
+                <div class="container">
+                  <nav class="float-left">
+                    <ul>
+                      <li>
+                        <a href="#Top">
+                            <img src="/img/Actual_logos/PNG_FORM/puttogether1-04.png" width="20%" alt="">
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                  
+                  <div class="footer">
+        
+        
+              <div class="footer-content">
+        
+                <div class="footer-section about">
+                  <!-- <div class="socials"> -->
+                      <a class="Socials" href="#"><i class="fab fa-facebook fa-lg"></i></a>
+                      <a class="Socials" href="#"><i class="fab fa-twitter fa-lg"></i></a>
+                      <a class="Socials" href="#"><i class="fab fa-google fa-lg "></i></a>
+                      <a class="Socials" href="#"><i class="fab fa-linkedin fa-lg"></i></a>
+                      <hr class="my-4">
+                  <p>
+                    PutTogether is built with passion, transcendency, and most importantly, user-based satisfaction. This is where everything gets a bit easier to organize. This is where all of your opportunities start and end. This is PutTogether.
+                  </p>
+                  <hr class="my-4">
+                  </div>
+                </div>
+                <div class="footer-section links"></div>
+                <div class="footer-section contact-form"></div>
+        
+        
+                </div>
+              </footer>
 
 
 
