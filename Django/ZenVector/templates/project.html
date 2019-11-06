@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+  <div class="row-nowrap">
+
+    <!-- TODO LIST (card)-->
+    <div class="col-xs-6 col-md-3">
+      <div class="card card-plain">
+        <div class="card-list-header">
+          <h4 class="card-title bottom-bordered">TODO</h4>
+        </div>
+        <div class="card-body text-center">
+          <!-- task card -->
+          <div class="card">
+            <div  class="card-header card-header-danger2">  <!--id="draggable-scroll"-->
+              <a class="card-title">Card title</a>
+              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                <i class="material-icons">menu</i>
+              </button>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+          <!-- end of task card -->
+
+          <!-- task card -->
+          <div class="card">
+            <div  class="card-header card-header-danger2">  <!--id="draggable-scroll"-->
+              <a class="card-title">Card title</a>
+              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                <i class="material-icons">menu</i>
+              </button>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+          <!-- end of task card -->
+
+        <!-- add task card-->
+        <div class="card">
+          <div class="card-body">
+            <a type="btn" class="card-title" href="#addTask" data-toggle="modal" data-target="#detailModal">
+              <i class="material-icons">add</i>Add Task
+            </a>
+          </div>
+        </div>
+          <!-- end of add task card -->
+        </div>
+      </div>
+    </div>
+    <!-- end of TODO -->
+
+
+
+
+    <!-- DOING LIST (card)-->
+    <div class="col-xs-6 col-md-3">
+      <div class="card card-plain">
+        <div class="card-list-header">
+          <h4 class="card-title bottom-bordered">DOING</h4>
+        </div>
+        <div class="card-body text-center">
+          <!-- task card -->
+          <div class="card">
+            <div  class="card-header card-header-warning2">  <!--id="draggable-scroll"-->
+              <a class="card-title">Card title</a>
+              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                <i class="material-icons">menu</i>
+              </button>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+          <!-- end of task card -->
+
+          <!-- task card -->
+          <div class="card">
+            <div  class="card-header card-header-warning2">  <!--id="draggable-scroll"-->
+              <a class="card-title">Card title</a>
+              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                <i class="material-icons">menu</i>
+              </button>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+          <!-- end of task card -->
+
+          <!-- task card -->
+          <div class="card">
+            <div  class="card-header card-header-warning2">  <!--id="draggable-scroll"-->
+              <a class="card-title">Card title</a>
+              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                <i class="material-icons">menu</i>
+              </button>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+          <!-- end of task card -->
+
+        <!-- add task card-->
+        <div class="card">
+          <div class="card-body">
+            <a type="btn" class="card-title" href="#addTask" data-toggle="modal" data-target="#detailModal">
+              <i class="material-icons">add</i>Add Task
+            </a>
+          </div>
+        </div>
+          <!-- end of add task card -->
+        </div>
+      </div>
+    </div>
+    <!-- end of DOING -->
+
+
+    <!-- DONE LIST (card)-->
+    <div class="col-xs-6 col-md-3">
+      <div class="card card-plain">
+        <div class="card-list-header">
+          <h4 class="card-title bottom-bordered">DONE</h4>
+        </div>
+        <div class="card-body text-center">
+          <!-- task card -->
+          <div class="card">
+            <div  class="card-header card-header-success2">  <!--id="draggable-scroll"-->
+              <a class="card-title">Card title</a>
+              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                <i class="material-icons">menu</i>
+              </button>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+          <!-- end of task card -->
+
+        <!-- add task card-->
+        <div class="card">
+          <div class="card-body">
+            <a type="btn" class="card-title" href="#addTask" data-toggle="modal" data-target="#detailModal">
+              <i class="material-icons">add</i>Add Task
+            </a>
+          </div>
+        </div>
+          <!-- end of add task card -->
+        </div>
+      </div>
+    </div>
+    <!-- end of DONE -->
+
+    <!-- unnecessary LIST (card)-->
+    <div class="col-xs-6 col-md-3">
+      <div class="card card-plain">
+        <div class="card-list-header">
+          <h4 class="card-title bottom-bordered">Unnecessary</h4>
+        </div>
+        <div class="card-body text-center">
+          <!-- task card -->
+          <div class="card">
+            <div  class="card-header card-header-primary2">  <!--id="draggable-scroll"-->
+              <a class="card-title">Card title</a>
+              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                <i class="material-icons">menu</i>
+              </button>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+          <!-- end of task card -->
+
+          <!-- task card -->
+          <div class="card">
+            <div  class="card-header card-header-primary2">  <!--id="draggable-scroll"-->
+              <a class="card-title">Card title</a>
+              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                <i class="material-icons">menu</i>
+              </button>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+          <!-- end of task card -->
+
+        <!-- add task card-->
+          <div class="card">
+            <div class="card-body">
+              <a type="btn" class="card-title" href="#addTask" data-toggle="modal" data-target="#detailModal">
+                <i class="material-icons">add</i>Add Task
+              </a>
+            </div>
+          </div>
+          <!-- end of add task card -->
+        </div>
+      </div>
+    </div>
+    <!-- end of unnecessary -->
+
+    <!-- ADD NEW LIST -->
+
+    <div class="col-xs-6 col-md-3">
+      <div class="card card-plain">
+        <div class="add-card-list-header">
+          <button type="button" class="btn btn-block " data-toggle="modal" data-target="#addListModal">
+            <i class="material-icons">add</i> add another list
+          </button>
+        </div>
+        <div class="card-body text-center">
+        </div>
+      </div>
+    </div>
+    <!-- end of add new list -->
+  </div>
+</div>
+
+  <!-- Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Task Name</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col mr-auto">
+            <form class="form" method="" action="">
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

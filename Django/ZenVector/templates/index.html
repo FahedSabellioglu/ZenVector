@@ -1,0 +1,367 @@
+{% extends 'base.html' %}
+{% load staticfiles%}
+{% block content %}
+
+  <section class="presentation">
+    <div class="introduction">
+      <div class="intro-text">
+        <h1>Your Life, Put Together.</h1>
+        <p>
+          Your New Favoruite Project Management Tool, PutTogether.
+        </p>
+      </div>
+      <div class="cta">
+      <button type="button" class="btn btn-round btn-default .btn-block">
+          <i class="fas fa-sign-in-alt"></i>
+          LOGIN</button>
+      <button type="button" data-toggle="modal" id="#signup" data-target="#signupModal"
+      class="btn btn-primary-success  btn-round btn-raised btn-success .btn-block">
+      <i class="fas fa-user-plus"></i>
+      SING UP NOW - IT'S
+      FREE</button>
+
+      </div>
+    </div>
+
+    <div class="cover">
+      <img src="{% static 'img/Top_Background.png' %}" class="responsive" alt="matebook" />
+    </div>
+  </section>
+
+<!------------------------------------------------------ /LANDING PART TOP BACKGROUND ------------------------------------------------------->
+
+
+
+    
+      <!----------------------------------------------------- Features SECTIONS ----------------------------------------------------->
+      <div class="container-fluid padding" style="margin-top: 7%; margin-bottom: 5%">
+        <div id="WhyUs" class="row text-center padding''">
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <img alt="Responsinve Icon" src="{% static 'img/Responsive_Icon.png' %}" width="10%">
+            <h3>Responsive</h3>
+            <p>Fastest, most responsive experience!</p>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <img src="{% static 'img/Syn_icon.png' %}" width="10%">
+            <h3>Platform Sync</h3>
+            <p>Stay Connected anywhere on any device!</p> 
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <img src="{% static 'img/User_friendly_icon.png' %}" width="10%">
+            <h3>USER FRIENDLY</h3>
+            <p>No tutorial needed to understand how this works!</p>
+          </div>
+        </div>
+      </div>
+      <!------------------------------------------------------ /Features SECTIONS  ------------------------------------------------------>
+
+<!------------------------------------------------------ POTNEIAL WHY US SECTION ------------------------------------------------------>
+      <hr class="my-4">
+      <div class="row" >
+        <div class="col-md-11 col-xs-5 mr-auto ml-auto text-center">
+          <div class="row">
+            <div class="col-md-8 col-xs-12 mr-auto ml-auto text-center">
+              <br>
+                <h1 class="display-2">Seize Your Potenial.</h1>
+                <br>
+            </div>
+            <div class="col-md-12 col-xs-12 ml-auto mr-auto">
+                <p class="lead text-muted"> PuTogether helps you work from anywhere, with anyone. PuTogether makes it easier for you to manage, collaborate, and stay up-to-date with your backlog. You are one click away from being more Productive, more Cross-Functional, and most importantly, more Transcendent.</p>
+                    <br>
+                    <br>
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+      <hr class="my-4">
+      
+      </div>
+      <!------------------------------------------------------  /POTNEIAL WHY US SECTION   ------------------------------------------------------>
+
+<!------------------------------------------------------   PRICING ------------------------------------------------------>
+      <div id="Pricing" class="section text-center">
+        <h2 class="title">Our Plans</h2>
+        <br>
+        <div class="pricing-2">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-pricing card-plain">
+                        <div class="card-body">
+                            <h6 class="card-category text-info">Free</h6>
+                            <h1 class="card-title">
+                                <small>$</small>0
+                                <small>/mo</small>
+                            </h1>
+                            <ul>
+                                <li>
+                                    <b>1</b> Project</li>
+                                <li>
+                                    <b>5</b> Team Members</li>
+                                <li>
+                                    <b>55</b> Personal Contacts</li>
+                                <li>
+                                    <b>5.000</b> Messages</li>
+                            </ul>
+                            <a href="#pablo" class="btn btn-rose btn-raised btn-round">
+                                Get Started
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-pricing card-raised bg-rose">
+                        <div class="card-body">
+                            <h6 class="card-category text-info">Premium</h6>
+                            <h1 class="card-title">
+                                <small>$</small>89
+                                <small>/mo</small>
+                            </h1>
+                            <ul>
+                                <li>
+                                    <b>500</b> Projects</li>
+                                <li>
+                                    <b>50</b> Team Members</li>
+                                <li>
+                                    <b>125</b> Personal Contacts</li>
+                                <li>
+                                    <b>15.000</b> Messages</li>
+                            </ul>
+                            <a href="#pablo" class="btn btn-white btn-raised btn-round">
+                                Get Started
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-pricing card-plain">
+                        <div class="card-body">
+                            <h6 class="card-category text-info">Platinum</h6>
+                            <h1 class="card-title">
+                                <small>$</small>199
+                                <small>/mo</small>
+                            </h1>
+                            <ul>
+                                <li>
+                                    <b>1000</b> Projects</li>
+                                <li>
+                                    <b>100</b> Team Members</li>
+                                <li>
+                                    <b>550</b> Personal Contacts</li>
+                                <li>
+                                    <b>50.000</b> Messages</li>
+                            </ul>
+                            <a href="#pablo" class="btn btn-rose btn-raised btn-round">
+                                Get Started
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div id="Team" class="section text-center">
+        <h2 class="title">Our Team</h2>
+        <br>
+        <div class="team">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="team-player">
+                <div class="card card-plain">
+                  <div class="col-md-6 ml-auto mr-auto">
+                    <img src="{% static 'img/Fahed_team_pic.jpg' %}" height="100%" width="70%" alt="Thumbnail Image"
+                      class="img-raised rounded-circle img-fluid">
+                  </div>
+                  <h4 class="card-title">Fahed
+                    <br>
+                    <small class="card-description text-muted">Databases & Functionality</small>
+                  </h4>
+                  
+                  <div class="card-footer justify-content-center"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="team-player">
+                <div class="card card-plain">
+                  <div class="col-md-6 ml-auto mr-auto">
+                    <img src="{% static 'img/khaled.final.jpg' %}"  width="75%" alt="Thumbnail Image"
+                      class="img-raised rounded-circle img-fluid">
+                  </div>
+                  <h4 class="card-title">Khaled
+                    <br>
+                    <small class="card-description text-muted">User Interface & User Experience</small>
+                  </h4>
+
+                  <div class="card-footer justify-content-center">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="team-player">
+                <div class="card card-plain">
+                  <div class="col-md-6 ml-auto mr-auto">
+                    <img src="{% static 'img/Zeynep_teampic.jpg' %}" width="59%" alt="Thumbnail Image"
+                      class="img-raised rounded-circle img-fluid">
+                  </div>
+                  <h4 class="card-title">Zeynep
+                    <br>
+                    <small class="card-description text-muted">Backend & Jinga</small>
+                  </h4>
+                  
+                  <div class="card-footer justify-content-center"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4">
+<!------------------------------------------------------/PRICING ------------------------------------------------------>
+
+<!------------------------------------------------------- MODAL FOR SIGNING UP!------------------------------------------------------>
+
+      <div class="modal fade" id="signupModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-signup" role="document">
+          <div class="modal-content">
+            <div class="card card-signup card-plain">
+              <div class="modal-header">
+
+                <h5 class="modal-title card-title">Register</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <i class="far fa-window-close" style="color: red"></i>
+
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+
+                  <div class="col mr-auto">
+
+                    <form  id='#SignUpForm' class="form" method="POST" action="">
+                      <div class="card-body">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-user"></i>
+                              </div>
+                            </div>
+                            <input type="text"  name = 'name' class="form-control" placeholder="Name...">
+                          </div>
+                        </div>
+
+
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                              </div>
+                            </div>
+                            <input type="text" name='email' class="form-control" placeholder="Email...">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fa fa-key" aria-hidden="true"></i>
+                              </div>
+                            </div>
+                            <input type="password" placeholder="Password..." class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fa fa-key" aria-hidden="true"></i>
+                              </div>
+                            </div>
+                            <input type="password" name='password' placeholder="Confirm Password..." class="form-control" />
+                          </div>
+                        </div>
+
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="True" checked>
+                            <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                            I agree to the <a href="#something">Terms and Conditions</a>.
+                          </label>
+                        </div>
+                      </div>
+                      <div class="modal-footer justify-content-center">
+                        <a href="#pablo" class="btn btn-primary btn-round">Get Started</a>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<!------------------------------------------------------/MODAL FOR SIGNING UP! ------------------------------------------------------>
+
+
+
+    <!------------------------------------------------------ FOOTER ------------------------------------------------------>
+
+    <!------------------------------------------------------ /FOOTER ------------------------------------------------------>
+
+
+
+
+
+{% endblock %}
+      <!------------------------------------------------------  SCRIPTS ------------------------------------------------------>
+{% block scripts %}
+  <script>
+        // Select all links with hashes
+        $('a[href*="#"]')
+          // Remove links that don't actually link to anything
+          .not('[href="#"]')
+          .not('[href="#0"]')
+          .click(function (event) {
+            // On-page links
+            if (
+              location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') &&
+              location.hostname == this.hostname
+            ) {
+              // Figure out element to scroll to
+              var target = $(this.hash);
+              target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+              // Does a scroll target exist?
+              if (target.length) {
+                // Only prevent default if animation is actually gonna happen
+                event.preventDefault();
+                $('html, body').animate({
+                  scrollTop: target.offset().top
+                }, 1000, function () {
+                  // Callback after animation
+                  // Must change focus!
+                  var $target = $(target);
+                  $target.focus();
+                  if ($target.is(":focus")) { // Checking if the target was focused
+                    return false;
+                  } else {
+                    $target.attr('tabindex',
+                      '-1'); // Adding tabindex for elements not focusable
+                    $target.focus(); // Set focus again
+                  };
+                });
+              }
+            }
+          });
+      </script>
+
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load staticfiles%}
+
+
+{% block css_styles %}
+                .logo-image {
+                    width: 134px;
+                    height: 64px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    margin-top: -34px;
+                    }
+
+              .vl {
+              border-left: 2px solid #59A61E;
+              height: 490px;
+          }
+
+          /* html { overflow-y: hidden; } */
+
+          .form-control, .is-focused .form-control div {
+            background-image:  linear-gradient(to top, #2aa134 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
+          }
+
+          .btn.btn-primary {
+              color: #fff;
+              background-color: #59A61E;
+              border-color: #59A61E;
+              box-shadow: 0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12);
+          }
+
+          .card .card-header-danger{
+            background: linear-gradient(60deg, #59A61E, #59A61E);
+          }
+
+          .list-group{
+            align-items: center;
+          }
+
+          .card .card-header-danger {
+                /* box-shadow: 0 5px 20px 0px rgba(89, 166, 30, 1), 0 13px 24px -11px rgba(89, 166, 30, 1); */
+                box-shadow: 0 5px 20px 0px rgb(250, 250, 250), 0 13px 24px -11px rgb(237, 238, 236)
+
+            }
+
+            .scroll-box {
+            overflow-y: scroll;
+            height: 100px;
+            padding: 1rem
+        }
+
+{% endblock %}
+
+
+
+{% block content %}
+
+            <div class="container-fluid padding" style="margin-top: 5%; margin-bottom: 5%">
+              <div class="row text-center padding''">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                  <div class="team-player">
+                    <div class="card card-plain">
+                      <div class="col-md-8 ml-auto mr-auto">
+                        <img src="{% static 'img/Fahed_team_pic.jpg '%}" height="100%" width="100%" alt="Thumbnail Image"
+                          class="img-raised rounded-circle img-fluid">
+                      </div>
+                      <h4 class="card-title">Fahed
+                        <br>
+                        <!-- <small class="card-description text-muted">Databases</small> -->
+                      </h4>
+                      <h4 class="mr-auto card-title" >Bio:
+                      </h4>
+                      <div class="card-body" style="padding-top: 0%; text-align: justify;text-justify:inter-word;">
+                        <p class="card-description">You can write here details about one of your team members. You can give
+                          more details about what they do. Feel free to add some
+                          <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="vl"></div>
+
+                <div class="mr-auto ml-auto col-xs-12 col-sm-6 col-md-4 form_element">
+
+                  <!-- <p class="h2" style="text-align:left;margin-top: 0%;">Profile:</p> -->
+
+                  <div class="form-group has-default bmd-form-group">
+                    <input type="text" class="form-control" placeholder="Name">
+                  </div>
+
+                <div class="form-group has-default bmd-form-group">
+                    <input type="text" class="form-control" placeholder="Email:">
+                </div>
+                <div class="form-group has-default bmd-form-group">
+                    <input type="password" class="form-control" placeholder="Old Password:">
+                </div>
+                <div class="form-group has-default bmd-form-group">
+                    <input type="password" class="form-control" placeholder="new Password:">
+                </div>
+
+                <div class="form-group has-default bmd-form-group" style="text-align:left;">
+                    <label for="exampleFormControlTextarea1">Bio</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                  <button class="btn btn-primary btn-round">
+                      <i class="far fa-save"></i> Save
+                  </button>
+
+                </div>
+
+                
+                <div class="vl"></div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="card card-nav-tabs" style="width: 26rem;">
+                        <div class="card-header card-header-danger">
+                          Last Activities:
+                        </div>
+                        <ul class="list-group list-group-flush sectionsNav">
+                          <li class="list-group-item">Login: Thur 24,Oct </li>
+                          <li class="list-group-item">Login: Thur 24,Oct</li>
+                          <li class="list-group-item">Login: Thur 24,Oct</li>
+                          <li class="list-group-item">Login: Thur 24,Oct </li>
+                          <li class="list-group-item">Login: Thur 24,Oct</li>
+                          <li class="list-group-item">Login: Thur 24,Oct</li>
+                          <li class="list-group-item">Login: Thur 24,Oct </li>
+                          <li class="list-group-item">Login: Thur 24,Oct</li>
+
+ 
+                        </ul>
+                    </div>
+                   
+                </div>
+              </div>
+            </div>
+      
+{% endblock %}
