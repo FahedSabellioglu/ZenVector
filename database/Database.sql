@@ -11,7 +11,7 @@ Create table Project
 Usr_Id int not null,unique(Project_name, Usr_Id),
 foreign key (Usr_Id) references Users(ID) on delete cascade)
 
-drop table tasks
+
 
 create table tasks
 (Task_name varchar(255) not null, deadline DATETIME not null, descrip varchar(max) not null, Task_status varchar(20) not null,
@@ -57,7 +57,7 @@ Go
 
 /*END */
 
-execute UserRegister @Usr_name = "Fahed", @Usr_password = "1234", @email = "Fahedshaabani@std.sehir.edu.tr";
+
 
 /*Function to create a project */
 create procedure ProjectCreation @Project_name varchar(255), @Usr_email varchar(255)
@@ -70,7 +70,6 @@ begin
 end
 go
 
-select * from tasks
 
 /*END */
 
@@ -88,14 +87,10 @@ begin
 end
 go
 
-select * from Users
 
-execute UserRegister @Usr_name = "Fahed", @Usr_password = "123", @email = "Fahedshaabani@std.sehir.edu.tr"
 
-execute ProjectCreation @Project_name = "New Project", @Usr_email = "Fahedshaabani@std.sehir.edu.tr"
 
-execute TaskCreation @Task_name = "New task", @Deadline = "10/14/2019", @Descrip = "Nothing", @Task_Status = "Active",@Project_Name = "New Project",
-@Usr_email="Fahedshaabani@std.sehir.edu.tr"
+
 
 
 create procedure AssignTasks @Taskname varchar(255), @leader_email varchar(255), @ToWho_email varchar(255)
@@ -164,7 +159,6 @@ end
 go
 
 
-select * from User_Tasks
 
 create procedure AddMember @Task_name varchar(255), @Owner_Email varchar(255), @Usr_email varchar(255)
 as
@@ -188,8 +182,5 @@ begin
 
 
 end
-
-
-
 
 
