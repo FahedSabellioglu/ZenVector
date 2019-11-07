@@ -1,26 +1,45 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.db import connections
+from django import template
 from django.shortcuts import render
-from database_func import *
-
-cursor = connections['default'].cursor()
-
+from models import *
+from django.http import JsonResponse
 def page_Home(response):
-    cursor.execute("SELECT * FROM Users")
-    data = cursor.fetchall()
+    #
+    # per = Projects(project_name="NEW PROJECT 2",usr_email=Users.objects.get(email='fahedshabani@std.sehir.edu.tr'))
+    # per.save()
     return render(response,'index.html')
 
 
-def func_login(request):
-    data =  dict(request.POST)
-    check = add_user(data['name'][0],data['pass'][0],data['mail'][0])
-    if check:
-        print "YES"
-    else:
-        print "FALSE"
+def func_login(resquest):
+    data = dict(resquest.POST)
+    if Users.objects.filter(email=data['mail'][0]).exists():
+        obj = Users.objects.get(email=data['mail'][0])
+        if data['password'][0] == obj.password and data['mail'][0] == obj.email:
+            response = JsonResponse({"message":"Success"})
+            response.status_code = 200
+            return  response
+        else:
+            response =  JsonResponse({"message": "Failed", 'reason': "Incorrect email or password, Try again."})
+            response.status_code = 401
+            return response
 
-    return 400
+    response =  JsonResponse({"message":"Failed",'reason':"This email address is not used"})
+    response.status_code = 401
+    return response
+
+
+def func_signup(request):
+    data =  dict(request.POST)
+    if Users.objects.filter(email=data['mail']).exists():
+        print "exits"
+        return JsonResponse({"message":"Failed",'reason':"This email address is used"})
+
+    else:
+        new_usr = Users.objects.create(usr_name=data['name'][0],password=data['pass'][0],email=data['mail'][0])
+        new_usr.save()
+        print "data"
+        return JsonResponse({"message":"Success"})
 
 
 def page_Projects(response):

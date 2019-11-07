@@ -11,9 +11,10 @@
         </p>
       </div>
       <div class="cta">
-      <button type="button" class="btn btn-round btn-default .btn-block">
+      <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-round btn-default .btn-block">
           <i class="fas fa-sign-in-alt"></i>
           LOGIN</button>
+
       <button type="button" data-toggle="modal" id="signup" data-target="#signupModal"
       class="btn btn-primary-success  btn-round btn-raised btn-success .btn-block">
       <i class="fas fa-user-plus"></i>
@@ -225,7 +226,6 @@
 <!------------------------------------------------------/PRICING ------------------------------------------------------>
 
 <!------------------------------------------------------- MODAL FOR SIGNING UP!------------------------------------------------------>
-
       <div class="modal fade" id="signupModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-signup" role="document">
           <div class="modal-content">
@@ -243,17 +243,20 @@
 
                   <div class="col mr-auto">
 
-                    <form  id='#SignUpForm' class="form" method="POST" action="">
+                    <form  id='SignUpForm' class="form"  >
+                        {% csrf_token %}
                       <div class="card-body">
                         <div class="form-group">
+
                           <div class="input-group">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
                                 <i class="fas fa-user"></i>
                               </div>
                             </div>
-                            <input type="text"  id ='usr_name' value="fahedshaabani" class="form-control" placeholder="Name...">
+                            <input type="text" required  id ='usr_name' value="fahedshaabani" class="form-control" placeholder="Name...">
                           </div>
+                            <label  class="label_control" id="name_error" style="display: none;">provide a meaningful name</label>
                         </div>
 
 
@@ -264,8 +267,9 @@
                                 <i class="fas fa-envelope"></i>
                               </div>
                             </div>
-                            <input type="text" id='email' value="fahedshabani@std.sehir.edu.tr" class="form-control" placeholder="Email...">
+                            <input type="email" required id='email' value="fahedshabani@std.sehir.edu.tr" class="form-control" placeholder="Email...">
                           </div>
+                            <label class="ml-auto mr-auto" id="email_error" style="display: none;">email exists</label>
                         </div>
 
                         <div class="form-group">
@@ -275,8 +279,9 @@
                                 <i class="fa fa-key" aria-hidden="true"></i>
                               </div>
                             </div>
-                            <input type="password"   id="password" value="fahedshaabani" placeholder="Password..." class="form-control pass" />
+                            <input type="password" required   id="password" value="fahedshaabani" placeholder="Password..." class="form-control pass" />
                           </div>
+                            <label class="label_control" id="password_error" style="display: none;">password longer than 8 characters</label>
                         </div>
                         <div class="form-group">
                           <div class="input-group">
@@ -285,13 +290,14 @@
                                 <i class="fa fa-key" aria-hidden="true"></i>
                               </div>
                             </div>
-                            <input type="password"  id="password_repeat" value="fahedshaabani"  placeholder="Confirm Password..." class="form-control pass" />
+                            <input type="password"  required id="password_repeat" value="fahedshaabani"  placeholder="Confirm Password..." class="form-control pass" />
                           </div>
+                            <label class="label_control" id="repeat_error" style="display: none;">passwords do not match</label>
                         </div>
 
                       </div>
                       <div class="modal-footer justify-content-center">
-                        <a href="#pablo" onclick="Control()" class="btn btn-primary btn-round">Get Started</a>
+                        <button type="submit" onclick="Control()" class="btn btn-primary btn-round">Get Started</button>
                       </div>
                     </form>
                   </div>
@@ -301,8 +307,66 @@
           </div>
         </div>
       </div>
+
 <!------------------------------------------------------/MODAL FOR SIGNING UP! ------------------------------------------------------>
 
+      <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-signup" role="document">
+          <div class="modal-content">
+            <div class="card card-signup card-plain">
+              <div class="modal-header">
+
+                <h5 class="modal-title card-title">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <i class="far fa-window-close" style="color: red"></i>
+
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+
+                  <div class="col mr-auto">
+
+                    <form  id='loginForm' class="form"  >
+                        {% csrf_token %}
+                      <div class="card-body">
+
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                              </div>
+                            </div>
+                            <input type="email" required id='email_login' value="fahedshabani@std.sehir.edu.tr" class="form-control" placeholder="Email...">
+                          </div>
+                            <label class="ml-auto mr-auto" id="email_error_login" style="display: none;">email exists</label>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fa fa-key" aria-hidden="true"></i>
+                              </div>
+                            </div>
+                            <input type="password" required   id="password_login" value="fahedshaabani" placeholder="Password..." class="form-control pass" />
+                          </div>
+                            <label class="label_control" id="password_error_login" style="display: none;">password longer than 8 characters</label>
+                        </div>
+
+                      </div>
+                      <div class="modal-footer justify-content-center">
+                        <button type="submit" onclick="loginControl()" class="btn btn-primary btn-round">Login</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
     <!------------------------------------------------------ FOOTER ------------------------------------------------------>
@@ -318,69 +382,117 @@
 {% block scripts %}
 
     <script>
-    function Control() {
+
+    $("#SignUpForm").on('submit',function (e) {
+        e.preventDefault();
+
+
+    });
+
+    $("#loginForm").on('submit',function(e){
+        e.preventDefault();
+    })
+
+    function loginControl(){
+        var email_element = document.getElementById('email_login');
+        var password_element = document.getElementById('password_login');
+        var element = document.getElementById('password_error_login');
+
+        element.style.display = 'none';
+
+
+        email = email_element.value;
+        password = password_element.value;
+
+        $.ajax({
+            type: "POST",
+            url: "Login/",
+            data:{mail:email,password:password,csrfmiddlewaretoken: "{{ csrf_token }}"},
+            success: function(e) {
+                console.log(e);
+                console.log('CORRECT LOGIN')
+            },
+            error:function(e){
+                var element = document.getElementById('password_error_login');
+                var message = e.responseJSON.reason;
+                element.innerHTML = message;
+                element.style.display='block'
+            }
+
+        })
+    }
+
+
+    </script>
+
+
+    <style>
+    .label_control{
+        padding-top: 0.5rem;
+        color: red;
+        padding-left: 7.5rem;
+    }
+    .btn.btn-primary{
+        background-color: #59A61E;
+        border-color: #59A61E;
+    }
+    .btn.btn-primary:hover
+    {
+        background-color: #59A61E;
+        border-color: #59A61E;
+    }
+    </style>
+
+    <script>
+    function Control(event) {
 
         usr_name = document.getElementById("usr_name").value;
         email = document.getElementById("email").value;
         password = document.getElementById("password").value;
         repeat = document.getElementById("password_repeat").value;
 
-        console.log(usr_name);
-        console.log(email);
-        console.log(password);
-        console.log(repeat);
+        document.getElementById("name_error").style.display = 'none';
+        document.getElementById("email_error").style.display = 'none';
+        document.getElementById('password_error').style.display = 'none';
+        document.getElementById('repeat_error').style.display = 'none';
+
+
         if ($.trim(usr_name)== '' || usr_name.length < 6)
         {
-            document.getElementById('usr_name').setCustomValidity("Error");
-            document.getElementById('usr_name').focus();
+            document.getElementById('name_error').style.display='block';
+
             return
         }
 
         if ($.trim(email) == '')
         {
-            document.getElementById('email').setCustomValidity("Error");
-            document.getElementById('email').focus();
+            document.getElementById('email_error').style.display='block';
             return
         }
 
         if (password.length < 8)
         {
-            document.getElementById('password').setCustomValidity("Error");
-            document.getElementById('password').focus();
+            document.getElementById('password_error').style.display='block';
             return;
         }
 
         if (password != repeat)
         {
-            var element = $("#password")[0];
-            element.setCustomValidity("Error");
-            {#$('#password_repeat').setCustomValidity("Error");#}
-            $('pass').focus();
+
+            document.getElementById('repeat_error').style.display = 'block';
             return;
         }
 
-        {#        type: "POST",#}
-        {#url: ApiLink,#}
-        {#data: { userId: usid, name: Name, code: Code },#}
-        {#success: function () {#}
-        {#    $("#exampleModal").modal("hide");#}
-        {#    window.location.replace(Linkto + currenturl);#}
-        {#error: function () {#}
-        {#    $("#exampleModal").modal("hide");#}
-        {#    document.getElementById("popup").innerHTML = "Couldn't delete the item " + Name;#}
-        {#document.getElementById("no1").innerHTML = "Close";#}
-        {#var clone = $("#exampleModal").clone();#}
-        {#clone.find(".Yes-button").remove();#}
-        {#clone.modal("show");}#}
-
         $.ajax({
             type:'POST',
-            url:"Login/",
+            url:"Signup/",
             data:{name:usr_name,mail:email,pass:password,csrfmiddlewaretoken: "{{ csrf_token }}"},
-            success: function () {
+            success: function (e) {
+                console.log(e.message);
                 console.log("Correct");
             },
-            error:function () {
+            error:function (e) {
+                console.log(e);
                 console.log('fail')
             }
         });
@@ -390,6 +502,7 @@
 
 
     </script>
+
   <script>
         // Select all links with hashes
         $('a[href*="#"]')

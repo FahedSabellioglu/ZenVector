@@ -65,6 +65,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'builtins':[
+                'ZenVector.templatetags.project_list'
+            ]
         },
     },
 ]
@@ -74,19 +77,24 @@ WSGI_APPLICATION = 'ZenVector-django.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'ZenVector',
-        'HOST': 'localhost',
-        'USER': '',
-        'PASSWORD': '',
-        'OPTIONS': {
-            'driver': 'ODBC Driver 13 for SQL Server',
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'sql_server.pyodbc',
+#         'NAME': 'ZenVector',
+#         'HOST': 'localhost',
+#         'USER': '',
+#         'PASSWORD': '',
+#         'OPTIONS': {
+#             'driver': 'ODBC Driver 13 for SQL Server',
+#         }
+#     }
+# }
 
 
 
