@@ -1030,13 +1030,6 @@ pre code {
   margin-left: -15px;
 }
 
-.row-nowrap {   /* added*/
-  display: flex;
-  flex-wrap: nowrap;
-  margin-right: -20px;
-  margin-left: -20px;
-}
-
 .no-gutters {
   margin-right: 0;
   margin-left: 0;
@@ -2694,9 +2687,6 @@ fieldset:disabled a.btn {
   border-color: #2196f3;
   box-shadow: none;
 }
-
-
-
 .btn-primary:hover {
   color: #ffffff;
   background-color: #0c83e2;
@@ -4624,6 +4614,7 @@ tbody.collapse.show {
 
 .card-title {
   margin-bottom: 0.75rem;
+  /* text-align: right; */
 }
 
 .card-subtitle {
@@ -4652,6 +4643,8 @@ tbody.collapse.show {
   margin-bottom: 0;
   background-color: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  text-align: left; /*added*/
+  padding-left: 1rem;   /*added*/
 }
 
 .card-header:first-child {
@@ -4804,11 +4797,47 @@ tbody.collapse.show {
   }
 }
 
-/*gerekli mi????*/
-/* .card-list .card{
-  margin-bottom: 0.75rem;
-  margin-top: 45px;
-} */
+
+.card-list {       /*added*/
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  /* flex-flow: row nowrap; */
+  /* background-clip: border-box; */
+  /* border: 1px solid rgba(0, 0, 0, 0.12);  */
+  /* border-radius: 0.25rem; */
+  background: transparent;
+  box-shadow: none;
+  margin-top: 30px;
+
+}
+
+.card-list .card-header {   /*added*/
+  /* padding: -1rem -1px; */
+  /* margin-left: 0px;
+  margin-right: 0px;*/
+  border: 0;
+  margin-top: 0rem;
+  /* margin-bottom: 1rem; */
+  margin-right: -10px;
+  margin-left: -10px;
+  
+}
+
+.card-list .card-header .card-list-title {   /*added*/
+  margin-top: 0.625rem;
+  border-bottom: 5px solid #52504d;
+}
+
+
+.card-list-body{  /*added*/
+  flex: 1 1 auto;
+  padding-left: 7px;
+  padding-right: 7px;
+  height: 3rem;
+}
 
 .card-columns .card {
   margin-bottom: 0.75rem;
@@ -14793,6 +14822,7 @@ small,
 
 .title,
 .card-title,
+.card-list-title,     /*added*/
 .info-title,
 .footer-brand,
 .footer-big h5,
@@ -14806,6 +14836,8 @@ small,
 .title a,
 .card-title,
 .card-title a,
+.card-list-title,     /*added*/
+.card-list-title a,     /*added*/
 .info-title,
 .info-title a,
 .footer-brand,
@@ -16288,11 +16320,11 @@ footer .pull-center {
   margin-top: 15px;
 }
 
-.card .card-title {
+.card .card-title {    /*???*/
   margin-top: 0.625rem;
 }
 
-.card .card-title.bottom-bordered {
+.card .card-title.bottom-bordered {    /*added*/
   margin-top: 0.25rem;
   margin-bottom: 1rem;
   border-bottom: 5px solid #52504d;
@@ -16313,7 +16345,7 @@ footer .pull-center {
 } */
 
 .card .card-body,   /*added*/
-.card .card-footer {
+.card .card-footer{
   padding: 0.8rem 0.875rem;
 }
 
@@ -16358,16 +16390,6 @@ footer .pull-center {
   }
 }
 
-/* .card .card-header {
-  border-radius: 3px;
-  padding: 1rem 15px;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: -30px;
-  border: 0;
-  background: linear-gradient(60deg, #eee, #bdbdbd);
-} */
-
 .card .card-list-header {   /*added*/
   border-radius: 3px;
   padding: -1rem -1px;
@@ -16384,7 +16406,7 @@ footer .pull-center {
   margin-right: 15px;
   margin-top: 65px;
   border: 0;
-  background:: #52504d;
+  background: #52504d;
   opacity: 0.65;
 }
 
@@ -16397,7 +16419,7 @@ footer .pull-center {
   margin-right: 0px;
   margin-top: -30px;
   border: 0;
-  background: linear-gradient(60deg, #eee, #bdbdbd);
+  background: #eee;
 }
 
 .card .card-header .title {
@@ -16507,6 +16529,8 @@ footer .pull-center {
 .card.card-rotate.bg-success .front,
 .card.card-rotate.bg-success .back {
   background: #388e3c;
+  /* background: #59A61E;  :ooo  */
+
 }
 
 .card .card-header-warning,
@@ -16574,7 +16598,7 @@ footer .pull-center {
 }
 
 .card [class*="header-"] .card-title a,
-.card [class*="header-"] .card-title,
+.card [class*="header-"] .card-title, 
 .card [class*="header-"] .icon i,
 .card[class*="bg-"] .card-title a,
 .card[class*="bg-"] .card-title,
@@ -16745,11 +16769,6 @@ footer .pull-center {
   margin-left: 0;
   margin-right: 0;
 }
-
-/* .card-plain .card-body {
-  padding-left: 5px;
-  padding-right: 5px;
-} */
 
 .card-plain .card-body {    /*added*/
   padding-left: 7px;
@@ -18175,3 +18194,32 @@ footer .pull-center {
 }
 
 /*# sourceMappingURL=kit-free.css.map */
+
+
+/* Dragula CSS Release 3.2.0 from: https://github.com/bevacqua/dragula */
+
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+
+.gu-hide {
+  display: none !important;
+}
+
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
