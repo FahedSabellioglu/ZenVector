@@ -4,7 +4,7 @@
 
 $("#loginForm").on('submit',function(e){
     e.preventDefault();
-})
+});
 
     function loginControl(){
         var email_element = document.getElementById('email_login');
@@ -93,3 +93,28 @@ $("#loginForm").on('submit',function(e){
 
 
     }
+
+$("#projectForm").off().on('submit',function (event) {
+    event.preventDefault();
+    var project_name = document.getElementById("project_name").value;
+    var error_element = document.getElementById("project_name_error");
+    error_element.style.display = 'none';
+    if ($.trim(project_name) == '' || $.trim(project_name).length < 3) {
+        error_element.style.display = 'block';
+        return false;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "CreateProject/",
+        data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken, p_name: project_name},
+        success: function () {
+            location.replace('/PutTogether/');
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
+});
+
+

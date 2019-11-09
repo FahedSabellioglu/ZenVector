@@ -42,7 +42,6 @@ class Users(AbstractUser):
     password = models.CharField(max_length=255)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['usr_name']
-
     is_active = models.BooleanField(default=True)
     objects = UserManager()
 
@@ -53,13 +52,18 @@ class Projects(models.Model):
     usr_email = models.ForeignKey(Users,db_column='email')
 
 
+class state(models.Model):
+    state_id = models.AutoField(primary_key=True)
+    state_name = models.CharField(max_length=255)
+    project_id = models.ForeignKey(Projects,db_column='project_id')
+
 
 class Tasks(models.Model):
     task_id = models.AutoField(primary_key=True)
     task_name = models.CharField(max_length=255)
     task_deadline = models.TimeField(auto_now_add=True)
     task_descrip = models.TextField()
-    task_status = models.CharField(max_length=25)
+    task_state = models.ForeignKey(state,db_column='state_name')
     task_creation_time = models.TimeField(auto_now_add=True)
     task_project_id = models.ForeignKey(Projects,db_column='project_id')
     task_given_by = models.ForeignKey(Users,db_column='email')

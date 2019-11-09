@@ -307,9 +307,6 @@
 <!-------------------------------------------------------- End of Add Task Modal -------------------------------------------------------->
 
 
-
-
-
 <!-------------------------------------------------------- Add List Modal -------------------------------------------------------->
 
       <div class="modal fade" id="addListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -324,7 +321,8 @@
             <div class="modal-body">
               <div class="row">
                 <div class="col mr-auto">
-                  <form class="form" id="addListForm" method="" action="">
+                  <form class="form" id="addListForm" >
+                          {% csrf_token %}
                   <!-- List Title -->
                   <div class="form-group">
                       <div class="input-group">
@@ -335,6 +333,8 @@
                         </div>
                         <input type="text" id="listTitle" class="form-control" placeholder="List Title..." required>
                       </div>
+                      <label class="label_control" id="list_name" style="display: none;">You already have this list.</label>
+
                     </div>
                     <!-- Color Picker -->
                     <div class="form-group">
@@ -349,7 +349,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" id=addCard class="btn btn-rose" data-dismiss="modal" id="closeAddListModal" onclick="addList()">Save</button>
+              <button type="submit"  class="btn btn-rose" onclick="addList()" >Save</button>
             </div>
           </div>
         </div>
@@ -365,8 +365,11 @@
 {% endblock %}
 
    {% block scripts %}
+       <script>
+              var csrftoken = '{{ csrf_token }}';
+       </script>
+
        <script src="{% static 'js/dragula.js' %}"></script>
        <script src="{% static 'js/jscolor.js' %}"></script>
     <script src="{% static 'js/project_page.js' %}"></script>
-
    {% endblock %}

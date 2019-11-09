@@ -4,8 +4,23 @@ from django.shortcuts import render, render_to_response
 from django.contrib.auth import login,logout,authenticate
 from models import *
 from django.http import JsonResponse,HttpResponseRedirect
+
+
+def func_new_task(response,p_id):
+    data = dict(response.POST)
+
+    print data
+    print "HEWRERERR"
+    # # usr = Users.objects.get(email='fahedshabani@std.sehir.edu.tr')
+    # p = Projects(project_name='new project',usr_email=usr)
+    #
+    # print data['name'][0],data['color'][0],'HERRER'
+    # task_new = state(proj)
+
+
+
 def page_Home(response):
-    # logout(response)
+
     return render(response,'index.html')
 
 def func_logout(request):

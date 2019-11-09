@@ -64,20 +64,46 @@ function addTask() {
       // $('#addTaskModal').modal('hide');
   }
 
-function addList() {
+$("#addListForm").on('submit',function(e) {
+    e.preventDefault();
+// });
+});
 
-  var title = document.getElementById("listTitle").value;
-  console.log(title);
+function addList(e) {
 
-  var color = document.getElementById("headerColor").value;
-  console.log(color);
+    var error_element = document.getElementById('list_name');
+    error_element.style.display = 'none';
+    var title = document.getElementById("listTitle").value;
+    console.log(title);
 
-  document.getElementById("board").innerHTML +=
-      "<div class='col-xs-6 col-md-3'><div class='card-list'><div class='card-header'><h4 class='card-list-title'>"
-      +title+"</h4></div><div class='card-list-body text-center' id="+title+"><div class='card'><div class='card-header "+
-      " card-header-danger2'>Task Title <button type='button' style='position: absolute; right: 1rem;'class='btn btn-just-icon"+
-      " btn-sm' data-toggle='modal' data-target='#detailModal'><i class='material-icons'>menu</i></button></div> "+
-      "<class='card-body card-text'>Please click to detail button to change task details</div></div></div></div>"
+      var color = document.getElementById("headerColor").value;
+      console.log(color);
+
+   if ($.trim(title).length  == 0){
+        error_element.innerHTML="You can't leave the list name empty";
+        error_element.style.display = 'block';
+        return false;}
+
+       $.ajax({
+        type:'POST',
+        url:"NewTask/",
+        data:{name:title,color:color,csrfmiddlewaretoken:csrftoken},
+        success:function (e) {
+            location.reload(true)
+        },
+        error:function (e) {
+            console.log(e)
+        }
+    });
+  // document.getElementById("board").innerHTML +=
+  //     "<div class='col-xs-6 col-md-3'><div class='card-list'><div class='card-header'><h4 class='card-list-title'>"
+  //     +title+"</h4></div><div class='card-list-body text-center' id="+title+"><div class='card'><div class='card-header "+
+  //     " card-header-danger2'>Task Title <button type='button' style='position: absolute; right: 1rem;'class='btn btn-just-icon"+
+  //     " btn-sm' data-toggle='modal' data-target='#detailModal'><i class='material-icons'>menu</i></button></div> "+
+  //     "<class='card-body card-text'>Please click to detail button to change task details</div></div></div></div>"
+
+
+
 }
 
 $("#addTask").click(function(){
@@ -100,20 +126,19 @@ document.getElementById("doing"),
 document.getElementById("done"),
 ]);
 
-removeOnSpill: false
-.on("drag", function(el) {
+removeOnSpill.on("drag", function(el) {
   el.className.replace("ex-moved", "");
-  console.log(el.className)
+  console.log(el.className);
 })
-.on("drop", function(el) {
+.on("dropremoveOnSpill", function(el) {
   el.className += "ex-moved";
-  console.log(el.className)
+  console.log(el.className);
 })
 .on("over", function(el, container) {
   container.className += "ex-over";
-  console.log(el.className)
+  console.log(el.className);
 })
 .on("out", function(el, container) {
   container.className.replace("ex-over", "");
-  console.log(el.className)
+  console.log(el.className);
 });

@@ -42,9 +42,10 @@
                         Projects!
                       </a>
                       <div class="dropdown-menu">
-
-                          {% for value in lists.project_list %}
-                            <a class="nav-link dropdown-item" data-value="{{ value.project_id }}" href="#">{{value.project_name}}</a>
+{#<a href="{% url 'pay_summary' value=0 %}">my link</a>#}
+{#                       href="{% url 'project_tasks' value = project.project_id %}"#}
+                          {% for project in lists.project_list %}
+                            <a class="nav-link dropdown-item" data-value="{{ project.project_id }}" href="{% url 'project_tasks' p_id=project.project_id %}">{{project.project_name}}</a>
                           {% endfor %}
 
                         <div class="dropdown-divider"></div>
@@ -97,7 +98,7 @@
 
                       </div>
                       <div class="modal-footer justify-content-center">
-                        <button type="submit"  class="btn btn-primary btn-round">Create</button>
+                        <button type="submit"  class="btn btn-primary btn-round" >Create</button>
                       </div>
                     </form>
                   </div>
