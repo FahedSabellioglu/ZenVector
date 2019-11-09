@@ -40,6 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+AUTH_USER_MODEL = 'ZenVector.Users'
+
+AUTHENTICATION_BACKENDS = ['ZenVector.models.EmailAuthenticate']
+
+# 'django.contrib.auth.backends.ModelBackend'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

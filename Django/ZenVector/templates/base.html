@@ -168,10 +168,40 @@
     {% include 'footer.html' %}
 
 
-  <script src="{% static 'Material-kit/js/core/jquery.min.js'  %}" type="text/javascript"></script>
-  <script src="{% static 'Material-kit/js/core/popper.min.js' %}" type="text/javascript"></script>
   <script src="{% static 'Material-kit/js/core/bootstrap-material-design.min.js' %}" type="text/javascript">
   </script>
+
+   <script>
+
+    $("#projectForm").on('submit',function (event) {
+        event.preventDefault();
+        var  project_name = document.getElementById("project_name").value;
+        var error_element = document.getElementById("project_name_error");
+        error_element.style.display='none';
+        console.log(project_name);
+        if ($.trim(project_name)=='' || $.trim(project_name).length < 3){
+            error_element.style.display='block';
+            return false;
+        }
+        $.ajax({
+            type:"POST",
+            url:"CreateProject/",
+            data:{usr_email:'{{ request.user.email }}',csrfmiddlewaretoken: "{{ csrf_token }}",p_name :project_name},
+            success:function () {
+                location.reload(true);
+            },
+            error:function () {
+                console.log("error");
+            }
+
+        });
+
+
+    });
+
+
+
+</script>
 
    {% block scripts %}
 
@@ -189,7 +219,6 @@
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 
 </body>
 </html>

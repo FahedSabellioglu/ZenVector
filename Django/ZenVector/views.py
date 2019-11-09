@@ -1,23 +1,39 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django import template
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
+from django.contrib.auth import login,logout,authenticate
 from models import *
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponseRedirect
 def page_Home(response):
-    #
-    # per = Projects(project_name="NEW PROJECT 2",usr_email=Users.objects.get(email='fahedshabani@std.sehir.edu.tr'))
-    # per.save()
+    # logout(response)
     return render(response,'index.html')
 
+def func_logout(request):
 
-def func_login(resquest):
-    data = dict(resquest.POST)
+    logout(request)
+    return HttpResponseRedirect('/PutTogether/')
+
+def func_create_project(request):
+    data = dict(request.POST)
+    usrObj= Users.objects.get(email='fahedshabani@std.sehir.edu.tr')
+    project = Projects(usr_email=usrObj,project_name=data['p_name'][0])
+    project.save()
+    rtn  = JsonResponse({'message':"created"})
+    rtn.status_code = 200
+    return  rtn
+
+
+def func_login(request):
+    data = dict(request.POST)
+    print data,'new'
     if Users.objects.filter(email=data['mail'][0]).exists():
         obj = Users.objects.get(email=data['mail'][0])
-        if data['password'][0] == obj.password and data['mail'][0] == obj.email:
+        auth_obj = EmailAuthenticate()
+        usr = authenticate(email=obj.email,password=data['password'][0])
+        if usr is not None:
             response = JsonResponse({"message":"Success"})
             response.status_code = 200
+            login(request,usr)
             return  response
         else:
             response =  JsonResponse({"message": "Failed", 'reason': "Incorrect email or password, Try again."})
@@ -31,15 +47,16 @@ def func_login(resquest):
 
 def func_signup(request):
     data =  dict(request.POST)
-    if Users.objects.filter(email=data['mail']).exists():
-        print "exits"
-        return JsonResponse({"message":"Failed",'reason':"This email address is used"})
+    if Users.objects.filter(email=data['mail'][0]).exists():
+        rtn = JsonResponse({"message":"Failed",'reason':"This email address is used"})
+        rtn.status_code = 201
+        return rtn
 
     else:
-        new_usr = Users.objects.create(usr_name=data['name'][0],password=data['pass'][0],email=data['mail'][0])
-        new_usr.save()
-        print "data"
-        return JsonResponse({"message":"Success"})
+        new_usr = Users.objects.create_user(username=data['name'][0],password=data['pass'][0],email=data['mail'][0])
+        rtn = JsonResponse({"message":"Success"})
+        rtn.status_code = 200
+        return rtn
 
 
 def page_Projects(response):
@@ -49,7 +66,6 @@ def page_Projects(response):
 
 
 def page_User(response):
-
 
     return render(response,'user.html')
 

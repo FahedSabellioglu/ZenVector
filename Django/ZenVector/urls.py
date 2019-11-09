@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^PutTogether/Signup/$',views.func_signup),
     url(r'^PutTogether/User/$',views.page_User),
     url(r'^PutTogether/Login/$',views.func_login),
+    url(r"^PutTogether/CreateProject/$",views.func_create_project),
+    url(r'^PutTogether/Loguout/$',views.func_logout)
 
 
 ]

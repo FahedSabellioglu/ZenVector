@@ -10,18 +10,20 @@
           Your New Favoruite Project Management Tool, PutTogether.
         </p>
       </div>
-      <div class="cta">
-      <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-round btn-default .btn-block">
-          <i class="fas fa-sign-in-alt"></i>
-          LOGIN</button>
+        {% if not  request.user.is_authenticated %}
+              <div class="cta">
+              <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-round btn-default .btn-block">
+                  <i class="fas fa-sign-in-alt"></i>
+                  LOGIN</button>
 
-      <button type="button" data-toggle="modal" id="signup" data-target="#signupModal"
-      class="btn btn-primary-success  btn-round btn-raised btn-success .btn-block">
-      <i class="fas fa-user-plus"></i>
-      SING UP NOW - IT'S
-      FREE</button>
+              <button type="button" data-toggle="modal" id="signup" data-target="#signupModal"
+              class="btn btn-primary-success  btn-round btn-raised btn-success .btn-block">
+              <i class="fas fa-user-plus"></i>
+              SING UP NOW - IT'S
+              FREE</button>
 
-      </div>
+              </div>
+        {% endif %}
     </div>
 
     <div class="cover">
@@ -269,7 +271,7 @@
                             </div>
                             <input type="email" required id='email' value="fahedshabani@std.sehir.edu.tr" class="form-control" placeholder="Email...">
                           </div>
-                            <label class="ml-auto mr-auto" id="email_error" style="display: none;">email exists</label>
+                            <label class="label_control" id="email_error" style="display: none;">email exists</label>
                         </div>
 
                         <div class="form-group">
@@ -308,7 +310,7 @@
         </div>
       </div>
 
-<!------------------------------------------------------/MODAL FOR SIGNING UP! ------------------------------------------------------>
+<!------------------------------------------------------/MODAL FOR Logging in! ------------------------------------------------------>
 
       <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-signup" role="document">
@@ -369,6 +371,8 @@
       </div>
 
 
+
+
     <!------------------------------------------------------ FOOTER ------------------------------------------------------>
 
     <!------------------------------------------------------ /FOOTER ------------------------------------------------------>
@@ -410,7 +414,9 @@
             data:{mail:email,password:password,csrfmiddlewaretoken: "{{ csrf_token }}"},
             success: function(e) {
                 console.log(e);
-                console.log('CORRECT LOGIN')
+                console.log('CORRECT LOGIN');
+                location.reload(true);
+
             },
             error:function(e){
                 var element = document.getElementById('password_error_login');
@@ -424,6 +430,8 @@
 
 
     </script>
+
+
 
 
     <style>
@@ -452,9 +460,12 @@
         repeat = document.getElementById("password_repeat").value;
 
         document.getElementById("name_error").style.display = 'none';
-        document.getElementById("email_error").style.display = 'none';
+        var email_error = document.getElementById("email_error");
+        email_error.style.display = 'none';
         document.getElementById('password_error').style.display = 'none';
         document.getElementById('repeat_error').style.display = 'none';
+
+
 
 
         if ($.trim(usr_name)== '' || usr_name.length < 6)
@@ -466,7 +477,7 @@
 
         if ($.trim(email) == '')
         {
-            document.getElementById('email_error').style.display='block';
+            email_error.style.display ='block';
             return
         }
 
@@ -488,12 +499,11 @@
             url:"Signup/",
             data:{name:usr_name,mail:email,pass:password,csrfmiddlewaretoken: "{{ csrf_token }}"},
             success: function (e) {
-                console.log(e.message);
-                console.log("Correct");
+                console.log(e.responseJSON.reason);
             },
             error:function (e) {
-                console.log(e);
-                console.log('fail')
+            email_error.innerHTML = e.responseJSON.reason;
+            email_error.style.display = 'block';
             }
         });
 
