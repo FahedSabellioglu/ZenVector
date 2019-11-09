@@ -1,258 +1,372 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
 {% block content %}
-
-
-<div class="container">
-  <div class="row-nowrap">
-
-    <!-- TODO LIST (card)-->
-    <div class="col-xs-6 col-md-3">
-      <div class="card card-plain">
-        <div class="card-list-header">
-          <h4 class="card-title bottom-bordered">TODO</h4>
-        </div>
-        <div class="card-body text-center">
-          <!-- task card -->
-          <div class="card">
-            <div  class="card-header card-header-danger2">  <!--id="draggable-scroll"-->
-              <a class="card-title">Card title</a>
-              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
-                <i class="material-icons">menu</i>
-              </button>
-            </div>
-            <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          <!-- end of task card -->
-
-          <!-- task card -->
-          <div class="card">
-            <div  class="card-header card-header-danger2">  <!--id="draggable-scroll"-->
-              <a class="card-title">Card title</a>
-              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
-                <i class="material-icons">menu</i>
-              </button>
-            </div>
-            <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          <!-- end of task card -->
-
-        <!-- add task card-->
-        <div class="card">
-          <div class="card-body">
-            <a type="btn" class="card-title" href="#addTask" data-toggle="modal" data-target="#detailModal">
-              <i class="material-icons">add</i>Add Task
-            </a>
-          </div>
-        </div>
-          <!-- end of add task card -->
-        </div>
-      </div>
-    </div>
-    <!-- end of TODO -->
-
-
-
-
-    <!-- DOING LIST (card)-->
-    <div class="col-xs-6 col-md-3">
-      <div class="card card-plain">
-        <div class="card-list-header">
-          <h4 class="card-title bottom-bordered">DOING</h4>
-        </div>
-        <div class="card-body text-center">
-          <!-- task card -->
-          <div class="card">
-            <div  class="card-header card-header-warning2">  <!--id="draggable-scroll"-->
-              <a class="card-title">Card title</a>
-              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
-                <i class="material-icons">menu</i>
-              </button>
-            </div>
-            <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          <!-- end of task card -->
-
-          <!-- task card -->
-          <div class="card">
-            <div  class="card-header card-header-warning2">  <!--id="draggable-scroll"-->
-              <a class="card-title">Card title</a>
-              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
-                <i class="material-icons">menu</i>
-              </button>
-            </div>
-            <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          <!-- end of task card -->
-
-          <!-- task card -->
-          <div class="card">
-            <div  class="card-header card-header-warning2">  <!--id="draggable-scroll"-->
-              <a class="card-title">Card title</a>
-              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
-                <i class="material-icons">menu</i>
-              </button>
-            </div>
-            <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          <!-- end of task card -->
-
-        <!-- add task card-->
-        <div class="card">
-          <div class="card-body">
-            <a type="btn" class="card-title" href="#addTask" data-toggle="modal" data-target="#detailModal">
-              <i class="material-icons">add</i>Add Task
-            </a>
-          </div>
-        </div>
-          <!-- end of add task card -->
-        </div>
-      </div>
-    </div>
-    <!-- end of DOING -->
-
-
-    <!-- DONE LIST (card)-->
-    <div class="col-xs-6 col-md-3">
-      <div class="card card-plain">
-        <div class="card-list-header">
-          <h4 class="card-title bottom-bordered">DONE</h4>
-        </div>
-        <div class="card-body text-center">
-          <!-- task card -->
-          <div class="card">
-            <div  class="card-header card-header-success2">  <!--id="draggable-scroll"-->
-              <a class="card-title">Card title</a>
-              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
-                <i class="material-icons">menu</i>
-              </button>
-            </div>
-            <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          <!-- end of task card -->
-
-        <!-- add task card-->
-        <div class="card">
-          <div class="card-body">
-            <a type="btn" class="card-title" href="#addTask" data-toggle="modal" data-target="#detailModal">
-              <i class="material-icons">add</i>Add Task
-            </a>
-          </div>
-        </div>
-          <!-- end of add task card -->
-        </div>
-      </div>
-    </div>
-    <!-- end of DONE -->
-
-    <!-- unnecessary LIST (card)-->
-    <div class="col-xs-6 col-md-3">
-      <div class="card card-plain">
-        <div class="card-list-header">
-          <h4 class="card-title bottom-bordered">Unnecessary</h4>
-        </div>
-        <div class="card-body text-center">
-          <!-- task card -->
-          <div class="card">
-            <div  class="card-header card-header-primary2">  <!--id="draggable-scroll"-->
-              <a class="card-title">Card title</a>
-              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
-                <i class="material-icons">menu</i>
-              </button>
-            </div>
-            <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          <!-- end of task card -->
-
-          <!-- task card -->
-          <div class="card">
-            <div  class="card-header card-header-primary2">  <!--id="draggable-scroll"-->
-              <a class="card-title">Card title</a>
-              <button type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
-                <i class="material-icons">menu</i>
-              </button>
-            </div>
-            <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          <!-- end of task card -->
-
-        <!-- add task card-->
-          <div class="card">
-            <div class="card-body">
-              <a type="btn" class="card-title" href="#addTask" data-toggle="modal" data-target="#detailModal">
-                <i class="material-icons">add</i>Add Task
-              </a>
-            </div>
-          </div>
-          <!-- end of add task card -->
-        </div>
-      </div>
-    </div>
-    <!-- end of unnecessary -->
-
-    <!-- ADD NEW LIST -->
-
-    <div class="col-xs-6 col-md-3">
-      <div class="card card-plain">
-        <div class="add-card-list-header">
-          <button type="button" class="btn btn-block " data-toggle="modal" data-target="#addListModal">
-            <i class="material-icons">add</i> add another list
-          </button>
-        </div>
-        <div class="card-body text-center">
-        </div>
-      </div>
-    </div>
-    <!-- end of add new list -->
+    <!-- Modal -->
+ <div>
+      <button id="addTask" data-toggle="modal" data-target="#addTaskModal">Add New Task</button>
+      <button id="addList" data-toggle="modal" data-target="#addListModal">Add New List</button>
   </div>
-</div>
 
-  <!-- Modal -->
-<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Task Name</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col mr-auto">
-            <form class="form" method="" action="">
+  <div class="container">
+    <div class="d-md-inline-flex d-sm-block" id="board">
 
-            </form>
+<!---------------------------------------------------------- TO DO List ---------------------------------------------------------->
+      <div class="col-xs-6 col-md-3">
+        <div class=card-list >
+          <div class="card-header">
+            <h4 class="card-list-title">TODO</h4>
+          </div>
+          <div class="card-list-body text-center"id="to-do">
+            <!-- task card -->
+            <div class="card">
+              <div  class="card-header card-header-danger2">
+                Card title
+                <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                  <i class="material-icons">menu</i>
+                </button>
+              </div>
+              <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+            <!-- task card -->
+            <div class="card">
+              <div  class="card-header card-header-danger2">
+                Card title
+                <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                  <i class="material-icons">menu</i>
+                </button>
+              </div>
+              <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+<!-------------------------------------------------- End of TO DO List ---------------------------------------------------------->
+
+
+
+<!---------------------------------------------------- DOING List ------------------------------------------------------------->
+      <div class="col-xs-6 col-md-3">
+        <div class=card-list >
+          <div class="card-header">
+            <h4 class="card-list-title">DOING</h4>
+          </div>
+          <div class="card-list-body text-center"id="doing">
+            <!-- task card -->
+            <div class="card">
+              <div  class="card-header card-header-warning2">
+                Card title
+                <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                  <i class="material-icons">menu</i>
+                </button>
+              </div>
+              <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+            <!-- task card -->
+            <div class="card">
+              <div  class="card-header card-header-warning2">
+                Card title
+                <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                  <i class="material-icons">menu</i>
+                </button>
+              </div>
+              <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+<!-------------------------------------------------- End of DOING List ---------------------------------------------------------->
+
+<!----------------------------------------------------  DONE List ---------------------------------------------------------->
+      <div class="col-xs-6 col-md-3">
+        <div class=card-list >
+          <div class="card-header">
+            <h4 class="card-list-title">DONE</h4>
+          </div>
+          <div class="card-list-body text-center"id="done">
+            <!-- task card -->
+            <div class="card">
+                <div  class="card-header card-header-success2">
+                  Card title
+                  <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                    <i class="material-icons">menu</i>
+                  </button>
+                </div>
+              <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+            <!-- task card -->
+            <div class="card">
+                <div  class="card-header card-header-success2">
+                    Card title
+                    <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                        <i class="material-icons">menu</i>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-------------------------------------------------- End of DONE List ---------------------------------------------------------->
     </div>
   </div>
-</div>
+
+
+  <!------------------------------------------------- Detail Modal ------------------------------------------------------------>
+
+      <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Card Title Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col mr-auto">
+                  <form class="form" id="detailsForm" method="" action="">
+                    <!-- Assigned to -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title"></i>
+                          </div>
+                        </div>
+                        <!-- This part should show the people who are assigned for the task -->
+                        <input type="text" id="assignedToD" class="form-control" placeholder="Assigned to..." required>
+                        <!-- <select id="assignedTo" class="form-control">
+                          <option selected >Choose...</option>
+                          <option value="userID1">Fahed</option>
+                          <option value="userID2">Khaled</option>
+                          <option value="userID3">Zeynep</option>
+                        </select> -->
+                      </div>
+                    </div>
+                    <!-- Deadline -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title"></i>
+                          </div>
+                        </div>
+                        <input class="form-control" type="datetime-local"  id="deadlineD" placeholder="2019-11-08T19:30">
+                      </div>
+                    </div>
+
+                    <!-- Details -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title"></i>
+                          </div>
+                        </div>
+                        <input type="text" id="taskDetailsD" class="form-control" placeholder="Details..." required>
+                      </div>
+                    </div>
+                    <!-- Status -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title"></i>
+                          </div>
+                        </div>
+                        <select id="statusD" class="form-control">
+                          <option selected value="to-do">To Do</option>
+                          <option value="doing">Doing</option>
+                          <option value="done">Done</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger" style="position: absolute; left: 1rem;" onclick="deleteTask()">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" id=changeDetails class="btn btn-rose" data-dismiss="modal" id="closeDetailModal" onclick="changeDetails()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!-------------------------------------------------------- End of Detail Modal -------------------------------------------------------->
+
+
+
+
+<!-------------------------------------------------------- Add Task Modal -------------------------------------------------------->
+
+      <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col mr-auto">
+                  <form class="form" id="addTaskForm" method="" action="">
+                    <!-- Task Details -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title"></i>
+                          </div>
+                        </div>
+                        <input type="text" id="taskTitle" class="form-control" placeholder="Task Title..." required>
+                      </div>
+                    </div>
+                    <!-- Assigned to -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title"></i>
+                          </div>
+                        </div>
+                        <select id="assignedTo" class="form-control">
+                          <option selected value="user1">Fahed</option>
+                          <option value="user2">Khaled</option>
+                          <option value="user3">Zeynep</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- Deadline -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-title"></i>
+                          </div>
+                        </div>
+                        <input class="form-control" type="datetime-local"  id="deadline"  placeholder="2019-11-08T19:30">
+                      </div>
+                    </div>
+                    <!-- Task Details -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title"></i>
+                          </div>
+                        </div>
+                        <input type="text" id="taskDetails" class="form-control" placeholder="Details..." required>
+                      </div>
+                    </div>
+                    <!-- Task Status -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title"></i>
+                          </div>
+                        </div>
+                        <select id="status" class="form-control">
+                          <option selected value="to-do">To Do</option>
+                          <option value="doing">Doing</option>
+                          <option value="done">Done</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" id=addTask class="btn btn-rose" data-dismiss="modal" id="closeAddTaskModal" onclick="addTask()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!-------------------------------------------------------- End of Add Task Modal -------------------------------------------------------->
+
+
+
+
+
+<!-------------------------------------------------------- Add List Modal -------------------------------------------------------->
+
+      <div class="modal fade" id="addListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col mr-auto">
+                  <form class="form" id="addListForm" method="" action="">
+                  <!-- List Title -->
+                  <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title"></i>
+                          </div>
+                        </div>
+                        <input type="text" id="listTitle" class="form-control" placeholder="List Title..." required>
+                      </div>
+                    </div>
+                    <!-- Color Picker -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <label for="headerColor">Choose color for header  </label>
+                        <input id="headerColor" class="jscolor" value="ab2567">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" id=addCard class="btn btn-rose" data-dismiss="modal" id="closeAddListModal" onclick="addList()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!---------------------------------------------------- End of Add List Modal -------------------------------------------------------->
+
+
+
+
+
 
 {% endblock %}
 
    {% block scripts %}
+       <script src="{% static 'js/dragula.js' %}"></script>
+       <script src="{% static 'js/jscolor.js' %}"></script>
+    <script src="{% static 'js/project_page.js' %}"></script>
 
-       dlksajdlkas
    {% endblock %}

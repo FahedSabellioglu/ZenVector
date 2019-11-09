@@ -630,57 +630,19 @@
       }   
   </script>
 
-    <!-- <script>    
-        $(document).ready(function(){
+  <script>
+      $("#addTask").click(function(){
+      $("#addTaskModal").modal({backdrop: "static"});
+      });
 
-        $("button.closeAddTaskModal").on("click",function(){
-        
-        $("div:last").after(
-            "<div class='card'><div class='card-header card-header-danger2 card-title'>" + title +
-                "<button type='button' class='btn btn-just-icon btn-sm' data-toggle='modal' data-target='#detailModal'>"+
-                "<i class='material-icons'>menu</i></button></div> <class='card-body card-text'>" + detail+ "</div></div>");
-            })
-        })
-    </script> -->
+      $("#addList").click(function(){
+      $("#addListModal").modal({backdrop: "static"});
+      });
 
-    <!-- <script> 
-        $('#closeAddCardModal').click(function addCard(){
-            var title = document.getElementById("taskTitle").value;
-            //   console.log(title);
-    
-              var detail = document.getElementById("taskDetails").value;
-            //   console.log(detail);
-    
-              var cardList = document.getElementById("selectList").value;
-            //   console.log(cardList);
-    
-              var headerColor =document.getElementById(cardList).value;
-              console.log(headerColor);   // to find color of header  IT DOESN'T WORK
-    
-              document.getElementById(cardList).innerHTML +=
-                "<div class='card-list-body'><div class='card'><div class='card-header card-header-danger2 card-title'>" + title +
-                "<button type='button' class='btn btn-just-icon btn-sm' data-toggle='modal' data-target='#detailModal'>"+
-                "<i class='material-icons'>menu</i></button></div> <class='card-body card-text'>" + detail+ "</div></div></div>";
-    
-              $('#addTaskModal').modal('hide');
-
-        }); 
-        </script>
-         -->
-
-    <script>
-        $("#addTask").click(function(){
-        $("#addTaskModal").modal({backdrop: "static"});
-        });
-
-        $("#addList").click(function(){
-        $("#addListModal").modal({backdrop: "static"});
-        });
-
-        $("#detailModal").click(function(){
-        $("#detailModal").modal({backdrop: "static"});
-        });
-    </script>
+      $("#detailModal").click(function(){
+      $("#detailModal").modal({backdrop: "static"});
+      });
+  </script>
 
 
   <script>

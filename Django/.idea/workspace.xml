@@ -2,16 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54d4791b-657f-41bf-8f66-941fd545559a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ZenVector/static/Material-kit/css/custom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZenVector/static/js/dragula.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZenVector/static/js/forms.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZenVector/static/js/jscolor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZenVector/static/js/project_page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZenVector-django/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector-django/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZenVector/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZenVector/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZenVector/static/Material-kit/css/material-kit-new.css" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector/static/Material-kit/css/material-kit-new.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZenVector/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZenVector/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZenVector/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector/templates/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZenVector/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZenVector/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db_old.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZenVector/templates/project.html" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector/templates/project.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_old.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Interface/html/project.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Interface/html/project.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +31,8 @@
       <list>
         <option value="HTML File" />
         <option value="Python Script" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -40,10 +46,14 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ZenVector/static/js" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Fahed Sabellioglu\Documents\GitHub\ZenVector\Django\ZenVector\static\js" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Fahed Sabellioglu\Documents\GitHub\ZenVector\Django\ZenVector\templatetags" />
     </key>
@@ -131,7 +141,7 @@
       <workItem from="1573105376157" duration="571000" />
       <workItem from="1573114412231" duration="21483000" />
       <workItem from="1573196980502" duration="12266000" />
-      <workItem from="1573219227630" duration="17722000" />
+      <workItem from="1573219227630" duration="20961000" />
     </task>
     <servers />
   </component>
