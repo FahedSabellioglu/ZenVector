@@ -6,11 +6,24 @@ from models import *
 from django.http import JsonResponse,HttpResponseRedirect
 
 
-def func_new_task(response,p_id):
-    data = dict(response.POST)
+def func_new_task(request,p_id):
+    print "HERERERERERR dsahdsakhdkjsahdkj"
+    data = dict(request.POST)
+    proj_obj = Projects.objects.get(project_id=p_id)
+    response = JsonResponse({"message":''})
 
-    print data
-    print "HEWRERERR"
+    if state.objects.filter(state_name=data['name'][0],project_id=proj_obj).exists():
+        response = JsonResponse({"message": 'The name already exists'})
+        response.status_code = 404
+        print "HERRE not"
+        return  response
+
+    new_list = state(state_name=data['name'][0],project_id=proj_obj)
+    new_list.save()
+    response.status_code = 200
+    return response
+
+
     # # usr = Users.objects.get(email='fahedshabani@std.sehir.edu.tr')
     # p = Projects(project_name='new project',usr_email=usr)
     #
@@ -74,10 +87,25 @@ def func_signup(request):
         return rtn
 
 
-def page_Projects(response):
+def page_Projects(response,p_id):
 
 
-    return render(response,'project.html')
+    proj_obj = Projects.objects.get(project_id=p_id)
+    usr_obj = Users.objects.all()[0]
+    stat = state.objects.filter(state_name='new list',project_id=proj_obj)
+    print stat
+
+    t = Tasks(task_project_id=proj_obj,task_deadline="09/09/2019",task_name='whatever task hey',task_state=stat[0],task_descrip='hey hey here',task_given_by=usr_obj)
+    t.save()
+
+
+    tasks = Tasks.objects.filter(task_project_id=proj_obj)
+    print tasks
+    states = state.objects.filter(project_id=proj_obj)
+
+
+
+    return render(response,'project.html',{"tasks":tasks,'states':states})
 
 
 def page_User(response):

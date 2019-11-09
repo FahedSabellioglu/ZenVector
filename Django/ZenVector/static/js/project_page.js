@@ -70,11 +70,11 @@ $("#addListForm").on('submit',function(e) {
 });
 
 function addList(e) {
-
+    console.log("hererer");
     var error_element = document.getElementById('list_name');
     error_element.style.display = 'none';
     var title = document.getElementById("listTitle").value;
-    console.log(title);
+    error_element.innerHTML="You can't leave the list name empty";
 
       var color = document.getElementById("headerColor").value;
       console.log(color);
@@ -83,7 +83,6 @@ function addList(e) {
         error_element.innerHTML="You can't leave the list name empty";
         error_element.style.display = 'block';
         return false;}
-
        $.ajax({
         type:'POST',
         url:"NewTask/",
@@ -92,7 +91,11 @@ function addList(e) {
             location.reload(true)
         },
         error:function (e) {
-            console.log(e)
+            console.log(e);
+            error_element.innerHTML = e.responseJSON.message;
+            error_element.style.display = 'block';
+
+
         }
     });
   // document.getElementById("board").innerHTML +=

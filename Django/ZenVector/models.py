@@ -61,7 +61,7 @@ class state(models.Model):
 class Tasks(models.Model):
     task_id = models.AutoField(primary_key=True)
     task_name = models.CharField(max_length=255)
-    task_deadline = models.TimeField(auto_now_add=True)
+    task_deadline = models.DateField(auto_now_add=True)
     task_descrip = models.TextField()
     task_state = models.ForeignKey(state,db_column='state_name')
     task_creation_time = models.TimeField(auto_now_add=True)

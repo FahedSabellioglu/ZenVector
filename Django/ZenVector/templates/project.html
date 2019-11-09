@@ -85,39 +85,34 @@
 <!-------------------------------------------------- End of DOING List ---------------------------------------------------------->
 
 <!----------------------------------------------------  DONE List ---------------------------------------------------------->
-      <div class="col-xs-6 col-md-3">
+      {% for element in states %}
+        <div class="col-xs-6 col-md-3">
         <div class=card-list >
           <div class="card-header">
-            <h4 class="card-list-title">DONE</h4>
+            <h4 class="card-list-title">{{element.state_name}}</h4>
           </div>
-          <div class="card-list-body text-center"id="done">
+          <div class="card-list-body text-center"id="{{element.state_name}}">
             <!-- task card -->
-            <div class="card">
-                <div  class="card-header card-header-success2">
-                  Card title
-                  <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
-                    <i class="material-icons">menu</i>
-                  </button>
-                </div>
-              <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
             <!-- task card -->
-            <div class="card">
-                <div  class="card-header card-header-success2">
-                    Card title
-                    <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
-                        <i class="material-icons">menu</i>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
+              {% for item in tasks %}
+                  {% if item.task_state == element %}
+                    <div class="card">
+                        <div  class="card-header card-header-success2">
+                            {{item.task_name}}
+                            <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                                <i class="material-icons">menu</i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"> Descrip: {{ item.task_descrip }} Deadline: {{ item.task_deadline }} Given by :{{ item.task_given_by }}</p>
+                        </div>
+                    </div>
+                  {% endif %}
+              {% endfor %}
           </div>
         </div>
       </div>
+    {% endfor %}
 <!-------------------------------------------------- End of DONE List ---------------------------------------------------------->
     </div>
   </div>
