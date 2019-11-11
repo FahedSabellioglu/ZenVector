@@ -42,8 +42,6 @@
                         Projects!
                       </a>
                       <div class="dropdown-menu">
-{#<a href="{% url 'pay_summary' value=0 %}">my link</a>#}
-{#                       href="{% url 'project_tasks' value = project.project_id %}"#}
                           {% for project in lists.project_list %}
                             <a class="nav-link dropdown-item" data-value="{{ project.project_id }}" href="{% url 'tasks' p_id=project.project_id %}">{{project.project_name}}</a>
                           {% endfor %}

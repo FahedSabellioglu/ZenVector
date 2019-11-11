@@ -24,14 +24,36 @@
       //         "<i class='material-icons'>menu</i></button></div> <class='card-body card-text'>" + detail+ "</div></div>";
 
 }
+
+
+$(document).on('click','.menu-button',function () {
+
+    var task_id = $(this).data('id');
+    console.log(task_id);
+    $('#edit_task_title').attr("taskid",task_id);
+    // console.log($("#edit_task_title").attr('taskid'));
+
+
+});
+
+
  function deleteTask(){
 
     var x = confirm("Are you sure you want to delete?");
+    var task_id = $("#edit_task_title").attr('taskid');
     if (x){
-      //  code to delete task
-        // document.getElementById("***").innerHTML = "";
-      console.log(x);
-      return true;
+
+       $.ajax({
+           type:"POST",
+           url:"DeleteTask/",
+           data:{taskid:task_id,csrfmiddlewaretoken:csrftoken},
+           success:function () {
+               location.reload(true);
+           },
+           error:function () {
+               console.log("NOT CORRECT");
+           }
+       })
     }
     else{
       console.log(x);
@@ -39,27 +61,74 @@
     }
 }
 
+$("#addTaskForm").on('submit',function (e) {
+    e.preventDefault();
+});
+
+
 function addTask() {
 
+      var title_error = document.getElementById("task_name_error");
+      var descrip_error = document.getElementById("task_descrip");
+      var deadline_error = document.getElementById('task_deadline');
+      var email_value = document.getElementById('project_owner').value;
+      var task_error = document.getElementById("task_error");
+      task_error.style.display = 'none';
+
+      title_error.style.display = 'none';
+      descrip_error.style.display = 'none';
+      deadline_error.style.display = 'none';
+
       var title = document.getElementById("taskTitle").value;
-      console.log(title);
 
       var assignedTo = document.getElementById("assignedTo").value;
-      console.log(assignedTo);
 
-      var deadline = document.getElementById("deadline").value;
-      console.log(deadline);
+      var deadline = document.getElementById("deadline");
 
       var detail = document.getElementById("taskDetails").value;
-      console.log(detail);
 
       var status = document.getElementById("status").value;
-      console.log(status);
 
-      document.getElementById(status).innerHTML +=
-          "<div class='card'><div class='card-header card-header-danger2'>" + title +
-          "<button type='button' style='position: absolute; right: 1rem;' class='btn btn-just-icon btn-sm' data-toggle='modal' data-target='#detailModal'>"+
-          "<i class='material-icons'>menu</i></button></div> <class='card-body card-text'>" + detail+ "</div></div>";
+      var dateControl = document.querySelector('input[type="datetime-local"]');
+
+      if ($.trim(title).length < 2)
+      {
+          title_error.innerHTML = "Please provide a meaningful name";
+          title_error.style.display = 'block';
+          return false;
+      }
+
+      //   if ($.trim(dateControl.value).length == 0){
+      //       deadline_error.innerHTML = "Please choose the deadline";
+      //       deadline_error.style.display = 'block';
+      //       return false;
+      // }
+
+      if ($.trim(detail).length < 5){
+          descrip_error.innerHTML = "Please provide a meaningful description";
+          descrip_error.style.display = 'block';
+          return false;
+      }
+
+      $.ajax({
+         type:"POST",
+         url:"NewTask/",
+         data: {title:title,assign_to: assignedTo,time:"09/09/2019",descrip:detail,list_name:status,csrfmiddlewaretoken:csrftoken},
+          success:function () {
+               location.reload(true);
+          },
+          error:function () {
+             task_error.style.display = 'block';
+          }
+
+      });
+
+
+
+      // document.getElementById(status).innerHTML +=
+      //     "<div class='card'><div class='card-header card-header-danger2'>" + title +
+      //     "<button type='button' style='position: absolute; right: 1rem;' class='btn btn-just-icon btn-sm' data-toggle='modal' data-target='#detailModal'>"+
+      //     "<i class='material-icons'>menu</i></button></div> <class='card-body card-text'>" + detail+ "</div></div>";
 
       // $('#addTaskModal').modal('hide');
   }
@@ -85,7 +154,7 @@ function addList(e) {
         return false;}
        $.ajax({
         type:'POST',
-        url:"NewTask/",
+        url:"NewState/",
         data:{name:title,color:color,csrfmiddlewaretoken:csrftoken},
         success:function (e) {
             location.reload(true)
@@ -123,11 +192,11 @@ $("#detailModal").modal({backdrop: "static"});
 
 
  /* Custom Dragula JS */
-dragula([
-document.getElementById("to-do"),
-document.getElementById("doing"),
-document.getElementById("done"),
-]);
+// dragula([
+// document.getElementById("to-do"),
+// document.getElementById("doing"),
+// document.getElementById("done"),
+// ]);
 
 removeOnSpill.on("drag", function(el) {
   el.className.replace("ex-moved", "");

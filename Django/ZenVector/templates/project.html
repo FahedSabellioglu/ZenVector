@@ -3,6 +3,7 @@
 {% block content %}
     <!-- Modal -->
  <div>
+     <p id="project_owner" style="display: none">{{ owner }}</p>
       <button id="addTask" data-toggle="modal" data-target="#addTaskModal">Add New Task</button>
       <button id="addList" data-toggle="modal" data-target="#addListModal">Add New List</button>
   </div>
@@ -99,7 +100,7 @@
                     <div class="card">
                         <div  class="card-header card-header-success2">
                             {{item.task_name}}
-                            <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm" data-toggle="modal" data-target="#detailModal">
+                            <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm menu-button" data-id="{{ item.task_id }}" data-toggle="modal" data-target="#detailModal">
                                 <i class="material-icons">menu</i>
                             </button>
                         </div>
@@ -124,7 +125,8 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Card Title Details</h5>
+              <h5 class="modal-title" id="edit_task_title" data-taskid="none">Edit Card Title Details</h5>
+
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -142,13 +144,11 @@
                           </div>
                         </div>
                         <!-- This part should show the people who are assigned for the task -->
-                        <input type="text" id="assignedToD" class="form-control" placeholder="Assigned to..." required>
-                        <!-- <select id="assignedTo" class="form-control">
-                          <option selected >Choose...</option>
-                          <option value="userID1">Fahed</option>
-                          <option value="userID2">Khaled</option>
-                          <option value="userID3">Zeynep</option>
-                        </select> -->
+                        <select id="assignedTo" class="form-control" required>
+                            {% for usr in users %}
+                          <option  value="{{ usr.email }}">{{ usr.email }}</option>
+                            {% endfor %}
+                        </select>
                       </div>
                     </div>
                     <!-- Deadline -->
@@ -183,9 +183,9 @@
                           </div>
                         </div>
                         <select id="statusD" class="form-control">
-                          <option selected value="to-do">To Do</option>
-                          <option value="doing">Doing</option>
-                          <option value="done">Done</option>
+                            {% for element in states %}
+                                <option value="{{ element.state_id }}">{{ element.state_name }}</option>
+                            {% endfor %}
                         </select>
                       </div>
                     </div>
@@ -200,7 +200,7 @@
               <button type="submit" id=changeDetails class="btn btn-rose" data-dismiss="modal" id="closeDetailModal" onclick="changeDetails()">Save</button>
             </div>
           </div>
-        </div>
+        </div>`
       </div>
 
 <!-------------------------------------------------------- End of Detail Modal -------------------------------------------------------->
@@ -222,7 +222,9 @@
             <div class="modal-body">
               <div class="row">
                 <div class="col mr-auto">
-                  <form class="form" id="addTaskForm" method="" action="">
+                  <form class="form" id="addTaskForm">
+                        {% csrf_token %}
+
                     <!-- Task Details -->
                     <div class="form-group">
                       <div class="input-group">
@@ -233,6 +235,7 @@
                         </div>
                         <input type="text" id="taskTitle" class="form-control" placeholder="Task Title..." required>
                       </div>
+                      <label class="label_control" id="task_name_error" style="display: none;">You already have this task name</label>
                     </div>
                     <!-- Assigned to -->
                     <div class="form-group">
@@ -242,10 +245,10 @@
                             <i class="fas fa-title"></i>
                           </div>
                         </div>
-                        <select id="assignedTo" class="form-control">
-                          <option selected value="user1">Fahed</option>
-                          <option value="user2">Khaled</option>
-                          <option value="user3">Zeynep</option>
+                        <select id="assignedTo" class="form-control" required>
+                            {% for usr in users %}
+                          <option  value="{{ usr.email }}">{{ usr.email }}</option>
+                            {% endfor %}
                         </select>
                       </div>
                     </div>
@@ -257,8 +260,10 @@
                             <i class="fas fa-title"></i>
                           </div>
                         </div>
-                        <input class="form-control" type="datetime-local"  id="deadline"  placeholder="2019-11-08T19:30">
+                        <input class="form-control" type="datetime-local"  id="deadline" required  placeholder="2019-11-08T19:30">
                       </div>
+                      <label class="label_control" id="task_deadline" style="display: none;">Please provide a meaningful details</label>
+
                     </div>
                     <!-- Task Details -->
                     <div class="form-group">
@@ -270,6 +275,8 @@
                         </div>
                         <input type="text" id="taskDetails" class="form-control" placeholder="Details..." required>
                       </div>
+                      <label class="label_control" id="task_descrip" style="display: none;">Please provide a meaningful details</label>
+
                     </div>
                     <!-- Task Status -->
                     <div class="form-group">
@@ -279,12 +286,14 @@
                             <i class="fas fa-title"></i>
                           </div>
                         </div>
-                        <select id="status" class="form-control">
-                          <option selected value="to-do">To Do</option>
-                          <option value="doing">Doing</option>
-                          <option value="done">Done</option>
+                        <select id="status" class="form-control" required>
+                            {% for element in states %}
+                                <option value={{ element.state_id }}>{{ element.state_name }}</option>
+                            {% endfor %}
                         </select>
                       </div>
+                      <label class="label_control"  id="task_error" style="display: none;">You Already have this task</label>
+
                     </div>
 
                   </form>
@@ -293,7 +302,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" id=addTask class="btn btn-rose" data-dismiss="modal" id="closeAddTaskModal" onclick="addTask()">Save</button>
+              <button type="submit" id=addTask class="btn btn-rose"  onclick="addTask()">Save</button>
             </div>
           </div>
         </div>
@@ -364,7 +373,16 @@
               var csrftoken = '{{ csrf_token }}';
        </script>
 
+
        <script src="{% static 'js/dragula.js' %}"></script>
        <script src="{% static 'js/jscolor.js' %}"></script>
+              <script>
+       dragula([
+                  {% for element in states %}
+            document.getElementById("{{ element.state_name}}"),
+                {% endfor %}
+       ]);
+       </script>
     <script src="{% static 'js/project_page.js' %}"></script>
+
    {% endblock %}
