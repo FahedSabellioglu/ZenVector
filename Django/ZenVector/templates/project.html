@@ -138,7 +138,7 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
-                            <i class="fas fa-title"></i>
+                            <i class="fas fa-title">user</i>
                           </div>
                         </div>
                         <!-- This part should show the people who are assigned for the task -->
@@ -156,7 +156,7 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
-                            <i class="fas fa-title"></i>
+                            <i class="fas fa-title">calendar-alt</i>
                           </div>
                         </div>
                         <input class="form-control" type="datetime-local"  id="deadlineD" placeholder="2019-11-08T19:30">
@@ -168,7 +168,7 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
-                            <i class="fas fa-title"></i>
+                            <i class="fas fa-title">stream</i>
                           </div>
                         </div>
                         <input type="text" id="taskDetailsD" class="form-control" placeholder="Details..." required>
@@ -179,7 +179,7 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
-                            <i class="fas fa-title"></i>
+                            <i class="fas fa-title">list</i>
                           </div>
                         </div>
                         <select id="statusD" class="form-control">
@@ -210,7 +210,7 @@
 
 <!-------------------------------------------------------- Add Task Modal -------------------------------------------------------->
 
-      <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -228,7 +228,7 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
-                            <i class="fas fa-title"></i>
+                            <i class="fas fa-title">heading</i>
                           </div>
                         </div>
                         <input type="text" id="taskTitle" class="form-control" placeholder="Task Title..." required>
@@ -239,13 +239,14 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
-                            <i class="fas fa-title"></i>
+                            <i class="fas fa-title">user</i>
                           </div>
                         </div>
                         <select id="assignedTo" class="form-control">
-                          <option selected value="user1">Fahed</option>
-                          <option value="user2">Khaled</option>
-                          <option value="user3">Zeynep</option>
+                          <option selected value="empty">Choose...</option>
+                            {% for user in users %}
+                          <option value="{{ user.email }} ">{{ user.username }}</option>
+                            {% endfor %}
                         </select>
                       </div>
                     </div>
@@ -254,7 +255,7 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <i class="fas fa-title"></i>
+                            <i class="fas fa-title">calendar-alt</i>
                           </div>
                         </div>
                         <input class="form-control" type="datetime-local"  id="deadline"  placeholder="2019-11-08T19:30">
@@ -265,7 +266,7 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
-                            <i class="fas fa-title"></i>
+                            <i class="fas fa-title">stream</i>
                           </div>
                         </div>
                         <input type="text" id="taskDetails" class="form-control" placeholder="Details..." required>
@@ -276,14 +277,16 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
-                            <i class="fas fa-title"></i>
+                            <i class="fas fa-title">list</i>
                           </div>
                         </div>
+
                         <select id="status" class="form-control">
-                          <option selected value="to-do">To Do</option>
-                          <option value="doing">Doing</option>
-                          <option value="done">Done</option>
+                            {% for state in states %}
+                          <option value="{{ state.state_id }}">{{ state.state_name }}</option>
+                            {% endfor %}
                         </select>
+
                       </div>
                     </div>
 
@@ -323,7 +326,7 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
-                            <i class="fas fa-title"></i>
+                            <i class="fas fa-title">list</i>
                           </div>
                         </div>
                         <input type="text" id="listTitle" class="form-control" placeholder="List Title..." required>
@@ -334,7 +337,11 @@
                     <!-- Color Picker -->
                     <div class="form-group">
                       <div class="input-group">
-                        <label for="headerColor">Choose color for header  </label>
+                          <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title">palette</i>
+                          </div>
+                        </div>
                         <input id="headerColor" class="jscolor" value="ab2567">
                       </div>
                     </div>
@@ -367,4 +374,6 @@
        <script src="{% static 'js/dragula.js' %}"></script>
        <script src="{% static 'js/jscolor.js' %}"></script>
     <script src="{% static 'js/project_page.js' %}"></script>
+
+
    {% endblock %}

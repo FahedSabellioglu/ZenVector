@@ -95,17 +95,17 @@ def page_Projects(response,p_id):
     stat = state.objects.filter(state_name='new list',project_id=proj_obj)
     print stat
 
-    t = Tasks(task_project_id=proj_obj,task_deadline="09/09/2019",task_name='whatever task hey',task_state=stat[0],task_descrip='hey hey here',task_given_by=usr_obj)
-    t.save()
+    # t = Tasks(task_project_id=proj_obj,task_deadline="09/09/2019",task_name='whatever task hey',task_state=stat[0],task_descrip='hey hey here',task_given_by=usr_obj)
+    # t.save()
 
 
     tasks = Tasks.objects.filter(task_project_id=proj_obj)
     print tasks
     states = state.objects.filter(project_id=proj_obj)
+    users= Users.objects.all()
 
 
-
-    return render(response,'project.html',{"tasks":tasks,'states':states})
+    return render(response,'project.html',{"tasks":tasks,'states':states ,"users":users})
 
 
 def page_User(response):
