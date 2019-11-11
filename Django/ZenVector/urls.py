@@ -11,7 +11,9 @@ urlpatterns = [
     url(r'^PutTogether/Login/$',views.func_login),
     url(r"^PutTogether/CreateProject/$",views.func_create_project),
     url(r'^PutTogether/Loguout/$',views.func_logout),
-    url(r'^PutTogether/Projects/(?P<p_id>\d+)/NewTask/$',views.func_new_task,name='project_tasks')
+    url(r'^PutTogether/Projects/(?P<p_id>\d+)/NewState/$',views.fun_new_state,name='project_tasks'),
+    url(r'^PutTogether/Projects/(?P<p_id>\d+)/NewTask/$',views.fun_new_task),
+    url(r'^PutTogether/Projects/(?P<p_id>\d+)/DeleteTask/$',views.func_delete_task)
 
 
 ]

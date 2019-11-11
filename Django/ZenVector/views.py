@@ -6,16 +6,14 @@ from models import *
 from django.http import JsonResponse,HttpResponseRedirect
 
 
-def func_new_task(request,p_id):
-    print "HERERERERERR dsahdsakhdkjsahdkj"
+def fun_new_state(request,p_id):
     data = dict(request.POST)
     proj_obj = Projects.objects.get(project_id=p_id)
-    response = JsonResponse({"message":''})
 
+    response = JsonResponse({"message":''})
     if state.objects.filter(state_name=data['name'][0],project_id=proj_obj).exists():
         response = JsonResponse({"message": 'The name already exists'})
         response.status_code = 404
-        print "HERRE not"
         return  response
 
     new_list = state(state_name=data['name'][0],project_id=proj_obj)
@@ -23,12 +21,47 @@ def func_new_task(request,p_id):
     response.status_code = 200
     return response
 
+def fun_new_task(response,p_id):
+    data = dict(response.POST)
+    proj_obj = Projects.objects.get(project_id=p_id)
+    state_obj = state.objects.get(state_id=data['list_name'][0],project_id=proj_obj)
+    print data['list_name'][0]
+    # print state_obj
 
-    # # usr = Users.objects.get(email='fahedshabani@std.sehir.edu.tr')
-    # p = Projects(project_name='new project',usr_email=usr)
-    #
-    # print data['name'][0],data['color'][0],'HERRER'
-    # task_new = state(proj)
+
+
+
+    if Tasks.objects.filter(task_name=data['title'][0],task_project_id=proj_obj).exists():
+        response = JsonResponse({"message":"The task already exists"})
+        response.status_code = 404
+        return  response
+    new_task = Tasks(task_name=data['title'][0],task_project_id=proj_obj,task_descrip = data['descrip'][0],
+                     task_given_by = proj_obj.usr_email,task_state=state_obj,task_deadline="2019-09-09")
+    new_task.save()
+
+    response = JsonResponse({})
+    response.status_code = 200
+    return response
+
+
+def func_delete_task(response,p_id):
+    data = dict(response.POST)
+    proj_obj = Projects.objects.get(project_id=p_id)
+    task_obj = Tasks.objects.get(task_id=data['taskid'][0],task_project_id=proj_obj)
+    task_obj.delete()
+
+    response = JsonResponse({"message":"task has been deleted"})
+    response.status_code = 200
+    return response
+
+
+
+# def func_update_task(response,p_id):
+
+
+
+
+
 
 
 
@@ -100,7 +133,6 @@ def page_Projects(response,p_id):
 
 
     tasks = Tasks.objects.filter(task_project_id=proj_obj)
-    print tasks
     states = state.objects.filter(project_id=proj_obj)
     users= Users.objects.all()
 
