@@ -190,21 +190,32 @@ $("#detailModal").click(function(){
 $("#detailModal").modal({backdrop: "static"});
 });
 
+// dragula.drake.on("drag", function(el) {
+// el.className.replace("ex-moved", "");
+// })
+// .on("drop", function(el) {
+// el.className += "ex-moved";
+// })
+// .on("over", function(el, container) {
+// container.className += "ex-over";
+// })
+// .on("out", function(el, container) {
+// container.className.replace("ex-over", "");
+// });
 
-
-dragula.removeOnSpill:false
-    .on("drag", function(el) {
-  el.className.replace("ex-moved", "");
-  console.log(el.className);
-}).on("dropremoveOnSpill", function(el) {
-  el.className += "ex-moved";
-  console.log(el.className);
-})
-.on("over", function(el, container) {
-  container.className += "ex-over";
-  console.log(el.className);
-})
-.on("out", function(el, container) {
-  container.className.replace("ex-over", "");
-  console.log(el.className);
-});
+// dragula.removeOnSpill:false
+//     .on("drag", function(el) {
+//   el.className.replace("ex-moved", "");
+//   console.log(el.className);
+// }).on("dropremoveOnSpill", function(el) {
+//   el.className += "ex-moved";
+//   console.log(el.className);
+// })
+// .on("over", function(el, container) {
+//   container.className += "ex-over";
+//   console.log(el.className);
+// })
+// .on("out", function(el, container) {
+//   container.className.replace("ex-over", "");
+//   console.log(el.className);
+// });

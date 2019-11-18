@@ -65,7 +65,19 @@ def change_password(response):
     return  rtn
 
 
+def move_task(request,p_id):
+    data = dict(request.POST)
+    proj_obj = Projects.objects.get(project_id=p_id)
+    task_obj = Tasks.objects.get(task_id=data['task_id'][0])
+    stat_obj = state.objects.get(state_name=data['to_list'][0],project_id=proj_obj)
+    task_obj.task_state = stat_obj
+    task_obj.save()
 
+    print "SAVED"
+
+    print data
+    print p_id
+    print "EHRRERERERERERERERERERE"
 # def func_update_task(response,p_id):
 
 
