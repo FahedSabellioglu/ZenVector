@@ -326,10 +326,10 @@ function dragula (initialContainers, options) {
         url:"MoveTask/",
         data:{from_list:from_list_id,to_list:to_list_id,task_id:task_id,csrfmiddlewaretoken:csrftoken},
         success:function () {
-          console.log("CORRECT");
+
         },
         error:function () {
-          console.log("FAIL");
+          alert('Something went wrong, Please try again later');
         }
       })
 

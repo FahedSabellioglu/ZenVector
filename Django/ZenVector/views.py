@@ -73,11 +73,9 @@ def move_task(request,p_id):
     task_obj.task_state = stat_obj
     task_obj.save()
 
-    print "SAVED"
-
-    print data
-    print p_id
-    print "EHRRERERERERERERERERERE"
+    rtn = JsonResponse({"Saved":"New state for the task with id "+str(data['task_id'][0])})
+    rtn.status_code = 200
+    return rtn
 # def func_update_task(response,p_id):
 
 
