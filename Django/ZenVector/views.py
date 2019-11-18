@@ -134,18 +134,20 @@ def page_Projects(response,p_id):
 
 
     proj_obj = Projects.objects.get(project_id=p_id)
-    usr_obj = Users.objects.all()
-    # stat = state.objects.filter(state_name='new list',project_id=proj_obj)
-    # print stat
-    #
+    usr_obj = Users.objects.all()[0]
+    stat = state.objects.filter(state_name='new list',project_id=proj_obj)
+    print stat
+
     # t = Tasks(task_project_id=proj_obj,task_deadline="09/09/2019",task_name='whatever task hey',task_state=stat[0],task_descrip='hey hey here',task_given_by=usr_obj)
     # t.save()
 
 
     tasks = Tasks.objects.filter(task_project_id=proj_obj)
     states = state.objects.filter(project_id=proj_obj)
+    users= Users.objects.all()
 
-    return render(response,'project.html',{'owner':proj_obj.usr_email,'projd_id':p_id,"tasks":tasks,'states':states,"users":usr_obj})
+
+    return render(response,'project.html',{"tasks":tasks,'states':states ,"users":users})
 
 
 def page_User(response):
