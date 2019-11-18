@@ -130,11 +130,12 @@ def func_signup(request):
     data =  dict(request.POST)
     if Users.objects.filter(email=data['mail'][0]).exists():
         rtn = JsonResponse({"message":"Failed",'reason':"This email address is used"})
-        rtn.status_code = 201
+        rtn.status_code = 400
         return rtn
 
     else:
         new_usr = Users.objects.create_user(username=data['name'][0],password=data['pass'][0],email=data['mail'][0])
+        login(request,new_usr)
         rtn = JsonResponse({"message":"Success"})
         rtn.status_code = 200
         return rtn

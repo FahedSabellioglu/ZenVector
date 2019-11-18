@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="54d4791b-657f-41bf-8f66-941fd545559a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZenVector/static/js/dragula.js" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector/static/js/dragula.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZenVector/templatetags/project_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector/templatetags/project_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZenVector-django/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector-django/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZenVector/static/js/forms.js" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector/static/js/forms.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZenVector/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector/templates/navbar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZenVector/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZenVector/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
@@ -112,7 +113,7 @@
       <workItem from="1573708792397" duration="1812000" />
       <workItem from="1573726803729" duration="2186000" />
       <workItem from="1573925636512" duration="2357000" />
-      <workItem from="1574048846125" duration="3123000" />
+      <workItem from="1574048846125" duration="5932000" />
     </task>
     <servers />
   </component>

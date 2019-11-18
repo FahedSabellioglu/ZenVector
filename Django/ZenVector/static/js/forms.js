@@ -83,7 +83,7 @@ $("#loginForm").on('submit',function(e){
             url:"Signup/",
             data:{name:usr_name,mail:email,pass:password,csrfmiddlewaretoken:csrftoken},
             success: function (e) {
-                console.log(e.responseJSON.reason);
+                location.reload(true);
             },
             error:function (e) {
             email_error.innerHTML = e.responseJSON.reason;

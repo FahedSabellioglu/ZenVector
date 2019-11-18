@@ -28,9 +28,7 @@
           </li>
         {% if request.user.is_authenticated %}
 
-          <li class="nav-item">
-            <a class="nav-link" href="Loguout/" id="#logOut"> Logout</a>
-          </li>
+
                 {#  Have this only if the user is logged in               #}
 
                 {% load project_list %}
@@ -60,6 +58,9 @@
                       <div class="dropdown-menu">
                             <a class="nav-link dropdown-item" data-toggle="modal" data-target="#PasswordModal">Change Password</a>
                             <a class="nav-link dropdown-item" data-toggle="modal",data-target="#DeleteModel">Delete Account</a>
+                            <a class="nav-link dropdown-item" href="Loguout/" id="#logOut"> Logout</a>
+
+
                       </div>
                 </div>
                 </li>
