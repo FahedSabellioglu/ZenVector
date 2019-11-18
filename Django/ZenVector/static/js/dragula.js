@@ -43,6 +43,11 @@ var classes = require('./classes');
 var doc = document;
 var documentElement = doc.documentElement;
 
+
+var from_list_id = '';
+var to_list_id = '';
+var task_id = '';
+
 function dragula (initialContainers, options) {
   var len = arguments.length;
   if (len === 1 && Array.isArray(initialContainers) === false) {
@@ -296,6 +301,10 @@ function dragula (initialContainers, options) {
       drake.emit('cancel', item, _source, _source);
     } else {
       drake.emit('drop', item, target, _source, _currentSibling);
+
+
+      to_list_id = target.getAttribute("id");
+
     }
     cleanup();
   }
@@ -415,6 +424,10 @@ function dragula (initialContainers, options) {
       over();
     }
     var parent = getParent(item);
+    // console.log('task id');
+    // task_id =
+    to_list_id = parent.getAttribute('id');
+    task_id = parent.children[0].getElementsByTagName('button')[0].getAttribute('data-id');
     if (dropTarget === _source && _copy && !o.copySortSource) {
       if (parent) {
         parent.removeChild(item);

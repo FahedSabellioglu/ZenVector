@@ -55,6 +55,16 @@ def func_delete_task(response,p_id):
     return response
 
 
+def change_password(response):
+    data = dict(response.POST)
+    user_obj =Users.objects.get(email=response.user.email)
+    user_obj.set_password(data['password'][0])
+
+    rtn = JsonResponse({"message":'password changed'})
+    rtn.status_code = 200
+    return  rtn
+
+
 
 # def func_update_task(response,p_id):
 

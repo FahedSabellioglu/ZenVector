@@ -117,4 +117,41 @@ $("#projectForm").off().on('submit',function (event) {
     });
 });
 
+$("#PasswordModal").off().on('submit',function (event) {
+    event.preventDefault();
+    var password_first = document.getElementById("first_password").value;
+    var first_error = document.getElementById("first_pass_control");
+
+
+    var password_second = document.getElementById('second_password').value;
+    var second_error = document.getElementById("second_pass_control");
+
+    first_error.style.display = 'none';
+    second_error.style.display = 'none';
+
+
+    if ($.trim(password_first) == '' || $.trim(password_first).length < 8) {
+        first_error.style.display = 'block';
+        return false;
+    }
+    else if ($.trim(password_first) != $.trim(password_second))
+    {
+        second_error.style.display = 'block';
+        return false;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/PutTogether/PasswordChange/",
+        data: {password:password_first, csrfmiddlewaretoken: csrftoken},
+        success: function () {
+            location.reload(true);
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
+});
+
+
 

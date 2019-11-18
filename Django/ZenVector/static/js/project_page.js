@@ -191,18 +191,12 @@ $("#detailModal").modal({backdrop: "static"});
 });
 
 
- /* Custom Dragula JS */
-// dragula([
-// document.getElementById("to-do"),
-// document.getElementById("doing"),
-// document.getElementById("done"),
-// ]);
 
-removeOnSpill.on("drag", function(el) {
+dragula.removeOnSpill:false
+    .on("drag", function(el) {
   el.className.replace("ex-moved", "");
   console.log(el.className);
-})
-.on("dropremoveOnSpill", function(el) {
+}).on("dropremoveOnSpill", function(el) {
   el.className += "ex-moved";
   console.log(el.className);
 })
