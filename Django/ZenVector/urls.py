@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^PutTogether/Projects/(?P<p_id>\d+)/DeleteTask/$',views.func_delete_task),
     url(r'^PutTogether/PasswordChange/$', views.change_password),
     url(r'^PutTogether/Projects/(?P<p_id>\d+)/MoveTask/$', views.move_task),
+    url(r'^PutTogether/DeleteAccount/$', views.func_delete_account),
 
 ]
 #

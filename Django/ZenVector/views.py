@@ -4,8 +4,9 @@ from django.shortcuts import render, render_to_response
 from django.contrib.auth import login,logout,authenticate
 from models import *
 from django.http import JsonResponse,HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 
-
+@login_required(login_url='/PutTogether/')
 def fun_new_state(request,p_id):
     data = dict(request.POST)
     proj_obj = Projects.objects.get(project_id=p_id)
@@ -20,7 +21,7 @@ def fun_new_state(request,p_id):
     new_list.save()
     response.status_code = 200
     return response
-
+@login_required(login_url='/PutTogether/')
 def fun_new_task(response,p_id):
     data = dict(response.POST)
     proj_obj = Projects.objects.get(project_id=p_id)
@@ -43,7 +44,7 @@ def fun_new_task(response,p_id):
     response.status_code = 200
     return response
 
-
+@login_required(login_url='/PutTogether/')
 def func_delete_task(response,p_id):
     data = dict(response.POST)
     proj_obj = Projects.objects.get(project_id=p_id)
@@ -54,7 +55,7 @@ def func_delete_task(response,p_id):
     response.status_code = 200
     return response
 
-
+@login_required(login_url='/PutTogether/')
 def change_password(response):
     data = dict(response.POST)
     user_obj =Users.objects.get(email=response.user.email)
@@ -65,6 +66,7 @@ def change_password(response):
     return  rtn
 
 
+@login_required(login_url='/PutTogether/')
 def move_task(request,p_id):
     data = dict(request.POST)
     proj_obj = Projects.objects.get(project_id=p_id)
@@ -76,8 +78,6 @@ def move_task(request,p_id):
     rtn = JsonResponse({"Saved":"New state for the task with id "+str(data['task_id'][0])})
     rtn.status_code = 200
     return rtn
-# def func_update_task(response,p_id):
-
 
 
 
@@ -87,13 +87,20 @@ def move_task(request,p_id):
 
 def page_Home(response):
 
+    for p in Projects.objects.all():
+        print p.project_id
+
     return render(response,'index.html')
 
+
+@login_required(login_url='/PutTogether/')
 def func_logout(request):
 
     logout(request)
     return HttpResponseRedirect('/PutTogether/')
 
+
+@login_required(login_url='/PutTogether/')
 def func_create_project(request):
     data = dict(request.POST)
     usrObj= Users.objects.get(email='fahedshabani@std.sehir.edu.tr')
@@ -103,7 +110,7 @@ def func_create_project(request):
     rtn.status_code = 200
     return  rtn
 
-
+@login_required(login_url='/PutTogether/')
 def func_login(request):
     data = dict(request.POST)
     print data,'new'
@@ -125,9 +132,9 @@ def func_login(request):
     response.status_code = 401
     return response
 
-
 def func_signup(request):
     data =  dict(request.POST)
+
     if Users.objects.filter(email=data['mail'][0]).exists():
         rtn = JsonResponse({"message":"Failed",'reason':"This email address is used"})
         rtn.status_code = 400
@@ -140,10 +147,25 @@ def func_signup(request):
         rtn.status_code = 200
         return rtn
 
+@login_required(login_url='/PutTogether/')
+def func_delete_account(request):
+    data = dict(request.POST)
+    print request.user.email
+    usr = authenticate(email=request.user.email, password=data['password'][0])
+    if usr:
+        usr_obj = Users.objects.get(email=usr)
+        logout(request)
+        usr_obj.delete()
+        rtn = JsonResponse({"success":"user is deleted"})
+        rtn.status_code = 200
+        return rtn
+    else:
+        rtn = JsonResponse({"reason":"Incorrect password"})
+        rtn.status_code = 400
+        return rtn
 
+@login_required(login_url='/PutTogether/')
 def page_Projects(response,p_id):
-
-
     proj_obj = Projects.objects.get(project_id=p_id)
     usr_obj = Users.objects.all()[0]
     stat = state.objects.filter(state_name='new list',project_id=proj_obj)
@@ -160,7 +182,7 @@ def page_Projects(response,p_id):
 
     return render(response,'project.html',{"tasks":tasks,'states':states ,"users":users})
 
-
+@login_required(login_url='/PutTogether/')
 def page_User(response):
 
     return render(response,'user.html')

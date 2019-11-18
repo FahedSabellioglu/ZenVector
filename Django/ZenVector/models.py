@@ -29,7 +29,7 @@ class UserManager(BaseUserManager):
         usr_obj = self.model(
             email = self.normalize_email(email)
         )
-        usr_obj.username= username
+        usr_obj.username= email
         usr_obj.set_password(password)
         usr_obj.save(using=self._db)
         return usr_obj
@@ -37,7 +37,7 @@ class UserManager(BaseUserManager):
 
 
 class Users(AbstractUser):
-    usr_name = models.CharField(max_length=255)
+    usr_name = models.CharField(max_length=255,unique=False)
     email = models.EmailField(max_length=500,primary_key=True)
     password = models.CharField(max_length=255)
     USERNAME_FIELD = 'email'

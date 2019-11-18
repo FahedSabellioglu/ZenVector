@@ -154,4 +154,30 @@ $("#PasswordModal").off().on('submit',function (event) {
 });
 
 
+$("#DeleteModel").off().on('submit',function (event) {
+    event.preventDefault();
+    var password = document.getElementById("delete_password").value;
+    var password_error = document.getElementById("delete_password_control");
+
+    password_error.style.display = 'none';
+
+    if ($.trim(password) == '' || $.trim(password).length < 8) {
+        password_error.style.display = 'block';
+        return false;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/PutTogether/DeleteAccount/",
+        data: {password:password, csrfmiddlewaretoken: csrftoken},
+        success: function (e) {
+            location.reload(true);
+        },
+        error: function (e) {
+            password_error.innerHTML = e.responseJSON.reason;
+            password_error.style.display = 'block';
+        }
+    });
+});
+
 
