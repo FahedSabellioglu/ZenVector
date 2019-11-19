@@ -17,7 +17,7 @@ def fun_new_state(request,p_id):
         response.status_code = 404
         return  response
 
-    new_list = state(state_name=data['name'][0],project_id=proj_obj)
+    new_list = state(state_name=data['name'][0],project_id=proj_obj,state_color=data['color'][0])
     new_list.save()
     response.status_code = 200
     return response
@@ -26,11 +26,6 @@ def fun_new_task(response,p_id):
     data = dict(response.POST)
     proj_obj = Projects.objects.get(project_id=p_id)
     state_obj = state.objects.get(state_id=data['list_name'][0],project_id=proj_obj)
-    print data['list_name'][0]
-    # print state_obj
-
-
-
 
     if Tasks.objects.filter(task_name=data['title'][0],task_project_id=proj_obj).exists():
         response = JsonResponse({"message":"The task already exists"})
@@ -87,9 +82,6 @@ def move_task(request,p_id):
 
 def page_Home(response):
 
-    for p in Projects.objects.all():
-        print p.project_id
-
     return render(response,'index.html')
 
 
@@ -103,14 +95,24 @@ def func_logout(request):
 @login_required(login_url='/PutTogether/')
 def func_create_project(request):
     data = dict(request.POST)
-    usrObj= Users.objects.get(email='fahedshabani@std.sehir.edu.tr')
+    usrObj= Users.objects.get(email=request.user.email)
     project = Projects(usr_email=usrObj,project_name=data['p_name'][0])
     project.save()
-    rtn  = JsonResponse({'message':"created"})
+
+
+    # Default lists
+    to_do_list = state(state_name='To Do',project_id=project)
+    doing_list = state(state_name='Doing',project_id=project)
+    done_list = state(state_name='Done',project_id=project)
+
+    to_do_list.save()
+    doing_list.save()
+    done_list.save()
+
+    rtn  = JsonResponse({'message':"created","project_id" :project.project_id})
     rtn.status_code = 200
     return  rtn
 
-@login_required(login_url='/PutTogether/')
 def func_login(request):
     data = dict(request.POST)
     print data,'new'

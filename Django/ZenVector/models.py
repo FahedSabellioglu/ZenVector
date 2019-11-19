@@ -56,6 +56,8 @@ class state(models.Model):
     state_id = models.AutoField(primary_key=True)
     state_name = models.CharField(max_length=255)
     project_id = models.ForeignKey(Projects,db_column='project_id')
+    state_color = models.CharField(max_length=255,default='#59A61E')
+
 
 
 class Tasks(models.Model):

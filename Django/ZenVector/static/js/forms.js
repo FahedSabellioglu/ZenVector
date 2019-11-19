@@ -106,10 +106,10 @@ $("#projectForm").off().on('submit',function (event) {
 
     $.ajax({
         type: "POST",
-        url: "CreateProject/",
+        url: "/PutTogether/CreateProject/",
         data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken, p_name: project_name},
-        success: function () {
-            location.replace('/PutTogether/');
+        success: function (e) {
+            location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
         },
         error: function () {
             console.log("error");
