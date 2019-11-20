@@ -1,9 +1,29 @@
- function changeDetails() {
+// // $("#detailModal").off().on('submit',function (event) {
+//     // event.preventDefault();
+//     console.log('ere');
+//     var assignedTo = document.getElementById("assignedToD").value;
+//     console.log(assignedTo);
+//
+//     var deadline = document.getElementById("task_edit_deadline").value;
+//     console.log(deadline);
+//
+//     var detail = document.getElementById("taskDetailsD").value;
+//     console.log(detail);
+//
+//     var status =document.getElementById("statusD").value;
+//     console.log(status);
+// });
 
-        var assignedTo = document.getElementById("assignedToD").value;
+$("#detailModal").on('submit',function (e) {
+    e.preventDefault();
+});
+
+function changeDetails() {
+
+        var assignedTo = document.getElementById("assignedTo").value;
         console.log(assignedTo);
 
-        var deadline = document.getElementById("deadlineD").value;
+        var deadline = document.getElementById("task_edit_deadline").value;
         console.log(deadline);
 
         var detail = document.getElementById("taskDetailsD").value;
@@ -12,17 +32,21 @@
         var status =document.getElementById("statusD").value;
         console.log(status);
 
-      // It sould get the task ID and check if the card status has changed, if it has been changed, add the task to the new state.
-        document.getElementById(status).innerHTML+=
-              "<div class='card'><div class='card-header card-header-danger2'>" + "Card Title !!!" +
-              "<button type='button' style='position: absolute; right: 1rem;' class='btn btn-just-icon btn-sm' data-toggle='modal' data-target='#detailModal'>"+
-              "<i class='material-icons'>menu</i></button></div> <class='card-body card-text'>" + detail+ "</div></div>";
-      // If it is not, it should change the card content.
-      // document.getElementById(task ID).innerHTML=
-      //         "<div class='card'><div class='card-header card-header-danger2'>" + "Card Title !!!" +
-      //         "<button type='button' style='position: absolute; right: 1rem;' class='btn btn-just-icon btn-sm' data-toggle='modal' data-target='#detailModal'>"+
-      //         "<i class='material-icons'>menu</i></button></div> <class='card-body card-text'>" + detail+ "</div></div>";
+        var taskid = $('#edit_task_title').attr("taskid");
 
+        console.log(taskid);
+
+        $.ajax({
+            type:"POST",
+            url:"ChangeTaskDetails/",
+            data:{task_id: taskid,assignto:assignedTo,time:deadline,detail:detail,status:status,csrfmiddlewaretoken:csrftoken},
+            success:function (e) {
+                location.reload(true)
+            },
+            error:function (e) {
+                console.log(e)
+            }
+        })
 }
 
 
@@ -31,10 +55,37 @@ $(document).on('click','.menu-button',function () {
     var task_id = $(this).data('id');
     console.log(task_id);
     $('#edit_task_title').attr("taskid",task_id);
-    // console.log($("#edit_task_title").attr('taskid'));
 
+    var element = document.getElementById(task_id);
+
+    var element_p = element.getElementsByTagName('p')[0].innerHTML;
+
+    var details = element_p.split(' Descrip: ')[1].split(' Deadline:')[0];
+
+    var date = element_p.split("Deadline: ")[1].split(" Given by")[0];
+
+
+    var list_title = $(this).parent().parent().parent().attr("id");
+
+    document.getElementById("taskDetailsD").value = details;
+
+    document.getElementById('task_edit_deadline').value = formatDate(date);
 
 });
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
 
  function deleteTask(){
@@ -89,7 +140,8 @@ function addTask() {
 
       var status = document.getElementById("status").value;
 
-      var dateControl = document.querySelector('input[type="datetime-local"]');
+      var dateControl = document.getElementById("task_form_deadline").value;
+
 
       if ($.trim(title).length < 2)
       {
@@ -98,11 +150,11 @@ function addTask() {
           return false;
       }
 
-      //   if ($.trim(dateControl.value).length == 0){
-      //       deadline_error.innerHTML = "Please choose the deadline";
-      //       deadline_error.style.display = 'block';
-      //       return false;
-      // }
+      if ($.trim(dateControl).length == 0){
+            deadline_error.innerHTML = "Please choose the deadline";
+            deadline_error.style.display = 'block';
+            return false;
+      }
 
       if ($.trim(detail).length < 5){
           descrip_error.innerHTML = "Please provide a meaningful description";
@@ -113,7 +165,7 @@ function addTask() {
       $.ajax({
          type:"POST",
          url:"NewTask/",
-         data: {title:title,assign_to: assignedTo,time:"09/09/2019",descrip:detail,list_name:status,csrfmiddlewaretoken:csrftoken},
+         data: {title:title,assign_to: assignedTo,date:dateControl,descrip:detail,list_name:status,csrfmiddlewaretoken:csrftoken},
           success:function () {
                location.reload(true);
           },
@@ -135,7 +187,6 @@ function addTask() {
 
 $("#addListForm").on('submit',function(e) {
     e.preventDefault();
-// });
 });
 
 function addList(e) {
@@ -185,9 +236,9 @@ $("#addList").click(function(){
 $("#addListModal").modal({backdrop: "static"});
 });
 
-$("#detailModal").click(function(){
-$("#detailModal").modal({backdrop: "static"});
-});
+// $("#detailModal").click(function(){
+// $("#detailModal").modal({backdrop: "static"});
+// });
 
 // dragula.drake.on("drag", function(el) {
 // el.className.replace("ex-moved", "");

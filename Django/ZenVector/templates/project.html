@@ -66,8 +66,8 @@
                                 <i class="material-icons">menu</i>
                             </button>
                         </div>
-                        <div class="card-body">
-                            <p class="card-text"> Descrip: {{ item.task_descrip }} Deadline: {{ item.task_deadline }} Given by :{{ item.task_given_by }}</p>
+                        <div class="card-body" id="{{ item.task_id }}">
+                            <p class="card-text" > Descrip: {{ item.task_descrip }} Deadline: {{ item.task_deadline }} Given by :{{ item.task_given_by }}</p>
                         </div>
                     </div>
                   {% endif %}
@@ -96,7 +96,8 @@
             <div class="modal-body">
               <div class="row">
                 <div class="col mr-auto">
-                  <form class="form" id="detailsForm" method="" action="">
+                  <form class="form" id="detailsForm" >
+                  {%  csrf_token %}
                     <!-- Assigned to -->
                     <div class="form-group">
                       <div class="input-group">
@@ -121,7 +122,7 @@
                             <i class="fas fa-title">calendar-alt</i>
                           </div>
                         </div>
-                        <input class="form-control" type="datetime-local"  id="deadlineD" placeholder="2019-11-08T19:30">
+                        <input class="form-control" type="date"  id="task_edit_deadline" placeholder="2019-11-08T19:30">
                       </div>
                     </div>
 
@@ -159,7 +160,7 @@
             <div class="modal-footer">
               <button class="btn btn-danger" style="position: absolute; left: 1rem;" onclick="deleteTask()">Delete</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" id=changeDetails class="btn btn-rose" data-dismiss="modal" id="closeDetailModal" onclick="changeDetails()">Save</button>
+              <button type="submit"  class="btn btn-rose" onclick="changeDetails()" >Save</button>
             </div>
           </div>
         </div>`
@@ -223,7 +224,7 @@
                             <i class="fas fa-title">calendar-alt</i>
                           </div>
                         </div>
-                        <input class="form-control" type="datetime-local"  id="deadline" required  placeholder="2019-11-08T19:30">
+                        <input class="form-control" type="date"  id="task_form_deadline" required  placeholder="2019-11-08T19:30">
                       </div>
                       <label class="label_control" id="task_deadline" style="display: none;">Please provide a meaningful details</label>
 

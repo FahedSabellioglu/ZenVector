@@ -32,7 +32,7 @@ def fun_new_task(response,p_id):
         response.status_code = 404
         return  response
     new_task = Tasks(task_name=data['title'][0],task_project_id=proj_obj,task_descrip = data['descrip'][0],
-                     task_given_by = proj_obj.usr_email,task_state=state_obj,task_deadline="2019-09-09")
+                     task_given_by = proj_obj.usr_email,task_state=state_obj,task_deadline=data['date'][0])
     new_task.save()
 
     response = JsonResponse({})
@@ -49,6 +49,24 @@ def func_delete_task(response,p_id):
     response = JsonResponse({"message":"task has been deleted"})
     response.status_code = 200
     return response
+
+@login_required(login_url='/PutTogether/')
+def change_task_details(request,p_id):
+    data = dict(request.POST)
+
+    proj_obj = Projects.objects.get(project_id=p_id)
+    state_obj = state.objects.get(state_id=data['status'][0])
+
+    task_obj = Tasks.objects.get(task_id=data['task_id'][0])
+
+    task_obj.task_state = state_obj
+    task_obj.task_deadline = data['time'][0]
+    task_obj.task_descrip = data['detail'][0]
+    task_obj.save()
+
+    rtn = JsonResponse({"message":"modified"})
+    rtn.status_code = 200
+    return rtn
 
 @login_required(login_url='/PutTogether/')
 def change_password(response):
@@ -73,11 +91,6 @@ def move_task(request,p_id):
     rtn = JsonResponse({"Saved":"New state for the task with id "+str(data['task_id'][0])})
     rtn.status_code = 200
     return rtn
-
-
-
-
-
 
 
 def page_Home(response):
@@ -171,11 +184,6 @@ def page_Projects(response,p_id):
     proj_obj = Projects.objects.get(project_id=p_id)
     usr_obj = Users.objects.all()[0]
     stat = state.objects.filter(state_name='new list',project_id=proj_obj)
-    print stat
-
-    # t = Tasks(task_project_id=proj_obj,task_deadline="09/09/2019",task_name='whatever task hey',task_state=stat[0],task_descrip='hey hey here',task_given_by=usr_obj)
-    # t.save()
-
 
     tasks = Tasks.objects.filter(task_project_id=proj_obj)
     states = state.objects.filter(project_id=proj_obj)
