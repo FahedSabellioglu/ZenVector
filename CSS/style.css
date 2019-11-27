@@ -2,6 +2,10 @@ html {
     scroll-behavior: smooth;
 }
 
+.navbar{
+    width: 100%;
+    position: fixed;
+}
 .navbar-brand {
     width: 400px;
     height: 100px;
@@ -10,11 +14,16 @@ html {
     top: 10%;
     content: none;
 }
-
-
-
-
-
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+.container{
+    width: 100%;
+    white-space: nowrap;
+}
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
 
 
