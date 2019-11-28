@@ -94,28 +94,30 @@ $("#loginForm").on('submit',function(e){
 
     }
 
-$("#projectForm").off().on('submit',function (event) {
-    event.preventDefault();
-    var project_name = document.getElementById("project_name").value;
-    var error_element = document.getElementById("project_name_error");
-    error_element.style.display = 'none';
-    if ($.trim(project_name) == '' || $.trim(project_name).length < 3) {
-        error_element.style.display = 'block';
-        return false;
-    }
-
-    $.ajax({
-        type: "POST",
-        url: "/PutTogether/CreateProject/",
-        data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken, p_name: project_name},
-        success: function (e) {
-            location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
-        },
-        error: function () {
-            console.log("error");
-        }
-    });
-});
+// $("#projectForm").off().on('submit',function (event) {
+//     event.preventDefault();
+//     var project_name = document.getElementById("project_name").value;
+//     var error_element = document.getElementById("project_name_error");
+//     error_element.style.display = 'none';
+//     if ($.trim(project_name) == '' || $.trim(project_name).length < 3) {
+//         error_element.style.display = 'block';
+//         return false;
+//     }
+//
+//     $.ajax({
+//         type: "POST",
+//         url: "Projects/CreateProject/",
+//         data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken, p_name: project_name},
+//         success: function (e) {
+//             // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
+//             location.reload(true);    //Why?????
+//
+//         },
+//         error: function () {
+//             console.log("error");
+//         }
+//     });
+// });
 
 $("#PasswordModal").off().on('submit',function (event) {
     event.preventDefault();
@@ -179,5 +181,6 @@ $("#DeleteModel").off().on('submit',function (event) {
         }
     });
 });
+
 
 

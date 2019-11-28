@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+    <div class="container">
+    <a class="nav-link dropdown-item" data-toggle="modal" data-target="#projectModal">Create Project!</a>
+        <div class="card-columns">
+            {% for project in projects %}
+                <div class="card" style="width: 20rem;" id="{{project.project_id}}">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title" style="position: absolute; top: 0.65rem;"><a  href="{% url 'tasks' p_id=project.project_id %}">
+                            {{project.project_name}}</a>
+                        </h4>
+                        <button  style="position: absolute; right: 1rem; top:1.5rem; color:red;" type="button" class="btn btn-just-icon btn-sm menu-button" data-id="{{ project.project_id }}" data-toggle="modal" data-target="#editModal">
+                            <i class="material-icons">menu</i>
+                        </button>
+
+{#                        <a data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">#}
+{#                            <i class="fas fa-title" style="position: absolute; top:1.5rem; right: 1rem;">ellipsis-v</i>#}
+{#                        </a>#}
+{##}
+{#                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start" style="position: absolute;  margin-left: 275px; margin-top: 20px; will-change: transform;">#}
+{#                            <button class="dropdown-item" data-toggle="modal" data-id="{{ project.project_id}}" data-target="#editModal">Edit</button>#}
+{#                            <a class="dropdown-item" data-toggle="modal" data-target="#addUserModal">Add User</a>#}
+{#                            <a class="dropdown-item" id="delete" data-id="{{ project.project_id }}">Delete</a>#}
+{#                        </div>#}
+
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"> Created By: {{ project.usr_email }}</p>
+                        <p class="card-text"> Num of members:</p>
+                        <p class="card-text"> Num of tasks: </p>
+                        <p class="card-text"> Creation time: {{ project.creation_time }}</p>
+
+                     </div>
+                </div>
+        {% endfor %}
+        </div>
+    </div>
+
+
+
+
+
+  <!------------------------------------------------- Detail Modal ------------------------------------------------------------>
+
+      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="edit_project_title" data-projectid="none">Project Details</h5>
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col mr-auto">
+                  <form class="form" id="editForm" method="" action="">
+                    {%  csrf_token %}
+
+                    <!-- Project Title-->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-heading"></i>
+                          </div>
+                        </div>
+                        <input type="text" id="projectTitle" class="form-control" required>{{ project.project_name }}
+                      </div>
+                    </div>
+                    <!-- When the project is created -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title">calendar-alt</i>
+                          </div>
+                        </div>
+                         <input class="form-control" type="date"  id="project_creation_time">   <!-- should be disabled-->
+                      </div>
+                    </div>
+                    <!-- Details -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title">info-circle</i>
+                          </div>
+                        </div>
+                        <input type="text" id="projectDetails" class="form-control" placeholder="Details..." required>
+                      </div>
+                    </div>
+
+                    <!-- Team Members -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title">user</i>
+                          </div>
+                        </div>
+
+                        <!-- This part should show the team members with their photos, names, emails. -->
+                        <select id="teamMembers" class="form-control" required>
+{#                            {% for usr in users %}#}
+{#                          <option  value="{{ usr.email }}">{{ usr.email }}</option>#}
+{#                            {% endfor %}#}
+
+                        </select>
+                      </div>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger" style="position: absolute; left: 1rem;" onclick="deleteProject()">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-rose" data-dismiss="modal" onclick="editDetails()">Save</button>
+            </div>
+          </div>
+        </div>`
+      </div>
+
+<!-------------------------------------------------------- End of Detail Modal -------------------------------------------------------->
+
+
+  <!------------------------------------------------- Add User Modal ------------------------------------------------------------>
+
+      <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="edit_task_title" data-taskid="none">Add New Team Member</h5>
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col mr-auto">
+                  <form class="form" id="addForm" method="" action="">
+
+                    <!-- Team Members -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-title">user</i>
+                          </div>
+                        </div>
+                        <input type="text" id="taskDetailsD" class="form-control" placeholder="Send an invite link via email to add members to this team" required>
+
+                        <!-- This part should show the team members with their photos, names, emails. -->
+{#                        <select id="teamMembers" class="form-control" required>#}
+{#                            {% for usr in users %}#}
+{#                          <option  value="{{ usr.email }}">{{ usr.email }}</option>#}
+{#                            {% endfor %}#}
+                        </select>
+                      </div>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-rose" data-dismiss="modal" onclick="addUser()">Save</button>
+            </div>
+          </div>
+        </div>`
+      </div>
+
+<!-------------------------------------------------------- End of Add User Modal -------------------------------------------------------->
+
+
+<!--------------------------------------------------------  Create Project Modal -------------------------------------------------------->
+
+    <div class="modal fade" id="projectModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-signup" role="document">
+          <div class="modal-content">
+            <div class="card card-signup card-plain">
+              <div class="modal-header">
+
+                <h5 class="modal-title card-title">Create Project</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <i class="far fa-window-close" style="color: red"></i>
+
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+
+                  <div class="col mr-auto">
+
+                    <form  id='projectForm' class="form"  >
+                        {% csrf_token %}
+                      <div class="card-body">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                    <i class="fas fa-heading"></i>
+                              </div>
+                            </div>
+                            <input type="text" required id='project_name' value="" class="form-control" placeholder="Project Name...">
+                          </div>
+                            <label class="label_control" id="project_name_error" style="display: none;">meaningful name please...</label>
+                        </div>
+
+
+                      </div>
+                      <div class="modal-footer justify-content-center">
+                        <button type="submit"  class="btn btn-primary btn-round">Create</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!-------------------------------------------------------- End of Create Project Modal -------------------------------------------------------->
+
+
+{% endblock %}
+
+
+
+{% block script %}
+
+    <script>
+        var csrftoken = '{{ csrf_token }}';
+    </script>
+
+    <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
+    <script src="{% static 'js/projects_page_forms.js' %}"></script>
+
+
+
+{% endblock %}

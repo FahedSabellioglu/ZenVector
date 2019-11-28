@@ -109,6 +109,7 @@ def func_logout(request):
 def func_create_project(request):
     data = dict(request.POST)
     usrObj= Users.objects.get(email=request.user.email)
+    print usrObj
     project = Projects(usr_email=usrObj,project_name=data['p_name'][0])
     project.save()
 
@@ -198,9 +199,48 @@ def page_User(response):
     return render(response,'user.html')
 
 
+@login_required(login_url='/PutTogether/')
+def display_projects(response):
+
+    logged_in=response.user
+    # print response.user
+    # proj= Projects.objects.get(project_id=64)
+    # proj.delete()
+
+    proj = Projects.objects.filter(usr_email=logged_in)
+    print proj
+
+    return render(response,'projects_page.html',{"projects":proj})
 
 
+@login_required(login_url='/PutTogether/')
+def change_project_details(request,p_id):
+    data = dict(request.POST)
 
+    # proj_obj = Projects.objects.get(project_id=p_id)
+    # state_obj = state.objects.get(state_id=data['status'][0])
+    #
+    # task_obj = Tasks.objects.get(task_id=data['task_id'][0])
+    #
+    # task_obj.task_state = state_obj
+    # task_obj.task_deadline = data['time'][0]
+    # task_obj.task_descrip = data['detail'][0]
+    # task_obj.save()
+
+    rtn = JsonResponse({"message":"modified"})
+    rtn.status_code = 200
+    return rtn
+
+
+@login_required(login_url='/PutTogether/')
+def func_delete_project(response):
+    data = dict(response.POST)
+    proj_obj = Projects.objects.get(project_id=p_id)
+    proj_obj.delete()
+
+    response = JsonResponse({"message":"project has been deleted"})
+    response.status_code = 200
+    return response
 
 
 

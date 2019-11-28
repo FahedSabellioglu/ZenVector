@@ -31,23 +31,24 @@
 
                 {#  Have this only if the user is logged in               #}
 
-                {% load project_list %}
-                {% dynamic_project_list request.user.email as lists %}
+{#                {% load project_list %}#}
+{#                {% dynamic_project_list request.user.email as lists %}#}
 
                 <li class="nav-item">
-                <div class="btn-group">
-                      <a  class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Projects!
-                      </a>
-                      <div class="dropdown-menu">
-                          {% for project in lists.project_list %}
-                            <a class="nav-link dropdown-item" data-value="{{ project.project_id }}" href="{% url 'tasks' p_id=project.project_id %}">{{project.project_name}}</a>
-                          {% endfor %}
-
-                        <div class="dropdown-divider"></div>
-                        <a class="nav-link dropdown-item" data-toggle="modal" data-target="#projectModal">Create Project!</a>
-                      </div>
-                </div>
+                    <a class="nav-link" data-value="projects" href="/PutTogether/Projects/" id="#projectsPage">Projects</a>
+{#                <div class="btn-group">#}
+{#                      <a  class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                        Projects!#}
+{#                      </a>#}
+{#                      <div class="dropdown-menu">#}
+{#                          {% for project in lists.project_list %}#}
+{#                            <a class="nav-link dropdown-item" data-value="{{ project.project_id }}" href="{% url 'tasks' p_id=project.project_id %}">{{project.project_name}}</a>#}
+{#                          {% endfor %}#}
+{##}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a class="nav-link dropdown-item" data-toggle="modal" data-target="#projectModal">Create Project!</a>#}
+{#                      </div>#}
+{#                </div>#}
                 </li>
 
                 <li class="nav-item">
@@ -75,51 +76,51 @@
       </div>
   </nav>
 
-      <div class="modal fade" id="projectModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-signup" role="document">
-          <div class="modal-content">
-            <div class="card card-signup card-plain">
-              <div class="modal-header">
-
-                <h5 class="modal-title card-title">Create Project</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="far fa-window-close" style="color: red"></i>
-
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-
-                  <div class="col mr-auto">
-
-                    <form  id='projectForm' class="form"  >
-                        {% csrf_token %}
-                      <div class="card-body">
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                    <i class="fas fa-heading"></i>
-                              </div>
-                            </div>
-                            <input type="text" required id='project_name' value="" class="form-control" placeholder="Project Name...">
-                          </div>
-                            <label class="label_control" id="project_name_error" style="display: none;">meaningful name please...</label>
-                        </div>
-
-
-                      </div>
-                      <div class="modal-footer justify-content-center">
-                        <button type="submit"  class="btn btn-primary btn-round" >Create</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+{#      <div class="modal fade" id="projectModal" tabindex="-1" role="dialog">#}
+{#        <div class="modal-dialog modal-signup" role="document">#}
+{#          <div class="modal-content">#}
+{#            <div class="card card-signup card-plain">#}
+{#              <div class="modal-header">#}
+{##}
+{#                <h5 class="modal-title card-title">Create Project</h5>#}
+{#                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                  <i class="far fa-window-close" style="color: red"></i>#}
+{##}
+{#                </button>#}
+{#              </div>#}
+{#              <div class="modal-body">#}
+{#                <div class="row">#}
+{##}
+{#                  <div class="col mr-auto">#}
+{##}
+{#                    <form  id='projectForm' class="form"  >#}
+{#                        {% csrf_token %}#}
+{#                      <div class="card-body">#}
+{#                        <div class="form-group">#}
+{#                          <div class="input-group">#}
+{#                            <div class="input-group-prepend">#}
+{#                              <div class="input-group-text">#}
+{#                                    <i class="fas fa-heading"></i>#}
+{#                              </div>#}
+{#                            </div>#}
+{#                            <input type="text" required id='project_name' value="" class="form-control" placeholder="Project Name...">#}
+{#                          </div>#}
+{#                            <label class="label_control" id="project_name_error" style="display: none;">meaningful name please...</label>#}
+{#                        </div>#}
+{##}
+{##}
+{#                      </div>#}
+{#                      <div class="modal-footer justify-content-center">#}
+{#                        <button type="submit"  class="btn btn-primary btn-round" >Create</button>#}
+{#                      </div>#}
+{#                    </form>#}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
 
                 {#Password change modal#}
       <div class="modal fade" id="PasswordModal" tabindex="-1" role="dialog">
