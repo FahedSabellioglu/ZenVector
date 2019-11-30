@@ -7,23 +7,65 @@ $("#projectForm").off().on('submit',function (event) {
         error_element.style.display = 'block';
         return false;
     }
+    $.ajax({
+        type: "POST",
+        url: "CreateProject/",
+        data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken, p_name: project_name},
+        success: function (e) {
+            // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
+            location.reload(true);    //Why?????
 
-    console.log('here');
-
-    // $.ajax({
-    //     type: "POST",
-    //     url: "Projects/CreateProject/",
-    //     data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken, p_name: project_name},
-    //     success: function (e) {
-    //         // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
-    //         location.reload(true);    //Why?????
-    //
-    //     },
-    //     error: function () {
-    //         console.log("error");
-    //     }
-    // });
+        },
+        error: function (e) {
+            console.log("error");
+        }
+    });
 });
+
+$("#upgradeForm").off().on('submit',function (event) {
+    event.preventDefault();
+
+    var Card_Number = document.getElementById('CreditNumber').value;
+
+    var security_number = document.getElementById('csv_number').value;
+
+    var month_exp = document.getElementById('MonthCredit').value;
+
+    var year_exp = document.getElementById('YearCredit').value;
+
+    var error_control = document.getElementById("upgrade_error");
+
+    error_control.style.display = 'none';
+
+    if ($.trim(Card_Number).length < 16)
+    {
+        error_control.innerHTML = "Credit # is a 16 digit number.";
+        error_control.style.display = 'block';
+        return false;
+    }
+    else if ($.trim(security_number).length < 3){
+        error_control.innerHTML = "Security number at least 3 digits.";
+        error_control.style.display = 'block';
+        return false;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/PutTogether/Upgrade/",
+        data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken,
+            number:Card_Number,security:security_number,m_exp:month_exp,y_exp:year_exp},
+        success: function (e) {
+            // console.log(e);
+            // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
+            location.reload(true);    //Why?????
+
+        },
+        error: function (e) {
+            console.log("error");
+        }
+    });
+});
+
 
 
 $("#editModal").on('submit',function (e) {

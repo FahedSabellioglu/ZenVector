@@ -97,12 +97,37 @@ def page_Home(response):
 
     return render(response,'index.html')
 
-
 @login_required(login_url='/PutTogether/')
 def func_logout(request):
 
     logout(request)
     return HttpResponseRedirect('/PutTogether/')
+
+@login_required(login_url='/PutTogether/')
+def upgrade_account(request):
+    data = dict(request.POST)
+
+    usrObj = Users.objects.get(email=request.user)
+    print usrObj,'here cekin'
+
+    if usrObj.account_type == 'F':
+        new_type = 'P'
+    elif usrObj.account_type == 'P':
+        new_type = 'B'
+
+    usrObj.account_type = new_type
+    usrObj.save()
+
+    rtn = JsonResponse({"message":"has been upgraded"})
+    rtn.status_code = 200
+
+    #TODO
+    #send email
+
+    return rtn
+
+
+
 
 
 @login_required(login_url='/PutTogether/')
@@ -112,7 +137,6 @@ def func_create_project(request):
     print usrObj,'herer chekcing'
     project = Projects(usr_email=usrObj,project_name=data['p_name'][0])
     project.save()
-
 
     # Default lists
     to_do_list = state(state_name='To Do',project_id=project)
