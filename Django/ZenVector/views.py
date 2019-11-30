@@ -94,7 +94,8 @@ def move_task(request,p_id):
 
 
 def page_Home(response):
-
+    for usr in Users.objects.all():
+        print usr.email
     return render(response,'index.html')
 
 @login_required(login_url='/PutTogether/')
@@ -127,6 +128,24 @@ def upgrade_account(request):
     return rtn
 
 
+def plan_register(request):
+    data = dict(request.POST)
+
+    if not Users.objects.filter(email=data['mail'][0]).exists():
+        new_usr = Users.objects.create_user(username=data['name'][0], password=data['password'][0], email=data['mail'][0])
+        new_usr.account_type = data['acc_type'][0]
+        new_usr.save()
+        login(request, new_usr)
+
+        rtn = JsonResponse({"message":"Success"})
+        rtn.status_code = 200
+        return rtn
+
+    print Users.objects.filter(email=data['mail'][0]).exists()
+
+    rtn = JsonResponse({"message": "Failed", 'reason': "This email address is used"})
+    rtn.status_code = 400
+    return rtn
 
 
 

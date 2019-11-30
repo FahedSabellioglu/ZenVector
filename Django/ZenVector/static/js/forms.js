@@ -94,30 +94,99 @@ $("#loginForm").on('submit',function(e){
 
     }
 
-// $("#projectForm").off().on('submit',function (event) {
-//     event.preventDefault();
-//     var project_name = document.getElementById("project_name").value;
-//     var error_element = document.getElementById("project_name_error");
-//     error_element.style.display = 'none';
-//     if ($.trim(project_name) == '' || $.trim(project_name).length < 3) {
-//         error_element.style.display = 'block';
-//         return false;
-//     }
-//
-//     $.ajax({
-//         type: "POST",
-//         url: "Projects/CreateProject/",
-//         data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken, p_name: project_name},
-//         success: function (e) {
-//             // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
-//             location.reload(true);    //Why?????
-//
-//         },
-//         error: function () {
-//             console.log("error");
-//         }
-//     });
-// });
+
+$(document).on('click', ".plans",function () {
+
+    var value = $(this).data('type');
+    $("#planPricingModal").attr("data-type",value);
+});
+
+
+$("#planPricingModal").off().on('submit',function (event) {
+    event.preventDefault();
+
+
+    var account_type = $(this).attr('data-type');
+
+    var username = document.getElementById("p_usr_name").value;
+
+    var email = document.getElementById("p_email").value;
+
+    var password = document.getElementById("p_password").value;
+
+    var repeat_password = document.getElementById("p_password_repeat").value;
+
+    var credit_number = document.getElementById('creditCardNumber').value;
+
+    var security_number = document.getElementById("p_secu_num").value;
+
+    var exp_month = document.getElementById("expmonth").value;
+
+    var exp_year = document.getElementById('yearExp').value;
+
+
+    var error_control = document.getElementById("upgrade_error");
+
+    error_control.style.display = 'none';
+
+
+    if ($.trim(username)== '' || username.length < 6)
+    {
+        error_control.innerHTML = 'Please provide a meaningful name.';
+        error_control.style.display = 'block';
+
+        return
+    }
+
+    if ($.trim(email).length == 0)
+    {
+        error_control.innerHTML = "Email can't be empty";
+    error_control.style.display = 'block';
+
+        return
+    }
+
+    if (password.length < 8)
+    {
+        error_control.innerHTML = "Password should be more than 8 characters";
+        error_control.style.display = 'block';
+
+        return;
+    }
+
+    if (password != repeat_password)
+    {
+        error_control.innerHTML = "Passwords do not match";
+         error_control.style.display = 'block';
+
+        return;
+    }
+
+    if ($.trim(credit_number).length < 16){
+        error_control.innerHTML = "Credit Card Number is a 16 digits number";
+        error_control.style.display = 'block';
+        console.log()
+        return;
+    }
+
+
+    $.ajax({
+        type: "POST",
+        url: "/PutTogether/PlanBuy/",
+        data: {csrfmiddlewaretoken: csrftoken, credit_n :credit_number,sec_n :security_number,exp_m: exp_month,exp_y: exp_year,
+               mail:email,password:password,name:username,acc_type:account_type},
+        success: function (e) {
+            location.reload(true);
+
+        },
+        error: function (e) {
+            error_control.innerHTML = e.responseJSON.reason;
+            error_control.style.display = 'block';
+            console.log(e);
+            console.log("error");
+        }
+    });
+});
 
 $("#PasswordModal").off().on('submit',function (event) {
     event.preventDefault();

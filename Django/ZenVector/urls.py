@@ -21,7 +21,8 @@ urlpatterns = [
     url(r'^PutTogether/DeleteAccount/$', views.func_delete_account),
     url(r"^PutTogether/Projects/(?P<p_id>\d+)/ChangeTaskDetails/",views.change_task_details),
     url(r"^PutTogether/Projects/ChangeProjectDetails/",views.change_project_details),
-    url(r"^PutTogether/Upgrade/", views.upgrade_account)
+    url(r"^PutTogether/Upgrade/", views.upgrade_account),
+    url(r"^PutTogether/PlanBuy/", views.plan_register),
 
 ]
 #

@@ -15,13 +15,12 @@
               <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-round btn-default .btn-block">
                   <i class="fas fa-sign-in-alt"></i>
                   LOGIN</button>
+                  <a  href="#Pricing" style="color: white" class="btn btn-primary-success  btn-round btn-raised btn-success .btn-block">
+                        <i class="fas fa-user-plus"></i>
 
-              <button type="button" data-toggle="modal" id="signup" data-target="#signupModal"
-              class="btn btn-primary-success  btn-round btn-raised btn-success .btn-block">
-              <i class="fas fa-user-plus"></i>
-              SING UP NOW - IT'S
-              FREE</button>
-
+                                    SING UP NOW - IT'S
+                        FREE
+                  </a>
               </div>
         {% endif %}
     </div>
@@ -153,9 +152,18 @@
                                 <li>
                                     <b>5</b> Team Members</li>
                             </ul>
-                            <a href="#pablo" class="btn btn-default btn-raised btn-round">
-                                Get Started
+
+                        {% if  request.user.is_authenticated and request.user.account_type == 'F' %}
+                            <a href="#pablo"  class="btn btn-default btn-raised btn-round">
+                                Your Current Plan
                             </a>
+
+                        {% elif request.user.account_type == 'P' or request.user.account_type == 'B' %}
+                            <a href="#pablo"  class="btn btn-default btn-raised btn-round">
+                                Disabled
+                            </a>
+                        {% endif %}
+
                         </div>
                     </div>
                 </div>
@@ -172,11 +180,23 @@
                                     <b>500</b> Projects</li>
                                 <li>
                                     <b>50</b> Team Members</li>
-
                             </ul>
-                            <a href="#pablo" class="btn btn-white btn-raised btn-round">
-                                Get Started
+                        {% if request.user.is_authenticated and request.user.account_type == 'P' %}
+
+                            <a href="#pablo"  data-type="P"  class="btn btn-white btn-raised btn-round plans">
+                               Your Current Plan
                             </a>
+
+                        {% elif request.user.is_authenticated and request.user.account_type == 'F'  %}
+                            <a href="#pablo"  data-type="P" data-target="#planPricingModal" data-toggle="modal"  class="btn btn-white btn-raised btn-round plans">
+                               Get Started
+                            </a>
+                        {% elif request.user.is_authenticated and request.user.account_type == 'B'  %}
+                            <a href="#pablo"  data-type="P" class="btn btn-white btn-raised btn-round plans">
+                               Disabled
+                            </a>
+                        {% endif %}
+
                         </div>
                     </div>
                 </div>
@@ -193,10 +213,17 @@
                                     <b>1000</b> Projects</li>
                                 <li>
                                     <b>100</b> Team Members</li>
-                            </ul>
-                            <a href="#pablo" class="btn btn-default btn-raised btn-round">
+                        </ul>
+                        {% if request.user.is_authenticated and request.user.account_type != 'B' %}
+
+                            <a href="#pablo" data-target="#planPricingModal" data-type="B" data-toggle="modal" class="btn btn-default btn-raised btn-round plans">
                                 Get Started
                             </a>
+                        {% elif request.user.is_authenticated and request.user.account_type == 'B' %}
+                            <a href="#pablo"  class="btn btn-default btn-raised btn-round plans">
+                                Your Current Plan
+                            </a>
+                        {% endif %}
                         </div>
                     </div>
                 </div>
@@ -298,7 +325,6 @@
                             <label  class="label_control" id="name_error" style="display: none;">provide a meaningful name</label>
                         </div>
 
-
                         <div class="form-group">
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -310,7 +336,6 @@
                           </div>
                             <label class="label_control" id="email_error" style="display: none;">email exists</label>
                         </div>
-
                         <div class="form-group">
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -410,7 +435,7 @@
 
     <!------------------------------------------------------ FOOTER ------------------------------------------------------>
 
-     <div class="modal fade" id="planPricingModal" tabindex="-1" role="dialog">
+     <div class="modal fade" id="planPricingModal" tabindex="-1" role="dialog" date-ptype="" >
         <div class="modal-dialog modal-signup" role="document">
           <div class="modal-content">
             <div class="card card-signup card-plain">
@@ -426,63 +451,84 @@
                 <div class="row">
                   <div class="col mr-auto">
 
-                    <form  id='planPricing' class="form"  >
+                         <form>
                         {% csrf_token %}
-                      <div class="card-body">
-                        <div class="form-group">
-                            <div class="row">
-                            <div class="col">
-                                  <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <div class="input-group-text">
-                                                <i class="fas fa-credit-card"></i>
-                                          </div>
-                                        </div>
-                                        <input type="text" required id='CreditNumber' value="" class="form-control" placeholder="Card #">
-                                  </div>
+                           <div class="form-group">
 
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-user"></i>
+                              </div>
                             </div>
-                            <div class="col">
-                                  <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <div class="input-group-text">
-                                                <i class="fas fa-credit-card"></i>
-                                          </div>
-                                        </div>
-                                        <input type="text" required id='csv_number' value="" class="form-control" placeholder="Security Code" >
-                                  </div>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                  <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <div class="input-group-text">
-                                                <i class="fas fa-credit-card"></i>
-                                          </div>
-                                        </div>
-                                        <input type="number" min="0" max="12" required id='MonthCredit' value="" class="form-control" placeholder="Month">
-                                  </div>
-                            </div>
-                            <div class="col">
-                                  <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <div class="input-group-text">
-                                                <i class="fas fa-credit-card"></i>
-                                          </div>
-                                        </div>
-                                        <input type="number" min="2010" max="2040"  required id='YearCredit' value="" class="form-control" placeholder="Year" >
-                                  </div>
-                            </div>
+                            <input type="text" required  id ='p_usr_name' value="fahedshaabani" class="form-control" placeholder="Name...">
+                          </div>
                         </div>
 
-                        <label class="label_control" id="upgrade_error" style="display: none;padding-left: 9.5rem;padding-top: 1rem">Credit Card is a 16 digit number</label>
-                      </div>
-                      <div class="modal-footer justify-content-center" style="padding: 7px">
-                        <button type="submit"  class="btn btn-primary btn-round">Upgrade</button>
-                      </div>
-                    </form>
+                            <div class="form-group">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                  </div>
+                                </div>
+                                <input type="email" required id='p_email' value="fahedshabani@std.sehir.edu.tr" class="form-control" placeholder="Email...">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fa fa-key" aria-hidden="true"></i>
+                                  </div>
+                                </div>
+                                <input type="password" required   id="p_password" value="fahedshaabani" placeholder="Password..." class="form-control pass" />
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fa fa-key" aria-hidden="true"></i>
+                                  </div>
+                                </div>
+                                <input type="password"  required id="p_password_repeat" value="fahedshaabani"  placeholder="Confirm Password..." class="form-control pass" />
+                              </div>
+                            </div>
+
+
+                             <div class="form-group">
+                                    <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fa fa-key" aria-hidden="true"></i>
+                              </div>
+                            </div>
+                            <input type="text"  required id="creditCardNumber"   placeholder="Credit #..." class="form-control" />
+                          </div>
+
+                             </div>
+
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="secu_num">Security Number</label>
+                              <input type="text" class="form-control" id="p_secu_num">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                              <label for="expmonth">Exp.Month</label>
+                              <input type="number" min="0" max="12" class="form-control" id="expmonth">
+
+                            </div>
+                            <div class="form-group col-md-2 ml-auto">
+                              <label for="yearExp">Exp.Year</label>
+                              <input type="number" class="form-control" id="yearExp">
+                            </div>
+                          </div>
+                        <label class="label_control" id="upgrade_error" style="display: none;padding-bottom:.5rem;padding-top: 1rem">Credit Card is a 16 digit number</label>
+
+                          <button type="submit" class="btn btn-primary">Sign up</button>
+                        </form>
                   </div>
                 </div>
               </div>
@@ -490,6 +536,12 @@
           </div>
         </div>
     </div>
+
+
+
+
+
+
 
 
 
