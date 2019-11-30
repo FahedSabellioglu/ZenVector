@@ -1,5 +1,4 @@
 $("#projectForm").off().on('submit',function (event) {
-    console.log("func projectForm");
     event.preventDefault();
     var project_name = document.getElementById("project_name").value;
     var error_element = document.getElementById("project_name_error");
@@ -9,25 +8,22 @@ $("#projectForm").off().on('submit',function (event) {
         return false;
     }
 
-    $.ajax({
-        type: "POST",
-        url: "Projects/CreateProject/",
-        data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken, p_name: project_name},
-        success: function (e) {
-            // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
-            // location.reload(true);    //Why?????
-            // location.replace('/PutTogether/Projects/');
+    console.log('here');
 
-
-        },
-        error: function () {
-            console.log("error");
-        }
-    });
+    // $.ajax({
+    //     type: "POST",
+    //     url: "Projects/CreateProject/",
+    //     data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken, p_name: project_name},
+    //     success: function (e) {
+    //         // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
+    //         location.reload(true);    //Why?????
+    //
+    //     },
+    //     error: function () {
+    //         console.log("error");
+    //     }
+    // });
 });
-
-
-
 
 
 $("#editModal").on('submit',function (e) {

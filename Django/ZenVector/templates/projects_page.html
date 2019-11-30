@@ -3,7 +3,11 @@
 {% block content %}
 
     <div class="container">
-    <a class="nav-link dropdown-item" data-toggle="modal" data-target="#projectModal">Create Project!</a>
+    {% if allow %}
+        <a class="nav-link dropdown-item" data-toggle="modal" data-target="#projectModal">Create Project!</a>
+    {% elif not allow %}
+         <a class="nav-link dropdown-item" data-toggle="modal" data-target="#">Upgrade First!</a>
+    {% endif %}
         <div class="card-columns">
             {% for project in projects %}
                 <div class="card" style="width: 20rem;" id="{{project.project_id}}">
@@ -199,11 +203,10 @@
               </div>
               <div class="modal-body">
                 <div class="row">
-
                   <div class="col mr-auto">
 
                     <form  id='projectForm' class="form"  >
-                        {% csrf_token %}
+{#                        {% csrf_token %}#}
                       <div class="card-body">
                         <div class="form-group">
                           <div class="input-group">
@@ -216,7 +219,6 @@
                           </div>
                             <label class="label_control" id="project_name_error" style="display: none;">meaningful name please...</label>
                         </div>
-
 
                       </div>
                       <div class="modal-footer justify-content-center">
@@ -238,20 +240,14 @@
 
 
 
-{% block script %}
+{% block scripts %}
+
+    <script src="{% static 'js/projects_page_forms.js' %}"></script>
+
 
     <script>
         var csrftoken = '{{ csrf_token }}';
     </script>
-
-    <script>
-        $(function () {
-          $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
-
-    <script src="{% static 'js/projects_page_forms.js' %}"></script>
-
 
 
 {% endblock %}

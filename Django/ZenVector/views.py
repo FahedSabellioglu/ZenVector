@@ -109,7 +109,7 @@ def func_logout(request):
 def func_create_project(request):
     data = dict(request.POST)
     usrObj= Users.objects.get(email=request.user.email)
-    print usrObj
+    print usrObj,'herer chekcing'
     project = Projects(usr_email=usrObj,project_name=data['p_name'][0])
     project.save()
 
@@ -129,7 +129,6 @@ def func_create_project(request):
 
 def func_login(request):
     data = dict(request.POST)
-    print data,'new'
     if Users.objects.filter(email=data['mail'][0]).exists():
         obj = Users.objects.get(email=data['mail'][0])
         auth_obj = EmailAuthenticate()
@@ -201,16 +200,18 @@ def page_User(response):
 
 @login_required(login_url='/PutTogether/')
 def display_projects(response):
+    usrobj = Users.objects.get(email=response.user)
+    proj = Projects.objects.filter(usr_email=usrobj)
 
-    logged_in=response.user
-    # print response.user
-    # proj= Projects.objects.get(project_id=64)
-    # proj.delete()
+    allow = True
+    if (usrobj.account_type == 'F' and len(proj) == 5):
+        allow = False
+    elif (usrobj.account_type == 'P' and len(proj) == 200):
+        allow = False
+    elif usrobj.account_type == 'B':
+        allow = True
 
-    proj = Projects.objects.filter(usr_email=logged_in)
-    print proj
-
-    return render(response,'projects_page.html',{"projects":proj})
+    return render(response,'projects_page.html',{"projects":proj,'allow':allow})
 
 
 @login_required(login_url='/PutTogether/')

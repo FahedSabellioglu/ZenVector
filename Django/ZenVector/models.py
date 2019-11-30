@@ -40,6 +40,7 @@ class Users(AbstractUser):
     usr_name = models.CharField(max_length=255,unique=False)
     email = models.EmailField(max_length=500,primary_key=True)
     password = models.CharField(max_length=255)
+    account_type = models.CharField(max_length=5)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['usr_name']
     is_active = models.BooleanField(default=True)
