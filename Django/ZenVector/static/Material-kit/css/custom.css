@@ -1,3 +1,5 @@
+
+
 .dropdown-menu .dropdown-item:hover, .dropdown-menu a:hover{
     background-color: #59A61E;}
 
@@ -6,7 +8,6 @@
   width: 134px;
   height: 64px;
   border-radius: 50%;
-  border-radius: 50%;
   overflow: hidden;
   margin-top: -34px;
 }
@@ -14,6 +15,7 @@
   height: 55px;
   /*padding: 0em;*/
 }
+
 
 .input-group .input-group-text {
   padding: 0px 14px 1px 0px
