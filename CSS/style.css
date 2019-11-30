@@ -4,7 +4,7 @@ html {
 
 .navbar{
     width: 100%;
-    position: fixed;
+    /*position: relative;*/
 }
 .navbar-brand {
     width: 400px;
