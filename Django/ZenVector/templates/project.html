@@ -2,7 +2,10 @@
 {% load staticfiles %}
 {% block content %}
     <!-- Modal -->
- <div class = "wrapper for buttons" style="text-align: center">
+    <br>
+    <br>
+    <br>
+ <div class = "wrapper for buttons" style= "text-align: center; overflow-y:hidden">
  <div class = "Add-Buttons" style="display: inline-block">
      <p id="project_owner" style="display: none">{{ owner }}</p>
       <button id="addTask" data-toggle="modal" data-target="#addTaskModal" class="btn btn-default btn-round btn-sm">
@@ -11,7 +14,6 @@
         <i class="material-icons"> add </i> Add New List</button>
   </div>
 </div>
-
   <div class="container-fluid">
     <div class="d-md-inline-flex d-sm-block" id="board">
 

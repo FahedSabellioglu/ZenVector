@@ -13,8 +13,9 @@
 }
 .navbar{
   height: 55px;
-  /*padding: 0em;*/
+  /*position: relative;*/
 }
+
 
 
 .input-group .input-group-text {

@@ -3,8 +3,14 @@
 {% block content %}
 
     <div class="container">
+    <br>
+    <br>
+    <br>
+    <br>
     {% if allow %}
-        <a class="nav-link dropdown-item" data-toggle="modal" data-target="#projectModal">Create Project!</a>
+        <div style="text-align: center">
+        <button class="btn btn-success btn-round btn-bg" style="display: inline-block" data-toggle="modal" data-target="#projectModal">Create Project!</button>
+        </div>
     {% elif not allow %}
          <a class="nav-link dropdown-item" data-toggle="modal" data-target="#UpgradeModal">Upgrade First!</a>
     {% endif %}
