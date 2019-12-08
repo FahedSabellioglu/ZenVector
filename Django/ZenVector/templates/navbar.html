@@ -1,9 +1,9 @@
 {% load staticfiles%}
 
 
-  <nav class="navbar navbar-expand sticky-top bg-white" style="position: fixed">
+  <nav class="navbar navbar-expand sticky-top bg-white"  style="position: fixed">
     <div class="container-fluid">
-      <img  src= "{% static 'img/Actual_logos/PNG_FORM/puttogether1-04.png' %}" width="10%" alt="">
+      <img src= "{% static 'img/Actual_logos/PNG_FORM/puttogether1-04.png' %}" width="10%" alt="">
       <!-- <a class="navbar-brand" href="#">Navbar</a> -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
         <span class="navbar-toggler-icon"></span>
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <div class="collapse navbar-collapse borderYtoX" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item active">
             <a class="nav-link " href="/PutTogether/#WhyUs">WHY US?<span class="sr-only">(current)</span></a>
@@ -47,9 +47,8 @@
 {#                      </div>#}
 {#                </div>#}
                 </li>
-
                 <li class="nav-item">
-                <div class="btn-group">
+                <div class="btn-group borderYtoX">
                       <a  class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Settings
                       </a>
