@@ -105,6 +105,9 @@ $(document).on('click', ".plans",function () {
 $("#downGradeForm").off().on('submit',function (event) {
     event.preventDefault();
     var account_type = $("#downGrade").attr("data-type");
+
+    var error_control = document.getElementById("projects_count");
+    error_control.style.display = "none";
     $.ajax({
         type: "POST",
         url: "/PutTogether/DownGrade/",
@@ -114,7 +117,9 @@ $("#downGradeForm").off().on('submit',function (event) {
 
         },
         error: function (e) {
-            console.log("error");
+            console.log(e);
+            error_control.innerHTML = e.responseJSON.reason;
+            error_control.style.display='block';
         }
     });
 });
@@ -326,8 +331,6 @@ $("#DeleteModel").off().on('submit',function (event) {
         }
     });
 });
-
-
 
 $('.modal').on('hidden.bs.modal', function(){
     $(this).find('form')[0].reset();
