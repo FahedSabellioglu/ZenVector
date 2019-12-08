@@ -6,37 +6,37 @@ $("#loginForm").on('submit',function(e){
     e.preventDefault();
 });
 
-    function loginControl(){
-        var email_element = document.getElementById('email_login');
-        var password_element = document.getElementById('password_login');
-        var element = document.getElementById('password_error_login');
+function loginControl(){
+    var email_element = document.getElementById('email_login');
+    var password_element = document.getElementById('password_login');
+    var element = document.getElementById('password_error_login');
 
-        element.style.display = 'none';
-
-
-        email = email_element.value;
-        password = password_element.value;
-
-        $.ajax({
-            type: "POST",
-            url: "Login/",
-            data:{mail:email,password:password,csrfmiddlewaretoken: csrftoken},
-            success: function(e) {
-                location.reload(true);
-
-            },
-            error:function(e){
-                var element = document.getElementById('password_error_login');
-                var message = e.responseJSON.reason;
-                element.innerHTML = message;
-                element.style.display='block'
-            }
-
-        })
-    }
+    element.style.display = 'none';
 
 
- function Control(event) {
+    email = email_element.value;
+    password = password_element.value;
+
+    $.ajax({
+        type: "POST",
+        url: "Login/",
+        data:{mail:email,password:password,csrfmiddlewaretoken: csrftoken},
+        success: function(e) {
+            location.reload(true);
+
+        },
+        error:function(e){
+            var element = document.getElementById('password_error_login');
+            var message = e.responseJSON.reason;
+            element.innerHTML = message;
+            element.style.display='block'
+        }
+
+    })
+}
+
+
+function Control(event) {
 
         usr_name = document.getElementById("usr_name").value;
         email = document.getElementById("email").value;
@@ -48,9 +48,6 @@ $("#loginForm").on('submit',function(e){
         email_error.style.display = 'none';
         document.getElementById('password_error').style.display = 'none';
         document.getElementById('repeat_error').style.display = 'none';
-
-
-
 
         if ($.trim(usr_name)== '' || usr_name.length < 6)
         {
@@ -81,7 +78,7 @@ $("#loginForm").on('submit',function(e){
         $.ajax({
             type:'POST',
             url:"Signup/",
-            data:{name:usr_name,mail:email,pass:password,csrfmiddlewaretoken:csrftoken},
+            data:{name:usr_name,mail:email,pass:password,csrfmiddlewaretoken:csrftoken,acc_type:"F"},
             success: function (e) {
                 location.reload(true);
             },
@@ -94,14 +91,89 @@ $("#loginForm").on('submit',function(e){
 
     }
 
-
 $(document).on('click', ".plans",function () {
 
     var value = $(this).data('type');
     $("#planPricingModal").attr("data-type",value);
+    $("#UpgradeModal").attr("data-type",value);
+    console.log(value);
+    $("#downGrade").attr("data-type",value);
+
 });
 
 
+$("#downGradeForm").off().on('submit',function (event) {
+    event.preventDefault();
+    var account_type = $("#downGrade").attr("data-type");
+    $.ajax({
+        type: "POST",
+        url: "/PutTogether/DownGrade/",
+        data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken,account_type:account_type},
+        success: function (e) {
+            location.reload(true);    //Why?????
+
+        },
+        error: function (e) {
+            console.log("error");
+        }
+    });
+});
+
+
+
+//Upgrading from a plan to a higher plan ( Home Page Code only )
+$("#upgradeForm").off().on('submit',function (event) {
+    event.preventDefault();
+
+    var Card_Number = document.getElementById('CreditNumber').value;
+
+    var security_number = document.getElementById('csv_number').value;
+
+    var month_exp = document.getElementById('MonthCredit').value;
+
+    var year_exp = document.getElementById('YearCredit').value;
+
+    var error_control = document.getElementById("upgrade_error");
+
+    var account_type = $("#UpgradeModal").attr("data-type");
+
+    error_control.style.display = 'none';
+
+    if ($.trim(Card_Number).length !== 16)
+    {
+        console.log("HERER");
+        error_control.innerHTML = "Credit # is a 16 digit number.";
+        error_control.style.display = 'block';
+                console.log(document.getElementById("upgrade_error").innerHTML);
+
+        return;
+    }
+    else if ($.trim(security_number).length !== 3){
+        console.log("herer");
+        error_control.innerHTML = "Security number at least 3 digits.";
+        error_control.style.display = 'block';
+
+        console.log(document.getElementById("upgrade_error").innerHTML);
+        return;
+    }
+    $.ajax({
+        type: "POST",
+        url: "/PutTogether/Upgrade/",
+        data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken,
+            number:Card_Number,security:security_number,m_exp:month_exp,y_exp:year_exp,account_type:account_type},
+        success: function (e) {
+            // console.log(e);
+            // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
+            location.reload(true);    //Why?????
+
+        },
+        error: function (e) {
+            console.log("error");
+        }
+    });
+});
+
+// Buying a plan in the first signup
 $("#planPricingModal").off().on('submit',function (event) {
     event.preventDefault();
 
@@ -125,12 +197,12 @@ $("#planPricingModal").off().on('submit',function (event) {
     var exp_year = document.getElementById('yearExp').value;
 
 
-    var error_control = document.getElementById("upgrade_error");
+    var error_control = document.getElementById("plan_error");
 
     error_control.style.display = 'none';
 
 
-    if ($.trim(username)== '' || username.length < 6)
+    if ($.trim(username) === '' || username.length < 6)
     {
         error_control.innerHTML = 'Please provide a meaningful name.';
         error_control.style.display = 'block';
@@ -138,7 +210,7 @@ $("#planPricingModal").off().on('submit',function (event) {
         return
     }
 
-    if ($.trim(email).length == 0)
+    if ($.trim(email).length === 0)
     {
         error_control.innerHTML = "Email can't be empty";
     error_control.style.display = 'block';
@@ -154,7 +226,7 @@ $("#planPricingModal").off().on('submit',function (event) {
         return;
     }
 
-    if (password != repeat_password)
+    if (password !== repeat_password)
     {
         error_control.innerHTML = "Passwords do not match";
          error_control.style.display = 'block';
@@ -162,13 +234,17 @@ $("#planPricingModal").off().on('submit',function (event) {
         return;
     }
 
-    if ($.trim(credit_number).length < 16){
+    if ($.trim(credit_number).length !== 16){
         error_control.innerHTML = "Credit Card Number is a 16 digits number";
         error_control.style.display = 'block';
-        console.log()
         return;
     }
 
+    if ($.trim(security_number).length !== 3){
+        error_control.innerHTML = "Security Number is a 3 digits number";
+        error_control.style.display = 'block';
+        return;
+    }
 
     $.ajax({
         type: "POST",
@@ -188,6 +264,7 @@ $("#planPricingModal").off().on('submit',function (event) {
     });
 });
 
+// Reset Password
 $("#PasswordModal").off().on('submit',function (event) {
     event.preventDefault();
     var password_first = document.getElementById("first_password").value;
@@ -224,7 +301,6 @@ $("#PasswordModal").off().on('submit',function (event) {
     });
 });
 
-
 $("#DeleteModel").off().on('submit',function (event) {
     event.preventDefault();
     var password = document.getElementById("delete_password").value;
@@ -253,3 +329,6 @@ $("#DeleteModel").off().on('submit',function (event) {
 
 
 
+$('.modal').on('hidden.bs.modal', function(){
+    $(this).find('form')[0].reset();
+});

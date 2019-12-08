@@ -37,33 +37,39 @@ $("#upgradeForm").off().on('submit',function (event) {
 
     error_control.style.display = 'none';
 
-    if ($.trim(Card_Number).length < 16)
+    console.log($("#upgradeForm").attr("data-type"));
+
+    if ($.trim(Card_Number).length !== 16)
     {
         error_control.innerHTML = "Credit # is a 16 digit number.";
         error_control.style.display = 'block';
         return false;
     }
-    else if ($.trim(security_number).length < 3){
+    else if ($.trim(security_number).length !== 3){
         error_control.innerHTML = "Security number at least 3 digits.";
         error_control.style.display = 'block';
         return false;
     }
 
-    $.ajax({
-        type: "POST",
-        url: "/PutTogether/Upgrade/",
-        data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken,
-            number:Card_Number,security:security_number,m_exp:month_exp,y_exp:year_exp},
-        success: function (e) {
-            // console.log(e);
-            // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
-            location.reload(true);    //Why?????
+    return false;
 
-        },
-        error: function (e) {
-            console.log("error");
-        }
-    });
+
+
+    // $.ajax({
+    //     type: "POST",
+    //     url: "/PutTogether/Upgrade/",
+    //     data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken,
+    //         number:Card_Number,security:security_number,m_exp:month_exp,y_exp:year_exp},
+    //     success: function (e) {
+    //         // console.log(e);
+    //         // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
+    //         location.reload(true);    //Why?????
+    //
+    //     },
+    //     error: function (e) {
+    //         console.log("error");
+    //     }
+    // });
 });
 
 

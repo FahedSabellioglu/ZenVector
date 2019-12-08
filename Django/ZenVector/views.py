@@ -107,16 +107,8 @@ def func_logout(request):
 @login_required(login_url='/PutTogether/')
 def upgrade_account(request):
     data = dict(request.POST)
-
     usrObj = Users.objects.get(email=request.user)
-    print usrObj,'here cekin'
-
-    if usrObj.account_type == 'F':
-        new_type = 'P'
-    elif usrObj.account_type == 'P':
-        new_type = 'B'
-
-    usrObj.account_type = new_type
+    usrObj.account_type = data['account_type'][0]
     usrObj.save()
 
     rtn = JsonResponse({"message":"has been upgraded"})
@@ -124,6 +116,19 @@ def upgrade_account(request):
 
     #TODO
     #send email
+
+    return rtn
+
+@login_required(login_url="/PutTogether/")
+def plan_downgrade(request):
+    data = dict(request.POST)
+    usrObj = Users.objects.get(email=request.user)
+
+    usrObj.account_type = data['account_type'][0]
+    usrObj.save()
+
+    rtn = JsonResponse({"message":"has been downgraded"})
+    rtn.status_code = 200
 
     return rtn
 
@@ -137,7 +142,7 @@ def plan_register(request):
         new_usr.save()
         login(request, new_usr)
 
-        rtn = JsonResponse({"message":"Success"})
+        rtn = JsonResponse({"reason":"Success"})
         rtn.status_code = 200
         return rtn
 
@@ -200,6 +205,8 @@ def func_signup(request):
 
     else:
         new_usr = Users.objects.create_user(username=data['name'][0],password=data['pass'][0],email=data['mail'][0])
+        new_usr.account_type = data['acc_type'][0]
+        new_usr.save()
         login(request,new_usr)
         rtn = JsonResponse({"message":"Success"})
         rtn.status_code = 200

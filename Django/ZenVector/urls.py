@@ -23,6 +23,7 @@ urlpatterns = [
     url(r"^PutTogether/Projects/ChangeProjectDetails/",views.change_project_details),
     url(r"^PutTogether/Upgrade/", views.upgrade_account),
     url(r"^PutTogether/PlanBuy/", views.plan_register),
+    url(r"^PutTogether/DownGrade/", views.plan_downgrade)
 
 ]
 #
