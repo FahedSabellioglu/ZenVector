@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import AbstractUser,BaseUserManager
-
+import string
+import random
 
 class EmailAuthenticate(object):
     def authenticate(self, email=None, password=None, **kwargs):
@@ -84,6 +85,16 @@ class UsrActivity(models.Model):
 class UsrTasks(models.Model):
     usr_email = models.ForeignKey(Users,db_column='email')
     task_id = models.ForeignKey(Tasks,db_column='task_id')
+
+
+def random_pass():
+    letters = string.ascii_letters
+    return ''.join(random.choice(letters) for i in range(8))
+
+
+class PasswordCodes(models.Model):
+    usr_email = models.ForeignKey(Users,db_column='email')
+    code = models.CharField(default=random_pass,max_length=15)
 
 
 

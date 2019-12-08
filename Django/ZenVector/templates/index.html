@@ -430,6 +430,8 @@
                       </div>
                       <div class="modal-footer justify-content-center ">
                         <button type="submit"  onclick="loginControl()" class="btn btn-primary btn-round">Login</button>
+                       <button type="button"  onclick="ForgotPassModal()" class="btn btn-primary btn-round">Forgot</button>
+
                       </div>
                     </form>
                   </div>
@@ -546,7 +548,6 @@
 
 <!------------------------------------------------------ Modal upgrading ------------------------------------------------------>
 
-
  <div class="modal fade" id="UpgradeModal" tabindex="-1" data-type="" role="dialog">
         <div class="modal-dialog modal-signup" role="document">
           <div class="modal-content">
@@ -629,7 +630,6 @@
         </div>
       </div>
 
-
 <!------------------------------------------------------ /Model DownGrade ------------------------------------------------------>
 
  <div class="modal fade" id="downGrade" tabindex="-1" data-type="" role="dialog">
@@ -670,11 +670,157 @@
         </div>
       </div>
 
-
-
 <!------------------------------------------------------ FOOTER ------------------------------------------------------>
+  <div class="modal fade" id="forgorPasswordModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-signup" role="document">
+          <div class="modal-content">
+            <div class="card card-signup card-plain">
+              <div class="modal-header">
+
+                <h5 class="modal-title card-title">Forgot Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <i class="far fa-window-close" style="color: red"></i>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+
+                  <div class="col mr-auto">
+
+                    <form  id='ForgotPasswordForm' class="form"  >
+                        {% csrf_token %}
+                      <div class="card-body">
+
+                        <div class="form-group">
+                          <div class="input-group" >
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                              </div>
+                            </div>
+                            <input type="email" required id='email_forgot_pass' class="form-control" placeholder="Email...">
+                          </div>
+                            <label class="ml-auto mr-auto" id="email_error_forgot" style="display: none;">email exists</label>
+                        </div>
+
+                      </div>
+                      <div class="modal-footer justify-content-center ">
+                       <button type="submit" class="btn btn-primary btn-round">GetCode</button>
+
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<!------------------------------------------------------ /Password Code ------------------------------------------------------>
+
+  <div class="modal fade" id="forgorPasswordCodeModal" tabindex="-1" role="dialog" data-email="">
+        <div class="modal-dialog modal-signup" role="document">
+          <div class="modal-content">
+            <div class="card card-signup card-plain">
+              <div class="modal-header">
+
+                <h5 class="modal-title card-title">Forgot Password Code</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <i class="far fa-window-close" style="color: red"></i>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+
+                  <div class="col mr-auto">
+
+                    <form  id='ForgotPasswordCodeForm' class="form"  >
+                        {% csrf_token %}
+                      <div class="card-body">
+
+                        <div class="form-group">
+                          <div class="input-group" >
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                              </div>
+                            </div>
+                            <input type="text" required id='email_forgot_Code' class="form-control" placeholder="Code...">
+                          </div>
+                            <label class="ml-auto mr-auto label_control" id="email_error_Code" style="display: none;">Wrong Code</label>
+                        </div>
+                      </div>
+                      <div class="modal-footer justify-content-center ">
+                       <button type="submit" class="btn btn-primary btn-round">Reset Password</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 <!------------------------------------------------------ /FOOTER ------------------------------------------------------>
+
+  <div class="modal fade" id="PasswordResetModal" data-email="" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-signup" role="document">
+          <div class="modal-content">
+            <div class="card card-signup card-plain">
+              <div class="modal-header">
+
+                <h5 class="modal-title card-title">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <i class="far fa-window-close" style="color: red"></i>
+
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+
+                  <div class="col mr-auto">
+
+                    <form  id='passwordResetForm' class="form"  >
+                        {% csrf_token %}
+                      <div class="card-body">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                    <i class="fas fa-heading"></i>
+                              </div>
+                            </div>
+                            <input type="password" required id='first_password_Reset' value="" class="form-control" placeholder="Password...">
+                          </div>
+                            <label class="label_control" id="first_pass_control_Reset" style="display: none;">Password is 8 characters or more</label>
+                        </div>
+
+                      <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                    <i class="fas fa-heading"></i>
+                              </div>
+                            </div>
+                            <input type="password" required id='second_password_Reset' value="" class="form-control" placeholder="Repeat password...">
+                          </div>
+                            <label class="label_control" id="second_pass_control_Reset" style="display: none;">Password's do not match...</label>
+                        </div>
+
+
+                      </div>
+                      <div class="modal-footer justify-content-center">
+                        <button type="submit"  class="btn btn-primary btn-round" >Change</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 

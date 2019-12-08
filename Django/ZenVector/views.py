@@ -5,6 +5,11 @@ from django.contrib.auth import login,logout,authenticate
 from models import *
 from django.http import JsonResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+
 
 @login_required(login_url='/PutTogether/')
 def fun_new_state(request,p_id):
@@ -73,11 +78,19 @@ def change_password(response):
     data = dict(response.POST)
     user_obj =Users.objects.get(email=response.user.email)
     user_obj.set_password(data['password'][0])
-
+    user_obj.save()
     rtn = JsonResponse({"message":'password changed'})
     rtn.status_code = 200
     return  rtn
 
+def ResetPassword(request):
+    data = dict(request.POST)
+    user_obj =Users.objects.get(email=data['email'][0])
+    user_obj.set_password(data['password'][0])
+    user_obj.save()
+    rtn = JsonResponse({"message":'password changed'})
+    rtn.status_code = 200
+    return  rtn
 
 @login_required(login_url='/PutTogether/')
 def move_task(request,p_id):
@@ -100,7 +113,6 @@ def page_Home(response):
 
 @login_required(login_url='/PutTogether/')
 def func_logout(request):
-
     logout(request)
     return HttpResponseRedirect('/PutTogether/')
 
@@ -132,14 +144,44 @@ def plan_downgrade(request):
         rtn.status_code = 401
         return rtn
 
-    # usrObj.account_type = data['account_type'][0]
-    #
-    # usrObj.save()
-    #
-    # rtn = JsonResponse({"message":"has been downgraded"})
-    # rtn.status_code = 200
-    # return rtn
+    usrObj.account_type = data['account_type'][0]
+    usrObj.save()
+    rtn = JsonResponse({"message":"has been downgraded"})
+    rtn.status_code = 200
+    return rtn
 
+def forgot_pass(request):
+    data = dict(request.POST)
+
+    usr = Users.objects.filter(email=data['usr_email'][0])
+
+    if len(usr) != 0:
+        PasswordCodes.objects.filter(usr_email=usr[0]).delete()
+        password_code = PasswordCodes(usr_email=usr[0])
+        password_code.save()
+        message = Email_PasswordResetCode(usr[0].email,password_code.code)
+        Email_SendServer(message,usr[9].email)
+        rtn = JsonResponse({"message": "email has been sent"})
+        rtn.status_code = 200
+        return rtn
+    rtn = JsonResponse({"reason":"Email does't belong to an account"})
+    rtn.status_code = 401
+    return rtn
+
+def CodeChecker(request):
+    data = dict(request.POST)
+    usr = Users.objects.get(email=data['usr_email'][0])
+    code = PasswordCodes.objects.get(usr_email=usr)
+
+    if  code.code == data['code'][0]:
+        code.delete()
+        rtn = JsonResponse({"message": "Correct Code"})
+        rtn.status_code = 200
+        return rtn
+
+    rtn = JsonResponse({"reason": "Wrong Code, Try again"})
+    rtn.status_code = 404
+    return rtn
 
 def plan_register(request):
     data = dict(request.POST)
@@ -159,8 +201,6 @@ def plan_register(request):
     rtn = JsonResponse({"message": "Failed", 'reason': "This email address is used"})
     rtn.status_code = 400
     return rtn
-
-
 
 @login_required(login_url='/PutTogether/')
 def func_create_project(request):
@@ -292,7 +332,7 @@ def change_project_details(request,p_id):
 
 
 @login_required(login_url='/PutTogether/')
-def func_delete_project(response):
+def func_delete_project(response,p_id):
     data = dict(response.POST)
     proj_obj = Projects.objects.get(project_id=p_id)
     proj_obj.delete()
@@ -302,6 +342,50 @@ def func_delete_project(response):
     return response
 
 
+def Email_SendServer(message,toUser):
+
+    mailserver = smtplib.SMTP('smtp.gmail.com', 587)
+    mailserver.ehlo()
+    mailserver.starttls()
+    mailserver.ehlo()
+    mailserver.login('puttogethersoftware@gmail.com', 'PutTogether123')
+
+    mailserver.sendmail('puttogethersoftware@gmail.com',
+                        toUser,
+                        message)
 
 
-# Create your views here.
+
+def Email_PasswordResetCode(usrEmail,code):
+    msg = MIMEMultipart()
+    msg['From'] = 'PutTogether Team'
+    msg['To'] = usrEmail
+    msg['Subject'] = "Password Reset Code"
+    message = """
+                <!DOCTYPE html>
+                    <html>
+                    <body style="padding-top: 20px; background-color: #f5f5f5;">
+                
+                    <div style="width:500px; margin: auto; background-color: white; border-radius: 5px; border-color: #59A61E; border-style: solid;">
+                        <div style="text-align: center; color: white; background-color: #59A61E">
+                        <img style="align-items: ;" src="https://res.cloudinary.com/di6zpszmk/image/upload/v1575834908/puttogether1-03_xzhhab.png" width="150" height="100">
+                        </div>
+                        <div style="padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                        <strong style="color: black">Hello </strong>
+                        <p style="color: black;">You have requested to reset your account's password. </p>
+                        <p>Please use the following code in the resetting process <b>{code}</b>.</p>
+                        <p>For any question please contact <strong>PutTogetherSoftware@gmail.com</strong>.</p>
+                        <p>PutTogether Team.</p>
+                        </div>
+                    </div>
+                </body>
+              """.format(code=code)
+    msg.attach(MIMEText(message, 'html'))
+
+    return msg.as_string()
+
+
+
+
+
+
