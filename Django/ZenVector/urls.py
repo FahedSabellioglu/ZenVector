@@ -26,8 +26,7 @@ urlpatterns = [
     url(r"^PutTogether/DownGrade/", views.plan_downgrade),
     url(r"^PutTogether/forgotPass/", views.forgot_pass),
     url(r"^PutTogether/CheckCode/", views.CodeChecker),
-    url(r"^PutTogether/PasswordReset/", views.ResetPassword)
+    url(r"^PutTogether/PasswordReset/", views.ResetPassword),
+    url(r"^PutTogether/PasswordResetOut/(?P<email>[\w\.-]+@[\w\.-]+(\.[\w]+)+)/(?P<code>\w+)$", views.passwordRestOut),
 
 ]
-#
-# url(r'^Projects/')

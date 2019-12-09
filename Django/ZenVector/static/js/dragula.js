@@ -317,10 +317,9 @@ function dragula (initialContainers, options) {
 
 
       to_list_id = target.getAttribute("id");
-      console.log(from_list_id);
-      console.log(to_list_id);
-      console.log(task_id);
-
+      // console.log(from_list_id);
+      // console.log(to_list_id);
+      // console.log(task_id);
       $.ajax({
         type:"POST",
         url:"MoveTask/",
@@ -331,7 +330,7 @@ function dragula (initialContainers, options) {
         error:function () {
           alert('Something went wrong, Please try again later');
         }
-      })
+      });
 
       console.log("DROPEED RUN");
 
