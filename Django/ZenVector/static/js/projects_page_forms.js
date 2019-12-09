@@ -1,7 +1,10 @@
 $("#projectForm").off().on('submit',function (event) {
+    console.log("project form here");
     event.preventDefault();
     var project_name = document.getElementById("project_name").value;
+    console.log(project_name);
     var error_element = document.getElementById("project_name_error");
+    console.log(error_element);
     error_element.style.display = 'none';
     if ($.trim(project_name) == '' || $.trim(project_name).length < 3) {
         error_element.style.display = 'block';
@@ -55,6 +58,7 @@ $("#upgradeForm").off().on('submit',function (event) {
 
 
 
+<<<<<<< Updated upstream
     // $.ajax({
     //     type: "POST",
     //     url: "/PutTogether/Upgrade/",
@@ -70,6 +74,22 @@ $("#upgradeForm").off().on('submit',function (event) {
     //         console.log("error");
     //     }
     // });
+=======
+    $.ajax({
+        type: "POST",
+        url: "CreateProject/",
+        // usr_email: '{{ request.user.email }}',
+        data: { csrfmiddlewaretoken: csrftoken, p_name: project_name},
+        success: function (e) {
+            // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
+            location.reload(true);
+
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
+>>>>>>> Stashed changes
 });
 
 
@@ -80,62 +100,63 @@ $("#editModal").on('submit',function (e) {
 });
 
 function editDetails() {
-    console.log("func editDetails");
-        // var assignedTo = document.getElementById("assignedTo").value;
-        // console.log(assignedTo);
-        //
-        // var deadline = document.getElementById("task_edit_deadline").value;
-        // console.log(deadline);
-        //
-        // var detail = document.getElementById("taskDetailsD").value;
-        // console.log(detail);
-        //
-        // var status =document.getElementById("statusD").value;
-        // console.log(status);
-        //
-        // var taskid = $('#edit_task_title').attr("taskid");
-        //
-        // console.log(taskid);
-        //
-        // $.ajax({
-        //     type:"POST",
-        //     url:"ChangeTaskDetails/",
-        //     data:{task_id: taskid,assignto:assignedTo,time:deadline,detail:detail,status:status,csrfmiddlewaretoken:csrftoken},
-        //     success:function (e) {
-        //         location.reload(true)
-        //     },
-        //     error:function (e) {
-        //         console.log(e)
-        //     }
-        // })
+
+        var projectTitle = document.getElementById("projectTitle").value;
+        console.log(projectTitle);
+
+        var project_creation_time = document.getElementById("project_creation_time").value;
+        console.log(project_creation_time);
+
+        // var projectDetails = document.getElementById("projectDetails").value;
+        // console.log(projectDetails);
+
+        var members =document.getElementById("teamMembers").value;
+        console.log(members);
+
+        var projectid = $('#edit_project_title').attr("projectid");
+        console.log(projectid);
+
+        $.ajax({
+            type:"POST",
+            url:"ChangeProjectDetails/",
+            data:{project_id: projectid,members:members,title:projectTitle,time:project_creation_time,csrfmiddlewaretoken:csrftoken},
+            // data:{project_id: projectid,members:members,title:projectTitle,time:project_creation_time,detail:projectDetails,csrfmiddlewaretoken:csrftoken},
+            success:function (e) {
+                location.reload(true)
+            },
+            error:function (e) {
+                console.log(e)
+            }
+        })
 }
 
 
-$(document).on('click','.menu-button',function () {
+$(document).on('click','#edit-t',function () {
+    var project_id = $(this).data('id');
+    console.log(project_id);
+    $('#edit_project_title').attr("projectid",project_id);
 
-        console.log("clicked menu");
-        var task_id = $(this).data('id');
-        console.log(task_id);
+    var element = document.getElementById(project_id);
 
-    //
-    // var task_id = $(this).data('id');
-    // console.log(task_id);
-    // $('#edit_task_title').attr("taskid",task_id);
-    //
-    // var element = document.getElementById(task_id);
-    //
-    // var element_p = element.getElementsByTagName('p')[0].innerHTML;
-    //
-    // var details = element_p.split(' Descrip: ')[1].split(' Deadline:')[0];
-    //
-    // var date = element_p.split("Deadline: ")[1].split(" Given by")[0];
-    //
-    //
-    // var list_title = $(this).parent().parent().parent().attr("id");
-    //
-    // document.getElementById("taskDetailsD").value = details;
-    //
-    // document.getElementById('task_edit_deadline').value = formatDate(date);
+    var title = element.getElementsByTagName('a')[0].innerHTML;
+    var title= $.trim(title);
+    console.log(title);
+    var createdBy = element.getElementsByTagName('p')[0].innerHTML;
+    var createdBy = createdBy.split(':')[1];
+    console.log(createdBy);
+    var nMembers = element.getElementsByTagName('p')[1].innerHTML;
+    var nMembers = nMembers.split(':')[1];
+    console.log(nMembers);
+    var nTasks = element.getElementsByTagName('p')[2].innerHTML;
+    var nTasks = nTasks.split(':')[1];
+    console.log(nTasks);
+    var date = element.getElementsByTagName('p')[3].innerHTML;
+    var date = date.split(':')[3];
+    console.log(date);
+
+    document.getElementById("projectTitle").value = title;
+    // document.getElementById("projectDetails").value = "bla bla and bla";
+    document.getElementById('project_creation_time').value = formatDate(date);
 
 });
 
@@ -155,27 +176,47 @@ function formatDate(date) {
 
 
  function deleteProject(){
-        console.log("func delete");
+
+    console.log("func delete");
+    var x = confirm("Are you sure you want to delete?");
+    var project_id = $("#edit_project_title").attr('projectid');
+    if (x){
+
+       $.ajax({
+           type:"POST",
+           url:"DeleteProject/",
+           data:{project_id:project_id,csrfmiddlewaretoken:csrftoken},
+           success:function () {
+               location.reload(true);
+           },
+           error:function () {
+               console.log("NOT CORRECT");
+           }
+       })
+    }
+    else{
+      console.log(x);
+      return false;
+    }
+}
 
 
-    // var x = confirm("Are you sure you want to delete?");
-    // var task_id = $("#edit_task_title").attr('taskid');
-    // if (x){
-    //
-    //    $.ajax({
-    //        type:"POST",
-    //        url:"DeleteTask/",
-    //        data:{taskid:task_id,csrfmiddlewaretoken:csrftoken},
-    //        success:function () {
-    //            location.reload(true);
-    //        },
-    //        error:function () {
-    //            console.log("NOT CORRECT");
-    //        }
-    //    })
-    // }
-    // else{
-    //   console.log(x);
-    //   return false;
-    // }
+function sendEmail() {
+    console.log("send clicked");
+    var email = document.getElementById('inviteNewMember').value;
+    console.log(email);
+
+       $.ajax({
+       type:"POST",
+       url:"sendEmail/",
+       data:{csrfmiddlewaretoken:csrftoken},
+       // data:{email:email, csrfmiddlewaretoken:csrftoken},
+       success:function () {
+           location.reload(true);
+       },
+       error:function () {
+           console.log("NOT CORRECT");
+       }
+    })
+
 }
