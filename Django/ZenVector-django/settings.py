@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
 ]
 
 AUTH_USER_MODEL = 'ZenVector.Users'
@@ -77,7 +79,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'builtins':[
-                'ZenVector.templatetags.project_list'
+                'ZenVector.templatetags.project_list',
+                'ZenVector.templatetags.progressbar'
+
             ]
         },
     },
@@ -146,3 +150,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+#
+# EMAIL_HOST= 'smtp.gmail.com'
+# EMAIL_PORT= 587
+#
+# EMAIL_HOST_USER= 'puttogether.zenvector@gmail.com'
+# EMAIL_PASSWORD= 'ZenVector'
+# EMAIL_USE_TLS= True
+# EMAIL_USE_SSL= False
+

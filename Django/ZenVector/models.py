@@ -36,7 +36,6 @@ class UserManager(BaseUserManager):
         return usr_obj
 
 
-
 class Users(AbstractUser):
     usr_name = models.CharField(max_length=255,unique=False)
     email = models.EmailField(max_length=500,primary_key=True)
@@ -47,10 +46,12 @@ class Users(AbstractUser):
     is_active = models.BooleanField(default=True)
     objects = UserManager()
 
+
 class Projects(models.Model):
     project_id = models.AutoField(primary_key=True)
     project_name = models.CharField(max_length=255)
     creation_time = models.TimeField(auto_now_add=True)
+    # creation_date=models.DatetimeField(auto_now_add=True)
     usr_email = models.ForeignKey(Users,db_column='email')
 
 
@@ -59,7 +60,6 @@ class state(models.Model):
     state_name = models.CharField(max_length=255)
     project_id = models.ForeignKey(Projects,db_column='project_id')
     state_color = models.CharField(max_length=255,default='#59A61E')
-
 
 
 class Tasks(models.Model):
@@ -72,14 +72,15 @@ class Tasks(models.Model):
     task_project_id = models.ForeignKey(Projects,db_column='project_id')
     task_given_by = models.ForeignKey(Users,db_column='email')
 
+
 class UsrProjects(models.Model):
     usr_email = models.ForeignKey(Users,db_column='email')
     project_id = models.ForeignKey(Projects,db_column='project_id')
 
+
 class UsrActivity(models.Model):
     usr_email = models.ForeignKey(Users,db_column='email')
     last_login = models.TimeField(auto_now_add=True)
-
 
 
 class UsrTasks(models.Model):
