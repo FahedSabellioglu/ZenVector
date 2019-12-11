@@ -49,7 +49,6 @@ div.borderYtoX a:after
   :hover {
     background-size: 100% 85%;
   }
-
 div.borderYtoX a:hover:before, div.borderYtoX a:hover:after
 {
     opacity: 1;
@@ -75,7 +74,6 @@ div.borderYtoX a:hover:before, div.borderYtoX a:hover:after
 
 .footer{
   background: white;
-  /* color: green; */
   height: 100px;
 }
 .pricing-2{
