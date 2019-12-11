@@ -5,7 +5,9 @@
   <section class="presentation">
     <div class="introduction">
       <div class="intro-text">
-        <h1>Your Life, Put Together.</h1>
+        <h1>Your Life,
+            <span class="underline--magical">Put Together.</span>
+        </h1>
         <p>
           Your New Favorite Project Management Tool, PutTogether.
         </p>
@@ -155,7 +157,7 @@
                                 Downgrade
                             </a>
                         {% elif not request.user.is_authenticated %}
-                            <a  class="btn btn-default btn-raised btn-round"  data-target="#signupModal" data-toggle="modal">
+                            <a  class="btn btn-default btn-raised btn-round" style="color: white"  data-target="#signupModal" data-toggle="modal">
                                 Get Started
                             </a>
                         {% endif %}
@@ -430,9 +432,11 @@
                       </div>
                       <div class="modal-footer justify-content-center ">
                         <button type="submit"  onclick="loginControl()" class="btn btn-primary btn-round">Login</button>
-                       <button type="button"  onclick="ForgotPassModal()" class="btn btn-primary btn-round">Forgot</button>
-
+{#                       <button type="button"  onclick="ForgotPassModal()" class="btn">Forgot</button>#}
                       </div>
+                        <div style="text-align: center">
+                            <a href="#ForgotPasswordForm" onclick="ForgotPassModal()" style="color: #59A61E">Forgot your password?</a>
+                        </div>
                     </form>
                   </div>
                 </div>
@@ -700,13 +704,11 @@
                             </div>
                             <input type="email" required id='email_forgot_pass' class="form-control" placeholder="Email...">
                           </div>
-                            <label class="ml-auto mr-auto" id="email_error_forgot" style="display: none;">email exists</label>
+                            <label class="ml-auto mr-auto" id="email_error_forgot" style="display: none;">Email already exists, try again.</label>
                         </div>
-
                       </div>
                       <div class="modal-footer justify-content-center ">
-                       <button type="submit" class="btn btn-primary btn-round">GetCode</button>
-
+                       <button type="submit" class="btn btn-primary btn-round btn-sm">Reset Password</button>
                       </div>
                     </form>
                   </div>
@@ -736,7 +738,6 @@
                     <form  id='ForgotPasswordCodeForm' class="form"  >
                         {% csrf_token %}
                       <div class="card-body">
-
                         <div class="form-group">
                           <div class="input-group" >
                             <div class="input-group-prepend">
@@ -760,7 +761,7 @@
           </div>
         </div>
       </div>
-<!------------------------------------------------------ /FOOTER ------------------------------------------------------>
+<!------------------------------------------------------ /PASSWORD CODE ------------------------------------------------------>
   <div class="modal fade" id="PasswordResetModal" data-email="" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-signup" role="document">
           <div class="modal-content">
@@ -770,7 +771,6 @@
                 <h5 class="modal-title card-title">Change Password</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <i class="far fa-window-close" style="color: red"></i>
-
                 </button>
               </div>
               <div class="modal-body">
@@ -819,10 +819,45 @@
         </div>
       </div>
 
+{#----------------------------------------- FOOTER ---------------------------------------------#}
+    <footer class="footer" style="position: static; text-align: center; ">
+        <div class="container-fluid">
+            <nav class="float-left">
+            <ul>
+              <li>
+                <a href="#">
+                    <img src="{% static '/img/Actual_logos/PNG_FORM/puttogether1-04.png'  %}" width="15%" alt="">
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+    <div class="footer">
+      <div class="footer-content">
+        <div class="footer-section about">
+              <a class="Socials" href="#"><i class="fab fa-facebook fa-lg"></i></a>
+              <a class="Socials" href="#"><i class="fab fa-twitter fa-lg"></i></a>
+              <a class="Socials" href="#"><i class="fab fa-google fa-lg "></i></a>
+              <a class="Socials" href="#"><i class="fab fa-linkedin fa-lg"></i></a>
+              <hr class="my-4">
+          <p>
+            PuTogether is built with passion, transcendence, and user-based development. This is where everything gets a bit easier to organize. This is where all of your opportunities start and end. This is PutTogether.
+          </p>
+          <hr class="my-4">
+          </div>
+        </div>
+{#        <div class="footer-section links"></div>#}
+{#        <div class="footer-section contact-form"></div>#}
 
 
+    </div>
+    </div>
+      </footer>
+
+{#----------------------------------------- FOOTER ---------------------------------------------#}
 
 {% endblock %}
+
       <!------------------------------------------------------  SCRIPTS ------------------------------------------------------>
 {% block scripts %}
 
@@ -871,4 +906,7 @@
           });
       </script>
 
+{% endblock %}
+
+{% block footer %}
 {% endblock %}

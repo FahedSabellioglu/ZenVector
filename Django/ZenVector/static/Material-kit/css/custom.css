@@ -15,6 +15,7 @@
   height: 55px;
   /*position: relative;*/
 }
+
 div.borderYtoX a:before, div.borderYtoX a:after
 {
     position: absolute;
@@ -37,6 +38,17 @@ div.borderYtoX a:after
     right: 0px;
     bottom: 0px;
 }
+
+.underline--magical {
+    background-image: linear-gradient(120deg, #59A61E 0%, #84fab0 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.2em;
+    background-position: 0 88%;
+    transition: background-size 0.25s ease-in;
+}
+  :hover {
+    background-size: 100% 85%;
+  }
 
 div.borderYtoX a:hover:before, div.borderYtoX a:hover:after
 {
@@ -170,7 +182,6 @@ float: right;
     border-color: #59A61E;
 }
 
-<<<<<<< Updated upstream
 
 
 /*---------------------------------------------------------------------*/
@@ -296,5 +307,3 @@ float: right;
     background-image:  linear-gradient(to top, #2aa134 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
   }
 
-=======
->>>>>>> Stashed changes
