@@ -54,42 +54,35 @@ $("#upgradeForm").off().on('submit',function (event) {
         return false;
     }
 
-    return false;
-
-
-
-<<<<<<< Updated upstream
-    // $.ajax({
-    //     type: "POST",
-    //     url: "/PutTogether/Upgrade/",
-    //     data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken,
-    //         number:Card_Number,security:security_number,m_exp:month_exp,y_exp:year_exp},
-    //     success: function (e) {
-    //         // console.log(e);
-    //         // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
-    //         location.reload(true);    //Why?????
-    //
-    //     },
-    //     error: function (e) {
-    //         console.log("error");
-    //     }
-    // });
-=======
     $.ajax({
         type: "POST",
-        url: "CreateProject/",
-        // usr_email: '{{ request.user.email }}',
-        data: { csrfmiddlewaretoken: csrftoken, p_name: project_name},
+        url: "/PutTogether/Upgrade/",
+        data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken,
+            number:Card_Number,security:security_number,m_exp:month_exp,y_exp:year_exp},
         success: function (e) {
+            // console.log(e);
             // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
-            location.reload(true);
+            location.reload(true);    //Why?????
 
         },
-        error: function () {
+        error: function (e) {
             console.log("error");
         }
     });
->>>>>>> Stashed changes
+    // $.ajax({
+    //     type: "POST",
+    //     url: "CreateProject/",
+    //     // usr_email: '{{ request.user.email }}',
+    //     data: { csrfmiddlewaretoken: csrftoken, p_name: project_name},
+    //     success: function (e) {
+    //         // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
+    //         location.reload(true);
+    //
+    //     },
+    //     error: function () {
+    //         console.log("error");
+    //     }
+    // });
 });
 
 

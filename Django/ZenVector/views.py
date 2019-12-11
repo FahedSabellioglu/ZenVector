@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, render_to_response
 from django.contrib.auth import login,logout,authenticate
 from models import *
-from django.http import JsonResponse,HttpResponseRedirect
+from django.http import JsonResponse ,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -232,9 +232,11 @@ def change_password(response):
 
 def ResetPassword(request):
     data = dict(request.POST)
-    user_obj =Users.objects.get(email=data['email'][0])
-    user_obj.set_password(data['password'][0])
-    user_obj.save()
+    user_obj = Users.objects.get(email=data['email'][0])
+    # user_obj.set_password(data['password'][0])
+    # user_obj.save()
+    # codeObjct  = PasswordCodes.objects.get(usr_email=user_obj,code=data['code'][0])
+    # codeObjct.delete()
     rtn = JsonResponse({"message":'password changed'})
     rtn.status_code = 200
     return  rtn
