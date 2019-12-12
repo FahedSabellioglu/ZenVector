@@ -2,7 +2,7 @@
 {% load staticfiles%}
 {% block content %}
 
-  <section class="presentation">
+  <section class="presentation" id="Top_background">
     <div class="introduction">
       <div class="intro-text">
         <h1>Your Life,
@@ -13,16 +13,11 @@
         </p>
       </div>
         {% if not  request.user.is_authenticated %}
-              <div class="cta">
-              <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-round btn-default .btn-small">
-                  <i class="fas fa-sign-in-alt"></i>
-                  LOGIN</button>
-                  <a  href="#Pricing" style="color: white" class="btn btn-primary-success  btn-round btn-raised btn-success .btn-block">
-                        <i class="fas fa-user-plus"></i>
-
-                                    SING UP NOW - IT'S
-                        FREE
-                  </a>
+              <div class="cta" style=" display: inline-flex;">
+                  <button type="button" style=" margin-right: 5px" data-toggle="modal" data-target="#loginModal" class="btn btn-round btn-default .btn-sm">
+                  <i class="fas fa-sign-in-alt"></i>LOGIN</button>
+                  <a  href="#Pricing" style="color: white;" class="btn btn-success btn-round btn-raised .btn-block">
+                        <i class="fas fa-user-plus"></i>SING UP NOW - IT'S FREE</a>
               </div>
         {% endif %}
     </div>
@@ -30,10 +25,9 @@
     <div class="cover">
         <br>
         <br>
-      <img src="{% static 'img/Top_Background.png' %}" class="responsive" alt="matebook" />
+      <img src="{% static 'img/Top_Background.png' %}" class="responsive" alt="" />
     </div>
   </section>
-
 <!------------------------------------------------------ /LANDING PART TOP BACKGROUND ------------------------------------------------------->
 
       <!----------------------------------------------------- Features SECTIONS ----------------------------------------------------->
@@ -672,7 +666,8 @@
           </div>
         </div>
       </div>
-<!------------------------------------------------------ FOOTER ------------------------------------------------------>
+
+<!------------------------------------------------------ FORGOT PASSWORD MODAL ------------------------------------------------------>
   <div class="modal fade" id="forgorPasswordModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-signup" role="document">
           <div class="modal-content">
@@ -906,7 +901,7 @@
             <nav class="float-left">
             <ul>
               <li>
-                <a href="#">
+                <a href="#Top_background">
                     <img src="{% static '/img/Actual_logos/PNG_FORM/puttogether1-04.png'  %}" width="15%" alt="">
                 </a>
               </li>
@@ -916,13 +911,13 @@
     <div class="footer">
       <div class="footer-content">
         <div class="footer-section about">
-              <a class="Socials" href="#"><i class="fab fa-facebook fa-lg"></i></a>
-              <a class="Socials" href="#"><i class="fab fa-twitter fa-lg"></i></a>
-              <a class="Socials" href="#"><i class="fab fa-google fa-lg "></i></a>
-              <a class="Socials" href="#"><i class="fab fa-linkedin fa-lg"></i></a>
+{#              <a class="Socials" href="#"><i class="fab fa-facebook fa-lg"></i></a>#}
+{#              <a class="Socials" href="#"><i class="fab fa-twitter fa-lg"></i></a>#}
+              <a class="Socials" style="fill: #59A61E" href="#"><i class="fab fa-google fa-lg "></i></a>
+{#              <a class="Socials" href="#"><i class="fab fa-linkedin fa-lg"></i></a>#}
               <hr class="my-4">
           <p>
-            PuTogether is built with passion, transcendence, and user-based development. This is where everything gets a bit easier to organize. This is where all of your opportunities start and end. This is PutTogether.
+            PuTogether is built with passion, transcendence, and user-based development. This is where everything gets a bit easier to organize. This is where all of your opportunities start and end. <br> <span class="underline--magical">This is PutTogether.</span>
           </p>
           <hr class="my-4">
           </div>
