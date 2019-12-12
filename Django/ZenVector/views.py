@@ -233,10 +233,15 @@ def change_password(response):
 def ResetPassword(request):
     data = dict(request.POST)
     user_obj = Users.objects.get(email=data['email'][0])
-    # user_obj.set_password(data['password'][0])
-    # user_obj.save()
-    # codeObjct  = PasswordCodes.objects.get(usr_email=user_obj,code=data['code'][0])
-    # codeObjct.delete()
+    user_obj.set_password(data['password'][0])
+    user_obj.save()
+    print data['code'][0]
+    for obj in PasswordCodes.objects.filter(usr_email=user_obj):
+        print obj.code,obj.usr_email
+
+    codeObjct  = PasswordCodes.objects.get(usr_email=user_obj,code=data['code'][0])
+    codeObjct.isUsed = True
+    codeObjct.save()
     rtn = JsonResponse({"message":'password changed'})
     rtn.status_code = 200
     return  rtn
@@ -644,8 +649,12 @@ def passwordRestOut(response,email,code):
     :return: 
     """""
 
+    code_object = PasswordCodes.objects.filter(usr_email=email,code=code)
+    if len(code_object) != 0:
+        return render(response,'index.html',{'Available':True,'check':code_object[0].isUsed})
+
     print email,code
-    return render(response,'404.html')
+    return render(response,'index.html',{"Available":False})
 
 
 

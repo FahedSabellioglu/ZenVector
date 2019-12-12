@@ -69,17 +69,17 @@
       </div>
 
 
-    <div class="modal" tabindex="-1" role="dialog" id="CorrectChangePass">
+       <div class="modal" tabindex="-1" role="dialog" id="CorrectChangePass">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Notification</h5>
+            <h5 id="ModalMessageTitle" class="modal-title">Notification</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <p>Password Has been changed successfully.</p>
+            <p id="ModelMessage">Password Has been changed successfully.</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" onclick='window.location.href = "http://127.0.0.1:8000/PutTogether"' data-dismiss="modal">Close</button>
@@ -108,20 +108,31 @@
 
 {% block scripts %}
     <script>
-       $(document).ready(function(){
-           let url = location.href.split("/");
-           var code = url[url.length - 1];
-           var email = url[url.length - 2];
+        {% if Available %}
+            {% if not check %}
+                   $(document).ready(function(){
+                       let url = location.href.split("/");
+                       var code = url[url.length - 1];
+                       var email = url[url.length - 2];
 
-           if (location.href.includes("PasswordResetOut"))
-           {
-                $("#PasswordResetModalPro").attr("data-email",email);
-                $("#PasswordResetModalPro").attr("data-code",code);
-                $("#PasswordResetModalPro").modal("show");
-           }
-       });
+                       if (location.href.includes("PasswordResetOut"))
+                       {
+                            $("#PasswordResetModalPro").attr("data-email",email);
+                            $("#PasswordResetModalPro").attr("data-code",code);
+                            $("#PasswordResetModalPro").modal("show");
+                       }
+                   });
+                {% else %}
+                document.getElementById("ModalMessageTitle").innerHTML = 'Warning';
+                document.getElementById("ModelMessage").innerHTML = "The lik has already been used, Ask for a new link";
+                $("#CorrectChangePass").modal("show");
+             {% endif %}
+        {% elif not Available %}
+            document.getElementById("ModalMessageTitle").innerHTML = 'Warning';
+            document.getElementById("ModelMessage").innerHTML = "Invalid Link, Please ask for a new link";
+            $("#CorrectChangePass").modal("show");
+        {% endif %}
     </script>
-
 
     <script>
 

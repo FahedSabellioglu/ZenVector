@@ -96,6 +96,8 @@ def random_pass():
 class PasswordCodes(models.Model):
     usr_email = models.ForeignKey(Users,db_column='email')
     code = models.CharField(default=random_pass,max_length=15)
+    isUsed = models.BooleanField(default=False)
+
 
 
 

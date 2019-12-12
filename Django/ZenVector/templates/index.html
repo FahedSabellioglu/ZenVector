@@ -5,7 +5,9 @@
   <section class="presentation">
     <div class="introduction">
       <div class="intro-text">
-        <h1>Your Life, Put Together.</h1>
+        <h1>Your Life,
+            <span class="underline--magical">Put Together.</span>
+        </h1>
         <p>
           Your New Favorite Project Management Tool, PutTogether.
         </p>
@@ -91,16 +93,16 @@
           <div class="carousel-inner">
             <div class="carousel-item active">
                 <h4>Your All New Redesigned Scrum Board!</h4>
-              <img class="d-block w-100" src="../static/img/Scrum_Board.png" alt="First slide">
+              <img class="d-block w-100" src="{% static 'img/Scrum_Board.png' %}" alt="First slide">
             </div>
             <div class="carousel-item">
                 <h4>Add Tasks Whenever, to Whomever!</h4>
 
-              <img class="d-block w-100" src="../static/img/FEMALE_adding_Cards.png" alt="Second slide">
+              <img class="d-block w-100" src="{% static 'img/FEMALE_adding_Cards.png' %}" alt="Second slide">
             </div>
             <div class="carousel-item">
               <h4>Get Stuff Done!</h4>
-                <img class="d-block w-100" src="../static/img/Checked_cards.png" alt="Third slide">
+                <img class="d-block w-100" src="{% static 'img/Checked_cards.png' %}" alt="Third slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -155,7 +157,7 @@
                                 Downgrade
                             </a>
                         {% elif not request.user.is_authenticated %}
-                            <a  class="btn btn-default btn-raised btn-round"  data-target="#signupModal" data-toggle="modal">
+                            <a  class="btn btn-default btn-raised btn-round" style="color: white"  data-target="#signupModal" data-toggle="modal">
                                 Get Started
                             </a>
                         {% endif %}
@@ -370,7 +372,7 @@
 
                       </div>
                       <div class="modal-footer justify-content-center">
-                        <button type="submit" onclick="Control()" class="btn btn-primary btn-round">Get Started</button>
+                        <button type="submit" onclick="Control()" class="btn btn-success btn-round btn-sm">Get Started</button>
                       </div>
                     </form>
                   </div>
@@ -424,15 +426,17 @@
                             </div>
                             <input type="password" required   id="password_login" value="fahedshaabani" placeholder="Password..." class="form-control pass" />
                           </div>
-                            <label class="label_control" id="password_error_login" style="display: none;">password longer than 8 characters</label>
+                            <label class="label_control" id="password_error_login" style="display: none;">Password longer than 8 characters</label>
                         </div>
 
                       </div>
                       <div class="modal-footer justify-content-center ">
-                        <button type="submit"  onclick="loginControl()" class="btn btn-primary btn-round">Login</button>
-                       <button type="button"  onclick="ForgotPassModal()" class="btn btn-primary btn-round">Forgot</button>
-
+                        <button type="submit"  onclick="loginControl()" class="btn btn-success btn-round btn-">Login</button>
+{#                       <button type="button"  onclick="ForgotPassModal()" class="btn">Forgot</button>#}
                       </div>
+                        <div style="text-align: center">
+                            <a href="#ForgotPasswordForm" onclick="ForgotPassModal()" style="color: #59A61E">Forgot your password?</a>
+                        </div>
                     </form>
                   </div>
                 </div>
@@ -619,7 +623,7 @@
 
                       </div>
                       <div class="modal-footer justify-content-center" style="padding: 7px">
-                        <button type="submit"  class="btn btn-primary btn-round">Upgrade</button>
+                        <button type="submit"  class="btn btn-success btn-round btn-sm">Upgrade</button>
                       </div>
                     </form>
                   </div>
@@ -631,7 +635,6 @@
       </div>
 
 <!------------------------------------------------------ /Model DownGrade ------------------------------------------------------>
-
  <div class="modal fade" id="downGrade" tabindex="-1" data-type="" role="dialog">
         <div class="modal-dialog modal-signup" role="document">
           <div class="modal-content">
@@ -669,7 +672,6 @@
           </div>
         </div>
       </div>
-
 <!------------------------------------------------------ FOOTER ------------------------------------------------------>
   <div class="modal fade" id="forgorPasswordModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-signup" role="document">
@@ -700,13 +702,11 @@
                             </div>
                             <input type="email" required id='email_forgot_pass' class="form-control" placeholder="Email...">
                           </div>
-                            <label class="ml-auto mr-auto" id="email_error_forgot" style="display: none;">email exists</label>
+                            <label class="ml-auto mr-auto" id="email_error_forgot" style="display: none;">Email already exists, try again.</label>
                         </div>
-
                       </div>
                       <div class="modal-footer justify-content-center ">
-                       <button type="submit" class="btn btn-primary btn-round">GetCode</button>
-
+                       <button type="submit" class="btn btn-primary btn-round btn-sm">Reset Password</button>
                       </div>
                     </form>
                   </div>
@@ -717,51 +717,52 @@
         </div>
       </div>
 <!------------------------------------------------------ /Password Code ------------------------------------------------------>
-  <div class="modal fade" id="forgorPasswordCodeModal" tabindex="-1" role="dialog" data-email="">
-        <div class="modal-dialog modal-signup" role="document">
-          <div class="modal-content">
-            <div class="card card-signup card-plain">
-              <div class="modal-header">
-
-                <h5 class="modal-title card-title">Forgot Password Code</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="far fa-window-close" style="color: red"></i>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-
-                  <div class="col mr-auto">
-
-                    <form  id='ForgotPasswordCodeForm' class="form"  >
-                        {% csrf_token %}
-                      <div class="card-body">
-
-                        <div class="form-group">
-                          <div class="input-group" >
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                              </div>
-                            </div>
-                            <input type="text" required id='email_forgot_Code' class="form-control" placeholder="Code...">
-                          </div>
-                            <label class="ml-auto mr-auto label_control" id="email_error_Code" style="display: none;">Wrong Code</label>
-                        </div>
-                      </div>
-                      <div class="modal-footer justify-content-center ">
-                       <button type="submit" class="btn btn-primary btn-round">Reset Password</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+{#  <div class="modal fade" id="forgorPasswordCodeModal" tabindex="-1" role="dialog" data-email="">#}
+{#        <div class="modal-dialog modal-signup" role="document">#}
+{#          <div class="modal-content">#}
+{#            <div class="card card-signup card-plain">#}
+{#              <div class="modal-header">#}
+{##}
+{#                <h5 class="modal-title card-title">Forgot Password Code</h5>#}
+{#                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                  <i class="far fa-window-close" style="color: red"></i>#}
+{#                </button>#}
+{#              </div>#}
+{#              <div class="modal-body">#}
+{#                <div class="row">#}
+{##}
+{#                  <div class="col mr-auto">#}
+{##}
+{#                    <form  id='ForgotPasswordCodeForm' class="form"  >#}
+{#                        {% csrf_token %}#}
+{#                      <div class="card-body">#}
+{##}
+{#                        <div class="form-group">#}
+{#                          <div class="input-group" >#}
+{#                            <div class="input-group-prepend">#}
+{#                              <div class="input-group-text">#}
+{#                                <i class="fas fa-envelope"></i>#}
+{#                              </div>#}
+{#                            </div>#}
+{#                            <input type="text" required id='email_forgot_Code' class="form-control" placeholder="Code...">#}
+{#                          </div>#}
+{#                            <label class="ml-auto mr-auto label_control" id="email_error_Code" style="display: none;">Wrong Code</label>#}
+{#                        </div>#}
+{#                      </div>#}
+{#                      <div class="modal-footer justify-content-center ">#}
+{#                       <button type="submit" class="btn btn-primary btn-round">Reset Password</button>#}
+{#                      </div>#}
+{#                    </form>#}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
 <!------------------------------------------------------ /FOOTER ------------------------------------------------------>
-  <div class="modal fade" id="PasswordResetModal" data-email="" tabindex="-1" role="dialog">
+    {% if  Available == '' %} }
+        <div class="modal fade" id="PasswordResetModal" data-email="" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-signup" role="document">
           <div class="modal-content">
             <div class="card card-signup card-plain">
@@ -818,18 +819,136 @@
           </div>
         </div>
       </div>
+    {% endif %}
+
+    <!------------------------------------------------------  Notification Modal ------------------------------------------------------>
+   <div class="modal" tabindex="-1" role="dialog" id="CorrectChangePass">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="ModalMessageTitle" class="modal-title">Notification</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="ModelMessage">Password Has been changed successfully.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick='window.location.href = "http://127.0.0.1:8000/PutTogether"' data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="modal fade" id="PasswordResetModalPro" data-email="" tabindex="-1" role="dialog">
+<!------------------------------------------------------ /PASSWORD CODE ------------------------------------------------------>
+  <div class="modal fade" id="PasswordResetModal" data-email="" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-signup" role="document">
+          <div class="modal-content">
+            <div class="card card-signup card-plain">
+              <div class="modal-header">
+
+                <h5 class="modal-title card-title">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <i class="far fa-window-close" style="color: red"></i>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+
+                  <div class="col mr-auto">
+
+                    <form  id='passwordResetFormPro' class="form"  >
+                        {% csrf_token %}
+                      <div class="card-body">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                    <i class="fas fa-heading"></i>
+                              </div>
+                            </div>
+                            <input type="password" required id='first_password_Reset' value="" class="form-control" placeholder="Password...">
+                          </div>
+                            <label class="label_control" id="first_pass_control_Reset" style="display: none;">Password is 8 characters or more</label>
+                        </div>
+
+                      <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                    <i class="fas fa-heading"></i>
+                              </div>
+                            </div>
+                            <input type="password" required id='second_password_Reset' value="" class="form-control" placeholder="Repeat password...">
+                          </div>
+                            <label class="label_control" id="second_pass_control_Reset" style="display: none;">Password's do not match...</label>
+                        </div>
 
 
+                      </div>
+                      <div class="modal-footer justify-content-center">
+                        <button type="submit"  class="btn btn-primary btn-round" >Change</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+{#----------------------------------------- FOOTER ---------------------------------------------#}
+    <footer class="footer" style="position: static; text-align: center; ">
+        <div class="container-fluid">
+            <nav class="float-left">
+            <ul>
+              <li>
+                <a href="#">
+                    <img src="{% static '/img/Actual_logos/PNG_FORM/puttogether1-04.png'  %}" width="15%" alt="">
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+    <div class="footer">
+      <div class="footer-content">
+        <div class="footer-section about">
+              <a class="Socials" href="#"><i class="fab fa-facebook fa-lg"></i></a>
+              <a class="Socials" href="#"><i class="fab fa-twitter fa-lg"></i></a>
+              <a class="Socials" href="#"><i class="fab fa-google fa-lg "></i></a>
+              <a class="Socials" href="#"><i class="fab fa-linkedin fa-lg"></i></a>
+              <hr class="my-4">
+          <p>
+            PuTogether is built with passion, transcendence, and user-based development. This is where everything gets a bit easier to organize. This is where all of your opportunities start and end. This is PutTogether.
+          </p>
+          <hr class="my-4">
+          </div>
+        </div>
+{#        <div class="footer-section links"></div>#}
+{#        <div class="footer-section contact-form"></div>#}
+
+
+    </div>
+    </div>
+      </footer>
+
+{#----------------------------------------- FOOTER ---------------------------------------------#}
 
 {% endblock %}
+
       <!------------------------------------------------------  SCRIPTS ------------------------------------------------------>
 {% block scripts %}
 
     <script>
 
         var csrftoken = '{{ csrf_token }}';
-    </script>
+
+        </script>
+
+
     <script src="{% static 'js/forms.js' %}"></script>
 
   <script>
@@ -871,4 +990,79 @@
           });
       </script>
 
+    <script>
+        $(document).ready(function(){
+
+        if (location.href.includes("PasswordResetOut"))
+        {
+            {% if Available %}
+            {% if not check %}
+                   let url = location.href.split("/");
+                   var code = url[url.length - 1].split("?")[0];
+                   var email = url[url.length - 2];
+
+                    $("#PasswordResetModalPro").attr("data-email",email);
+                    $("#PasswordResetModalPro").attr("data-code",code);
+                    $("#PasswordResetModalPro").modal("show");
+
+                {% else %}
+                document.getElementById("ModalMessageTitle").innerHTML = 'Warning';
+                document.getElementById("ModelMessage").innerHTML = "The lik has already been used, Ask for a new link";
+                $("#CorrectChangePass").modal("show");
+             {% endif %}
+        {% elif not Available %}
+            document.getElementById("ModalMessageTitle").innerHTML = 'Warning';
+            document.getElementById("ModelMessage").innerHTML = "Invalid Link, Please ask for a new link";
+            $("#CorrectChangePass").modal("show");
+        {% endif %}
+        }
+
+        })
+    </script>
+    <script>
+        $("#passwordResetFormPro").off().on('submit',function (event) {
+        event.preventDefault();
+        var password_first = document.getElementById("first_password_Reset").value;
+        var first_error = document.getElementById("first_pass_control_Reset");
+
+        var password_second = document.getElementById('second_password_Reset').value;
+        var second_error = document.getElementById("second_pass_control_Reset");
+
+        var usr_email = $("#PasswordResetModalPro").attr("data-email");
+        var code = $("#PasswordResetModalPro").attr("data-code");
+
+        first_error.style.display = 'none';
+        second_error.style.display = 'none';
+
+        if ($.trim(password_first) === '' || $.trim(password_first).length < 8) {
+            first_error.style.display = 'block';
+            return false;
+        }
+        else if ($.trim(password_first) !== $.trim(password_second))
+        {
+            second_error.style.display = 'block';
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/PutTogether/PasswordReset/",
+            data: {password:password_first, email:usr_email, csrfmiddlewaretoken: csrftoken,
+                   code:code},
+            success: function () {
+                $("#PasswordResetModalPro").modal("hide");
+                $("#CorrectChangePass").modal("show");
+            },
+            error: function () {
+                second_error.innerHTML = "Something went wrong, Try again";
+                second_error.style.display = 'block';
+            }
+        });
+    });
+    </script>
+
+
+{% endblock %}
+
+{% block footer %}
 {% endblock %}

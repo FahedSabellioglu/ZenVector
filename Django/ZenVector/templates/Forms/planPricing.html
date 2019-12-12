@@ -1,0 +1,101 @@
+ <div class="modal fade" id="planPricingModal" tabindex="-1" role="dialog" data-type="" >
+        <div class="modal-dialog modal-signup" role="document">
+          <div class="modal-content">
+            <div class="card card-signup card-plain">
+              <div class="modal-header">
+
+                <h5 class="modal-title card-title">Buy a Plan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <i class="far fa-window-close" style="color: red"></i>
+
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col mr-auto">
+
+                         <form>
+                        {% csrf_token %}
+                           <div class="form-group">
+
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-user"></i>
+                              </div>
+                            </div>
+                            <input type="text" required  id ='p_usr_name' value="fahedshaabani" class="form-control" placeholder="Name...">
+                          </div>
+                        </div>
+
+                            <div class="form-group">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                  </div>
+                                </div>
+                                <input type="email" required id='p_email' value="fahedshabani@std.sehir.edu.tr" class="form-control" placeholder="Email...">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fa fa-key" aria-hidden="true"></i>
+                                  </div>
+                                </div>
+                                <input type="password" required   id="p_password" value="fahedshaabani" placeholder="Password..." class="form-control pass" />
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fa fa-key" aria-hidden="true"></i>
+                                  </div>
+                                </div>
+                                <input type="password"  required id="p_password_repeat" value="fahedshaabani"  placeholder="Confirm Password..." class="form-control pass" />
+                              </div>
+                            </div>
+
+
+                             <div class="form-group">
+                                    <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fa fa-key" aria-hidden="true"></i>
+                              </div>
+                            </div>
+                            <input type="text"  required id="creditCardNumber"   placeholder="Credit #..." class="form-control" />
+                          </div>
+
+                             </div>
+
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="secu_num">Security Number</label>
+                              <input type="text" class="form-control" id="p_secu_num">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                              <label for="expmonth">Exp.Month</label>
+                              <input type="number" min="0" max="12" class="form-control" id="expmonth">
+
+                            </div>
+                            <div class="form-group col-md-2 ml-auto">
+                              <label for="yearExp">Exp.Year</label>
+                              <input type="number" class="form-control" id="yearExp">
+                            </div>
+                          </div>
+                        <label class="label_control" id="plan_error" style="display: none;padding-bottom:.5rem;padding-top: 1rem">Credit Card is a 16 digit number</label>
+
+                          <button type="submit" class="btn btn-primary">Sign up</button>
+                        </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
