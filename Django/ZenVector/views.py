@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from django.contrib.auth import update_session_auth_hash
 
 """Password Resetting"""
 def forgot_pass(request):
@@ -220,15 +221,15 @@ def change_task_details(request,p_id):
     rtn.status_code = 200
     return rtn
 
-@login_required(login_url='/PutTogether/')
-def change_password(response):
-    data = dict(response.POST)
-    user_obj =Users.objects.get(email=response.user.email)
-    user_obj.set_password(data['password'][0])
-    user_obj.save()
-    rtn = JsonResponse({"message":'password changed'})
-    rtn.status_code = 200
-    return  rtn
+# @login_required(login_url='/PutTogether/')
+# def change_password(response):
+#     data = dict(response.POST)
+#     user_obj =Users.objects.get(email=response.user.email)
+#     user_obj.set_password(data['password'][0])
+#     user_obj.save()
+#     rtn = JsonResponse({"message":'password changed'})
+#     rtn.status_code = 200
+#     return  rtn
 
 def ResetPassword(request):
     data = dict(request.POST)
@@ -309,7 +310,9 @@ def change_password(response):
     data = dict(response.POST)
     user_obj =Users.objects.get(email=response.user.email)
     user_obj.set_password(data['password'][0])
+    update_session_auth_hash(response, response.user)
     user_obj.save()
+    print response.user
     rtn = JsonResponse({"message":'password changed'})
     rtn.status_code = 200
     return  rtn

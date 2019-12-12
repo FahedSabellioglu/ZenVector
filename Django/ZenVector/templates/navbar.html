@@ -117,64 +117,65 @@
 {#        </div>#}
 {#      </div>#}
 
+{% include "Forms/LoggedPasswordChange.html" %}
                 {#Password change modal#}
-      <div class="modal fade" id="PasswordModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-signup" role="document">
-          <div class="modal-content">
-            <div class="card card-signup card-plain">
-              <div class="modal-header">
-
-                <h5 class="modal-title card-title">Change Password</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="far fa-window-close" style="color: red"></i>
-
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-
-                  <div class="col mr-auto">
-
-                    <form  id='passwordForm' class="form"  >
-                        {% csrf_token %}
-                      <div class="card-body">
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                    <i class="fas fa-heading"></i>
-                              </div>
-                            </div>
-                            <input type="password" required id='first_password' value="" class="form-control" placeholder="Password...">
-                          </div>
-                            <label class="label_control" id="first_pass_control" style="display: none;">Password is 8 characters or more</label>
-                        </div>
-
-                      <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                    <i class="fas fa-heading"></i>
-                              </div>
-                            </div>
-                            <input type="password" required id='second_password' value="" class="form-control" placeholder="Repeat password...">
-                          </div>
-                            <label class="label_control" id="second_pass_control" style="display: none;">Password's do not match...</label>
-                        </div>
-
-
-                      </div>
-                      <div class="modal-footer justify-content-center">
-                        <button type="submit"  class="btn btn-primary btn-round" >Change</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+{#      <div class="modal fade" id="PasswordModal" tabindex="-1" role="dialog">#}
+{#        <div class="modal-dialog modal-signup" role="document">#}
+{#          <div class="modal-content">#}
+{#            <div class="card card-signup card-plain">#}
+{#              <div class="modal-header">#}
+{##}
+{#                <h5 class="modal-title card-title">Change Password</h5>#}
+{#                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                  <i class="far fa-window-close" style="color: red"></i>#}
+{##}
+{#                </button>#}
+{#              </div>#}
+{#              <div class="modal-body">#}
+{#                <div class="row">#}
+{##}
+{#                  <div class="col mr-auto">#}
+{##}
+{#                    <form  id='passwordForm' class="form"  >#}
+{#                        {% csrf_token %}#}
+{#                      <div class="card-body">#}
+{#                        <div class="form-group">#}
+{#                          <div class="input-group">#}
+{#                            <div class="input-group-prepend">#}
+{#                              <div class="input-group-text">#}
+{#                                    <i class="fas fa-heading"></i>#}
+{#                              </div>#}
+{#                            </div>#}
+{#                            <input type="password" required id='first_password' value="" class="form-control" placeholder="Password...">#}
+{#                          </div>#}
+{#                            <label class="label_control" id="first_pass_control" style="display: none;">Password is 8 characters or more</label>#}
+{#                        </div>#}
+{##}
+{#                      <div class="form-group">#}
+{#                          <div class="input-group">#}
+{#                            <div class="input-group-prepend">#}
+{#                              <div class="input-group-text">#}
+{#                                    <i class="fas fa-heading"></i>#}
+{#                              </div>#}
+{#                            </div>#}
+{#                            <input type="password" required id='second_password' value="" class="form-control" placeholder="Repeat password...">#}
+{#                          </div>#}
+{#                            <label class="label_control" id="second_pass_control" style="display: none;">Password's do not match...</label>#}
+{#                        </div>#}
+{##}
+{##}
+{#                      </div>#}
+{#                      <div class="modal-footer justify-content-center">#}
+{#                        <button type="submit"  class="btn btn-primary btn-round" >Change</button>#}
+{#                      </div>#}
+{#                    </form>#}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
 
 
 

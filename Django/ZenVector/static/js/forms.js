@@ -125,9 +125,10 @@ $("#downGradeForm").off().on('submit',function (event) {
 // a function to hide the login modal and show the forgot modal
 function ForgotPassModal(){
     $('#loginModal').modal('hide');
-    $('#forgorPasswordModal').modal('show');
+    $('#forgotPasswordModal').modal('show');
 }
 
+// Sending Code to user ( Forgot Pass )
 $("#ForgotPasswordForm").off().on('submit',function (event) {
     // SENDING AN EMAIL TO THE USER
     event.preventDefault();
@@ -147,9 +148,8 @@ $("#ForgotPasswordForm").off().on('submit',function (event) {
         success: function (e) {
             document.getElementById("ModalMessageTitle").innerHTML = 'Notification';
             document.getElementById("ModelMessage").innerHTML = "Please check your email.";
-            $('#forgorPasswordModal').modal('hide');
-            $("#CorrectChangePass").modal("show");
-
+            $('#forgotPasswordModal').modal('hide');
+            $("#Notification").modal("show");
         },
         error: function (e) {
             error_control.innerHTML  = e.responseJSON.reason;
@@ -372,11 +372,11 @@ $("#PasswordModal").off().on('submit',function (event) {
     second_error.style.display = 'none';
 
 
-    if ($.trim(password_first) == '' || $.trim(password_first).length < 8) {
+    if ($.trim(password_first) === '' || $.trim(password_first).length < 8) {
         first_error.style.display = 'block';
         return false;
     }
-    else if ($.trim(password_first) != $.trim(password_second))
+    else if ($.trim(password_first) !== $.trim(password_second))
     {
         second_error.style.display = 'block';
         return false;

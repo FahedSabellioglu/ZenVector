@@ -297,603 +297,23 @@
 <!------------------------------------------------------/PRICING ------------------------------------------------------>
 
 <!------------------------------------------------------- MODAL FOR SIGNING UP!------------------------------------------------------>
-  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-signup" role="document">
-          <div class="modal-content">
-            <div class="card card-signup card-plain">
-              <div class="modal-header">
-
-                <h5 class="modal-title card-title">Register</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="far fa-window-close" style="color: red"></i>
-
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-
-                  <div class="col mr-auto">
-
-                    <form  id='SignUpForm' class="form"  >
-                        {% csrf_token %}
-                      <div class="card-body">
-                        <div class="form-group">
-
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fas fa-user"></i>
-                              </div>
-                            </div>
-                            <input type="text" required  id ='usr_name' value="fahedshaabani" class="form-control" placeholder="Name...">
-                          </div>
-                            <label  class="label_control" id="name_error" style="display: none;">provide a meaningful name</label>
-                        </div>
-
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                              </div>
-                            </div>
-                            <input type="email" required id='email' value="fahedshabani@std.sehir.edu.tr" class="form-control" placeholder="Email...">
-                          </div>
-                            <label class="label_control" id="email_error" style="display: none;">email exists</label>
-                        </div>
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fa fa-key" aria-hidden="true"></i>
-                              </div>
-                            </div>
-                            <input type="password" required   id="password" value="fahedshaabani" placeholder="Password..." class="form-control pass" />
-                          </div>
-                            <label class="label_control" id="password_error" style="display: none;">password longer than 8 characters</label>
-                        </div>
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fa fa-key" aria-hidden="true"></i>
-                              </div>
-                            </div>
-                            <input type="password"  required id="password_repeat" value="fahedshaabani"  placeholder="Confirm Password..." class="form-control pass" />
-                          </div>
-                            <label class="label_control" id="repeat_error" style="display: none;">passwords do not match</label>
-                        </div>
-
-                      </div>
-                      <div class="modal-footer justify-content-center">
-                        <button type="submit" onclick="Control()" class="btn btn-success btn-round btn-sm">Get Started</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    {% include 'Forms/Signup.html' %}
 <!------------------------------------------------------/MODAL FOR Logging in! ------------------------------------------------------>
-
-  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-signup" role="document">
-          <div class="modal-content">
-            <div class="card card-signup card-plain">
-              <div class="modal-header">
-
-                <h5 class="modal-title card-title">Login</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="far fa-window-close" style="color: red"></i>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-
-                  <div class="col mr-auto">
-
-                    <form  id='loginForm' class="form"  >
-                        {% csrf_token %}
-                      <div class="card-body">
-
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                              </div>
-                            </div>
-                            <input type="email" required id='email_login' value="fahedshabani@std.sehir.edu.tr" class="form-control" placeholder="Email...">
-                          </div>
-                            <label class="ml-auto mr-auto" id="email_error_login" style="display: none;">email exists</label>
-                        </div>
-
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fa fa-key" aria-hidden="true"></i>
-                              </div>
-                            </div>
-                            <input type="password" required   id="password_login" value="fahedshaabani" placeholder="Password..." class="form-control pass" />
-                          </div>
-                            <label class="label_control" id="password_error_login" style="display: none;">Password longer than 8 characters</label>
-                        </div>
-
-                      </div>
-                      <div class="modal-footer justify-content-center ">
-                        <button type="submit"  onclick="loginControl()" class="btn btn-success btn-round btn-">Login</button>
-{#                       <button type="button"  onclick="ForgotPassModal()" class="btn">Forgot</button>#}
-                      </div>
-                        <div style="text-align: center">
-                            <a href="#ForgotPasswordForm" onclick="ForgotPassModal()" style="color: #59A61E">Forgot your password?</a>
-                        </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    {% include 'Forms/Login.html' %}
 <!------------------------------------------------------ Buying a plan Modal ------------------------------------------------------>
-
- <div class="modal fade" id="planPricingModal" tabindex="-1" role="dialog" data-type="" >
-        <div class="modal-dialog modal-signup" role="document">
-          <div class="modal-content">
-            <div class="card card-signup card-plain">
-              <div class="modal-header">
-
-                <h5 class="modal-title card-title">Buy a Plan</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="far fa-window-close" style="color: red"></i>
-
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col mr-auto">
-
-                         <form>
-                        {% csrf_token %}
-                           <div class="form-group">
-
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fas fa-user"></i>
-                              </div>
-                            </div>
-                            <input type="text" required  id ='p_usr_name' value="fahedshaabani" class="form-control" placeholder="Name...">
-                          </div>
-                        </div>
-
-                            <div class="form-group">
-                              <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">
-                                    <i class="fas fa-envelope"></i>
-                                  </div>
-                                </div>
-                                <input type="email" required id='p_email' value="fahedshabani@std.sehir.edu.tr" class="form-control" placeholder="Email...">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">
-                                    <i class="fa fa-key" aria-hidden="true"></i>
-                                  </div>
-                                </div>
-                                <input type="password" required   id="p_password" value="fahedshaabani" placeholder="Password..." class="form-control pass" />
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">
-                                    <i class="fa fa-key" aria-hidden="true"></i>
-                                  </div>
-                                </div>
-                                <input type="password"  required id="p_password_repeat" value="fahedshaabani"  placeholder="Confirm Password..." class="form-control pass" />
-                              </div>
-                            </div>
-
-
-                             <div class="form-group">
-                                    <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fa fa-key" aria-hidden="true"></i>
-                              </div>
-                            </div>
-                            <input type="text"  required id="creditCardNumber"   placeholder="Credit #..." class="form-control" />
-                          </div>
-
-                             </div>
-
-                          <div class="form-row">
-                            <div class="form-group col-md-6">
-                              <label for="secu_num">Security Number</label>
-                              <input type="text" class="form-control" id="p_secu_num">
-                            </div>
-
-                            <div class="form-group col-md-3">
-                              <label for="expmonth">Exp.Month</label>
-                              <input type="number" min="0" max="12" class="form-control" id="expmonth">
-
-                            </div>
-                            <div class="form-group col-md-2 ml-auto">
-                              <label for="yearExp">Exp.Year</label>
-                              <input type="number" class="form-control" id="yearExp">
-                            </div>
-                          </div>
-                        <label class="label_control" id="plan_error" style="display: none;padding-bottom:.5rem;padding-top: 1rem">Credit Card is a 16 digit number</label>
-
-                          <button type="submit" class="btn btn-primary">Sign up</button>
-                        </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-
+    {% include 'Forms/planPricing.html' %}
 <!------------------------------------------------------ Modal upgrading ------------------------------------------------------>
-
- <div class="modal fade" id="UpgradeModal" tabindex="-1" data-type="" role="dialog">
-        <div class="modal-dialog modal-signup" role="document">
-          <div class="modal-content">
-            <div class="card card-signup card-plain">
-              <div class="modal-header">
-
-                <h5 class="modal-title card-title">Upgrade Account</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="far fa-window-close" style="color: red"></i>
-
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col mr-auto">
-
-                    <form  id='upgradeForm' class="form"  >
-                        {% csrf_token %}
-                      <div class="card-body">
-                        <div class="form-group">
-                            <div class="row">
-                            <div class="col">
-                                  <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <div class="input-group-text">
-                                                <i class="fas fa-credit-card"></i>
-                                          </div>
-                                        </div>
-                                        <input type="text" required id='CreditNumber' value="" class="form-control" placeholder="Card #">
-                                  </div>
-
-                            </div>
-                            <div class="col">
-                                  <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <div class="input-group-text">
-                                                <i class="fas fa-credit-card"></i>
-                                          </div>
-                                        </div>
-                                        <input type="text" required id='csv_number' value="" class="form-control" placeholder="Security Code" >
-                                  </div>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                  <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <div class="input-group-text">
-                                                <i class="fas fa-credit-card"></i>
-                                          </div>
-                                        </div>
-                                        <input type="number" min="0" max="12" required id='MonthCredit' value="" class="form-control" placeholder="Month">
-                                  </div>
-                            </div>
-                            <div class="col">
-                                  <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <div class="input-group-text">
-                                                <i class="fas fa-credit-card"></i>
-                                          </div>
-                                        </div>
-                                        <input type="number" min="2010" max="2040"  required id='YearCredit' value="" class="form-control" placeholder="Year" >
-                                  </div>
-                            </div>
-                        </div>
-
-                        <label class="label_control" id="upgrade_error" style="display: none;padding-left: 9.5rem;padding-top: 1rem">Credit Card is a 16 digit number</label>
-
-                      </div>
-                      <div class="modal-footer justify-content-center" style="padding: 7px">
-                        <button type="submit"  class="btn btn-success btn-round btn-sm">Upgrade</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    {% include 'Forms/UpgradeModal.html' %}
 <!------------------------------------------------------ /Model DownGrade ------------------------------------------------------>
- <div class="modal fade" id="downGrade" tabindex="-1" data-type="" role="dialog">
-        <div class="modal-dialog modal-signup" role="document">
-          <div class="modal-content">
-            <div class="card card-signup card-plain">
-              <div class="modal-header">
-
-                <h5 class="modal-title card-title">Downgrade Account</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="far fa-window-close" style="color: red"></i>
-
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col mr-auto">
-
-                    <form  id='downGradeForm' class="form"  >
-                        {% csrf_token %}
-                      <div class="card-body">
-                        <div class="form-group justify-content-center">
-                              <h3 >Are you sure ?</h3>
-                        </div>
-                      <label class="label_control" id="projects_count" style="display: none;padding-left: 9.5rem;padding-top: 1rem">Delete Projects First</label>
-
-                      </div>
-                          <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                            <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-<!------------------------------------------------------ FORGOT PASSWORD MODAL ------------------------------------------------------>
-  <div class="modal fade" id="forgorPasswordModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-signup" role="document">
-          <div class="modal-content">
-            <div class="card card-signup card-plain">
-              <div class="modal-header">
-
-                <h5 class="modal-title card-title">Forgot Password</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="far fa-window-close" style="color: red"></i>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-
-                  <div class="col mr-auto">
-
-                    <form  id='ForgotPasswordForm' class="form"  >
-                        {% csrf_token %}
-                      <div class="card-body">
-
-                        <div class="form-group">
-                          <div class="input-group" >
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                              </div>
-                            </div>
-                            <input type="email" required id='email_forgot_pass' class="form-control" placeholder="Email...">
-                          </div>
-                            <label class="ml-auto mr-auto" id="email_error_forgot" style="display: none;">Email already exists, try again.</label>
-                        </div>
-                      </div>
-                      <div class="modal-footer justify-content-center ">
-                       <button type="submit" class="btn btn-primary btn-round btn-sm">Reset Password</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-<!------------------------------------------------------ /Password Code ------------------------------------------------------>
-{#  <div class="modal fade" id="forgorPasswordCodeModal" tabindex="-1" role="dialog" data-email="">#}
-{#        <div class="modal-dialog modal-signup" role="document">#}
-{#          <div class="modal-content">#}
-{#            <div class="card card-signup card-plain">#}
-{#              <div class="modal-header">#}
-{##}
-{#                <h5 class="modal-title card-title">Forgot Password Code</h5>#}
-{#                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
-{#                  <i class="far fa-window-close" style="color: red"></i>#}
-{#                </button>#}
-{#              </div>#}
-{#              <div class="modal-body">#}
-{#                <div class="row">#}
-{##}
-{#                  <div class="col mr-auto">#}
-{##}
-{#                    <form  id='ForgotPasswordCodeForm' class="form"  >#}
-{#                        {% csrf_token %}#}
-{#                      <div class="card-body">#}
-{##}
-{#                        <div class="form-group">#}
-{#                          <div class="input-group" >#}
-{#                            <div class="input-group-prepend">#}
-{#                              <div class="input-group-text">#}
-{#                                <i class="fas fa-envelope"></i>#}
-{#                              </div>#}
-{#                            </div>#}
-{#                            <input type="text" required id='email_forgot_Code' class="form-control" placeholder="Code...">#}
-{#                          </div>#}
-{#                            <label class="ml-auto mr-auto label_control" id="email_error_Code" style="display: none;">Wrong Code</label>#}
-{#                        </div>#}
-{#                      </div>#}
-{#                      <div class="modal-footer justify-content-center ">#}
-{#                       <button type="submit" class="btn btn-primary btn-round">Reset Password</button>#}
-{#                      </div>#}
-{#                    </form>#}
-{#                  </div>#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
+    {% include 'Forms/Downgrade.html' %}
 <!------------------------------------------------------ /FOOTER ------------------------------------------------------>
-    {% if  Available == '' %} }
-        <div class="modal fade" id="PasswordResetModal" data-email="" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-signup" role="document">
-          <div class="modal-content">
-            <div class="card card-signup card-plain">
-              <div class="modal-header">
 
-                <h5 class="modal-title card-title">Change Password</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="far fa-window-close" style="color: red"></i>
-
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-
-                  <div class="col mr-auto">
-
-                    <form  id='passwordResetForm' class="form"  >
-                        {% csrf_token %}
-                      <div class="card-body">
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                    <i class="fas fa-heading"></i>
-                              </div>
-                            </div>
-                            <input type="password" required id='first_password_Reset' value="" class="form-control" placeholder="Password...">
-                          </div>
-                            <label class="label_control" id="first_pass_control_Reset" style="display: none;">Password is 8 characters or more</label>
-                        </div>
-
-                      <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                    <i class="fas fa-heading"></i>
-                              </div>
-                            </div>
-                            <input type="password" required id='second_password_Reset' value="" class="form-control" placeholder="Repeat password...">
-                          </div>
-                            <label class="label_control" id="second_pass_control_Reset" style="display: none;">Password's do not match...</label>
-                        </div>
-
-
-                      </div>
-                      <div class="modal-footer justify-content-center">
-                        <button type="submit"  class="btn btn-primary btn-round" >Change</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    {% endif %}
-
-    <!------------------------------------------------------  Notification Modal ------------------------------------------------------>
-   <div class="modal" tabindex="-1" role="dialog" id="CorrectChangePass">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 id="ModalMessageTitle" class="modal-title">Notification</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p id="ModelMessage">Password Has been changed successfully.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick='window.location.href = "http://127.0.0.1:8000/PutTogether"' data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  <div class="modal fade" id="PasswordResetModalPro" data-email="" tabindex="-1" role="dialog">
-<!------------------------------------------------------ /PASSWORD CODE ------------------------------------------------------>
-  <div class="modal fade" id="PasswordResetModal" data-email="" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-signup" role="document">
-          <div class="modal-content">
-            <div class="card card-signup card-plain">
-              <div class="modal-header">
-
-                <h5 class="modal-title card-title">Change Password</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="far fa-window-close" style="color: red"></i>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-
-                  <div class="col mr-auto">
-
-                    <form  id='passwordResetFormPro' class="form"  >
-                        {% csrf_token %}
-                      <div class="card-body">
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                    <i class="fas fa-heading"></i>
-                              </div>
-                            </div>
-                            <input type="password" required id='first_password_Reset' value="" class="form-control" placeholder="Password...">
-                          </div>
-                            <label class="label_control" id="first_pass_control_Reset" style="display: none;">Password is 8 characters or more</label>
-                        </div>
-
-                      <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                    <i class="fas fa-heading"></i>
-                              </div>
-                            </div>
-                            <input type="password" required id='second_password_Reset' value="" class="form-control" placeholder="Repeat password...">
-                          </div>
-                            <label class="label_control" id="second_pass_control_Reset" style="display: none;">Password's do not match...</label>
-                        </div>
-
-
-                      </div>
-                      <div class="modal-footer justify-content-center">
-                        <button type="submit"  class="btn btn-primary btn-round" >Change</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<!------------------------------------------------------  Modals ------------------------------------------------------>
+{#    {% include 'Forms/LoggedPasswordChange.html' %}#}
+    {% include 'Forms/Notification.html' %}
+    {% include 'Forms/ResetPassword.html' %}
+{#    {% include 'Forms/LoggedPasswordChange.html' %}#}
+    {% include "Forms/PasswordCode.html" %}
 
 {#----------------------------------------- FOOTER ---------------------------------------------#}
     <footer class="footer" style="position: static; text-align: center; ">
@@ -924,8 +344,6 @@
         </div>
 {#        <div class="footer-section links"></div>#}
 {#        <div class="footer-section contact-form"></div>#}
-
-
     </div>
     </div>
       </footer>
@@ -942,8 +360,6 @@
         var csrftoken = '{{ csrf_token }}';
 
         </script>
-
-
     <script src="{% static 'js/forms.js' %}"></script>
 
   <script>
@@ -986,8 +402,8 @@
       </script>
 
     <script>
+        // Resetting Password
         $(document).ready(function(){
-
         if (location.href.includes("PasswordResetOut"))
         {
             {% if Available %}
@@ -995,48 +411,48 @@
                    let url = location.href.split("/");
                    var code = url[url.length - 1].split("?")[0];
                    var email = url[url.length - 2];
-
-                    $("#PasswordResetModalPro").attr("data-email",email);
-                    $("#PasswordResetModalPro").attr("data-code",code);
-                    $("#PasswordResetModalPro").modal("show");
+                    $("#Pass_Reset").attr("data-email",email);
+                    $("#Pass_Reset").attr("data-code",code);
+                    $("#Pass_Reset").modal("show");
 
                 {% else %}
-                document.getElementById("ModalMessageTitle").innerHTML = 'Warning';
-                document.getElementById("ModelMessage").innerHTML = "The lik has already been used, Ask for a new link";
-                $("#CorrectChangePass").modal("show");
+                    document.getElementById("ModalMessageTitle").innerHTML = 'Warning';
+                    document.getElementById("ModelMessage").innerHTML = "The lik has already been used, Ask for a new link";
+                    $("#Notification").modal("show");
              {% endif %}
         {% elif not Available %}
             document.getElementById("ModalMessageTitle").innerHTML = 'Warning';
             document.getElementById("ModelMessage").innerHTML = "Invalid Link, Please ask for a new link";
-            $("#CorrectChangePass").modal("show");
+            $("#Notification").modal("show");
         {% endif %}
         }
 
-        })
+        });
+
     </script>
     <script>
-        $("#passwordResetFormPro").off().on('submit',function (event) {
+    $("#Pass_Reset_Form").off().on('submit',function (event) {
         event.preventDefault();
         var password_first = document.getElementById("first_password_Reset").value;
         var first_error = document.getElementById("first_pass_control_Reset");
-
         var password_second = document.getElementById('second_password_Reset').value;
         var second_error = document.getElementById("second_pass_control_Reset");
-
-        var usr_email = $("#PasswordResetModalPro").attr("data-email");
-        var code = $("#PasswordResetModalPro").attr("data-code");
+        var usr_email = $("#Pass_Reset").attr("data-email");
+        var code = $("#Pass_Reset").attr("data-code");
 
         first_error.style.display = 'none';
         second_error.style.display = 'none';
 
+
         if ($.trim(password_first) === '' || $.trim(password_first).length < 8) {
             first_error.style.display = 'block';
-            return false;
+
+            return;
         }
         else if ($.trim(password_first) !== $.trim(password_second))
         {
             second_error.style.display = 'block';
-            return false;
+            return;
         }
 
         $.ajax({
@@ -1045,17 +461,16 @@
             data: {password:password_first, email:usr_email, csrfmiddlewaretoken: csrftoken,
                    code:code},
             success: function () {
-                $("#PasswordResetModalPro").modal("hide");
-                $("#CorrectChangePass").modal("show");
+                $("#Pass_Reset").modal("hide");
+                $("#Notification").modal("show");
             },
             error: function () {
                 second_error.innerHTML = "Something went wrong, Try again";
                 second_error.style.display = 'block';
             }
-        });
+        })
     });
     </script>
-
 
 {% endblock %}
 
