@@ -9,7 +9,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from django.contrib.auth import update_session_auth_hash
-
+import json
 """Password Resetting"""
 def forgot_pass(request):
     """ 
@@ -255,11 +255,27 @@ def move_task(request,p_id):
         :returns json response of 200
     """""
     data = dict(request.POST)
+    print data,'here positions'
     proj_obj = Projects.objects.get(project_id=p_id)
     task_obj = Tasks.objects.get(task_id=data['task_id'][0])
     stat_obj = state.objects.get(state_name=data['to_list'][0],project_id=proj_obj)
+    to_list_positions = json.loads(data['to_list_positions'][0])
+    from_list_positions = json.loads(data['from_list_positons'][0])
+    task_obj.task_position = to_list_positions[str(task_obj.task_id)]
     task_obj.task_state = stat_obj
     task_obj.save()
+
+    for o_task in from_list_positions:
+        obj = Tasks.objects.get(task_id=int(o_task))
+        obj.task_position = from_list_positions[o_task]
+        obj.save()
+
+    for n_task in to_list_positions:
+        if n_task != data['task_id'][0]:
+            obj = Tasks.objects.get(task_id=int(n_task))
+            obj.task_position = to_list_positions[n_task]
+            obj.save()
+
 
     rtn = JsonResponse({"Saved":"New state for the task with id "+str(data['task_id'][0])})
     rtn.status_code = 200
