@@ -1,0 +1,37 @@
+ <div class="modal fade" id="downGrade" tabindex="-1" data-type="" role="dialog">
+        <div class="modal-dialog modal-signup" role="document">
+          <div class="modal-content">
+            <div class="card card-signup card-plain">
+              <div class="modal-header">
+
+                <h5 class="modal-title card-title">Downgrade Account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <i class="far fa-window-close" style="color: red"></i>
+
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col mr-auto">
+
+                    <form  id='downGradeForm' class="form"  >
+                        {% csrf_token %}
+                      <div class="card-body">
+                        <div class="form-group justify-content-center">
+                              <h3 >Are you sure ?</h3>
+                        </div>
+                      <label class="label_control" id="projects_count" style="display: none;padding-left: 9.5rem;padding-top: 1rem">Delete Projects First</label>
+
+                      </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

@@ -125,17 +125,12 @@ $("#downGradeForm").off().on('submit',function (event) {
 // a function to hide the login modal and show the forgot modal
 function ForgotPassModal(){
     $('#loginModal').modal('hide');
-    $('#forgorPasswordModal').modal('show');
+    $('#forgotPasswordModal').modal('show');
 }
 
-
-
-
-
-
-
-
+// Sending Code to user ( Forgot Pass )
 $("#ForgotPasswordForm").off().on('submit',function (event) {
+    // SENDING AN EMAIL TO THE USER
     event.preventDefault();
 
     var usr_email = document.getElementById('email_forgot_pass');
@@ -146,16 +141,15 @@ $("#ForgotPasswordForm").off().on('submit',function (event) {
 
     error_control.style.display = 'none';
 
-
     $.ajax({
         type: "POST",
         url: "/PutTogether/forgotPass/",
         data: {usr_email: usr_email.value , csrfmiddlewaretoken: csrftoken},
         success: function (e) {
-
-            $('#forgorPasswordModal').modal('hide');
-            $('#forgorPasswordCodeModal').attr('data-email',usr_email.value);
-            $('#forgorPasswordCodeModal').modal('show');
+            document.getElementById("ModalMessageTitle").innerHTML = 'Notification';
+            document.getElementById("ModelMessage").innerHTML = "Please check your email.";
+            $('#forgotPasswordModal').modal('hide');
+            $("#Notification").modal("show");
         },
         error: function (e) {
             error_control.innerHTML  = e.responseJSON.reason;
@@ -165,82 +159,69 @@ $("#ForgotPasswordForm").off().on('submit',function (event) {
     });
 });
 
-
-$("#ForgotPasswordCodeForm").off().on('submit',function (event) {
-    event.preventDefault();
-
-    var code = document.getElementById('email_forgot_Code').value;
-
-    var error_control = document.getElementById('email_error_Code');
-
-    var usr_email =  $('#forgorPasswordCodeModal').attr('data-email');
-
-    error_control.style.display = 'none';
-    $.ajax({
-        type: "POST",
-        url: "/PutTogether/CheckCode/",
-        data: {usr_email: usr_email, code:code , csrfmiddlewaretoken: csrftoken},
-        success: function (e) {
-            $('#forgorPasswordCodeModal').modal('hide');
-            $('#PasswordResetModal').attr('data-email',usr_email);
-            $('#PasswordResetModal').modal('show');
-        },
-        error: function (e) {
-            error_control.innerHTML = e.responseJSON.reason;
-            error_control.style.display = 'block';
-
-        }
-    });
-});
-
-
-$("#passwordResetForm").off().on('submit',function (event) {
-    event.preventDefault();
-    var password_first = document.getElementById("first_password_Reset").value;
-    var first_error = document.getElementById("first_pass_control_Reset");
-
-    var password_second = document.getElementById('second_password_Reset').value;
-    var second_error = document.getElementById("second_pass_control_Reset");
-
-    var usr_email = $("#PasswordResetModal").attr("data-email");
-
-    first_error.style.display = 'none';
-    second_error.style.display = 'none';
-
-    if ($.trim(password_first) === '' || $.trim(password_first).length < 8) {
-        first_error.style.display = 'block';
-        return false;
-    }
-    else if ($.trim(password_first) !== $.trim(password_second))
-    {
-        second_error.style.display = 'block';
-        return false;
-    }
-
-    $.ajax({
-        type: "POST",
-        url: "/PutTogether/PasswordReset/",
-        data: {password:password_first, email:usr_email, csrfmiddlewaretoken: csrftoken},
-        success: function () {
-            location.reload(true);
-        },
-        error: function () {
-            second_error.innerHTML = "Something went wrong, Try again";
-            second_error.style.display = 'block';
-        }
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
+// NOT USED, JUST KEEP IT
+// $("#ForgotPasswordCodeForm").off().on('submit',function (event) {
+//     event.preventDefault();
+//
+//     var code = document.getElementById('email_forgot_Code').value;
+//
+//     var error_control = document.getElementById('email_error_Code');
+//
+//     var usr_email =  $('#forgorPasswordCodeModal').attr('data-email');
+//
+//     error_control.style.display = 'none';
+//     $.ajax({
+//         type: "POST",
+//         url: "/PutTogether/CheckCode/",
+//         data: {usr_email: usr_email, code:code , csrfmiddlewaretoken: csrftoken},
+//         success: function (e) {
+//             $('#forgorPasswordCodeModal').modal('hide');
+//             $('#PasswordResetModal').attr('data-email',usr_email);
+//             $('#PasswordResetModal').modal('show');
+//         },
+//         error: function (e) {
+//             error_control.innerHTML = e.responseJSON.reason;
+//             error_control.style.display = 'block';
+//
+//         }
+//     });
+// });
+// $("#passwordResetForm").off().on('submit',function (event) {
+//     event.preventDefault();
+//     var password_first = document.getElementById("first_password_Reset").value;
+//     var first_error = document.getElementById("first_pass_control_Reset");
+//
+//     var password_second = document.getElementById('second_password_Reset').value;
+//     var second_error = document.getElementById("second_pass_control_Reset");
+//
+//     var usr_email = $("#PasswordResetModal").attr("data-email");
+//
+//     first_error.style.display = 'none';
+//     second_error.style.display = 'none';
+//
+//     if ($.trim(password_first) === '' || $.trim(password_first).length < 8) {
+//         first_error.style.display = 'block';
+//         return false;
+//     }
+//     else if ($.trim(password_first) !== $.trim(password_second))
+//     {
+//         second_error.style.display = 'block';
+//         return false;
+//     }
+//
+//     $.ajax({
+//         type: "POST",
+//         url: "/PutTogether/PasswordReset/",
+//         data: {password:password_first, email:usr_email, csrfmiddlewaretoken: csrftoken},
+//         success: function () {
+//             location.reload(true);
+//         },
+//         error: function () {
+//             second_error.innerHTML = "Something went wrong, Try again";
+//             second_error.style.display = 'block';
+//         }
+//     });
+// });
 
 //Upgrading from a plan to a higher plan ( Home Page Code only )
 $("#upgradeForm").off().on('submit',function (event) {
@@ -391,11 +372,11 @@ $("#PasswordModal").off().on('submit',function (event) {
     second_error.style.display = 'none';
 
 
-    if ($.trim(password_first) == '' || $.trim(password_first).length < 8) {
+    if ($.trim(password_first) === '' || $.trim(password_first).length < 8) {
         first_error.style.display = 'block';
         return false;
     }
-    else if ($.trim(password_first) != $.trim(password_second))
+    else if ($.trim(password_first) !== $.trim(password_second))
     {
         second_error.style.display = 'block';
         return false;
@@ -439,6 +420,7 @@ $("#DeleteModel").off().on('submit',function (event) {
         }
     });
 });
+
 
 $('.modal').on('hidden.bs.modal', function(){
     $(this).find('form')[0].reset();

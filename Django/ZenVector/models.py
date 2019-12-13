@@ -71,6 +71,7 @@ class Tasks(models.Model):
     task_creation_time = models.TimeField(auto_now_add=True)
     task_project_id = models.ForeignKey(Projects,db_column='project_id')
     task_given_by = models.ForeignKey(Users,db_column='email')
+    task_position = models.IntegerField()
 
 
 class UsrProjects(models.Model):
@@ -96,6 +97,8 @@ def random_pass():
 class PasswordCodes(models.Model):
     usr_email = models.ForeignKey(Users,db_column='email')
     code = models.CharField(default=random_pass,max_length=15)
+    isUsed = models.BooleanField(default=False)
+
 
 
 

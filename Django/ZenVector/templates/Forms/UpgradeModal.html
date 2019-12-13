@@ -1,0 +1,81 @@
+ <div class="modal fade" id="UpgradeModal" tabindex="-1" data-type="" role="dialog">
+        <div class="modal-dialog modal-signup" role="document">
+          <div class="modal-content">
+            <div class="card card-signup card-plain">
+              <div class="modal-header">
+
+                <h5 class="modal-title card-title">Upgrade Account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <i class="far fa-window-close" style="color: red"></i>
+
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col mr-auto">
+
+                    <form  id='upgradeForm' class="form"  >
+                        {% csrf_token %}
+                      <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                            <div class="col">
+                                  <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">
+                                                <i class="fas fa-credit-card"></i>
+                                          </div>
+                                        </div>
+                                        <input type="text" required id='CreditNumber' value="" class="form-control" placeholder="Card #">
+                                  </div>
+
+                            </div>
+                            <div class="col">
+                                  <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">
+                                                <i class="fas fa-credit-card"></i>
+                                          </div>
+                                        </div>
+                                        <input type="text" required id='csv_number' value="" class="form-control" placeholder="Security Code" >
+                                  </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                  <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">
+                                                <i class="fas fa-credit-card"></i>
+                                          </div>
+                                        </div>
+                                        <input type="number" min="0" max="12" required id='MonthCredit' value="" class="form-control" placeholder="Month">
+                                  </div>
+                            </div>
+                            <div class="col">
+                                  <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">
+                                                <i class="fas fa-credit-card"></i>
+                                          </div>
+                                        </div>
+                                        <input type="number" min="2010" max="2040"  required id='YearCredit' value="" class="form-control" placeholder="Year" >
+                                  </div>
+                            </div>
+                        </div>
+
+                        <label class="label_control" id="upgrade_error" style="display: none;padding-left: 9.5rem;padding-top: 1rem">Credit Card is a 16 digit number</label>
+
+                      </div>
+                      <div class="modal-footer justify-content-center" style="padding: 7px">
+                        <button type="submit"  class="btn btn-primary btn-round">Upgrade</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

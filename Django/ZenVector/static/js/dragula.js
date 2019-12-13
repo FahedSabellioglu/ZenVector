@@ -305,6 +305,15 @@ function dragula (initialContainers, options) {
     }
   }
 
+  function getPositions(listName)
+  {
+    var positions = {};
+    $("[id='{name}']".replace('{name}',listName)).children().each( (index, element) => {
+          positions[element.id] = index;
+       });
+    return positions;
+  }
+
   function drop (item, target) {
     var parent = getParent(item);
     if (_copy && o.copySortSource && target === _source) {
@@ -321,17 +330,21 @@ function dragula (initialContainers, options) {
       console.log(to_list_id);
       console.log(task_id);
 
+      var from_positions = getPositions(from_list_id);
+      var to_positions = getPositions(to_list_id);
+
+
       $.ajax({
         type:"POST",
         url:"MoveTask/",
-        data:{from_list:from_list_id,to_list:to_list_id,task_id:task_id,csrfmiddlewaretoken:csrftoken},
+        data:{from_list:from_list_id,from_list_positons:JSON.stringify(from_positions),to_list:to_list_id,to_list_positions:JSON.stringify(to_positions),task_id:task_id,csrfmiddlewaretoken:csrftoken},
         success:function () {
 
         },
         error:function () {
           alert('Something went wrong, Please try again later');
         }
-      })
+      });
 
       console.log("DROPEED RUN");
 

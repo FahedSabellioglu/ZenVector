@@ -54,25 +54,21 @@ $("#upgradeForm").off().on('submit',function (event) {
         return false;
     }
 
-    return false;
+    $.ajax({
+        type: "POST",
+        url: "/PutTogether/Upgrade/",
+        data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken,
+            number:Card_Number,security:security_number,m_exp:month_exp,y_exp:year_exp},
+        success: function (e) {
+            // console.log(e);
+            // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
+            location.reload(true);    //Why?????
 
-
-    // $.ajax({
-    //     type: "POST",
-    //     url: "/PutTogether/Upgrade/",
-    //     data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken,
-    //         number:Card_Number,security:security_number,m_exp:month_exp,y_exp:year_exp},
-    //     success: function (e) {
-    //         // console.log(e);
-    //         // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
-    //         location.reload(true);    //Why?????
-    //
-    //     },
-    //     error: function (e) {
-    //         console.log("error");
-    //     }
-    // });
-
+        },
+        error: function (e) {
+            console.log("error");
+        }
+    });
     // $.ajax({
     //     type: "POST",
     //     url: "CreateProject/",
@@ -87,6 +83,7 @@ $("#upgradeForm").off().on('submit',function (event) {
     //         console.log("error");
     //     }
     // });
+});
 
 });
 

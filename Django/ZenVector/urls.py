@@ -19,7 +19,6 @@ urlpatterns = [
     url(r'^PutTogether/PasswordChange/$', views.change_password),
     url(r'^PutTogether/Projects/(?P<p_id>\d+)/MoveTask/$', views.move_task),
     url(r'^PutTogether/DeleteAccount/$', views.func_delete_account),
-
     url(r"^PutTogether/Projects/(?P<p_id>\d+)/ChangeTaskDetails/",views.change_task_details),
     url(r"^PutTogether/Projects/ChangeProjectDetails/",views.change_project_details),
     url(r"^PutTogether/Upgrade/", views.upgrade_account),
@@ -28,11 +27,11 @@ urlpatterns = [
     url(r"^PutTogether/forgotPass/", views.forgot_pass),
     url(r"^PutTogether/CheckCode/", views.CodeChecker),
     url(r"^PutTogether/PasswordReset/", views.ResetPassword),
-
+    url(r"^PutTogether/PasswordResetOut/(?P<email>[\w\.-]+@[\w\.-]+(\.[\w]+)+)/(?P<code>\w+)$", views.passwordRestOut),
+    url(r"^PutTogether/PasswordReset/", views.ResetPassword),
     url(r'^PutTogether/Projects/(?P<p_id>\d+)/ChangeTaskDetails/',views.change_task_details),
-    url(r"^PutTogether/Projects/ChangeProjectDetails/$",views.change_project_details),
-    # url(r'^PutTogether/Projects/InviteMember/$', views.send_invite_email),
-
+    url(r"^PutTogether/Projects/ChangeProjectDetails/$",views.change_project_details)
+    # url(r'^PutTogether/Projects/sendEmail/$', views.send_invite_email),
 ]
 #
 # url(r'^Projects/')

@@ -1,0 +1,60 @@
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-signup" role="document">
+      <div class="modal-content">
+        <div class="card card-signup card-plain">
+          <div class="modal-header">
+
+            <h5 class="modal-title card-title">Login</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <i class="far fa-window-close" style="color: red"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+
+              <div class="col mr-auto">
+
+                <form  id='loginForm' class="form"  >
+                    {% csrf_token %}
+                  <div class="card-body">
+
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-envelope"></i>
+                          </div>
+                        </div>
+                        <input type="email" required id='email_login' value="fahedshabani@std.sehir.edu.tr" class="form-control" placeholder="Email...">
+                      </div>
+                        <label class="ml-auto mr-auto" id="email_error_login" style="display: none;">email exists</label>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                          </div>
+                        </div>
+                        <input type="password" required   id="password_login" value="fahedshaabani" placeholder="Password..." class="form-control pass" />
+                      </div>
+                        <label class="label_control" id="password_error_login" style="display: none;">password longer than 8 characters</label>
+                    </div>
+
+                  </div>
+                  <div class="modal-footer justify-content-center ">
+                    <button type="submit"  onclick="loginControl()" class="btn btn-primary btn-round">Login</button>
+                </div>
+
+                    <div style="text-align: center">
+                        <a href="#" onclick="ForgotPassModal()" style="color: #59A61E">Forgot your password?</a>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
