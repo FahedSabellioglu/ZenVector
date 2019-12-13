@@ -255,26 +255,50 @@ def move_task(request,p_id):
         :returns json response of 200
     """""
     data = dict(request.POST)
-    print data,'here positions'
     proj_obj = Projects.objects.get(project_id=p_id)
-    task_obj = Tasks.objects.get(task_id=data['task_id'][0])
-    stat_obj = state.objects.get(state_name=data['to_list'][0],project_id=proj_obj)
+
+    from_list = state.objects.get(state_name=data['from_list'][0],project_id=proj_obj)
+    to_list = state.objects.get(state_name=data['to_list'][0],project_id=proj_obj)
+
     to_list_positions = json.loads(data['to_list_positions'][0])
     from_list_positions = json.loads(data['from_list_positons'][0])
-    task_obj.task_position = to_list_positions[str(task_obj.task_id)]
-    task_obj.task_state = stat_obj
-    task_obj.save()
 
-    for o_task in from_list_positions:
-        obj = Tasks.objects.get(task_id=int(o_task))
-        obj.task_position = from_list_positions[o_task]
-        obj.save()
+    for task_id in to_list_positions:
+        taskObj = Tasks.objects.get(task_id=task_id,task_project_id=proj_obj)
+        taskObj.task_state = to_list
+        taskObj.task_position = to_list_positions[task_id]
+        taskObj.save()
 
-    for n_task in to_list_positions:
-        if n_task != data['task_id'][0]:
-            obj = Tasks.objects.get(task_id=int(n_task))
-            obj.task_position = to_list_positions[n_task]
-            obj.save()
+    for task_id in from_list_positions:
+        taskObj = Tasks.objects.get(task_id=task_id,task_project_id=proj_obj)
+        taskObj.task_state = from_list
+        taskObj.task_position = from_list_positions[task_id]
+        taskObj.save()
+
+
+    # print data,'here positions'
+    # task_obj = Tasks.objects.get(task_id=data['task_id'][0])
+    # stat_obj = state.objects.get(state_name=data['to_list'][0],project_id=proj_obj)
+    # # to_list_positions = json.loads(data['to_list_positions'][0])
+    # # from_list_positions = json.loads(data['from_list_positons'][0])
+    # # # task_obj.task_position = to_list_positions[str(task_obj.task_id)]
+    # print task_obj.task_state.state_name,'old'
+    # print stat_obj.state_name,'name'
+    # print task_obj.task_name,'task name'
+    # task_obj.task_state = stat_obj
+    # task_obj.save()
+    # print task_obj.task_state.state_name,'check'
+
+    # for o_task in from_list_positions:
+    #     obj = Tasks.objects.get(task_id=int(o_task))
+    #     obj.task_position = from_list_positions[o_task]
+    #     obj.save()
+    #
+    # for n_task in to_list_positions:
+    #     if n_task != data['task_id'][0]:
+    #         obj = Tasks.objects.get(task_id=int(n_task))
+    #         obj.task_position = to_list_positions[n_task]
+    #         obj.save()
 
 
     rtn = JsonResponse({"Saved":"New state for the task with id "+str(data['task_id'][0])})
@@ -467,7 +491,7 @@ def page_Projects(response, p_id):
     usr_obj = Users.objects.all()[0]
     stat = state.objects.filter(state_name='new list', project_id=proj_obj)
 
-    tasks = Tasks.objects.filter(task_project_id=proj_obj)
+    tasks = Tasks.objects.filter(task_project_id=proj_obj).order_by('task_position')
     states = state.objects.filter(project_id=proj_obj)
     users = Users.objects.all()
 
