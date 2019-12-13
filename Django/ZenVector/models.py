@@ -51,7 +51,7 @@ class Projects(models.Model):
     project_id = models.AutoField(primary_key=True)
     project_name = models.CharField(max_length=255)
     creation_time = models.TimeField(auto_now_add=True)
-    # creation_date=models.DatetimeField(auto_now_add=True)
+    # creation_date=models.DateField(auto_now_add=True)
     usr_email = models.ForeignKey(Users,db_column='email')
 
 

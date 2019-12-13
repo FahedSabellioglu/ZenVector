@@ -10,15 +10,14 @@ def progressbar(context):
 
     if len(tasks) == 0:
         per = 0
-    else:
 
+    else:
         for t in tasks:
             if t.task_state.state_name=='Done':
                 done+=1.0
             else:
                 progress+=1.0
-        per= int(done/(progress+done))*100
-
+        per= int(done/(progress+done)*100)
 
     return {'percentage':per,'total':int(progress+done)}
 

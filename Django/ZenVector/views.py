@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.shortcuts import render, render_to_response
 from django.contrib.auth import login,logout,authenticate
 from models import *
 from django.http import JsonResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-<<<<<<< Updated upstream
+
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 
-=======
-# from  django.core.mail import send_mail
->>>>>>> Stashed changes
 
 @login_required(login_url='/PutTogether/')
 def fun_new_state(request,p_id):
@@ -305,8 +303,8 @@ def page_User(response):
 def display_projects(response):
     usrobj = Users.objects.get(email=response.user)
     proj = Projects.objects.filter(usr_email=usrobj)
-    for i in proj:
-        print i.creation_time
+    # for i in proj:
+    #     print i.creation_time
 
     allow = True
     if (usrobj.account_type == 'F' and len(proj) == 5):
@@ -336,7 +334,7 @@ def change_project_details(request):
 
 
 @login_required(login_url='/PutTogether/')
-def func_delete_project(response,p_id):
+def func_delete_project(response):
     data = dict(response.POST)
     proj_obj = Projects.objects.get(project_id=data['project_id'][0])
     proj_obj.delete()
@@ -344,19 +342,6 @@ def func_delete_project(response,p_id):
     response = JsonResponse({"message":"project has been deleted"})
     response.status_code = 200
     return response
-
-# def send_invite_email(response):
-#     data=dict(response.POST)
-#     # email=data['email'][0]
-#     # print email
-#     # send_mail('helloo','hel','puttogether.zenvector@gmail.com',[email],fail_silently=False)
-#
-#
-#     send_mail('Hello from Puttogether','User invites you message','puttogether.zenvector@gmail.com',['tehadic996@email1.pro'],fail_silently=False)
-#
-#     response = JsonResponse({"message":"mail is sent"})
-#     response.status_code = 200
-#     return response
 
 
 def Email_SendServer(message,toUser):

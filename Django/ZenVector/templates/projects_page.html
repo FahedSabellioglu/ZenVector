@@ -9,50 +9,44 @@
     <br>
     {% if allow %}
         <div style="text-align: center">
-        <button class="btn btn-success btn-round btn-bg" style="display: inline-block" data-toggle="modal" data-target="#projectModal">Create Project!</button>
+            <button class="btn btn-success btn-round btn-bg" style="display: inline-block" data-toggle="modal" onclick="createprojectmodal()" >Create Project!</button>
         </div>
     {% elif not allow %}
-         <a class="nav-link dropdown-item" data-toggle="modal" data-target="#UpgradeModal">Upgrade First!</a>
+        <div style="text-align: center">
+            <button class="btn btn-success btn-round btn-bg" style="display: inline-block;" data-toggle="modal" data-target="#UpgradeModal">Upgrade First!</button>
+        </div>
     {% endif %}
-        <div class="row">
 
+        <div class="row">
             {% for project in projects %}
                 {% load progressbar %}
                 {% progressbar project.project_id as list %}
                 <div class="col-md-4">
-                <div class="card" style="width: 20rem;" id="{{project.project_id}}">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar" style="width: {{list.percentage}}%;" aria-valuenow="{{list.percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title" style="position: absolute; top: 0.65rem;"><a  href="{% url 'tasks' p_id=project.project_id %}">
-                            {{project.project_name}}</a>
-                        </h4>
-{#                        <button  style="position: absolute; right: 1rem; top:1.5rem; color:red;" type="button" class="btn btn-just-icon btn-sm menu-button" data-id="{{ project.project_id }}" data-toggle="modal" data-target="#editModal">#}
-{#                            <i class="material-icons">menu</i>#}
-{#                        </button>#}
-
-                        <a data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-title" style="position: absolute; width:1rem; top:1.5rem; right: 1rem;">ellipsis-v</i>
-                        </a>
-{##}
-                        <div class="dropdown-menu" style="margin-left:10rem; margin-top: 1rem; " >
-                            <button class="dropdown-item"  style="width: 10px; margin-right: -1rem;" id="edit-t" data-toggle="modal" data-id="{{ project.project_id}}" data-target="#editModal">Edit</button>
-                            <button class="dropdown-item" style="width: 10px; margin-right: -1rem;"id="add-user" data-toggle="modal" data-target="#addUserModal">Add User</button>
-                            <button class="dropdown-item" style="width: 10px; margin-right: -1rem;"id="delete" data-id="{{ project.project_id }}" onclick="deleteProject()">Delete</button>
+                    <div class="card" style="width: 20rem;" id="{{project.project_id}}">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar" style="width: {{list.percentage}}%;" aria-valuenow="{{list.percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-
+                        <div class="card-body">
+                            <h4 class="card-title" style="position: absolute; top: 0.65rem;"><a  href="{% url 'tasks' p_id=project.project_id %}">
+                                {{project.project_name}}</a>
+                            </h4>
+                            <a data-toggle="dropdown" id="dropdownmenu-click" style="position: absolute; width:1.5rem; top:1.5rem; right: 0rem;" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-title" >ellipsis-v</i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" style="min-width: 3rem;" >
+                                <button class="dropdown-item" id="editId" data-toggle="modal" data-id="{{ project.project_id}}" data-target="#editModal">Edit</button>
+                                <button class="dropdown-item" id="add-user" data-id="{{ project.project_id }}" data-toggle="modal" data-target="#addUserModal">Add User</button>
+                                <button class="dropdown-item" id="deleteId" data-id="{{ project.project_id }}" data-target="#deleteConfirmation">Delete</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"> Created By: {{ project.usr_email }}</p>
+                            <p class="card-text"> Num of members:</p>
+                            <p class="card-text"> Num of tasks:  {{list.total}} </p>
+                            <p class="card-text"> Creation time: {{ project.creation_date}} </p>
+                         </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text"> Created By: {{ project.usr_email }}</p>
-                        <p class="card-text"> Num of members:</p>
-                        <p class="card-text"> Num of tasks:  {{list.total}} </p>
-                        <p class="card-text"> Creation time: {{ project.creation_date}} </p>
-
-                     </div>
                 </div>
-                </div>
-
         {% endfor %}
         </div>
     </div>
@@ -60,138 +54,177 @@
 
 
 
+     <!-------------------------------------------------------- Create Project Modal -------------------------------------------------------->
+
+    <div class="modal fade" id="projectModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title card-title">Create Project</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <i class="far fa-window-close" style="color: red"></i>
+            </button>
+          </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col mr-auto">
+                  <form  id='projectForm' class="form"  >
+                      {% csrf_token %}
+                    <div class="card-body">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                              <i class="fas fa-heading"></i>
+                            </div>
+                          </div>
+                          <input type="text" required id='project_name' value="" class="form-control" placeholder="Project Name...">
+                        </div>
+                        <label class="label_control" id="project_name_error" style="display: none;">meaningful name please...</label>
+                      </div>
+                    </div>
+                    <div class="modal-footer justify-content-center" style="margin-top: -1rem; margin-bottom: -0.5rem;">
+                      <button type="submit"  class="btn btn-primary btn-round">Create</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  <!------------------------------------------------- End of Create Project Modal ------------------------------------------------------------>
+
+
+<!--------------------------------------------------------  Upgrade Account Modal -------------------------------------------------------->
+
+     <div class="modal fade" id="UpgradeModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-signup" role="document">
+      <div class="modal-content">
+        <div class="card card-signup card-plain">
+          <div class="modal-header">
+
+            <h5 class="modal-title card-title">Upgrade Account</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <i class="far fa-window-close" style="color: red"></i>
+
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col mr-auto">
+
+                <form  id='upgradeForm' class="form"  >
+                    {% csrf_token %}
+                  <div class="card-body">
+                    <div class="form-group">
+                        <div class="row">
+                        <div class="col">
+                              <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text">
+                                            <i class="fas fa-credit-card"></i>
+                                      </div>
+                                    </div>
+                                    <input type="text" required id='CreditNumber' value="" class="form-control" placeholder="Card #">
+                              </div>
+
+                        </div>
+                        <div class="col">
+                              <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text">
+                                            <i class="fas fa-credit-card"></i>
+                                      </div>
+                                    </div>
+                                    <input type="text" required id='csv_number' value="" class="form-control" placeholder="Security Code" >
+                              </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                              <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text">
+                                            <i class="fas fa-credit-card"></i>
+                                      </div>
+                                    </div>
+                                    <input type="number" min="0" max="12" required id='MonthCredit' value="" class="form-control" placeholder="Month">
+                              </div>
+                        </div>
+                        <div class="col">
+                              <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text">
+                                            <i class="fas fa-credit-card"></i>
+                                      </div>
+                                    </div>
+                                    <input type="number" min="2010" max="2040"  required id='YearCredit' value="" class="form-control" placeholder="Year" >
+                              </div>
+                        </div>
+                    </div>
+
+                    <label class="label_control" id="upgrade_error" style="display: none;padding-left: 9.5rem;padding-top: 1rem">Credit Card is a 16 digit number</label>
+                  </div>
+                  <div class="modal-footer justify-content-center" style="padding: 7px">
+                    <button type="submit"  class="btn btn-primary btn-round">Upgrade</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-------------------------------------------------------- End of Upgrade Account Modal -------------------------------------------------------->
 
   <!------------------------------------------------- Detail Modal ------------------------------------------------------------>
 
-      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="edit_project_title" data-projectid="none">Project Details</h5>
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title card-title" id="edit_project_title" data-projectid="none">Project Details</h5>
 
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="col mr-auto">
-                  <form class="form" id="editForm" method="" action="">
-                    {%  csrf_token %}
-
-                    <!-- Project Title-->
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">
-                            <i class="fas fa-heading"></i>
-                          </div>
-                        </div>
-                        <input type="text" id="projectTitle" class="form-control" required>{{ project.project_name }}
-                      </div>
-                    </div>
-                    <!-- When the project is created -->
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">
-                            <i class="fas fa-title">calendar-alt</i>
-                          </div>
-                        </div>
-                         <input class="form-control" type="date"  id="project_creation_time">   <!-- should be disabled-->
-                      </div>
-                    </div>
-{#                    <!-- Details -->#}
-{#                    <div class="form-group">#}
-{#                      <div class="input-group">#}
-{#                        <div class="input-group-prepend">#}
-{#                          <div class="input-group-text">#}
-{#                            <i class="fas fa-title">info-circle</i>#}
-{#                          </div>#}
-{#                        </div>#}
-{#                        <input type="text" id="projectDetails" class="form-control" placeholder="Details..." required>#}
-{#                      </div>#}
-{#                    </div>#}
-
-                    <!-- Team Members -->
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">
-                            <i class="fas fa-title">user</i>
-                          </div>
-                        </div>
-
-                        <!-- This part should show the team members with their photos, names, emails. -->
-                        <select id="teamMembers" class="form-control" required>
-{#                            {% for usr in users %}#}
-{#                          <option  value="{{ usr.email }}">{{ usr.email }}</option>#}
-{#                            {% endfor %}#}
-
-                        </select>
-                      </div>
-                    </div>
-
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-danger" style="position: absolute; left: 1rem;" onclick="deleteProject()">Delete</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-rose" data-dismiss="modal" onclick="editDetails()">Save</button>
-            </div>
-          </div>
-        </div>`
-      </div>
-
-<!-------------------------------------------------------- End of Detail Modal -------------------------------------------------------->
-
-
-  <!------------------------------------------------- Add User Modal ------------------------------------------------------------>
-
-      <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="add_member" data-taskid="none">Invite New Team Member</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-
-            <div class="modal-body">
-              <div class="row">
-                <div class="col mr-auto">
-                  <form class="form" id="InviteForm" method="" action="">
-                      {%  csrf_token %}
-                    <!-- Invite Team Members -->
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">
-                            <i class="fas fa-title">user</i>
-                          </div>
-                        </div>
-                        <input type="text" id="inviteNewMember" class="form-control" style="margin-right: 1rem;" placeholder="Send an invite link via email to new members" required>
-                        <button type="submit" class="btn btn-sm btn-rose"  data-dismiss="modal" onclick="sendEmail()">Send</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-
-
-          <div class="modal-header">
-            <h5 class="modal-title" id="edit_task_title" data-taskid="none">Add New Member to Team</h5>
-          </div>
-
-          <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="far fa-window-close" style="color: red"></i>
+          </button>
+        </div>
+        <div class="modal-body">
           <div class="row">
             <div class="col mr-auto">
-              <form class="form" id="AddMemberForm" method="" action="">
-                  {%  csrf_token %}
+              <form class="form" id="editForm" method="" action="">
+                {%  csrf_token %}
+
+                <!-- Project Title-->
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-heading"></i>
+                      </div>
+                    </div>
+                    <input type="text" id="projectTitle" class="form-control" required>{{ project.project_name }}
+                  </div>
+                </div>
+                <!-- When the project is created -->
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-title">calendar-alt</i>
+                      </div>
+                    </div>
+                     <input class="form-control" type="date"  id="project_creation_time">   <!-- should be disabled-->
+                  </div>
+                </div>
+
                 <!-- Team Members -->
                 <div class="form-group">
                   <div class="input-group">
@@ -200,201 +233,108 @@
                         <i class="fas fa-title">user</i>
                       </div>
                     </div>
+
                     <!-- This part should show the team members with their photos, names, emails. -->
-    {#                        <select id="teamMembers" class="form-control" required>#}
-    {#                            {% for usr in users %}#}
-    {#                          <option  value="{{ usr.email }}">{{ usr.email }}</option>#}
-    {#                            {% endfor %}#}
-    {#                        </select>#}
+                    <select id="teamMembers" class="form-control" required>
+{#                            {% for usr in users %}#}
+{#                          <option  value="{{ usr.email }}">{{ usr.email }}</option>#}
+{#                            {% endfor %}#}
 
-    {#                         <label for="choices-multiple-remove-button">With remove button</label>#}
-
-
-    {#                        <select class="form-control custom-select" name="choices-multiple-remove-button" id="choices-multiple-remove-button" multiple>#}
-    {#                          <option value="Choice 1" selected>Choice 1</option>#}
-    {#                          <option value="Choice 2">Choice 2</option>#}
-    {#                          <option value="Choice 3">Choice 3</option>#}
-    {#                          <option value="Choice 4">Choice 4</option>#}
-    {#                          <option value="Choice 2">Choice 2</option>#}
-    {#                          <option value="Choice 3">Choice 3</option>#}
-    {#                          <option value="Choice 4">Choice 4</option>#}
-    {#                        </select>#}
-    {##}
-
-
-{#<div class="container mt-5">#}
-{#    <div class="row">#}
-{#        <div class="col-md-6 text-right">#}
-{#            <select id="select1">#}
-{#                <option></option>#}
-{#            </select>#}
-{#        </div>#}
-{#        <div class="col-md-6">#}
-{#            <select multiple id="select2">#}
-{#                <option value="bla">bla</option>#}
-{#                <option value="blaa">blaa</option>#}
-{#                <option value="blaaa">blaaa</option>#}
-{#                <option value="blaaaa">blaaaa</option>#}
-{#            </select>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
-
-
-{#<select class="selectpicker" multiple>#}
-{#  <option>Mustard</option>#}
-{#  <option>Ketchup</option>#}
-{#  <option>Barbecue</option>#}
-{#</select>#}
-
-
-
-
-
-                  </form>
+                    </select>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-rose" data-dismiss="modal" onclick="addUser()">Save</button>
+              </form>
             </div>
           </div>
-        </div>`
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" style="position: absolute; left: 1rem;" id="deleteId" data-target="#deleteConfirmation">Delete</button>
+{#          <button class="btn btn-danger" style="position: absolute; left: 1rem;" id="deleteId" data-target="#deleteConfirmation">Delete</button>#}
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-rose" data-dismiss="modal" onclick="editDetails()">Save</button>
+        </div>
       </div>
+    </div>`
+  </div>
+
+<!-------------------------------------------------------- End of Detail Modal -------------------------------------------------------->
+
+  <!------------------------------------------------- Add User Modal ------------------------------------------------------------>
+
+  <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title card-title " id="add_member" data-taskid="none">Invite New Team Member</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="far fa-window-close" style="color: red"></i>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col mr-auto">
+              <form class="form" id="InviteForm" method="" action="">
+                  {%  csrf_token %}
+                <!-- Invite Team Members -->
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-title">user</i>
+                      </div>
+                    </div>
+                    <input type="email" id="inviteMemberMail" class="form-control" style="margin-right: 1rem;" placeholder="Send an invite link via email to new members" required>
+                    <button type="submit" class="btn btn-sm btn-rose"  data-dismiss="modal" onclick="sendEmail()">Send</button>
+                  </div>
+                  <label class="ml-auto mr-auto" id="email_error_invite" style="display: none;">email exists</label>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-rose" data-dismiss="modal" onclick="addUser()">Save</button>
+        </div>
+      </div>
+    </div>`
+  </div>
 
 <!-------------------------------------------------------- End of Add User Modal -------------------------------------------------------->
 
 
-<!--------------------------------------------------------  Create Project Modal -------------------------------------------------------->
-    <div class="modal fade" id="projectModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-signup" role="document">
-          <div class="modal-content">
-            <div class="card card-signup card-plain">
-              <div class="modal-header">
-                <h5 class="modal-title card-title">Create Project</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="far fa-window-close" style="color: red"></i>
-                </button>
-              </div>
+ <!-------------------------------------------------------- Confirm the Deletion  Modal -------------------------------------------------------->
 
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col mr-auto">
-                    <form  id='projectForm' class="form"  >
-                        {% csrf_token %}
-                      <div class="card-body">
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                    <i class="fas fa-heading"></i>
-                              </div>
-                            </div>
-                            <input type="text" required id='project_name' value="" class="form-control" placeholder="Project Name...">
-                          </div>
-                            <label class="label_control" id="project_name_error" style="display: none;">meaningful name please...</label>
-                        </div>
-
-                      </div>
-                      <div class="modal-footer justify-content-center">
-                        <button type="submit"  class="btn btn-primary btn-round">Create</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+    <div class="modal fade" id="deleteConfirmation" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title card-title ">Confirm the Deletion </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <i class="far fa-window-close" style="color: red"></i>
+            </button>
           </div>
-        </div>
-    </div>
-
-
-
-
-     <div class="modal fade" id="UpgradeModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-signup" role="document">
-          <div class="modal-content">
-            <div class="card card-signup card-plain">
-              <div class="modal-header">
-
-                <h5 class="modal-title card-title">Upgrade Account</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="far fa-window-close" style="color: red"></i>
-
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col mr-auto">
-
-                    <form  id='upgradeForm' class="form"  >
-                        {% csrf_token %}
-                      <div class="card-body">
-                        <div class="form-group">
-                            <div class="row">
-                            <div class="col">
-                                  <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <div class="input-group-text">
-                                                <i class="fas fa-credit-card"></i>
-                                          </div>
-                                        </div>
-                                        <input type="text" required id='CreditNumber' value="" class="form-control" placeholder="Card #">
-                                  </div>
-
-                            </div>
-                            <div class="col">
-                                  <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <div class="input-group-text">
-                                                <i class="fas fa-credit-card"></i>
-                                          </div>
-                                        </div>
-                                        <input type="text" required id='csv_number' value="" class="form-control" placeholder="Security Code" >
-                                  </div>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                  <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <div class="input-group-text">
-                                                <i class="fas fa-credit-card"></i>
-                                          </div>
-                                        </div>
-                                        <input type="number" min="0" max="12" required id='MonthCredit' value="" class="form-control" placeholder="Month">
-                                  </div>
-                            </div>
-                            <div class="col">
-                                  <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <div class="input-group-text">
-                                                <i class="fas fa-credit-card"></i>
-                                          </div>
-                                        </div>
-                                        <input type="number" min="2010" max="2040"  required id='YearCredit' value="" class="form-control" placeholder="Year" >
-                                  </div>
-                            </div>
-                        </div>
-
-                        <label class="label_control" id="upgrade_error" style="display: none;padding-left: 9.5rem;padding-top: 1rem">Credit Card is a 16 digit number</label>
-                      </div>
-                      <div class="modal-footer justify-content-center" style="padding: 7px">
-                        <button type="submit"  class="btn btn-primary btn-round">Upgrade</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="deleteProject()">Yes</button>
           </div>
         </div>
       </div>
+    </div>
 
-<!-------------------------------------------------------- End of Create Project Modal -------------------------------------------------------->
+  <!------------------------------------------------- End of Confirm the Deletion  Modal ------------------------------------------------------------>
+
+
+
+
+
 
 
 {% endblock %}
@@ -404,10 +344,7 @@
 {% block scripts %}
 
     <script src="{% static 'js/projects_page_forms.js' %}"></script>
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
     <script>
         var csrftoken = '{{ csrf_token }}';
     </script>

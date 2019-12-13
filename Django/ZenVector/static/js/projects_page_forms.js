@@ -6,7 +6,7 @@ $("#projectForm").off().on('submit',function (event) {
     var error_element = document.getElementById("project_name_error");
     console.log(error_element);
     error_element.style.display = 'none';
-    if ($.trim(project_name) == '' || $.trim(project_name).length < 3) {
+    if ($.trim(project_name) == '' || $.trim(project_name).length < 3 || $.trim(project_name).length >26) {
         error_element.style.display = 'block';
         return false;
     }
@@ -15,8 +15,7 @@ $("#projectForm").off().on('submit',function (event) {
         url: "CreateProject/",
         data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken, p_name: project_name},
         success: function (e) {
-            // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
-            location.reload(true);    //Why?????
+            location.reload(true);
 
         },
         error: function (e) {
@@ -24,6 +23,7 @@ $("#projectForm").off().on('submit',function (event) {
         }
     });
 });
+
 
 $("#upgradeForm").off().on('submit',function (event) {
     event.preventDefault();
@@ -57,8 +57,6 @@ $("#upgradeForm").off().on('submit',function (event) {
     return false;
 
 
-
-<<<<<<< Updated upstream
     // $.ajax({
     //     type: "POST",
     //     url: "/PutTogether/Upgrade/",
@@ -74,28 +72,26 @@ $("#upgradeForm").off().on('submit',function (event) {
     //         console.log("error");
     //     }
     // });
-=======
-    $.ajax({
-        type: "POST",
-        url: "CreateProject/",
-        // usr_email: '{{ request.user.email }}',
-        data: { csrfmiddlewaretoken: csrftoken, p_name: project_name},
-        success: function (e) {
-            // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
-            location.reload(true);
 
-        },
-        error: function () {
-            console.log("error");
-        }
-    });
->>>>>>> Stashed changes
+    // $.ajax({
+    //     type: "POST",
+    //     url: "CreateProject/",
+    //     // usr_email: '{{ request.user.email }}',
+    //     data: { csrfmiddlewaretoken: csrftoken, p_name: project_name},
+    //     success: function (e) {
+    //         // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
+    //         location.reload(true);
+    //
+    //     },
+    //     error: function () {
+    //         console.log("error");
+    //     }
+    // });
+
 });
 
 
-
 $("#editModal").on('submit',function (e) {
-    console.log("func editmodal");
     e.preventDefault();
 });
 
@@ -107,8 +103,6 @@ function editDetails() {
         var project_creation_time = document.getElementById("project_creation_time").value;
         console.log(project_creation_time);
 
-        // var projectDetails = document.getElementById("projectDetails").value;
-        // console.log(projectDetails);
 
         var members =document.getElementById("teamMembers").value;
         console.log(members);
@@ -130,8 +124,7 @@ function editDetails() {
         })
 }
 
-
-$(document).on('click','#edit-t',function () {
+$(document).on('click','#editId',function () {
     var project_id = $(this).data('id');
     console.log(project_id);
     $('#edit_project_title').attr("projectid",project_id);
@@ -175,13 +168,32 @@ function formatDate(date) {
 }
 
 
+$(document).on('click','#deleteId',function () {
+    var project_id = $(this).data('id');
+    console.log(project_id);
+    $('#detailModal').modal('hide');
+    $('#deleteConfirmation').modal('show');
+})
+
+// function deletionConfirmation() {
+//      var project_id = $(this).data('id');
+//     console.log(project_id);
+//     $('#detailModal').modal('hide');
+//     $('#deleteConfirmation').modal('show');
+//
+// }
+
+
+function createprojectmodal(){
+       $('#projectModal').modal('show');
+}
+
+
  function deleteProject(){
-
-    console.log("func delete");
-    var x = confirm("Are you sure you want to delete?");
+    var project_id = $(this).data('id');
+    $('#edit_project_title').attr("projectid",project_id);
     var project_id = $("#edit_project_title").attr('projectid');
-    if (x){
-
+    console.log(project_id);
        $.ajax({
            type:"POST",
            url:"DeleteProject/",
@@ -193,30 +205,62 @@ function formatDate(date) {
                console.log("NOT CORRECT");
            }
        })
-    }
-    else{
-      console.log(x);
-      return false;
-    }
 }
 
 
-function sendEmail() {
-    console.log("send clicked");
-    var email = document.getElementById('inviteNewMember').value;
-    console.log(email);
+// function sendEmail() {
+//     console.log("send clicked");
+//     var email = document.getElementById('inviteNewMember').value;
+//     console.log(email);
+//
+//        $.ajax({
+//        type:"POST",
+//        url:"sendEmail/",
+//        data:{csrfmiddlewaretoken:csrftoken},
+//        // data:{email:email, csrfmiddlewaretoken:csrftoken},
+//        success:function () {
+//            location.reload(true);
+//        },
+//        error:function () {
+//            console.log("NOT CORRECT");
+//        }
+//     })
+//
+// }
 
-       $.ajax({
-       type:"POST",
-       url:"sendEmail/",
-       data:{csrfmiddlewaretoken:csrftoken},
-       // data:{email:email, csrfmiddlewaretoken:csrftoken},
-       success:function () {
-           location.reload(true);
-       },
-       error:function () {
-           console.log("NOT CORRECT");
-       }
-    })
 
-}
+
+
+
+
+
+
+
+
+//
+// $("#InviteForm").off().on('submit',function (event) {
+//     event.preventDefault();
+//
+//     var usr_email = document.getElementById('inviteMemberMail');
+//
+//     var error_control = document.getElementById('email_error_forgot');
+//
+//     error_control.style.display = 'none';
+//
+//
+//     $.ajax({
+//         type: "POST",
+//         url: "/PutTogether/InviteMember/",
+//         data: {usr_email: usr_email.value , csrfmiddlewaretoken: csrftoken},
+//         success: function (e) {
+//
+//             $('#addUserModal').modal('hide');
+//             Location.reload(true);
+//         },
+//         error: function (e) {
+//             error_control.innerHTML  = e.responseJSON.reason;
+//             error_control.style.display = 'block';
+//
+//         }
+//     });
+// });
