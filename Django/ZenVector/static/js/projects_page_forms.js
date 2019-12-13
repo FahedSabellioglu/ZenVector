@@ -193,8 +193,9 @@ $(document).on('click','#deleteId',function () {
     var project_id = $(this).data('id');
     console.log(project_id);
     $('#detailModal').modal('hide');
+    $('#deleteConfirmation').data('id',project_id);
     $('#deleteConfirmation').modal('show');
-})
+});
 
 
 function createprojectmodal(){
@@ -203,9 +204,9 @@ function createprojectmodal(){
 
 
  function deleteProject(){
-    var project_id = $(this).data('id');
+    var project_id = $("#deleteConfirmation").data('id');
     $('#edit_project_title').attr("projectid",project_id);
-    var project_id = $("#edit_project_title").attr('projectid');
+    // var project_id = $("#edit_project_title").attr('projectid');
     console.log(project_id);
        $.ajax({
            type:"POST",
