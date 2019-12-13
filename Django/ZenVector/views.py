@@ -509,8 +509,9 @@ def page_User(response):
 def display_projects(response):
     usrobj = Users.objects.get(email=response.user)
     proj = Projects.objects.filter(usr_email=usrobj)
-    # for i in proj:
-    #     print i.creation_time
+    for i in proj:
+        print i.creation_time
+        print i.creation_date
 
     allow = True
     if (usrobj.account_type == 'F' and len(proj) == 5):

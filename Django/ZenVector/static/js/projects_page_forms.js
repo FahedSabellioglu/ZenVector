@@ -85,7 +85,7 @@ $("#upgradeForm").off().on('submit',function (event) {
     // });
 });
 
-});
+// });
 
 
 $("#editModal").on('submit',function (e) {
@@ -97,10 +97,6 @@ function editDetails() {
         var projectTitle = document.getElementById("projectTitle").value;
         console.log(projectTitle);
 
-        var project_creation_time = document.getElementById("project_creation_time").value;
-        console.log(project_creation_time);
-
-
         var members =document.getElementById("teamMembers").value;
         console.log(members);
 
@@ -110,8 +106,7 @@ function editDetails() {
         $.ajax({
             type:"POST",
             url:"ChangeProjectDetails/",
-            data:{project_id: projectid,members:members,title:projectTitle,time:project_creation_time,csrfmiddlewaretoken:csrftoken},
-            // data:{project_id: projectid,members:members,title:projectTitle,time:project_creation_time,detail:projectDetails,csrfmiddlewaretoken:csrftoken},
+            data:{project_id: projectid,members:members,title:projectTitle,csrfmiddlewaretoken:csrftoken},
             success:function (e) {
                 location.reload(true)
             },
@@ -141,14 +136,42 @@ $(document).on('click','#editId',function () {
     var nTasks = nTasks.split(':')[1];
     console.log(nTasks);
     var date = element.getElementsByTagName('p')[3].innerHTML;
-    var date = date.split(':')[3];
     console.log(date);
+    var date = date.split(':  ')[1];
+    // var date_time=date.split('  ');
+    // var date=date_time[0];
+    // var time=date_time[1].split(' ')[0];
+    // console.log(date);
+    // console.log(time);
+    // console.log(date+" "+time);
+
 
     document.getElementById("projectTitle").value = title;
-    // document.getElementById("projectDetails").value = "bla bla and bla";
-    document.getElementById('project_creation_time').value = formatDate(date);
+    // document.getElementById('project_creation_time').value =formatDate(date+" "+time);
+    document.getElementById('project_creation_time').value =date;
 
 });
+
+// function formatDate(date) {
+//     var d = new Date(date),
+//         month = '' + (d.getMonth() + 1),
+//         day = '' + d.getDate(),
+//         year = d.getFullYear(),
+//         hours=d.getHours(),
+//         minutes=d.getMinutes();
+//     console.log(d);
+//
+//     if (month.length < 2)
+//         month = '0' + month;
+//     if (day.length < 2)
+//         day = '0' + day;
+//
+//     var a=[year,month,day].join('-');
+//     var b=[hours,minutes].join(':');
+//     return [a,b].join('T');
+// }
+//
+
 
 function formatDate(date) {
     var d = new Date(date),
@@ -165,20 +188,13 @@ function formatDate(date) {
 }
 
 
+
 $(document).on('click','#deleteId',function () {
     var project_id = $(this).data('id');
     console.log(project_id);
     $('#detailModal').modal('hide');
     $('#deleteConfirmation').modal('show');
 })
-
-// function deletionConfirmation() {
-//      var project_id = $(this).data('id');
-//     console.log(project_id);
-//     $('#detailModal').modal('hide');
-//     $('#deleteConfirmation').modal('show');
-//
-// }
 
 
 function createprojectmodal(){

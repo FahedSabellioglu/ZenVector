@@ -51,7 +51,7 @@ class Projects(models.Model):
     project_id = models.AutoField(primary_key=True)
     project_name = models.CharField(max_length=255)
     creation_time = models.TimeField(auto_now_add=True)
-    # creation_date=models.DateField(auto_now_add=True)
+    creation_date = models.DateField(auto_now_add=True)
     usr_email = models.ForeignKey(Users,db_column='email')
 
 
@@ -69,6 +69,7 @@ class Tasks(models.Model):
     task_descrip = models.TextField()
     task_state = models.ForeignKey(state,db_column='state_name')
     task_creation_time = models.TimeField(auto_now_add=True)
+    task_creation_date = models.DateField(auto_now_add=True)
     task_project_id = models.ForeignKey(Projects,db_column='project_id')
     task_given_by = models.ForeignKey(Users,db_column='email')
     task_position = models.IntegerField()
