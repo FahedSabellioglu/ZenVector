@@ -173,8 +173,14 @@ def fun_new_task(response,p_id):
         response = JsonResponse({"message":"The task already exists"})
         response.status_code = 404
         return  response
+
+    task_position = len(Tasks.objects.filter(task_project_id=proj_obj,task_state=state_obj))
+    if task_position != 0:
+        task_position += 1
+
     new_task = Tasks(task_name=data['title'][0],task_project_id=proj_obj,task_descrip = data['descrip'][0],
-                     task_given_by = proj_obj.usr_email,task_state=state_obj,task_deadline=data['date'][0])
+                     task_given_by = proj_obj.usr_email,task_state=state_obj,task_deadline=data['date'][0],
+                     task_position=task_position)
     new_task.save()
 
     response = JsonResponse({})
@@ -263,11 +269,11 @@ def move_task(request,p_id):
 
     to_list_positions = json.loads(data['to_list_positions'][0])
     from_list_positions = json.loads(data['from_list_positons'][0])
-
     for task_id in to_list_positions:
         taskObj = Tasks.objects.get(task_id=task_id,task_project_id=proj_obj)
         taskObj.task_state = to_list
         taskObj.task_position = to_list_positions[task_id]
+        print taskObj.task_id,to_list_positions[task_id]
         taskObj.save()
 
     for task_id in from_list_positions:
@@ -428,6 +434,21 @@ def func_create_project(request):
     doing_list.save()
     done_list.save()
 
+
+    to_do_default = Tasks(task_name="Default Task To Do",task_project_id=project,task_descrip ="Default Task",
+                     task_given_by = project.usr_email,task_state=to_do_list,task_deadline="2019-02-09",
+                     task_position=0)
+    doing_default = Tasks(task_name="Default Task Doing",task_project_id=project,task_descrip ="Default Task",
+                     task_given_by = project.usr_email,task_state=doing_list,task_deadline="2019-02-09",
+                     task_position=0)
+    done_default = Tasks(task_name="Default Task Done",task_project_id=project,task_descrip ="Default Task",
+                     task_given_by = project.usr_email,task_state=done_list,task_deadline="2019-02-09",
+                     task_position=0)
+
+    to_do_default.save()
+    doing_default.save()
+    done_default.save()
+
     rtn  = JsonResponse({'message':"created","project_id" :project.project_id})
     rtn.status_code = 200
     return  rtn
@@ -509,9 +530,9 @@ def page_User(response):
 def display_projects(response):
     usrobj = Users.objects.get(email=response.user)
     proj = Projects.objects.filter(usr_email=usrobj)
-    for i in proj:
-        print i.creation_time
-        print i.creation_date
+    # for i in proj:
+    #     print i.creation_time
+    #     print i.creation_date
 
     allow = True
     if (usrobj.account_type == 'F' and len(proj) == 5):
@@ -551,6 +572,7 @@ def change_project_details(request):
 @login_required(login_url='/PutTogether/')
 def func_delete_project(response):
     data = dict(response.POST)
+    print data,'data'
     proj_obj = Projects.objects.get(project_id=data['project_id'][0])
     proj_obj.delete()
 
