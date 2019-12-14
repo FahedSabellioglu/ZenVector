@@ -12,6 +12,7 @@
     {% if allow %}
         <div style="text-align: center">
             <button class="btn btn-success btn-round btn-bg" style="display: inline-block" data-toggle="modal" onclick="createprojectmodal()" >Create Project!</button>
+
         </div>
     {% elif not allow %}
         <div style="text-align: center">
@@ -90,6 +91,9 @@
                           </div>
                           <input type="text" required id='project_name' value="" class="form-control" placeholder="Project Name...">
                         </div>
+                        <br>
+                        <div><h4 >Members:</h4></div>
+                          <input type='text' class='tags_input' />
                         <label class="label_control" id="project_name_error" style="display: none;">meaningful name please...</label>
                       </div>
                     </div>
@@ -250,7 +254,6 @@
 {#                            {% for usr in users %}#}
 {#                          <option  value="{{ usr.email }}">{{ usr.email }}</option>#}
 {#                            {% endfor %}#}
-
                     </select>
                   </div>
                 </div>
@@ -322,14 +325,13 @@ $(function(){
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary btn-round btn-sm" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success btn-round btn-sm" data-dismiss="modal" onclick="addUser()">Invite</button>
+          <button type="submit" class="btn btn-success btn-round btn-sm" data-dismiss="modal" onclick="addUser()">Save</button>
         </div>
       </div>
     </div>`
   </div>
 
 <!-------------------------------------------------------- End of Add User Modal -------------------------------------------------------->
-
 
  <!-------------------------------------------------------- Confirm the Deletion  Modal -------------------------------------------------------->
 
@@ -355,15 +357,7 @@ $(function(){
 
   <!------------------------------------------------- End of Confirm the Deletion  Modal ------------------------------------------------------------>
 
-
-
-
-
-
-
 {% endblock %}
-
-
 
 {% block scripts %}
 

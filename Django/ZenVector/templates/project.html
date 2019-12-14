@@ -235,24 +235,24 @@ $(function(){
                       <label class="label_control" id="task_name_error" style="display: none;">You already have this task name</label>
                     </div>
                     <!-- Assigned to -->
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">
-                            <i class="fas fa-title">user</i>
-                          </div>
-                        </div>
-                      <div class="container-selectbox">
-                       <input type='text' class='tags_input'/>
-                      </div>
+{#                    <div class="form-group">#}
+{#                      <div class="input-group">#}
+{#                        <div class="input-group-prepend">#}
+{#                          <div class="input-group-text">#}
+{#                            <i style="margin-right: 12px" class="fas fa-title">user</i>#}
+{#                          </div>#}
+{#                        </div>#}
+{#                      <div class="container-selectbox">#}
+{#                      </div>#}
+
 {#                        <select id="assignedTo" class="form-control">#}
 {#                          <option selected value="empty">Choose...</option>#}
 {#                            {% for user in users %}#}
 {#                          <option value="{{ user.email }} ">{{ user.username }}</option>#}
 {#                            {% endfor %}#}
 {#                        </select>#}
-                      </div>
-                    </div>
+{#                      </div>#}
+{#                    </div>#}
                     <!-- Deadline -->
                     <div class="form-group">
                       <div class="input-group">
@@ -264,7 +264,6 @@ $(function(){
                         <input class="form-control" type="date"  id="task_form_deadline" required  placeholder="2019-11-08T19:30">
                       </div>
                       <label class="label_control" id="task_deadline" style="display: none;">Please provide a meaningful details</label>
-
                     </div>
                     <!-- Task Details -->
                     <div class="form-group">
@@ -277,7 +276,6 @@ $(function(){
                         <input type="text" id="taskDetails" class="form-control" placeholder="Details..." required>
                       </div>
                       <label class="label_control" id="task_descrip" style="display: none;">Please provide a meaningful details</label>
-
                     </div>
                     <!-- Task Status -->
                     <div class="form-group">
@@ -296,9 +294,14 @@ $(function(){
 
                       </div>
                       <label class="label_control"  id="task_error" style="display: none;">You Already have this task</label>
+                    <br>
+                    <div class="form-group">Type in the emails here...
+{#                        <div class="input-group-prepend">#}
 
+{#                        </div>#}
+                        <input type='text' class='tags_input' />
                     </div>
-
+                </div>
                   </form>
                 </div>
               </div>
@@ -358,6 +361,8 @@ $(function(){
                 </div>
               </div>
             </div>
+
+
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="submit"  class="btn btn-rose" onclick="addList()" >Save</button>
