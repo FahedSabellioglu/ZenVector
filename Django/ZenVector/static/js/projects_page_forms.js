@@ -101,6 +101,10 @@ function editDetails() {
         })
 }
 
+
+
+
+
 $(document).on('click','#editId',function () {
     var project_id = $(this).data('id');
     console.log(project_id);
@@ -233,34 +237,37 @@ function createprojectmodal(){
 
 
 
+$(document).on('click','#add-user',function () {
+    var project_id = $(this).data('id');
+    $("#InviteForm").attr('data-projectid',project_id);
+});
 
 
 
 
-//
-// $("#InviteForm").off().on('submit',function (event) {
-//     event.preventDefault();
-//
-//     var usr_email = document.getElementById('inviteMemberMail');
-//
-//     var error_control = document.getElementById('email_error_forgot');
-//
-//     error_control.style.display = 'none';
-//
-//
-//     $.ajax({
-//         type: "POST",
-//         url: "/PutTogether/InviteMember/",
-//         data: {usr_email: usr_email.value , csrfmiddlewaretoken: csrftoken},
-//         success: function (e) {
-//
-//             $('#addUserModal').modal('hide');
-//             Location.reload(true);
-//         },
-//         error: function (e) {
-//             error_control.innerHTML  = e.responseJSON.reason;
-//             error_control.style.display = 'block';
-//
-//         }
-//     });
-// });
+
+
+$("#InviteForm").off().on('submit',function (event) {
+    event.preventDefault();
+    var id = document.getElementById("InviteForm").getAttribute("data-projectid");
+    var users = document.getElementById('selectedUsers').value;
+
+
+    $.ajax({
+        type: "POST",
+        url: "InviteMember",
+        data: {users: users ,project_id:id, csrfmiddlewaretoken: csrftoken},
+        success: function (e) {
+            console.log("HERE");
+            //
+            // $('#addUserModal').modal('hide');
+            // Location.reload(true);
+        },
+        error: function (e) {
+            console.log("ERROR");
+            // error_control.innerHTML  = e.responseJSON.reason;
+            // error_control.style.display = 'block';
+
+        }
+    });
+});

@@ -198,9 +198,7 @@ function addList(e) {
 
     var color = document.getElementById("headerColor").value;
 
-    console.log(color);
-
-   if ($.trim(title).length  == 0){
+   if ($.trim(title).length  === 0){
         error_element.innerHTML="You can't leave the list name empty";
         error_element.style.display = 'block';
         return false;}
