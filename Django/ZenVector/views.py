@@ -421,18 +421,17 @@ def func_create_project(request):
     """""
     data = dict(request.POST)
     usrObj= Users.objects.get(email=request.user.email)
-    print usrObj,'herer chekcing'
     project = Projects(usr_email=usrObj,project_name=data['p_name'][0])
     project.save()
 
     # Default lists
-    to_do_list = state(state_name='To Do',project_id=project)
-    doing_list = state(state_name='Doing',project_id=project)
-    done_list = state(state_name='Done',project_id=project)
-
-    to_do_list.save()
-    doing_list.save()
-    done_list.save()
+    # to_do_list = state(state_name='To Do',project_id=project)
+    # doing_list = state(state_name='Doing',project_id=project)
+    # done_list = state(state_name='Done',project_id=project)
+    #
+    # to_do_list.save()
+    # doing_list.save()
+    # done_list.save()
 
 
     # to_do_default = Tasks(task_name="Default Task To Do",task_project_id=project,task_descrip ="Default Task",
@@ -516,6 +515,7 @@ def page_Projects(response, p_id):
     tasks = Tasks.objects.filter(task_project_id=proj_obj).order_by('task_position')
     states = state.objects.filter(project_id=proj_obj)
     users = Users.objects.all()
+
 
     return render(response, 'project.html', {"tasks": tasks, 'states': states, "users": users})
 
