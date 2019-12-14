@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
+    <link rel='stylesheet' href="{% static 'tagcomplete.css' %}"/>
+    <script src= "{% static 'tagcomplete.js' %}"></script>
     <!-- Modal -->
     <br>
     <br>
@@ -184,6 +186,27 @@
 
 <!-------------------------------------------------------- Add Task Modal -------------------------------------------------------->
 
+    {#    ----------------------------  JAVASCRIPT FOR SELECTBOX --------------------------- #}
+<script>
+$(function(){
+	var data = [
+		'khaledyassen@std.sehir.edu.tr',
+		'fahed@std',
+		'zeynep@std',
+	];
+
+	$(".tags_input").tagComplete({
+
+				keylimit: 1,
+				hide: false,
+				autocomplete: {
+					data: data
+				}
+		});
+});
+</script>
+{#    ----------------------------  /JAVASCRIPT FOR SELECTBOX --------------------------- #}
+
     <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -219,12 +242,15 @@
                             <i class="fas fa-title">user</i>
                           </div>
                         </div>
-                        <select id="assignedTo" class="form-control">
-                          <option selected value="empty">Choose...</option>
-                            {% for user in users %}
-                          <option value="{{ user.email }} ">{{ user.username }}</option>
-                            {% endfor %}
-                        </select>
+                      <div class="container-selectbox">
+                       <input type='text' class='tags_input'/>
+                      </div>
+{#                        <select id="assignedTo" class="form-control">#}
+{#                          <option selected value="empty">Choose...</option>#}
+{#                            {% for user in users %}#}
+{#                          <option value="{{ user.email }} ">{{ user.username }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
                       </div>
                     </div>
                     <!-- Deadline -->
