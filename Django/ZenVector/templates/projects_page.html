@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
+    <link rel='stylesheet' href="{% static 'tagcomplete.css' %}"/>
+    <script src= "{% static 'tagcomplete.js' %}"></script>
 
     <div class="container">
     <br>
@@ -10,6 +12,7 @@
     {% if allow %}
         <div style="text-align: center">
             <button class="btn btn-success btn-round btn-bg" style="display: inline-block" data-toggle="modal" onclick="createprojectmodal()" >Create Project!</button>
+
         </div>
     {% elif not allow %}
         <div style="text-align: center">
@@ -52,8 +55,6 @@
     </div>
 
 
-
-
      <!-------------------------------------------------------- Create Project Modal -------------------------------------------------------->
 
     <div class="modal fade" id="projectModal" tabindex="-1" role="dialog">
@@ -80,6 +81,9 @@
                           </div>
                           <input type="text" required id='project_name' value="" class="form-control" placeholder="Project Name...">
                         </div>
+                        <br>
+                        <div><h4 >Members:</h4></div>
+                          <input type='text' class='tags_input' />
                         <label class="label_control" id="project_name_error" style="display: none;">meaningful name please...</label>
                       </div>
                     </div>
@@ -240,7 +244,6 @@
 {#                            {% for usr in users %}#}
 {#                          <option  value="{{ usr.email }}">{{ usr.email }}</option>#}
 {#                            {% endfor %}#}
-
                     </select>
                   </div>
                 </div>
@@ -262,51 +265,63 @@
 
   <!------------------------------------------------- Add User Modal ------------------------------------------------------------>
 
+{#    ----------------------------  JAVASCRIPT FOR SELECTBOX --------------------------- #}
+<script>
+$(function(){
+	var data = [
+		'khaledyassen@std.sehir.edu.tr',
+		'fahed@std',
+		'zeynep@std',
+	];
+
+	$(".tags_input").tagComplete({
+
+				keylimit: 1,
+				hide: false,
+				autocomplete: {
+					data: data
+				}
+		});
+});
+</script>
+{#    ----------------------------  /JAVASCRIPT FOR SELECTBOX --------------------------- #}
   <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-
         <div class="modal-header">
-          <h5 class="modal-title card-title " id="add_member" data-taskid="none">Invite New Team Member</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <i class="far fa-window-close" style="color: red"></i>
-          </button>
+          <h5 class="modal-title card-title" id="add_member" data-taskid="none">Invite Your New Team Members!</h5>
+{#            <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#            <i class="far fa-window-close" style="color: red"></i>#}
+{#          </button>#}
         </div>
-
         <div class="modal-body">
-          <div class="row">
-            <div class="col mr-auto">
               <form class="form" id="InviteForm" method="" action="">
                   {%  csrf_token %}
                 <!-- Invite Team Members -->
                 <div class="form-group">
-                  <div class="input-group">
+                  <div class="input-group_add_mem">
                     <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="fas fa-title">user</i>
-                      </div>
+{#                      <div class="input-group-text_add_mem">#}
+{#                        <i class="fas fa-title">user</i>#}
+{#                      </div>#}
                     </div>
-                    <input type="email" id="inviteMemberMail" class="form-control" style="margin-right: 1rem;" placeholder="Send an invite link via email to new members" required>
-                    <button type="submit" class="btn btn-sm btn-primary btn-round"  data-dismiss="modal" onclick="sendEmail()">Send</button>
+                      <div class="container-selectbox">
+                          <input type='text' class='tags_input' value="khaledyassen@std.sehir.edu.tr, fahedsaaban@std.sehir.edu.tr, zeynepaykuz@std.sehir.edu.tr" />
+                      </div>
                   </div>
                   <label class="ml-auto mr-auto" id="email_error_invite" style="display: none;">email exists</label>
                 </div>
               </form>
-            </div>
-          </div>
         </div>
-
-
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-rose btn-round" data-dismiss="modal" onclick="addUser()">Save</button>
+          <button type="button" class="btn btn-secondary btn-round btn-sm" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success btn-round btn-sm" data-dismiss="modal" onclick="addUser()">Save</button>
         </div>
       </div>
     </div>`
   </div>
 
 <!-------------------------------------------------------- End of Add User Modal -------------------------------------------------------->
-
 
  <!-------------------------------------------------------- Confirm the Deletion  Modal -------------------------------------------------------->
 
@@ -332,10 +347,7 @@
 
   <!------------------------------------------------- End of Confirm the Deletion  Modal ------------------------------------------------------------>
 
-
 {% endblock %}
-
-
 
 {% block scripts %}
 

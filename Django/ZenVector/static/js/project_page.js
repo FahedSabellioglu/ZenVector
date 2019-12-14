@@ -202,27 +202,29 @@ function addList(e) {
     var title = document.getElementById("listTitle").value;
     error_element.innerHTML="You can't leave the list name empty";
 
-      var color = document.getElementById("headerColor").value;
+    var color = document.getElementById("headerColor").value;
+
+    console.log(color);
 
    if ($.trim(title).length  == 0){
         error_element.innerHTML="You can't leave the list name empty";
         error_element.style.display = 'block';
         return false;}
-       $.ajax({
-        type:'POST',
-        url:"NewState/",
-        data:{name:title,color:color,csrfmiddlewaretoken:csrftoken},
-        success:function (e) {
-            location.reload(true)
-        },
-        error:function (e) {
-            console.log(e);
-            error_element.innerHTML = e.responseJSON.message;
-            error_element.style.display = 'block';
-
-
-        }
-    });
+       // $.ajax({
+       //  type:'POST',
+       //  url:"NewState/",
+       //  data:{name:title,color:color,csrfmiddlewaretoken:csrftoken},
+       //  success:function (e) {
+       //      location.reload(true)
+       //  },
+       //  error:function (e) {
+       //      console.log(e);
+       //      error_element.innerHTML = e.responseJSON.message;
+       //      error_element.style.display = 'block';
+       //
+       //
+       //  }
+    // });
   // document.getElementById("board").innerHTML +=
   //     "<div class='col-xs-6 col-md-3'><div class='card-list'><div class='card-header'><h4 class='card-list-title'>"
   //     +title+"</h4></div><div class='card-list-body text-center' id="+title+"><div class='card'><div class='card-header "+

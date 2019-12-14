@@ -326,12 +326,31 @@ function dragula (initialContainers, options) {
 
 
       to_list_id = target.getAttribute("id");
-      console.log(from_list_id);
-      console.log(to_list_id);
-      console.log(task_id);
-
       var from_positions = getPositions(from_list_id);
       var to_positions = getPositions(to_list_id);
+
+      var color_new_list = document.getElementById(to_list_id).getAttribute('data-color');
+      var old_color_list = document.getElementById(from_list_id).getAttribute('data-color');
+
+
+      console.log(color_new_list);
+      console.log(old_color_list);
+      if (! color_new_list.includes("#"))
+      {
+        color_new_list = "#" + color_new_list;
+      }
+
+      if (! old_color_list.includes("#"))
+      {
+        old_color_list = "#" + old_color_list;
+      }
+      $.each(to_positions,function(index,value){
+          document.getElementById(index).children[0].style.background = color_new_list;
+      });
+
+      $.each(from_positions,function(index,value){
+          document.getElementById(index).children[0].style.background = old_color_list;
+      });
 
 
       $.ajax({
