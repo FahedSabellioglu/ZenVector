@@ -435,19 +435,19 @@ def func_create_project(request):
     done_list.save()
 
 
-    to_do_default = Tasks(task_name="Default Task To Do",task_project_id=project,task_descrip ="Default Task",
-                     task_given_by = project.usr_email,task_state=to_do_list,task_deadline="2019-02-09",
-                     task_position=0)
-    doing_default = Tasks(task_name="Default Task Doing",task_project_id=project,task_descrip ="Default Task",
-                     task_given_by = project.usr_email,task_state=doing_list,task_deadline="2019-02-09",
-                     task_position=0)
-    done_default = Tasks(task_name="Default Task Done",task_project_id=project,task_descrip ="Default Task",
-                     task_given_by = project.usr_email,task_state=done_list,task_deadline="2019-02-09",
-                     task_position=0)
-
-    to_do_default.save()
-    doing_default.save()
-    done_default.save()
+    # to_do_default = Tasks(task_name="Default Task To Do",task_project_id=project,task_descrip ="Default Task",
+    #                  task_given_by = project.usr_email,task_state=to_do_list,task_deadline="2019-02-09",
+    #                  task_position=0)
+    # doing_default = Tasks(task_name="Default Task Doing",task_project_id=project,task_descrip ="Default Task",
+    #                  task_given_by = project.usr_email,task_state=doing_list,task_deadline="2019-02-09",
+    #                  task_position=0)
+    # done_default = Tasks(task_name="Default Task Done",task_project_id=project,task_descrip ="Default Task",
+    #                  task_given_by = project.usr_email,task_state=done_list,task_deadline="2019-02-09",
+    #                  task_position=0)
+    #
+    # to_do_default.save()
+    # doing_default.save()
+    # done_default.save()
 
     rtn  = JsonResponse({'message':"created","project_id" :project.project_id})
     rtn.status_code = 200

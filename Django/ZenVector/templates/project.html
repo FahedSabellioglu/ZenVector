@@ -55,7 +55,12 @@
 
 <!----------------------------------------------------  Lists ---------------------------------------------------------->
       {% for element in states %}
-        <div class="col-xs-6 col-md-3 col-lg-2">
+          {% if tasks %}
+            <div class="col-xs-6 col-md-3 col-lg-3" style="min-width: 20.8rem;max-width: 2%" >
+         {% else %}
+            <div class="col-xs-6 col-md-3 col-lg-3" style="min-width: 20.8rem;max-width: 15%">
+            {% endif %}
+
         <div class="card-list" >
           <div class="card-header">
             <h4 class="card-list-title">{{element.state_name}}</h4>
@@ -65,7 +70,7 @@
             <!-- task card -->
               {% for item in tasks %}
                   {% if item.task_state == element %}
-                    <div class="card" id="{{ item.task_id }}">
+                    <div class="card" id="{{ item.task_id }}" style="max-width: 90rem">
                         <div  class="card-header card-header-success2">
                             {{item.task_name}}
                             <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm menu-button" data-id="{{ item.task_id }}" data-toggle="modal" data-target="#detailModal">
