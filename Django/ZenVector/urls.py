@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^PutTogether/Projects/(?P<p_id>\d+)/ChangeTaskDetails/',views.change_task_details),
     url(r"^PutTogether/Projects/ChangeProjectDetails/$",views.change_project_details),
     url(r"ContactUs/$",views.contact_us),
+    url(r'^PutTogether/Projects/InviteMember$', views.add_users),
 ]
 #
 # url(r'^Projects/')

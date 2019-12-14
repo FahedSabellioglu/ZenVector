@@ -530,10 +530,7 @@ def page_User(response):
 def display_projects(response):
     usrobj = Users.objects.get(email=response.user)
     proj = Projects.objects.filter(usr_email=usrobj)
-    # for i in proj:
-    #     print i.creation_time
-    #     print i.creation_date
-
+    users = [user.email for user in Users.objects.exclude(email=usrobj.email)]
     allow = True
     if (usrobj.account_type == 'F' and len(proj) == 5):
         allow = False
@@ -542,17 +539,42 @@ def display_projects(response):
     elif usrobj.account_type == 'B':
         allow = True
 
-    return render(response,'projects_page.html',{"projects":proj,'allow':allow})
+    all_projects = list(proj)+[p.project_id for p in UsrProjects.objects.filter(usr_email=usrobj)]
+
+    return render(response,'projects_page.html',{"projects":all_projects,'allow':allow,'users':users})
+
+
+@login_required(login_url='/PutTogether/')
+def add_users(response):
+    data = dict(response.POST)
+
+    users = data['users'][0].split(', ')
+    project_obj = Projects.objects.get(project_id=data['project_id'][0])
+    for user in users:
+        if len(Users.objects.filter(email=user)) != 0:
+            userObj = Users.objects.get(email=user)
+            if len(UsrProjects.objects.filter(usr_email=userObj)) == 0:
+                usrProjObj = UsrProjects(usr_email=userObj,project_id=project_obj)
+                usrProjObj.save()
+            else:
+                usrDeleteObj = UsrProjects.objects.get(usr_email=userObj)
+                usrDeleteObj.delete()
+                usrDeleteObj.save()
+            #TODO EMAIL
+        #     print "DOES NOT EXIST"
+        #     #TODO EMAIL
+        # else:
+
+    rtn = JsonResponse({"message": "added"})
+    rtn.status_code = 200
+    return rtn
 
 
 @login_required(login_url='/PutTogether/')
 def change_project_details(request):
     data = dict(request.POST)
-    print data
     proj_obj = Projects.objects.get(project_id=data['project_id'][0])
-    print proj_obj
     proj_obj.project_name=data['title'][0]
-    print proj_obj.project_name
     proj_obj.save()
 
     # proj_obj = Projects.objects.get(project_id=p_id)

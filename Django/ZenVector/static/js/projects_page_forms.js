@@ -101,6 +101,10 @@ function editDetails() {
         })
 }
 
+
+
+
+
 $(document).on('click','#editId',function () {
     var project_id = $(this).data('id');
     console.log(project_id);
@@ -207,3 +211,63 @@ function createprojectmodal(){
        })
 }
 
+
+// function sendEmail() {
+//     console.log("send clicked");
+//     var email = document.getElementById('inviteNewMember').value;
+//     console.log(email);
+//
+//        $.ajax({
+//        type:"POST",
+//        url:"sendEmail/",
+//        data:{csrfmiddlewaretoken:csrftoken},
+//        // data:{email:email, csrfmiddlewaretoken:csrftoken},
+//        success:function () {
+//            location.reload(true);
+//        },
+//        error:function () {
+//            console.log("NOT CORRECT");
+//        }
+//     })
+//
+// }
+
+
+
+
+
+
+$(document).on('click','#add-user',function () {
+    var project_id = $(this).data('id');
+    $("#InviteForm").attr('data-projectid',project_id);
+});
+
+
+
+
+
+
+$("#InviteForm").off().on('submit',function (event) {
+    event.preventDefault();
+    var id = document.getElementById("InviteForm").getAttribute("data-projectid");
+    var users = document.getElementById('selectedUsers').value;
+
+
+    $.ajax({
+        type: "POST",
+        url: "InviteMember",
+        data: {users: users ,project_id:id, csrfmiddlewaretoken: csrftoken},
+        success: function (e) {
+            console.log("HERE");
+            //
+            // $('#addUserModal').modal('hide');
+            // Location.reload(true);
+        },
+        error: function (e) {
+            console.log("ERROR");
+            // error_control.innerHTML  = e.responseJSON.reason;
+            // error_control.style.display = 'block';
+
+        }
+    });
+});

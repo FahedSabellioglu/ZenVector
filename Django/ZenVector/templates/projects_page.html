@@ -33,7 +33,7 @@
                             <h4 class="card-title" style="position: absolute; top: 0.65rem;"><a  href="{% url 'tasks' p_id=project.project_id %}">
                                 {{project.project_name}}</a>
                             </h4>
-                            <a data-toggle="dropdown" id="dropdownmenu-click" style="position: absolute; width:1.5rem; top:1.5rem; right: 0rem;" aria-haspopup="true" aria-expanded="false">
+                            <a data-toggle="dropdown" id="dropdownmenu-click" data-id="{{ project.project_id }}" style="position: absolute; width:1.5rem; top:1.5rem; right: 0rem;" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-title" >ellipsis-v</i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" style="min-width: 3rem;" >
@@ -268,11 +268,12 @@
 {#    ----------------------------  JAVASCRIPT FOR SELECTBOX --------------------------- #}
 <script>
 $(function(){
-	var data = [
-		'khaledyassen@std.sehir.edu.tr',
-		'fahed@std',
-		'zeynep@std',
-	];
+
+
+    var data = [{% for user in users %}
+        '{{ user }}',
+        {% endfor %} ];
+
 
 	$(".tags_input").tagComplete({
 
@@ -295,7 +296,7 @@ $(function(){
 {#          </button>#}
         </div>
         <div class="modal-body">
-              <form class="form" id="InviteForm" method="" action="">
+              <form class="form" id="InviteForm" data-projectid="">
                   {%  csrf_token %}
                 <!-- Invite Team Members -->
                 <div class="form-group">
@@ -305,12 +306,17 @@ $(function(){
 {#                        <i class="fas fa-title">user</i>#}
 {#                      </div>#}
                     </div>
-                      <div class="container-selectbox">
-                          <input type='text' class='tags_input' value="khaledyassen@std.sehir.edu.tr, fahedsaaban@std.sehir.edu.tr, zeynepaykuz@std.sehir.edu.tr" />
+                      <div class="container-selectbox" >
+                          <input id="selectedUsers" type='text' class='tags_input' value="khaledyassen@std.sehir.edu.tr, fahedsaaban@std.sehir.edu.tr, zeynepaykuz@std.sehir.edu.tr" />
                       </div>
                   </div>
                   <label class="ml-auto mr-auto" id="email_error_invite" style="display: none;">email exists</label>
                 </div>
+
+              <div class="modal-footer justify-content-center" style="margin-top: -1rem; margin-bottom: -0.5rem;">
+                      <button type="button" class="btn btn-secondary btn-round btn-sm" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-success btn-round btn-sm">Invite</button>
+              </div>
               </form>
         </div>
         <div class="modal-footer">
