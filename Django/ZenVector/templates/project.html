@@ -65,13 +65,13 @@
           <div class="card-header">
             <h4 class="card-list-title">{{element.state_name}}</h4>
           </div>
-          <div class="card-list-body text-center"id="{{element.state_name}}">
+          <div class="card-list-body text-center"id="{{element.state_name}}"  data-color = {{ element.state_color  }}>
             <!-- task card -->
             <!-- task card -->
               {% for item in tasks %}
                   {% if item.task_state == element %}
-                    <div class="card" id="{{ item.task_id }}" style="max-width: 90rem">
-                        <div  class="card-header card-header-success2">
+                    <div class="card" id="{{ item.task_id }}" style="max-width: 90rem;">
+                        <div  class="card-header card-header-success2" style="background: #{{element.state_color }}">
                             {{item.task_name}}
                             <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm menu-button" data-id="{{ item.task_id }}" data-toggle="modal" data-target="#detailModal">
                                 <i class="material-icons">menu</i>
@@ -339,9 +339,9 @@
           </div>
         </div>
       </div>
+  </div>
 
 <!---------------------------------------------------- End of Add List Modal -------------------------------------------------------->
-
 
 
 
@@ -368,3 +368,8 @@
 
 
    {% endblock %}
+
+    {% block footer %}
+
+    {% endblock %}
+
