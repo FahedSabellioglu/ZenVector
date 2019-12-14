@@ -1,20 +1,13 @@
-
-/*body{*/
-/*    background:#E3EEEF;*/
-    /*font-family: 'Open Sans';*/
-/*}*/
-
 .container-selectbox{
     width:80%;
     margin:150px auto;
 }
-/*.input-group-text_add_mem{*/
-/*    margin-top: -100px;*/
-/*}*/
-.input-group_add_mem{
+
+.input-group_add_mem {
     margin-top: -135px;
     margin-bottom: -120px;
 }
+
 
 input{
     margin:0 auto;
