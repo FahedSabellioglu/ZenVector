@@ -141,6 +141,8 @@ function addTask() {
       var status = document.getElementById("status").value;
 
       var dateControl = document.getElementById("task_form_deadline").value;
+      console.log(dateControl);
+
 
 
       if ($.trim(title).length < 2)
@@ -155,6 +157,12 @@ function addTask() {
             deadline_error.style.display = 'block';
             return false;
       }
+      //
+      // if ($.trim(dateControl).length == 0){
+      //       deadline_error.innerHTML = "Please choose the deadline";
+      //       deadline_error.style.display = 'block';
+      //       return false;
+      // }
 
       if ($.trim(detail).length < 5){
           descrip_error.innerHTML = "Please provide a meaningful description";
@@ -174,8 +182,6 @@ function addTask() {
           }
 
       });
-
-
 
       // document.getElementById(status).innerHTML +=
       //     "<div class='card'><div class='card-header card-header-danger2'>" + title +
@@ -232,6 +238,28 @@ $("#addTask").click(function(){
 $("#addTaskModal").modal({backdrop: "static"});
 });
 
+
+
+$(function(){
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    var year1 = dtToday.getFullYear()+10;
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    var minDate = year + '-' + month + '-' + day;
+    var maxDate = year1 + '-' + month + '-' + day;
+    $('#task_form_deadline').attr('min', minDate);
+    $('#task_form_deadline').attr('max', maxDate);
+
+    $('#task_edit_deadline').attr('min', minDate);
+    $('#task_edit_deadline').attr('max', maxDate);
+});
+
+
 $("#addList").click(function(){
 $("#addListModal").modal({backdrop: "static"});
 });
@@ -269,3 +297,21 @@ $("#addListModal").modal({backdrop: "static"});
 //   container.className.replace("ex-over", "");
 //   console.log(el.className);
 // });
+
+
+
+ function deleteList(){
+    var list_id = $("#deleteListId").data('id');
+    console.log(list_id);
+       $.ajax({
+           type:"POST",
+           url:"DeleteList/",
+           data:{list_id:list_id,csrfmiddlewaretoken:csrftoken},
+           success:function () {
+               location.reload(true);
+           },
+           error:function () {
+               console.log("NOT CORRECT");
+           }
+       })
+}

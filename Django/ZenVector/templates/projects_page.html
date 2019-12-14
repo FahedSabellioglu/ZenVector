@@ -249,10 +249,10 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-danger" style="position: absolute; left: 1rem;" id="deleteId" data-target="#deleteConfirmation">Delete</button>
+          <button class="btn btn-danger btn-round" style="position: absolute; left: 1rem;" id="deleteId" data-target="#deleteConfirmation">Delete</button>
 {#          <button class="btn btn-danger" style="position: absolute; left: 1rem;" id="deleteId" data-target="#deleteConfirmation">Delete</button>#}
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-rose" data-dismiss="modal" onclick="editDetails()">Save</button>
+          <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary btn-round" data-dismiss="modal" onclick="editDetails()">Save</button>
         </div>
       </div>
     </div>`
@@ -287,7 +287,7 @@
                       </div>
                     </div>
                     <input type="email" id="inviteMemberMail" class="form-control" style="margin-right: 1rem;" placeholder="Send an invite link via email to new members" required>
-                    <button type="submit" class="btn btn-sm btn-rose"  data-dismiss="modal" onclick="sendEmail()">Send</button>
+                    <button type="submit" class="btn btn-sm btn-primary btn-round"  data-dismiss="modal" onclick="sendEmail()">Send</button>
                   </div>
                   <label class="ml-auto mr-auto" id="email_error_invite" style="display: none;">email exists</label>
                 </div>
@@ -298,8 +298,8 @@
 
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-rose" data-dismiss="modal" onclick="addUser()">Save</button>
+          <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-rose btn-round" data-dismiss="modal" onclick="addUser()">Save</button>
         </div>
       </div>
     </div>`
@@ -323,19 +323,14 @@
             <p>Are you sure you want to delete?</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" onclick="deleteProject()">Yes</button>
+            <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary btn-round" onclick="deleteProject()">Yes</button>
           </div>
         </div>
       </div>
     </div>
 
   <!------------------------------------------------- End of Confirm the Deletion  Modal ------------------------------------------------------------>
-
-
-
-
-
 
 
 {% endblock %}

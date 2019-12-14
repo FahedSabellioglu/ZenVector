@@ -707,6 +707,28 @@ def Email_PasswordResetCode(usrEmail,code):
 
     return msg.as_string()
 
+def Email_Contact_Us(usrEmail,subject,message):
+    msg = MIMEMultipart()
+    msg['From'] = 'puttogethersoftware@gmail.com'
+    msg['To'] = 'PutTogether Team'
+    msg['Subject'] = subject
+    message = """
+                <!DOCTYPE html>
+                    <html>
+                    <body style="padding-top: 20px; background-color: #f5f5f5;">
+
+                    <div style="width:500px; margin: auto; background-color: white; border-radius: 5px; border-color: #59A61E; border-style: solid;">
+                        <div style="text-align: center; color: white; background-color: #59A61E">
+                        <img style="align-items: ;" src="https://res.cloudinary.com/di6zpszmk/image/upload/v1575834908/puttogether1-03_xzhhab.png" width="150" height="100">
+                        </div>
+                        <div style="padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                        <p style="color: black;">{message}</p>
+                        </div>
+                    </div>
+                </body>
+              """.format(message=message)
+    msg.attach(MIMEText(message, 'html'))
+    return msg.as_string()
 
 
 def passwordRestOut(response,email,code):
@@ -722,3 +744,43 @@ def passwordRestOut(response,email,code):
 
     print email,code
     return render(response,'index.html',{"Available":False})
+
+
+
+@login_required(login_url='/PutTogether/')
+def func_delete_list(response,p_id):
+    """:param
+        p_id: project id
+        :returns
+        json response of 200(succeed) status code
+    """
+    data = dict(response.POST)
+    proj_obj = Projects.objects.get(project_id=p_id)
+    stat=state.objects.get(state_id=data['list_id'][0])
+    task_obj = Tasks.objects.filter(task_project_id=proj_obj,task_state=stat)
+
+    for i in task_obj:
+        i.delete()
+    stat.delete()
+
+    response = JsonResponse({"message":"task has been deleted"})
+    response.status_code = 200
+    return response
+
+
+
+def contact_us(response):
+    data = dict(response.POST)
+    message=data['message'][0]
+    subject=data['subject'][0]
+    if data['email'][0]=="":
+        email=response.user.email
+    else:
+        email=data['email'][0]
+
+        message = Email_Contact_Us(email,subject,message)
+        Email_SendServer(message,'puttogethersoftware@gmail.com')
+
+    response = JsonResponse({"message":"mail is send"})
+    response.status_code = 200
+    return response

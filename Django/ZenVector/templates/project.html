@@ -64,6 +64,9 @@
         <div class="card-list" >
           <div class="card-header">
             <h4 class="card-list-title">{{element.state_name}}</h4>
+              <a data-id="{{ element.state_id }}" id="deleteListId" style="position: absolute; width:1.5rem; top:1.5rem; right: 0rem;" data-toggle="modal" data-target="#deleteConfirmation">
+                  <i class="fas fa-title">trash-alt</i>
+              </a>
           </div>
           <div class="card-list-body text-center"id="{{element.state_name}}">
             <!-- task card -->
@@ -169,9 +172,9 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-danger" style="position: absolute; left: 1rem;" onclick="deleteTask()">Delete</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit"  class="btn btn-rose" onclick="changeDetails()" >Save</button>
+              <button class="btn btn-danger btn-round" style="position: absolute; left: 1rem;" onclick="deleteTask()">Delete</button>
+              <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">Close</button>
+              <button type="submit"  class="btn btn-primary btn-round" onclick="changeDetails()" >Save</button>
             </div>
           </div>
         </div>`
@@ -278,8 +281,8 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" id=addTask class="btn btn-rose"  onclick="addTask()">Save</button>
+              <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">Close</button>
+              <button type="submit" id=addTask class="btn btn-primary btn-round"  onclick="addTask()">Save</button>
             </div>
           </div>
         </div>
@@ -333,8 +336,8 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit"  class="btn btn-rose" onclick="addList()" >Save</button>
+              <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">Close</button>
+              <button type="submit"  class="btn btn-primary btn-round" onclick="addList()" >Save</button>
             </div>
           </div>
         </div>
@@ -342,9 +345,29 @@
 
 <!---------------------------------------------------- End of Add List Modal -------------------------------------------------------->
 
+  <!-------------------------------------------------------- Confirm the Deletion  Modal -------------------------------------------------------->
 
+    <div class="modal fade" id="deleteConfirmation" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title card-title" id="stateId" data-projectid="none">Confirm the Deletion </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <i class="far fa-window-close" style="color: red"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary btn-round" onclick="deleteList()">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-
+  <!------------------------------------------------- End of Confirm the Deletion  Modal ------------------------------------------------------------>
 
 
 {% endblock %}
@@ -353,7 +376,6 @@
        <script>
               var csrftoken = '{{ csrf_token }}';
        </script>
-
 
        <script src="{% static 'js/dragula.js' %}"></script>
        <script src="{% static 'js/jscolor.js' %}"></script>

@@ -178,7 +178,7 @@ $(document).on('click','#deleteId',function () {
     var project_id = $(this).data('id');
     $('#edit_project_title').attr("projectid",project_id);
     var project_id = $("#edit_project_title").attr('projectid')
-    $('#detailModal').modal('hide');
+
     $('#deleteConfirmation').data('id',project_id);
     $('#deleteConfirmation').modal('show');
 });
@@ -207,60 +207,3 @@ function createprojectmodal(){
        })
 }
 
-
-// function sendEmail() {
-//     console.log("send clicked");
-//     var email = document.getElementById('inviteNewMember').value;
-//     console.log(email);
-//
-//        $.ajax({
-//        type:"POST",
-//        url:"sendEmail/",
-//        data:{csrfmiddlewaretoken:csrftoken},
-//        // data:{email:email, csrfmiddlewaretoken:csrftoken},
-//        success:function () {
-//            location.reload(true);
-//        },
-//        error:function () {
-//            console.log("NOT CORRECT");
-//        }
-//     })
-//
-// }
-
-
-
-
-
-
-
-
-
-
-//
-// $("#InviteForm").off().on('submit',function (event) {
-//     event.preventDefault();
-//
-//     var usr_email = document.getElementById('inviteMemberMail');
-//
-//     var error_control = document.getElementById('email_error_forgot');
-//
-//     error_control.style.display = 'none';
-//
-//
-//     $.ajax({
-//         type: "POST",
-//         url: "/PutTogether/InviteMember/",
-//         data: {usr_email: usr_email.value , csrfmiddlewaretoken: csrftoken},
-//         success: function (e) {
-//
-//             $('#addUserModal').modal('hide');
-//             Location.reload(true);
-//         },
-//         error: function (e) {
-//             error_control.innerHTML  = e.responseJSON.reason;
-//             error_control.style.display = 'block';
-//
-//         }
-//     });
-// });

@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^PutTogether/Projects/(?P<p_id>\d+)/NewState/$',views.fun_new_state,name='project_tasks'),
     url(r'^PutTogether/Projects/(?P<p_id>\d+)/NewTask/$',views.fun_new_task),
     url(r'^PutTogether/Projects/(?P<p_id>\d+)/DeleteTask/$',views.func_delete_task),
+    url(r'^PutTogether/Projects/(?P<p_id>\d+)/DeleteList/$',views.func_delete_list),
     url(r'^PutTogether/Projects/DeleteProject/$', views.func_delete_project),
     url(r'^PutTogether/PasswordChange/$', views.change_password),
     url(r'^PutTogether/Projects/(?P<p_id>\d+)/MoveTask/$', views.move_task),
@@ -30,8 +31,8 @@ urlpatterns = [
     url(r"^PutTogether/PasswordResetOut/(?P<email>[\w\.-]+@[\w\.-]+(\.[\w]+)+)/(?P<code>\w+)$", views.passwordRestOut),
     url(r"^PutTogether/PasswordReset/", views.ResetPassword),
     url(r'^PutTogether/Projects/(?P<p_id>\d+)/ChangeTaskDetails/',views.change_task_details),
-    url(r"^PutTogether/Projects/ChangeProjectDetails/$",views.change_project_details)
-    # url(r'^PutTogether/Projects/sendEmail/$', views.send_invite_email),
+    url(r"^PutTogether/Projects/ChangeProjectDetails/$",views.change_project_details),
+    url(r"ContactUs/$",views.contact_us),
 ]
 #
 # url(r'^Projects/')

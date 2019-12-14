@@ -5,7 +5,7 @@
 {#<div style="clear: both">#}
 
 {#<div id = "wrapper-for-footer" ">#}
-<footer class="footer" style="position: static; text-align: center; float: bottom; padding-top: 100%">
+<footer class="footer">
         <div class="container-fluid">
             <nav class="float-left">
             <ul>
@@ -22,7 +22,7 @@
         <div class="footer-section about">
 {#              <a class="Socials" href="#"><i class="fab fa-facebook fa-lg"></i></a>#}
 {#              <a class="Socials" href="#"><i class="fab fa-twitter fa-lg"></i></a>#}
-              <a class="Socials" href="#"><i class="fab fa-google fa-lg "></i></a>
+              <a class="Socials" data-toggle="modal" data-target="#contactUs"><i class="fab fa-google fa-lg "></i></a>
 {#              <a class="Socials" href="#"><i class="fab fa-linkedin fa-lg"></i></a>#}
               <hr class="my-4">
           <p>
@@ -40,3 +40,52 @@
       </footer>
 {#    </div>#}
 {#    </div>#}
+
+<!------------------------------------------------------- Contact Us Modal------------------------------------------------------>
+    {% include 'Forms/ContactUs.html' %}
+
+
+
+{% block scripts %}
+
+    <script>
+        $("#ContactUsForm").off().on('submit',function (event) {
+        event.preventDefault();
+
+        var email="";
+
+        {% if not request.user.is_authenticated %}
+            var email = document.getElementById('contact_email').value;
+            console.log(email);
+        {% endif %}
+
+        var subject = document.getElementById('contact_subject').value;
+        console.log(subject);
+
+        var message = document.getElementById('contact_message').value;
+        console.log(message);
+
+
+        {#email_error.style.display = 'none';#}
+        {#subject_error.style.display = 'none';#}
+        {#message_error.style.display = 'none';#}
+
+
+        $.ajax({
+            type: "POST",
+            url: "ContactUs/",
+            data: {message:message, email:email, subject:subject, csrfmiddlewaretoken: csrftoken},
+            success: function () {
+                location.reload(true);
+            },
+            error: function () {
+                console.log("NOT CORRECT");
+            }
+        })
+    });
+    </script>
+
+
+
+{% endblock %}
+
