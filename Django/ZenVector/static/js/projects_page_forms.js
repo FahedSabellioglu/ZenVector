@@ -69,23 +69,8 @@ $("#upgradeForm").off().on('submit',function (event) {
             console.log("error");
         }
     });
-    // $.ajax({
-    //     type: "POST",
-    //     url: "CreateProject/",
-    //     // usr_email: '{{ request.user.email }}',
-    //     data: { csrfmiddlewaretoken: csrftoken, p_name: project_name},
-    //     success: function (e) {
-    //         // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
-    //         location.reload(true);
-    //
-    //     },
-    //     error: function () {
-    //         console.log("error");
-    //     }
-    // });
 });
 
-// });
 
 
 $("#editModal").on('submit',function (e) {
@@ -129,9 +114,9 @@ $(document).on('click','#editId',function () {
     var createdBy = element.getElementsByTagName('p')[0].innerHTML;
     var createdBy = createdBy.split(':')[1];
     console.log(createdBy);
-    var nMembers = element.getElementsByTagName('p')[1].innerHTML;
-    var nMembers = nMembers.split(':')[1];
-    console.log(nMembers);
+    // var nMembers = element.getElementsByTagName('p')[1].innerHTML;
+    // var nMembers = nMembers.split(':')[1];
+    // console.log(nMembers);
     var nTasks = element.getElementsByTagName('p')[2].innerHTML;
     var nTasks = nTasks.split(':')[1];
     console.log(nTasks);
@@ -191,7 +176,8 @@ function formatDate(date) {
 
 $(document).on('click','#deleteId',function () {
     var project_id = $(this).data('id');
-    console.log(project_id);
+    $('#edit_project_title').attr("projectid",project_id);
+    var project_id = $("#edit_project_title").attr('projectid')
     $('#detailModal').modal('hide');
     $('#deleteConfirmation').data('id',project_id);
     $('#deleteConfirmation').modal('show');
