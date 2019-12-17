@@ -11,6 +11,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from django.contrib.auth import update_session_auth_hash
 import json
+from django.core import serializers
+
 """Password Resetting"""
 def forgot_pass(request):
     """
@@ -183,6 +185,15 @@ def fun_new_task(response,p_id):
                      task_position=task_position)
     new_task.save()
 
+    for user in data['assign_to'][0].strip().split(","):
+        if len(Users.objects.filter(email=user.strip())) != 0:
+            usrTask = UsrTasks(task_id=new_task,usr_email=Users.objects.get(email=user.strip()))
+            usrTask.save()
+            print "NEW USER TO TASK"
+        else:
+            print "NEW USER TO APP"
+        print (user,'here')
+
     response = JsonResponse({})
     response.status_code = 200
     return response
@@ -213,12 +224,9 @@ def change_task_details(request,p_id):
         json response of 200(succeed) status code
     """
     data = dict(request.POST)
-
     proj_obj = Projects.objects.get(project_id=p_id)
     state_obj = state.objects.get(state_id=data['status'][0])
-
     task_obj = Tasks.objects.get(task_id=data['task_id'][0])
-
     task_obj.task_state = state_obj
     task_obj.task_deadline = data['time'][0]
     task_obj.task_descrip = data['detail'][0]
@@ -375,7 +383,10 @@ def upgrade_account(request):
     """""
     data = dict(request.POST)
     usrObj = Users.objects.get(email=request.user)
-    usrObj.account_type = data['account_type'][0]
+    if usrObj.account_type == 'F':
+        usrObj.account_type = "P"
+    elif usrObj.account_type == 'P':
+        usrObj.account_type = "B"
     usrObj.save()
 
     rtn = JsonResponse({"message":"has been upgraded"})
@@ -511,17 +522,34 @@ def func_delete_account(request):
 @login_required(login_url='/PutTogether/')
 def page_Projects(response, p_id):
     proj_obj = Projects.objects.get(project_id=p_id)
+    proj_users = [str(usrProjobj.usr_email.email) for usrProjobj in UsrProjects.objects.filter(project_id=proj_obj)] + [str(proj_obj.usr_email.email)]
+    if str(response.user) not  in proj_users:
+
+        return render(response, '404.html')
 
     tasks = Tasks.objects.filter(task_project_id=proj_obj).order_by('task_position')
     states = state.objects.filter(project_id=proj_obj)
     users = Users.objects.all()
 
-
     return render(response, 'project.html', {"tasks": tasks, 'states': states, "users": users})
 
 @login_required(login_url='/PutTogether/')
-def page_User(response):
+def task_users(response,p_id):
+    data = dict(response.GET)
 
+    task_obj = Tasks.objects.get(task_id=data['taskid'][0])
+    task_users =  [usrTask.usr_email for usrTask in UsrTasks.objects.filter(task_id=task_obj)]
+    ser_users = serializers.serialize('json', list(task_users))
+    rtn = JsonResponse({"message": "task users",'users':ser_users})
+    rtn.status_code = 200
+
+    return rtn
+
+
+
+
+@login_required(login_url='/PutTogether/')
+def page_User(response):
     return render(response,'user.html')
 
 
@@ -547,27 +575,49 @@ def display_projects(response):
 @login_required(login_url='/PutTogether/')
 def add_users(response):
     data = dict(response.POST)
-
-    users = data['users'][0].split(', ')
+    users = map(lambda x:x.strip(),data['users'][0].split(','))
     project_obj = Projects.objects.get(project_id=data['project_id'][0])
+    proj_users = [user.usr_email for user in UsrProjects.objects.filter(project_id=project_obj)]
+    delete_proj_users = [userobj for userobj in proj_users if userobj.email not in users]
+
+    print len(UsrProjects.objects.filter(project_id=project_obj)),'old'
+    for userobj in delete_proj_users:
+        proj_usr = UsrProjects.objects.filter(usr_email=userobj)
+        proj_usr.delete()
+        print "DELETE USER"
+
+
+    print len(UsrProjects.objects.filter(project_id=project_obj)),'new'
+
     for user in users:
-        if len(Users.objects.filter(email=user)) != 0:
-            userObj = Users.objects.get(email=user)
-            if len(UsrProjects.objects.filter(usr_email=userObj)) == 0:
+        if len(Users.objects.filter(email=str(user))) != 0:
+            userObj = Users.objects.get(email=str(user))
+            if userObj not in proj_users:
+                if len(UsrProjects.objects.filter(project_id=project_obj)) == 5:
+                    rtn = JsonResponse({"message": "Not Allow"})
+                    rtn.status_code = 200
+                    return rtn
                 usrProjObj = UsrProjects(usr_email=userObj,project_id=project_obj)
                 usrProjObj.save()
-            else:
-                usrDeleteObj = UsrProjects.objects.get(usr_email=userObj)
-                usrDeleteObj.delete()
-                usrDeleteObj.save()
-            #TODO EMAIL
-        #     print "DOES NOT EXIST"
-        #     #TODO EMAIL
-        # else:
+                print "NEW USER TO PROJECT"
+
+        else:
+            print "NEW USER TO APP"
+            #TODO NEW USER
 
     rtn = JsonResponse({"message": "added"})
     rtn.status_code = 200
     return rtn
+
+@login_required(login_url='/PutTogether/')
+def get_users(request):
+    project_ID = dict(request.GET)['project_id'][0]
+    user_projects = UsrProjects.objects.filter(project_id=Projects.objects.get(project_id=project_ID))
+    serialized_qs = serializers.serialize('json', list(user_projects))
+    rtn = JsonResponse({"message": "added",'users':serialized_qs})
+    rtn.status_code = 200
+    return rtn
+
 
 
 @login_required(login_url='/PutTogether/')

@@ -1,12 +1,38 @@
+$('.modal').on('hidden.bs.modal', function(){
+    $(this).find('form')[0].reset();
+    $('.tags_container').empty();
+
+});
+
 $("#projectForm").off().on('submit',function (event) {
-    console.log("project form here");
     event.preventDefault();
     var project_name = document.getElementById("project_name").value;
-    console.log(project_name);
     var error_element = document.getElementById("project_name_error");
-    console.log(error_element);
+    var project_users = document.getElementById("newProjectUsers").value;
+    var check = true;
+
+
+    if ($.trim(project_users).length !== 0)
+    {
+        $.each(project_users.split(','),function(index,value){
+
+        if (!validateEmail(value))
+        {
+               check = false;
+        }
+            });
+    }
+
+    if (check === false)
+    {
+        error_element.innerHTML = 'One or of the emails is not valid';
+        error_element.style.display = 'block';
+        return ;
+    }
     error_element.style.display = 'none';
-    if ($.trim(project_name) == '' || $.trim(project_name).length < 3 || $.trim(project_name).length >26) {
+    if ($.trim(project_name) === '' || $.trim(project_name).length < 3 || $.trim(project_name).length >26) {
+
+        error_element.innerHTML = 'meaningful name please...';
         error_element.style.display = 'block';
         return false;
     }
@@ -19,10 +45,14 @@ $("#projectForm").off().on('submit',function (event) {
 
         },
         error: function (e) {
-            console.log("error");
+            error_element.innerHTML = 'Server Error, Please contact us.';
+            error_element.style.display = 'block';
         }
     });
 });
+
+
+
 
 
 $("#upgradeForm").off().on('submit',function (event) {
@@ -40,7 +70,7 @@ $("#upgradeForm").off().on('submit',function (event) {
 
     error_control.style.display = 'none';
 
-    console.log($("#upgradeForm").attr("data-type"));
+    // console.log($("#upgradeForm").attr("data-type"));
 
     if ($.trim(Card_Number).length !== 16)
     {
@@ -71,8 +101,6 @@ $("#upgradeForm").off().on('submit',function (event) {
     });
 });
 
-
-
 $("#editModal").on('submit',function (e) {
     e.preventDefault();
 });
@@ -100,10 +128,6 @@ function editDetails() {
             }
         })
 }
-
-
-
-
 
 $(document).on('click','#editId',function () {
     var project_id = $(this).data('id');
@@ -161,7 +185,6 @@ $(document).on('click','#editId',function () {
 // }
 //
 
-
 function formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -175,8 +198,6 @@ function formatDate(date) {
 
     return [year, month, day].join('-');
 }
-
-
 
 $(document).on('click','#deleteId',function () {
     var project_id = $(this).data('id');
@@ -217,11 +238,33 @@ function createprojectmodal(){
 $(document).on('click','#add-user',function () {
     var project_id = $(this).data('id');
     $("#InviteForm").attr('data-projectid',project_id);
+
+    $.ajax({
+        type: "GET",
+        url: "getMembers",
+        data: {project_id:project_id},
+        success: function (e) {
+           var  div_element = document.getElementsByClassName('tags_container');
+           $('.tags_container').empty();
+
+          $.each(JSON.parse(e['users']),function(index,value){
+            $('.tags_container').append("<span data-id="+value['fields']['usr_email']+" class='tag'>"+value['fields']['usr_email']+"<span class='close'></span></span>");
+          });
+
+        },
+        error: function (e) {
+            console.log("NOT");
+            // error_control.innerHTML  = e.responseJSON.reason;
+            // error_control.style.display = 'block';
+
+        }
+    });
 });
 
-
-
-
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 
 
 $("#InviteForm").off().on('submit',function (event) {
@@ -229,21 +272,46 @@ $("#InviteForm").off().on('submit',function (event) {
     var id = document.getElementById("InviteForm").getAttribute("data-projectid");
     var users = document.getElementById('selectedUsers').value;
 
+    var email_error = document.getElementById('add_user_errors');
+    email_error.style.display = 'none';
+    var user_array = users.split(',');
+    var check = true;
+
+    console.log(users);
+
+    if ($.trim(users).length !== 0)
+    {
+            $.each(user_array,function(index,value){
+
+        if (!validateEmail(value))
+        {
+               check = false;
+        }
+
+      });
+
+        if (check === false)
+        {
+            email_error.innerHTML = 'One or of the emails is not valid';
+            email_error.style.display = 'block';
+            return;
+        }
+    }
+
+
 
     $.ajax({
         type: "POST",
         url: "InviteMember",
         data: {users: users ,project_id:id, csrfmiddlewaretoken: csrftoken},
         success: function (e) {
-            console.log("HERE");
-            //
-            // $('#addUserModal').modal('hide');
-            // Location.reload(true);
+
+            $('#addUserModal').modal('hide');
+            location.reload(true);
         },
         error: function (e) {
-            console.log("ERROR");
-            // error_control.innerHTML  = e.responseJSON.reason;
-            // error_control.style.display = 'block';
+            email_error.innerHTML  = "SERVER ERROR";
+            email_error.style.display = 'block';
 
         }
     });

@@ -48,8 +48,8 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <p class="card-text"> Created By:  {{ project.usr_email }}</p>
-                            <p class="card-text"> Num of members:</p>
+                            <p class="card-text"> Created By:  {{ project.usr_email.username }}</p>
+                            <p class="card-text"> Num of members: {{ list.user_count }}</p>
                             <p class="card-text"> Num of tasks:  {{list.total}} </p>
                             <p class="card-text"> Creation time:  {{ project.creation_date}}  {{ project.creation_time}}</p>
                          </div>
@@ -88,7 +88,7 @@
                         </div>
                         <br>
                         <div><h4 >Members:</h4></div>
-                          <input type='text' class='tags_input' />
+                          <input type='text' class='tags_input' id="newProjectUsers"  />
                         <label class="label_control" id="project_name_error" style="display: none;">meaningful name please...</label>
                       </div>
                     </div>
@@ -281,12 +281,11 @@ $(function(){
 
 
 	$(".tags_input").tagComplete({
-
-				keylimit: 1,
-				hide: false,
-				autocomplete: {
-					data: data
-				}
+            keylimit: 1,
+            hide: false,
+            autocomplete: {
+                data: data
+            }
 		});
 });
 </script>
@@ -301,21 +300,18 @@ $(function(){
 {#          </button>#}
         </div>
         <div class="modal-body">
-              <form class="form" id="InviteForm" data-projectid="">
+              <form class="form" id="InviteForm" data-projectid="" action="javascript:void(0)">
                   {%  csrf_token %}
                 <!-- Invite Team Members -->
                 <div class="form-group">
                   <div class="input-group_add_mem">
                     <div class="input-group-prepend">
-{#                      <div class="input-group-text_add_mem">#}
-{#                        <i class="fas fa-title">user</i>#}
-{#                      </div>#}
                     </div>
                       <div class="container-selectbox" >
-                          <input id="selectedUsers" type='text' class='tags_input' value="khaledyassen@std.sehir.edu.tr, fahedsaaban@std.sehir.edu.tr, zeynepaykuz@std.sehir.edu.tr" />
+                          <input id="selectedUsers" type='text' class='tags_input'  />
                       </div>
                   </div>
-                  <label class="ml-auto mr-auto" id="email_error_invite" style="display: none;">email exists</label>
+                  <label class="ml-auto mr-auto" id="add_user_errors" style="display: none;">email exists</label>
                 </div>
 
               <div class="modal-footer justify-content-center" style="margin-top: -1rem; margin-bottom: -0.5rem;">
@@ -324,10 +320,7 @@ $(function(){
               </div>
               </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-round btn-sm" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success btn-round btn-sm" data-dismiss="modal" onclick="addUser()">Save</button>
-        </div>
+
       </div>
     </div>`
   </div>

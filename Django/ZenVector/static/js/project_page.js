@@ -20,26 +20,19 @@ $("#detailModal").on('submit',function (e) {
 
 function changeDetails() {
 
-        var assignedTo = document.getElementById("assignedTo").value;
-        console.log(assignedTo);
+        // var assignedTo = document.getElementById("assignedTo").value;
+        // console.log(assignedTo);
 
         var deadline = document.getElementById("task_edit_deadline").value;
-        console.log(deadline);
-
         var detail = document.getElementById("taskDetailsD").value;
-        console.log(detail);
-
         var status =document.getElementById("statusD").value;
-        console.log(status);
-
         var taskid = $('#edit_task_title').attr("taskid");
-
-        console.log(taskid);
+            // data:{task_id: taskid,assignto:assignedTo,time:deadline,detail:detail,status:status,csrfmiddlewaretoken:csrftoken},
 
         $.ajax({
             type:"POST",
             url:"ChangeTaskDetails/",
-            data:{task_id: taskid,assignto:assignedTo,time:deadline,detail:detail,status:status,csrfmiddlewaretoken:csrftoken},
+            data:{task_id: taskid,time:deadline,detail:detail,status:status,csrfmiddlewaretoken:csrftoken},
             success:function (e) {
                 location.reload(true)
             },
@@ -64,12 +57,37 @@ $(document).on('click','.menu-button',function () {
 
     var date = element_p.split("Deadline: ")[1].split(" Given by")[0];
 
-
     var list_title = $(this).parent().parent().parent().attr("id");
 
     document.getElementById("taskDetailsD").value = details;
 
+    var select_item= document.getElementById('assignedToTasks');
+
+ // <option  value="{{ usr.email }}">{{ usr.email }}</option>
+    $.ajax({
+           type:"GET",
+           url:"getTaskUsers/",
+           data:{taskid:task_id,csrfmiddlewaretoken:csrftoken},
+           success:function (e) {
+
+                  $('#assignedToTasks').empty();
+                  $.each(JSON.parse(e['users']),function(index,value){
+
+                    $('#assignedToTasks').append("<option value='"+value['pk']+"'>"+value['pk']+"</option>");
+                    // $('#assignedToTasks').append("<span data-id="+value['fields']['usr_email']+" class='tag'>"+value['fields']['usr_email']+"<span class='close'></span></span>");
+                  });
+
+               console.log(e);
+               // location.reload(true);
+           },
+           error:function () {
+               // console.log("NOT CORRECT");
+           }
+       });
+
     document.getElementById('task_edit_deadline').value = formatDate(date);
+
+
 
 });
 
@@ -116,6 +134,12 @@ $("#addTaskForm").on('submit',function (e) {
     e.preventDefault();
 });
 
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+
 
 function addTask() {
 
@@ -142,7 +166,29 @@ function addTask() {
 
       var dateControl = document.getElementById("task_form_deadline").value;
 
+      var assigned_to_error = document.getElementById("add_task_users");
+      assigned_to_error.style.display = 'none';
 
+      console.log(assignedTo);
+
+      var check = true;
+      if ($.trim(assignedTo).length !== 0)
+        {
+            $.each(assignedTo.split(','),function(index,value){
+
+            if (!validateEmail(value))
+            {
+                   check = false;
+            }
+                });
+        }
+
+      if (check === false)
+      {
+          assigned_to_error.innerHTML = 'One or of the emails is not valid';
+          assigned_to_error.style.display = 'block';
+          return ;
+      }
 
       if ($.trim(title).length < 2)
       {
@@ -150,13 +196,11 @@ function addTask() {
           title_error.style.display = 'block';
           return false;
       }
-
-      if ($.trim(dateControl).length == 0){
+      if ($.trim(dateControl).length === 0){
             deadline_error.innerHTML = "Please choose the deadline";
             deadline_error.style.display = 'block';
             return false;
       }
-
       if ($.trim(detail).length < 5){
           descrip_error.innerHTML = "Please provide a meaningful description";
           descrip_error.style.display = 'block';
@@ -176,12 +220,6 @@ function addTask() {
 
       });
 
-      // document.getElementById(status).innerHTML +=
-      //     "<div class='card'><div class='card-header card-header-danger2'>" + title +
-      //     "<button type='button' style='position: absolute; right: 1rem;' class='btn btn-just-icon btn-sm' data-toggle='modal' data-target='#detailModal'>"+
-      //     "<i class='material-icons'>menu</i></button></div> <class='card-body card-text'>" + detail+ "</div></div>";
-
-      // $('#addTaskModal').modal('hide');
   }
 
 $("#addListForm").on('submit',function(e) {
@@ -215,13 +253,8 @@ function addList(e) {
 
         }
     });
-  // document.getElementById("board").innerHTML +=
-  //     "<div class='col-xs-6 col-md-3'><div class='card-list'><div class='card-header'><h4 class='card-list-title'>"
-  //     +title+"</h4></div><div class='card-list-body text-center' id="+title+"><div class='card'><div class='card-header "+
-  //     " card-header-danger2'>Task Title <button type='button' style='position: absolute; right: 1rem;'class='btn btn-just-icon"+
-  //     " btn-sm' data-toggle='modal' data-target='#detailModal'><i class='material-icons'>menu</i></button></div> "+
-  //     "<class='card-body card-text'>Please click to detail button to change task details</div></div></div></div>"
-  //
+
+
 
 
 }
@@ -291,6 +324,14 @@ $("#addListModal").modal({backdrop: "static"});
 // });
 
 
+$(document).on('click','#deleteListId',function () {
+    console.log($(this).data('id'));
+     $("#deleteConfirmation").attr('data-project_id',$(this).data('id'));
+});
+
+
+
+ function deleteList(e){
 
  function deleteList(){
     var list_id = $("#stateId").data('stateid');
