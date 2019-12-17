@@ -8,6 +8,8 @@ def progressbar(context):
     proj=Projects.objects.get(project_id=context)
     tasks=Tasks.objects.filter(task_project_id=proj)
 
+    task_user_count = len(UsrProjects.objects.filter(project_id=proj))
+
     if len(tasks) == 0:
         per = 0
 
@@ -19,5 +21,5 @@ def progressbar(context):
                 progress+=1.0
         per= int(done/(progress+done)*100)
 
-    return {'percentage':per,'total':int(progress+done)}
+    return {'percentage':per,'total':int(progress+done),'user_count':task_user_count}
 
