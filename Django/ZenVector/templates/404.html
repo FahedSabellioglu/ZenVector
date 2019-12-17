@@ -89,7 +89,7 @@
     </div>
 
 
-{#    #}
+
 {##}
 {##}
 {#    <div style="text-align: center">#}
@@ -107,81 +107,81 @@
 
 
 {% block scripts %}
-    <script>
-        {% if Available %}
-            {% if not check %}
-                   $(document).ready(function(){
-                       let url = location.href.split("/");
-                       var code = url[url.length - 1];
-                       var email = url[url.length - 2];
-
-                       if (location.href.includes("PasswordResetOut"))
-                       {
-                            $("#PasswordResetModalPro").attr("data-email",email);
-                            $("#PasswordResetModalPro").attr("data-code",code);
-                            $("#PasswordResetModalPro").modal("show");
-                       }
-                   });
-                {% else %}
-                document.getElementById("ModalMessageTitle").innerHTML = 'Warning';
-                document.getElementById("ModelMessage").innerHTML = "The lik has already been used, Ask for a new link";
-                $("#CorrectChangePass").modal("show");
-             {% endif %}
-        {% elif not Available %}
-            document.getElementById("ModalMessageTitle").innerHTML = 'Warning';
-            document.getElementById("ModelMessage").innerHTML = "Invalid Link, Please ask for a new link";
-            $("#CorrectChangePass").modal("show");
-        {% endif %}
-    </script>
-
-    <script>
-
-        $("#passwordResetFormPro").off().on('submit',function (event) {
-        event.preventDefault();
-        var password_first = document.getElementById("first_password_Reset").value;
-        var first_error = document.getElementById("first_pass_control_Reset");
-
-        var password_second = document.getElementById('second_password_Reset').value;
-        var second_error = document.getElementById("second_pass_control_Reset");
-
-        var usr_email = $("#PasswordResetModalPro").attr("data-email");
-        var code = $("#PasswordResetModalPro").attr("data-code");
-
-        first_error.style.display = 'none';
-        second_error.style.display = 'none';
-
-        if ($.trim(password_first) === '' || $.trim(password_first).length < 8) {
-            first_error.style.display = 'block';
-            return false;
-        }
-        else if ($.trim(password_first) !== $.trim(password_second))
-        {
-            second_error.style.display = 'block';
-            return false;
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "/PutTogether/PasswordReset/",
-            data: {password:password_first, email:usr_email, csrfmiddlewaretoken: csrftoken,
-                   code:code},
-            success: function () {
-                $("#PasswordResetModalPro").modal("hide");
-                $("#CorrectChangePass").modal("show");
-            },
-            error: function () {
-                second_error.innerHTML = "Something went wrong, Try again";
-                second_error.style.display = 'block';
-            }
-        });
-    });
-
-
-    $('#CorrectChangePass').on('hidden.bs.modal', function () {
-        console.log("here");
-
-    })
-
-    </script>
+{#    <script>#}
+{#        {% if Available %}#}
+{#            {% if not check %}#}
+{#                   $(document).ready(function(){#}
+{#                       let url = location.href.split("/");#}
+{#                       var code = url[url.length - 1];#}
+{#                       var email = url[url.length - 2];#}
+{##}
+{#                       if (location.href.includes("PasswordResetOut"))#}
+{#                       {#}
+{#                            $("#PasswordResetModalPro").attr("data-email",email);#}
+{#                            $("#PasswordResetModalPro").attr("data-code",code);#}
+{#                            $("#PasswordResetModalPro").modal("show");#}
+{#                       }#}
+{#                   });#}
+{#                {% else %}#}
+{#                document.getElementById("ModalMessageTitle").innerHTML = 'Warning';#}
+{#                document.getElementById("ModelMessage").innerHTML = "The lik has already been used, Ask for a new link";#}
+{#                $("#CorrectChangePass").modal("show");#}
+{#             {% endif %}#}
+{#        {% elif not Available %}#}
+{#            document.getElementById("ModalMessageTitle").innerHTML = 'Warning';#}
+{#            document.getElementById("ModelMessage").innerHTML = "Invalid Link, Please ask for a new link";#}
+{#            $("#CorrectChangePass").modal("show");#}
+{#        {% endif %}#}
+{#    </script>#}
+{##}
+{#    <script>#}
+{##}
+{#        $("#passwordResetFormPro").off().on('submit',function (event) {#}
+{#        event.preventDefault();#}
+{#        var password_first = document.getElementById("first_password_Reset").value;#}
+{#        var first_error = document.getElementById("first_pass_control_Reset");#}
+{##}
+{#        var password_second = document.getElementById('second_password_Reset').value;#}
+{#        var second_error = document.getElementById("second_pass_control_Reset");#}
+{##}
+{#        var usr_email = $("#PasswordResetModalPro").attr("data-email");#}
+{#        var code = $("#PasswordResetModalPro").attr("data-code");#}
+{##}
+{#        first_error.style.display = 'none';#}
+{#        second_error.style.display = 'none';#}
+{##}
+{#        if ($.trim(password_first) === '' || $.trim(password_first).length < 8) {#}
+{#            first_error.style.display = 'block';#}
+{#            return false;#}
+{#        }#}
+{#        else if ($.trim(password_first) !== $.trim(password_second))#}
+{#        {#}
+{#            second_error.style.display = 'block';#}
+{#            return false;#}
+{#        }#}
+{##}
+{#        $.ajax({#}
+{#            type: "POST",#}
+{#            url: "/PutTogether/PasswordReset/",#}
+{#            data: {password:password_first, email:usr_email, csrfmiddlewaretoken: csrftoken,#}
+{#                   code:code},#}
+{#            success: function () {#}
+{#                $("#PasswordResetModalPro").modal("hide");#}
+{#                $("#CorrectChangePass").modal("show");#}
+{#            },#}
+{#            error: function () {#}
+{#                second_error.innerHTML = "Something went wrong, Try again";#}
+{#                second_error.style.display = 'block';#}
+{#            }#}
+{#        });#}
+{#    });#}
+{##}
+{##}
+{#    $('#CorrectChangePass').on('hidden.bs.modal', function () {#}
+{#        console.log("here");#}
+{##}
+{#    })#}
+{##}
+{#    </script>#}
 
 {% endblock %}
