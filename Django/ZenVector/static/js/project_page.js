@@ -324,14 +324,6 @@ $("#addListModal").modal({backdrop: "static"});
 // });
 
 
-$(document).on('click','#deleteListId',function () {
-    console.log($(this).data('id'));
-     $("#deleteConfirmation").attr('data-project_id',$(this).data('id'));
-});
-
-
-
- function deleteList(e){
 
  function deleteList(){
     var list_id = $("#stateId").data('stateid');
@@ -350,10 +342,7 @@ $(document).on('click','#deleteListId',function () {
 }
 
 $(document).on('click','#deleteListId',function () {
-
     var list_id=$(this).data('idstate');
+    console.log(list_id);
     $('#stateId').data("stateid",list_id);
-    var id= $('#stateId').data('stateid');
-     console.log(id);
-
 });
