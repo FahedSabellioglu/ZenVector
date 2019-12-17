@@ -141,7 +141,6 @@ function addTask() {
       var status = document.getElementById("status").value;
 
       var dateControl = document.getElementById("task_form_deadline").value;
-      console.log(dateControl);
 
 
 
@@ -157,12 +156,6 @@ function addTask() {
             deadline_error.style.display = 'block';
             return false;
       }
-      //
-      // if ($.trim(dateControl).length == 0){
-      //       deadline_error.innerHTML = "Please choose the deadline";
-      //       deadline_error.style.display = 'block';
-      //       return false;
-      // }
 
       if ($.trim(detail).length < 5){
           descrip_error.innerHTML = "Please provide a meaningful description";
@@ -196,7 +189,6 @@ $("#addListForm").on('submit',function(e) {
 });
 
 function addList(e) {
-    console.log("hererer");
     var error_element = document.getElementById('list_name');
     error_element.style.display = 'none';
     var title = document.getElementById("listTitle").value;
@@ -208,28 +200,28 @@ function addList(e) {
         error_element.innerHTML="You can't leave the list name empty";
         error_element.style.display = 'block';
         return false;}
-       // $.ajax({
-       //  type:'POST',
-       //  url:"NewState/",
-       //  data:{name:title,color:color,csrfmiddlewaretoken:csrftoken},
-       //  success:function (e) {
-       //      location.reload(true)
-       //  },
-       //  error:function (e) {
-       //      console.log(e);
-       //      error_element.innerHTML = e.responseJSON.message;
-       //      error_element.style.display = 'block';
-       //
-       //
-       //  }
-    // });
+       $.ajax({
+        type:'POST',
+        url:"NewState/",
+        data:{name:title,color:color,csrfmiddlewaretoken:csrftoken},
+        success:function (e) {
+            location.reload(true)
+        },
+        error:function (e) {
+            console.log(e);
+            error_element.innerHTML = e.responseJSON.message;
+            error_element.style.display = 'block';
+
+
+        }
+    });
   // document.getElementById("board").innerHTML +=
   //     "<div class='col-xs-6 col-md-3'><div class='card-list'><div class='card-header'><h4 class='card-list-title'>"
   //     +title+"</h4></div><div class='card-list-body text-center' id="+title+"><div class='card'><div class='card-header "+
   //     " card-header-danger2'>Task Title <button type='button' style='position: absolute; right: 1rem;'class='btn btn-just-icon"+
   //     " btn-sm' data-toggle='modal' data-target='#detailModal'><i class='material-icons'>menu</i></button></div> "+
   //     "<class='card-body card-text'>Please click to detail button to change task details</div></div></div></div>"
-
+  //
 
 
 }
@@ -301,7 +293,7 @@ $("#addListModal").modal({backdrop: "static"});
 
 
  function deleteList(){
-    var list_id = $("#deleteListId").data('id');
+    var list_id = $("#stateId").data('stateid');
     console.log(list_id);
        $.ajax({
            type:"POST",
@@ -315,3 +307,12 @@ $("#addListModal").modal({backdrop: "static"});
            }
        })
 }
+
+$(document).on('click','#deleteListId',function () {
+
+    var list_id=$(this).data('idstate');
+    $('#stateId').data("stateid",list_id);
+    var id= $('#stateId').data('stateid');
+     console.log(id);
+
+});

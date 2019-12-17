@@ -20,6 +20,11 @@
         </div>
     {% endif %}
 
+    {% if not projects %}
+        <div class="row" style="margin-bottom: 7rem;"></div>
+{#        <div class="row" style="margin-bottom: 18rem;"></div>     //just show logo (without writing)#}
+    {% endif %}
+
         <div class="row">
             {% for project in projects %}
                 {% load progressbar %}
