@@ -1,3 +1,13 @@
+
+.name_project
+{
+    box-shadow: none;
+    animation: none;
+    transition: none;
+    transform: none;
+    -webkit-appearance: none;
+}
+
 .gotopbtn{
   animation: fade_gotobtn 3s ease-in forwards;
   position: fixed;

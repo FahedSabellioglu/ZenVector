@@ -9,6 +9,9 @@
     <br>
  <div class = "wrapper for buttons" style= "text-align: center; overflow-y:hidden">
  <div class = "Add-Buttons" style="display: inline-block">
+{#  <span class="badge badge-default">{{ project_name }}</span>#}
+     <button class="btn btn-default btn-round btn-sm name_project" style="background-color: #e97f02; opacity: 0.8" disabled>{{ project_name }}</button>
+
      <p id="project_owner" style="display: none">{{ owner }}</p>
      {% if states %}
       <button id="addTask" data-toggle="modal" data-target="#addTaskModal" class="btn btn-default btn-round btn-sm">
@@ -17,7 +20,6 @@
       <button id="addList" data-toggle="modal" data-target="#addListModal" class="btn btn-primary btn-round btn-sm">
           <i class="material-icons"> add </i>Add New List</button>
   </div>
- <span class="badge badge-default">{{ project_name }}</span>
 </div>
   <div class="container-fluid">
     <div class="d-md-inline-flex d-sm-block" id="board">
