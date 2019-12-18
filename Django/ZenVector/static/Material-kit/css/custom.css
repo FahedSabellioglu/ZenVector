@@ -1,3 +1,13 @@
+
+
+/*.slide-content .scroller {*/
+/*  width: 1024px;*/
+/*}*/
+
+/** {*/
+/*  border: 1px solid #f00 !important;*/
+/*}*/
+
 .gotopbtn{
   animation: fade_gotobtn 3s ease-in forwards;
   position: fixed;
