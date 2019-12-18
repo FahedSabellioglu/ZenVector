@@ -6,6 +6,14 @@ $("#loginForm").on('submit',function(e){
     e.preventDefault();
 });
 
+$('form input').keydown(function (e) {
+    if (e.keyCode == 13) {
+        console.log('here check');
+        e.preventDefault();
+        return false;
+    }
+});
+
 function loginControl(){
     var email_element = document.getElementById('email_login');
     var password_element = document.getElementById('password_login');
@@ -22,9 +30,8 @@ function loginControl(){
         url: "Login/",
         data:{mail:email,password:password,csrfmiddlewaretoken: csrftoken},
         success: function(e) {
-            location.reload(true);
-
-        },
+            location.href = "/PutTogether/Projects/";
+       },
         error:function(e){
             var element = document.getElementById('password_error_login');
             var message = e.responseJSON.reason;

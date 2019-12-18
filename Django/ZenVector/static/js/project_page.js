@@ -42,20 +42,19 @@ function changeDetails() {
         })
 }
 
-
 $(document).on('click','.menu-button',function () {
 
     var task_id = $(this).data('id');
-    console.log(task_id);
     $('#edit_task_title').attr("taskid",task_id);
 
     var element = document.getElementById(task_id);
 
-    var element_p = element.getElementsByTagName('p')[0].innerHTML;
 
-    var details = element_p.split(' Descrip: ')[1].split(' Deadline:')[0];
+    var element_p = element.getElementsByTagName('pre')[0].innerHTML;
 
-    var date = element_p.split("Deadline: ")[1].split(" Given by")[0];
+    var details = element_p.split("<")[0];
+
+    var date = element_p.split('12px">')[1].split('Given by:')[0].split("Deadline: ")[1];
 
     var list_title = $(this).parent().parent().parent().attr("id");
 
@@ -63,7 +62,6 @@ $(document).on('click','.menu-button',function () {
 
     var select_item= document.getElementById('assignedToTasks');
 
- // <option  value="{{ usr.email }}">{{ usr.email }}</option>
     $.ajax({
            type:"GET",
            url:"getTaskUsers/",
@@ -74,9 +72,8 @@ $(document).on('click','.menu-button',function () {
                   $.each(JSON.parse(e['users']),function(index,value){
 
                     $('#assignedToTasks').append("<option value='"+value['pk']+"'>"+value['pk']+"</option>");
-                    // $('#assignedToTasks').append("<span data-id="+value['fields']['usr_email']+" class='tag'>"+value['fields']['usr_email']+"<span class='close'></span></span>");
                   });
-
+                  console.log("HERRE");
                console.log(e);
                // location.reload(true);
            },
@@ -142,7 +139,6 @@ function validateEmail(email) {
 $("#addTaskModal").on('hidden.bs.modal',function (e) {
     e.preventDefault();
 
-    console.log('here hidden');
       var title_error = document.getElementById("task_name_error");
       var descrip_error = document.getElementById("task_descrip");
       var deadline_error = document.getElementById('task_deadline');
@@ -178,13 +174,13 @@ function addTask() {
 
       var assignedTo = document.getElementById("assignedTo").value;
 
-      var deadline = document.getElementById("deadline");
+      // var deadline = document.getElementById("deadline");
 
       var detail = document.getElementById("taskDetails").value;
 
       var status = document.getElementById("status").value;
 
-      var dateControl = document.getElementById("task_form_deadline").value;
+      var dateControl = $("#task_form_deadline").val();
 
       var assigned_to_error = document.getElementById("add_task_users");
       assigned_to_error.style.display = 'none';
@@ -227,6 +223,7 @@ function addTask() {
           title_error.style.display = 'block';
           return false;
       }
+
       if ($.trim(dateControl).length === 0){
             deadline_error.innerHTML = "Please choose the deadline";
             deadline_error.style.display = 'block';
@@ -376,4 +373,13 @@ $(document).on('click','#deleteListId',function () {
     var list_id=$(this).data('idstate');
     console.log(list_id);
     $('#stateId').data("stateid",list_id);
+});
+
+
+ $('form input').keydown(function (e) {
+    if (e.keyCode == 13) {
+        console.log('here check');
+        e.preventDefault();
+        return false;
+    }
 });
