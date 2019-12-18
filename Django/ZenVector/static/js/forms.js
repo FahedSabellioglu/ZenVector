@@ -42,6 +42,9 @@ function Control(event) {
         password = document.getElementById("password").value;
         repeat = document.getElementById("password_repeat").value;
 
+        acc_type = $("#signupModal").attr('data-type');
+        console.log(acc_type);
+
         document.getElementById("name_error").style.display = 'none';
         var email_error = document.getElementById("email_error");
         email_error.style.display = 'none';
@@ -77,7 +80,7 @@ function Control(event) {
         $.ajax({
             type:'POST',
             url:"Signup/",
-            data:{name:usr_name,mail:email,pass:password,csrfmiddlewaretoken:csrftoken,acc_type:"F"},
+            data:{name:usr_name,mail:email,pass:password,csrfmiddlewaretoken:csrftoken,acc_type:acc_type},
             success: function (e) {
                 location.reload(true);
             },
@@ -93,6 +96,7 @@ function Control(event) {
 $(document).on('click', ".plans",function () {
 
     var value = $(this).data('type');
+    $("#signupModal").attr("data-type",value);
     $("#planPricingModal").attr("data-type",value);
     $("#UpgradeModal").attr("data-type",value);
     console.log(value);
@@ -335,8 +339,19 @@ $("#planPricingModal").off().on('submit',function (event) {
         error_control.style.display = 'block';
         return;
     }
+    if (isNaN($.trim(credit_number))){
+        error_control.innerHTML = "Credit Card Number is a 16 digits number";
+        error_control.style.display = 'block';
+        return;
+    }
 
     if ($.trim(security_number).length !== 3){
+        error_control.innerHTML = "Security Number is a 3 digits number";
+        error_control.style.display = 'block';
+        return;
+    }
+
+    if (isNaN($.trim(security_number))){
         error_control.innerHTML = "Security Number is a 3 digits number";
         error_control.style.display = 'block';
         return;
@@ -346,7 +361,7 @@ $("#planPricingModal").off().on('submit',function (event) {
         type: "POST",
         url: "/PutTogether/PlanBuy/",
         data: {csrfmiddlewaretoken: csrftoken, credit_n :credit_number,sec_n :security_number,exp_m: exp_month,exp_y: exp_year,
-               mail:email,password:password,name:username,acc_type:account_type},
+               mail:email,pass:password,name:username,acc_type:account_type},
         success: function (e) {
             location.reload(true);
 

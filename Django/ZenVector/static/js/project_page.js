@@ -156,7 +156,6 @@ $("#addTaskModal").on('hidden.bs.modal',function (e) {
       descrip_error.style.display = 'none';
       deadline_error.style.display = 'none';
 
-
 });
 
 
