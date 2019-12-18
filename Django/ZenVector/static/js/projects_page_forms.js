@@ -4,13 +4,22 @@ $('.modal').on('hidden.bs.modal', function(){
 
 });
 
+$("#projectModal").on('hidden.bs.modal',function (e) {
+    e.preventDefault();
+        var error_element = document.getElementById("project_name_error");
+        error_element.style.display='none';
+
+});
+
 $("#projectForm").off().on('submit',function (event) {
     event.preventDefault();
     var project_name = document.getElementById("project_name").value;
     var error_element = document.getElementById("project_name_error");
     var project_users = document.getElementById("newProjectUsers").value;
-    var check = true;
 
+
+    var check = true;
+    var includesCheck = true;
 
     if ($.trim(project_users).length !== 0)
     {
@@ -20,15 +29,28 @@ $("#projectForm").off().on('submit',function (event) {
         {
                check = false;
         }
-            });
+         else if (!usrOptions['data'].includes(value)){
+                includesCheck = false;
+
+            }
+      });
+
+
     }
 
     if (check === false)
     {
-        error_element.innerHTML = 'One or of the emails is not valid';
+        error_element.innerHTML = 'One or more of the emails is not valid';
         error_element.style.display = 'block';
         return ;
     }
+
+  if (includesCheck === false)
+      {
+          error_element.innerHTML = 'One or more the emails are not registered to the app';
+          error_element.style.display = 'block';
+          return ;
+      }
     error_element.style.display = 'none';
     if ($.trim(project_name) === '' || $.trim(project_name).length < 3 || $.trim(project_name).length >26) {
 
@@ -39,7 +61,8 @@ $("#projectForm").off().on('submit',function (event) {
     $.ajax({
         type: "POST",
         url: "CreateProject/",
-        data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken, p_name: project_name},
+        data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken, p_name: project_name,
+                members:project_users},
         success: function (e) {
             location.reload(true);
 
@@ -284,8 +307,6 @@ $("#InviteForm").off().on('submit',function (event) {
     email_error.style.display = 'none';
     var user_array = users.split(',');
     var check = true;
-
-    console.log(users);
 
     if ($.trim(users).length !== 0)
     {

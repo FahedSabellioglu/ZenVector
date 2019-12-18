@@ -153,6 +153,8 @@ $("#addTaskModal").on('hidden.bs.modal',function (e) {
 
 
 
+
+
 function addTask() {
 
       var title_error = document.getElementById("task_name_error");
