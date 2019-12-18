@@ -2,9 +2,11 @@
 {% load staticfiles%}
 {% block content %}
 
-
-    <figure class="item" style="text-align: center">
-        <img src="../static/img/404_alien.png" alt="" style="width: 50%;">
+    <figure class="item" style="text-align: center" data-aos="zoom-in-up" data-aos-offset="250" data-aos-easing="ease-in-sine">
+    <br>
+    <br>
+    <br>
+        <img src='{% static "/img/404_alien.png" %}' alt="" style="width: 50%;">
         <figcaption class="caption"><h4>Oh Hey there! You seem to have been abducted, but we saved you!</h4></figcaption>
     </figure>
 
@@ -183,5 +185,8 @@
 {#    })#}
 {##}
 {#    </script>#}
+    <script>
+  AOS.init();
+</script>
 
 {% endblock %}
