@@ -77,8 +77,8 @@ def contact_us(response):
     else:
         email=data['email'][0]
 
-        message = Email_Contact_Us(email,subject,message)
-        Email_SendServer(message,'puttogethersoftware@gmail.com')
+    message = Email_Contact_Us(email,subject,message)
+    Email_SendServer(message,'puttogethersoftware@gmail.com')
 
     response = JsonResponse({"message":"mail is send"})
     response.status_code = 200
