@@ -12,7 +12,8 @@
 
     <script src="{% static 'Material-kit/js/core/jquery.min.js' %}"></script>
     <script src="{% static 'Material-kit/js/core/popper.min.js' %}"></script>
-
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 {#  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
 {#  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>#}
   <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -69,7 +70,8 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 
-    <a class="gotopbtn" style="cursor: pointer;" onclick="window.scrollTo({top: 0, left:0, behavior: 'smooth'});"> <i  style="color: white" class="fas fa-chevron-circle-up"></i> </a>
+    <div data-aos="fade-up" data-aos-offset="250" data-aos-easing="ease-in-sine" data-aos-anchor-placement="top-bottom"><a class="gotopbtn" style="cursor: pointer;" onclick="window.scrollTo({top: 0, left:0, behavior: 'smooth'});" > <i  style="color: white" class="fas fa-chevron-circle-up"></i> </a>
+    </div>
 </body>
 
 </html>

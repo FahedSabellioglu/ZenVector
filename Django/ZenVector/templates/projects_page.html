@@ -28,8 +28,8 @@
             {% for project in projects %}
                 {% load progressbar %}
                 {% progressbar project.project_id as list %}
-                <div class="col-md-4">
-                    <div class="card" style="width: 20rem;" id="{{project.project_id}}">
+                <div class="col-md-4" data-aos="fade-up" data-aos-offset="250" data-aos-easing="ease-in-sine" data-aos-anchor-placement="center-bottom">
+                    <div class="card"  style="width: 20rem;" id="{{project.project_id}}">
                         <div class="progress">
                             <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar" style="width: {{list.percentage}}%;" aria-valuenow="{{list.percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -360,5 +360,8 @@ $(function(){
         var csrftoken = '{{ csrf_token }}';
     </script>
 
+<script>
+  AOS.init();
+</script>
 
 {% endblock %}
