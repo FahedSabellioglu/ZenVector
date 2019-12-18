@@ -16,6 +16,7 @@ def Signup(request):
         new_usr = Users.objects.create_user(username=data['name'][0], password=data['pass'][0], email=data['mail'][0])
         new_usr.account_type = data['acc_type'][0]
         new_usr.save()
+        print "SAVED USER",new_usr.email
         message = Email_SignUp(data['mail'][0],data['name'][0],data['acc_type'][0])
         Email_SendServer(message,data['mail'][0])
         login(request, new_usr)
@@ -65,7 +66,6 @@ def DeleteAccount(request):
     if usr:
         usr_obj = Users.objects.get(email=usr)
         logout(request)
-        usr_obj.delete()
         usr_obj.delete()
         rtn = JsonResponse({"success":"user is deleted"})
         rtn.status_code = 200

@@ -50,48 +50,56 @@ function Control(event) {
         repeat = document.getElementById("password_repeat").value;
 
         acc_type = $("#signupModal").attr('data-type');
-        console.log(acc_type);
-
         document.getElementById("name_error").style.display = 'none';
         var email_error = document.getElementById("email_error");
         email_error.style.display = 'none';
         document.getElementById('password_error').style.display = 'none';
         document.getElementById('repeat_error').style.display = 'none';
 
-        if ($.trim(usr_name)== '' || usr_name.length < 6)
+        if ($.trim(usr_name)=== '' || usr_name.length < 6)
         {
             document.getElementById('name_error').style.display='block';
 
-            return
+            return;
         }
 
-        if ($.trim(email) == '')
+        if ($.trim(email) === '')
         {
             email_error.style.display ='block';
-            return
+            return;
         }
 
         if (password.length < 8)
         {
+
             document.getElementById('password_error').style.display='block';
             return;
         }
 
-        if (password != repeat)
+        if (password !== repeat)
         {
-
             document.getElementById('repeat_error').style.display = 'block';
             return;
         }
+
+
+        $("#"+event.id).attr("disabled", true);
+        $("#"+event.id).removeClass('active_button');
 
         $.ajax({
             type:'POST',
             url:"Signup/",
             data:{name:usr_name,mail:email,pass:password,csrfmiddlewaretoken:csrftoken,acc_type:acc_type},
             success: function (e) {
+                $("#"+event.id).attr("disabled", false);
+                $("#"+event.id).addClass('active_button');
+
                 location.reload(true);
             },
             error:function (e) {
+
+                $("#"+event.id).attr("disabled", false);
+                $("#"+event.id).addClass('active_button');
             email_error.innerHTML = e.responseJSON.reason;
             email_error.style.display = 'block';
             }
@@ -254,7 +262,6 @@ $("#upgradeForm").off().on('submit',function (event) {
 
     if ($.trim(Card_Number).length !== 16)
     {
-        console.log("HERER");
         error_control.innerHTML = "Credit # is a 16 digit number.";
         error_control.style.display = 'block';
         return;
@@ -264,18 +271,25 @@ $("#upgradeForm").off().on('submit',function (event) {
         error_control.style.display = 'block';
         return;
     }
+
+    $("#"+event.id).attr("disabled", true);
+    $("#"+event.id).removeClass('active_button');
+
     $.ajax({
         type: "POST",
         url: "/PutTogether/Upgrade/",
         data: {usr_email: '{{ request.user.email }}', csrfmiddlewaretoken: csrftoken,
             number:Card_Number,security:security_number,m_exp:month_exp,y_exp:year_exp,account_type:account_type},
         success: function (e) {
-            // console.log(e);
-            // location.replace('/PutTogether/Projects/'+e.project_id.toString()+'/');
+                $("#"+event.id).attr("disabled", false);
+                $("#"+event.id).addClass('active_button');
             location.reload(true);    //Why?????
 
         },
         error: function (e) {
+
+                $("#"+event.id).attr("disabled", false);
+                $("#"+event.id).addClass('active_button');
             console.log("error");
         }
     });
@@ -307,7 +321,6 @@ $("#planPricingModal").off().on('submit',function (event) {
     var error_control = document.getElementById("plan_error");
 
     error_control.style.display = 'none';
-
 
     if ($.trim(username) === '' || username.length < 6)
     {
@@ -364,16 +377,25 @@ $("#planPricingModal").off().on('submit',function (event) {
         return;
     }
 
+    $("#"+event.id).attr("disabled", true);
+    $("#"+event.id).removeClass('active_button');
+
     $.ajax({
         type: "POST",
         url: "/PutTogether/PlanBuy/",
         data: {csrfmiddlewaretoken: csrftoken, credit_n :credit_number,sec_n :security_number,exp_m: exp_month,exp_y: exp_year,
                mail:email,pass:password,name:username,acc_type:account_type},
         success: function (e) {
+
+            $("#"+event.id).attr("disabled", false);
+            $("#"+event.id).addClass('active_button');
             location.reload(true);
 
         },
         error: function (e) {
+                            $("#"+event.id).attr("disabled", false);
+                $("#"+event.id).addClass('active_button');
+
             error_control.innerHTML = e.responseJSON.reason;
             error_control.style.display = 'block';
         }

@@ -36,7 +36,7 @@ def page_Projects(response, p_id):
     users = [ usrObj.usr_email for usrObj in UsrProjects.objects.filter(project_id=proj_obj)]
     users.append(proj_obj.usr_email)
 
-    return render(response, 'project.html', {"tasks": tasks, 'states': states, "users": users})
+    return render(response, 'project.html', {"tasks": tasks, 'states': states, "users": users,'project_name':proj_obj.project_name})
 
 
 @login_required(login_url='/PutTogether/')
