@@ -480,6 +480,7 @@ def func_login(request):
             response.status_code = 401
             return response
 
+
     response =  JsonResponse({"message":"Failed",'reason':"This email address is not used"})
     response.status_code = 401
     return response
@@ -509,6 +510,7 @@ def func_delete_account(request):
     if usr:
         usr_obj = Users.objects.get(email=usr)
         logout(request)
+        usr_obj.delete()
         usr_obj.delete()
         rtn = JsonResponse({"success":"user is deleted"})
         rtn.status_code = 200
@@ -626,16 +628,6 @@ def change_project_details(request):
     proj_obj.project_name=data['title'][0]
     proj_obj.save()
 
-    # proj_obj = Projects.objects.get(project_id=p_id)
-    # state_obj = state.objects.get(state_id=data['status'][0])
-    #
-    # task_obj = Tasks.objects.get(task_id=data['task_id'][0])
-    #
-    # task_obj.task_state = state_obj
-    # task_obj.task_deadline = data['time'][0]
-    # task_obj.task_descrip = data['detail'][0]
-    # task_obj.save()
-
     rtn = JsonResponse({"message":"modified"})
     rtn.status_code = 200
     return rtn
@@ -650,23 +642,6 @@ def func_delete_project(response):
     response = JsonResponse({"message":"project has been deleted"})
     response.status_code = 200
     return response
-
-# def send_invite_email(response):
-#     data=dict(response.POST)
-#     # email=data['email'][0]
-#     # print email
-#     # send_mail('helloo','hel','puttogether.zenvector@gmail.com',[email],fail_silently=False)
-#
-#
-#     send_mail('Hello from Puttogether','User invites you message','puttogether.zenvector@gmail.com',['tehadic996@email1.pro'],fail_silently=False)
-#
-#     response = JsonResponse({"message":"mail is sent"})
-#     response.status_code = 200
-#     return response
-
-""""""
-
-
 
 
 
@@ -778,6 +753,24 @@ def Email_PasswordResetCode(usrEmail,code):
 
     return msg.as_string()
 
+
+def contact_us(response):
+    data = dict(response.POST)
+    message=data['message'][0]
+    subject=data['subject'][0]
+    if data['email'][0]=="":
+        email=response.user.email
+    else:
+        email=data['email'][0]
+
+        message = Email_Contact_Us(email,subject,message)
+        Email_SendServer(message,'puttogethersoftware@gmail.com')
+
+    response = JsonResponse({"message":"mail is send"})
+    response.status_code = 200
+    return response
+
+
 def Email_Contact_Us(usrEmail,subject,message):
     msg = MIMEMultipart()
     msg['From'] = 'puttogethersoftware@gmail.com'
@@ -793,11 +786,14 @@ def Email_Contact_Us(usrEmail,subject,message):
                         <img style="align-items: ;" src="https://res.cloudinary.com/di6zpszmk/image/upload/v1575834908/puttogether1-03_xzhhab.png" width="150" height="100">
                         </div>
                         <div style="padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                        <p style="color: black;">Message from: {usrEmail}</p>
+                        <p style="color: black;">Subject: {subject}</p>
+                        <p></p>
                         <p style="color: black;">{message}</p>
                         </div>
                     </div>
                 </body>
-              """.format(message=message)
+              """.format(usrEmail=usrEmail, subject=subject, message=message)
     msg.attach(MIMEText(message, 'html'))
     return msg.as_string()
 
@@ -840,21 +836,7 @@ def func_delete_list(response,p_id):
 
 
 
-def contact_us(response):
-    data = dict(response.POST)
-    message=data['message'][0]
-    subject=data['subject'][0]
-    if data['email'][0]=="":
-        email=response.user.email
-    else:
-        email=data['email'][0]
 
-        message = Email_Contact_Us(email,subject,message)
-        Email_SendServer(message,'puttogethersoftware@gmail.com')
-
-    response = JsonResponse({"message":"mail is send"})
-    response.status_code = 200
-    return response
 def Email_Invitation_to_members(usrEmail,code):
     msg = MIMEMultipart()
     msg['From'] = 'PutTogether Team'

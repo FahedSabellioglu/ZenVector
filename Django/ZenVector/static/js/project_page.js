@@ -259,7 +259,6 @@ $("#addListForm").on('submit',function(e) {
 });
 
 function addList(e) {
-    console.log("hererer");
     var error_element = document.getElementById('list_name');
     error_element.style.display = 'none';
     var title = document.getElementById("listTitle").value;
@@ -357,16 +356,9 @@ $("#addListModal").modal({backdrop: "static"});
 // });
 
 
-$(document).on('click','#deleteListId',function () {
-    console.log($(this).data('id'));
-     $("#deleteConfirmation").attr('data-project_id',$(this).data('id'));
-});
 
-
-
- function deleteList(e){
-
-    var list_id = $("#deleteConfirmation").attr('data-project_id');
+ function deleteList(){
+    var list_id = $("#stateId").data('stateid');
     console.log(list_id);
        $.ajax({
            type:"POST",
@@ -380,3 +372,9 @@ $(document).on('click','#deleteListId',function () {
            }
        })
 }
+
+$(document).on('click','#deleteListId',function () {
+    var list_id=$(this).data('idstate');
+    console.log(list_id);
+    $('#stateId').data("stateid",list_id);
+});

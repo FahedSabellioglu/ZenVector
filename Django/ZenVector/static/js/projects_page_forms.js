@@ -233,29 +233,6 @@ function createprojectmodal(){
 }
 
 
-// function sendEmail() {
-//     console.log("send clicked");
-//     var email = document.getElementById('inviteNewMember').value;
-//     console.log(email);
-//
-//        $.ajax({
-//        type:"POST",
-//        url:"sendEmail/",
-//        data:{csrfmiddlewaretoken:csrftoken},
-//        // data:{email:email, csrfmiddlewaretoken:csrftoken},
-//        success:function () {
-//            location.reload(true);
-//        },
-//        error:function () {
-//            console.log("NOT CORRECT");
-//        }
-//     })
-//
-// }
-
-
-
-
 
 
 $(document).on('click','#add-user',function () {
