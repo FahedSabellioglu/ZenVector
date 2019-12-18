@@ -4,7 +4,7 @@ from ZenVector.models import *
 
 
 @login_required(login_url='/PutTogether/')
-def func_delete_list(response,p_id):
+def DeleteState(response,p_id):
     """:param
         p_id: project id
         :returns
@@ -25,7 +25,7 @@ def func_delete_list(response,p_id):
 
 
 @login_required(login_url='/PutTogether/')
-def fun_new_state(request,p_id):
+def NewState(request,p_id):
     """:arg
         p_id: project id
        :returns

@@ -6,7 +6,7 @@ from ZenVector.models import *
 from EmailHandler import  *
 
 
-def ResetPassword(request):
+def NonLogged_ResetPassword(request):
     """"
         changes the password of the user after passing all the checks.
         :param
@@ -24,7 +24,7 @@ def ResetPassword(request):
     return  rtn
 
 @login_required(login_url='/PutTogether/')
-def change_password(response):
+def Logged_change_password(response):
     """
         changing the password for a logged in user
         :returns
@@ -41,7 +41,7 @@ def change_password(response):
     return  rtn
 
 
-def LinkCheckPassRest(response,email,code):
+def PasswordResetLink(response,email,code):
     """
     check 
     :param response:
@@ -54,7 +54,7 @@ def LinkCheckPassRest(response,email,code):
 
     return render(response,'index.html',{"Available":False})
 
-def forgot_pass(request):
+def RequestPasswordResetCode(request):
     """
         gets the user entered email and checks if there such user, sends a code for resetting password to his email
         :returns json response of 200 or 401 status code
@@ -74,7 +74,7 @@ def forgot_pass(request):
     rtn.status_code = 401
     return rtn
 
-def CodeChecker(request):
+def PasswordResetCodeValidity(request):
     """
         a function for checking if the code given by the user if the code we have sent him/her
         :param request:

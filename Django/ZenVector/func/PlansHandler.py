@@ -4,7 +4,7 @@ from ZenVector.models import *
 
 
 @login_required(login_url='/PutTogether/')
-def upgrade_account(request):
+def UpgradeAccount(request):
     """
      HAS SOME BUGS, WAITING FOR PROJECTS PAGE
     :param request:
@@ -26,7 +26,7 @@ def upgrade_account(request):
     return rtn
 
 @login_required(login_url="/PutTogether/")
-def plan_downgrade(request):
+def DowngradeAccount(request):
     """"
         downgrading the user plan, the user has to be logged in
         :returns josn response fo 401 or 200

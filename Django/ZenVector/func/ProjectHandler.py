@@ -6,7 +6,7 @@ from django.core import serializers
 
 
 @login_required(login_url='/PutTogether/')
-def func_create_project(request):
+def CreateProject(request):
     """
         creates a project with default lists
     :param request:
@@ -46,7 +46,7 @@ def func_create_project(request):
     return  rtn
 
 @login_required(login_url='/PutTogether/')
-def add_users(response):
+def InviteMembers(response):
     data = dict(response.POST)
     users = map(lambda x:x.strip(),data['users'][0].split(','))
     project_obj = Projects.objects.get(project_id=data['project_id'][0])
@@ -83,7 +83,7 @@ def add_users(response):
     return rtn
 
 @login_required(login_url='/PutTogether/')
-def change_project_details(request):
+def ChangeProjectDetails(request):
     data = dict(request.POST)
     proj_obj = Projects.objects.get(project_id=data['project_id'][0])
     proj_obj.project_name=data['title'][0]
@@ -94,7 +94,7 @@ def change_project_details(request):
     return rtn
 
 @login_required(login_url='/PutTogether/')
-def func_delete_project(response):
+def DeleteProject(response):
     data = dict(response.POST)
     print data,'data'
     proj_obj = Projects.objects.get(project_id=data['project_id'][0])
@@ -105,7 +105,7 @@ def func_delete_project(response):
     return response
 
 @login_required(login_url='/PutTogether/')
-def get_users(request):
+def GetProjectMembers(request):
     project_ID = dict(request.GET)['project_id'][0]
     user_projects = UsrProjects.objects.filter(project_id=Projects.objects.get(project_id=project_ID))
     serialized_qs = serializers.serialize('json', list(user_projects))

@@ -5,7 +5,7 @@ from ZenVector.models import *
 import json
 
 @login_required(login_url='/PutTogether/')
-def fun_new_task(response,p_id):
+def NewTask(response,p_id):
     """:param
         p_id: project id
         :returns
@@ -44,7 +44,7 @@ def fun_new_task(response,p_id):
     return response
 
 @login_required(login_url='/PutTogether/')
-def func_delete_task(response,p_id):
+def DeleteTask(response,p_id):
     """:param
         p_id: project id
         :returns
@@ -60,7 +60,7 @@ def func_delete_task(response,p_id):
     return response
 
 @login_required(login_url='/PutTogether/')
-def change_task_details(request,p_id):
+def ChangeTaskDetails(request,p_id):
     """
         changing the task details
         :param
@@ -82,7 +82,7 @@ def change_task_details(request,p_id):
     return rtn
 
 @login_required(login_url='/PutTogether/')
-def move_task(request,p_id):
+def MoveTask(request,p_id):
     """
         changing the state of the task once the task is droppen
         :param p_id project id
@@ -114,7 +114,7 @@ def move_task(request,p_id):
     return rtn
 
 @login_required(login_url='/PutTogether/')
-def task_users(response,p_id):
+def TaskMembers(response,p_id):
     data = dict(response.GET)
 
     task_obj = Tasks.objects.get(task_id=data['taskid'][0])

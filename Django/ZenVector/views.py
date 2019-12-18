@@ -88,6 +88,8 @@ def contact_us(response):
 
 
 
+"""TO BE DELETED"""
+
 # def ResetPassword(request):
 #     """"
 #         changes the password of the user after passing all the checks.

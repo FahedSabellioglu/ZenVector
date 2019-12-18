@@ -5,7 +5,7 @@ from ZenVector.models import *
 from EmailHandler import *
 
 """Login, Signup, PlanBuying"""
-def func_signup(request):
+def Signup(request):
     """"
         plan buying if the user has no such account previously
         :param
@@ -27,7 +27,7 @@ def func_signup(request):
     rtn.status_code = 403
     return rtn
 
-def func_login(request):
+def Login(request):
     """
         a logging in function
         :param
@@ -52,13 +52,13 @@ def func_login(request):
     return response
 
 @login_required(login_url='/PutTogether/')
-def func_logout(request):
+def Logout(request):
     logout(request)
     return HttpResponseRedirect('/PutTogether/')
 
 
 @login_required(login_url='/PutTogether/')
-def func_delete_account(request):
+def DeleteAccount(request):
     data = dict(request.POST)
     print request.user.email
     usr = authenticate(email=request.user.email, password=data['password'][0])
