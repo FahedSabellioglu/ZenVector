@@ -102,12 +102,13 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 
+$("#deleteTaskConfirm").click(function(){
+$("#detailModal").modal('hide');
+});
+
 
  function deleteTask(){
-
-    var x = confirm("Are you sure you want to delete?");
-    var task_id = $("#edit_task_title").attr('taskid');
-    if (x){
+    var task_id=$(edit_task_title).attr('taskid');
 
        $.ajax({
            type:"POST",
@@ -120,11 +121,6 @@ function formatDate(date) {
                console.log("NOT CORRECT");
            }
        })
-    }
-    else{
-      console.log(x);
-      return false;
-    }
 }
 
 $("#addTaskForm").on('submit',function (e) {
