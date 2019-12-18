@@ -58,40 +58,50 @@ function Control(event) {
         document.getElementById('password_error').style.display = 'none';
         document.getElementById('repeat_error').style.display = 'none';
 
-        if ($.trim(usr_name)== '' || usr_name.length < 6)
+        if ($.trim(usr_name)=== '' || usr_name.length < 6)
         {
             document.getElementById('name_error').style.display='block';
 
-            return
+            return;
         }
 
-        if ($.trim(email) == '')
+        if ($.trim(email) === '')
         {
             email_error.style.display ='block';
-            return
+            return;
         }
 
         if (password.length < 8)
         {
+
             document.getElementById('password_error').style.display='block';
             return;
         }
 
-        if (password != repeat)
+        if (password !== repeat)
         {
-
             document.getElementById('repeat_error').style.display = 'block';
             return;
         }
+
+
+        $("#"+event.id).attr("disabled", true);
+        $("#"+event.id).removeClass('active_button');
 
         $.ajax({
             type:'POST',
             url:"Signup/",
             data:{name:usr_name,mail:email,pass:password,csrfmiddlewaretoken:csrftoken,acc_type:acc_type},
             success: function (e) {
+                $("#"+event.id).attr("disabled", false);
+                $("#"+event.id).addClass('active_button');
+
                 location.reload(true);
             },
             error:function (e) {
+
+                $("#"+event.id).attr("disabled", false);
+                $("#"+event.id).addClass('active_button');
             email_error.innerHTML = e.responseJSON.reason;
             email_error.style.display = 'block';
             }

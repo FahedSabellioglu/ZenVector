@@ -247,6 +247,7 @@ float: right;
     border-color: #59A61E;
 }
 
+
  .btn.btn-primary:focus,
  .btn.btn-primary:active,
  .btn.btn-primary:visited,
@@ -255,7 +256,8 @@ float: right;
  .btn.btn-primary:active.focus,
  .btn.btn-primary.active:hover,
  .btn.btn-primary.active:focus,
- .btn.btn-primary.active.focus
+ .btn.btn-primary.active.focus,
+ .btn.btn-primary.disabled:hover, .btn.btn-primary:disabled:hover
  {
     color: #fff;
     background-color: rgb(136, 136, 136);
