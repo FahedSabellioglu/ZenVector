@@ -235,6 +235,17 @@ function createprojectmodal(){
 
 
 
+window.addEventListener('keydown', function(e) {
+    if (e.keyIdentifier == 'U+000A' || e.keyIdentifier == 'Enter' || e.keyCode == 13) {
+        e.preventDefault();
+        if (e['path'][7].id === 'inviteModalForm')
+        {
+                console.log('hre');
+                 return false;
+        }
+    }
+}, true);
+
 $(document).on('click','#add-user',function () {
     var project_id = $(this).data('id');
     $("#InviteForm").attr('data-projectid',project_id);
@@ -316,3 +327,5 @@ $("#InviteForm").off().on('submit',function (event) {
         }
     });
 });
+
+

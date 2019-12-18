@@ -11,12 +11,11 @@ from func.ProjectHandler import  *
 from func.StatesHandler import  *
 
 
+
 def page_Home(response):
     """
         :returns Home Page
     """""
-    # for usr in Users.objects.all():
-    #     print usr.email
     return render(response,'index.html')
 
 @login_required(login_url='/PutTogether/')
@@ -35,6 +34,7 @@ def page_Projects(response, p_id):
     tasks = Tasks.objects.filter(task_project_id=proj_obj).order_by('task_position')
     states = state.objects.filter(project_id=proj_obj)
     users = [ usrObj.usr_email for usrObj in UsrProjects.objects.filter(project_id=proj_obj)]
+    users.append(proj_obj.usr_email)
 
     return render(response, 'project.html', {"tasks": tasks, 'states': states, "users": users})
 

@@ -119,6 +119,8 @@ def TaskMembers(response,p_id):
 
     task_obj = Tasks.objects.get(task_id=data['taskid'][0])
     task_users =  [usrTask.usr_email for usrTask in UsrTasks.objects.filter(task_id=task_obj)]
+    print task_obj.task_given_by,'tasks given by'
+    task_users.append(Tasks.task_given_by)
     ser_users = serializers.serialize('json', list(task_users))
     rtn = JsonResponse({"message": "task users",'users':ser_users})
     rtn.status_code = 200

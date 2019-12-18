@@ -107,8 +107,9 @@ def DeleteProject(response):
 @login_required(login_url='/PutTogether/')
 def GetProjectMembers(request):
     project_ID = dict(request.GET)['project_id'][0]
-    user_projects = UsrProjects.objects.filter(project_id=Projects.objects.get(project_id=project_ID))
-    serialized_qs = serializers.serialize('json', list(user_projects))
+    user_projects = list(UsrProjects.objects.filter(project_id=Projects.objects.get(project_id=project_ID)))
+    user_projects.append(Projects.objects.get(project_id=project_ID).usr_email)
+    serialized_qs = serializers.serialize('json', user_projects)
     rtn = JsonResponse({"message": "added",'users':serialized_qs})
     rtn.status_code = 200
     return rtn

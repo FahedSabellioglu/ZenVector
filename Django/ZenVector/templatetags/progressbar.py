@@ -8,7 +8,7 @@ def progressbar(context):
     proj=Projects.objects.get(project_id=context)
     tasks=Tasks.objects.filter(task_project_id=proj)
 
-    task_user_count = len(UsrProjects.objects.filter(project_id=proj))
+    task_user_count = len(UsrProjects.objects.filter(project_id=proj))+1
 
     if len(tasks) == 0:
         per = 0
