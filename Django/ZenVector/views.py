@@ -187,9 +187,10 @@ def fun_new_task(response,p_id):
 
     for user in data['assign_to'][0].strip().split(","):
         if len(Users.objects.filter(email=user.strip())) != 0:
-            usrTask = UsrTasks(task_id=new_task,usr_email=Users.objects.get(email=user.strip()))
-            usrTask.save()
-            print "NEW USER TO TASK"
+            if len(UsrTasks.objects.filter(task_id=new_task,usr_email=Users.objects.get(email=user.strip()))) == 0:
+                usrTask = UsrTasks(task_id=new_task,usr_email=Users.objects.get(email=user.strip()))
+                usrTask.save()
+                print "NEW USER TO TASK"
         else:
             print "NEW USER TO APP"
         print (user,'here')
@@ -527,7 +528,7 @@ def page_Projects(response, p_id):
 
     tasks = Tasks.objects.filter(task_project_id=proj_obj).order_by('task_position')
     states = state.objects.filter(project_id=proj_obj)
-    users = Users.objects.all()
+    users = [ usrObj.usr_email for usrObj in UsrProjects.objects.filter(project_id=proj_obj)]
 
     return render(response, 'project.html', {"tasks": tasks, 'states': states, "users": users})
 

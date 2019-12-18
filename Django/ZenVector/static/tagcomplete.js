@@ -2,6 +2,8 @@
 *APACHE 2.0 LICENSE
 *@author: Razak Zakari <razzsense@gmail.com>
  */
+
+var usrOptions =
 (function( $ ){
 
 	/**
@@ -88,6 +90,8 @@
 
 		//set default options
 		var options = $.extend(true,defaultOpts,userOpts);
+
+		usrOptions = userOpts.autocomplete;
 
 		//console.log(options);
 		//

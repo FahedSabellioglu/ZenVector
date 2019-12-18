@@ -139,6 +139,27 @@ function validateEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
+$("#addTaskModal").on('hidden.bs.modal',function (e) {
+    e.preventDefault();
+
+    console.log('here hidden');
+      var title_error = document.getElementById("task_name_error");
+      var descrip_error = document.getElementById("task_descrip");
+      var deadline_error = document.getElementById('task_deadline');
+      var task_error = document.getElementById("task_error");
+
+      var assigned_to_error = document.getElementById("add_task_users");
+      assigned_to_error.style.display = 'none';
+
+      task_error.style.display = 'none';
+      title_error.style.display = 'none';
+      descrip_error.style.display = 'none';
+      deadline_error.style.display = 'none';
+
+
+});
+
+
 
 
 function addTask() {
@@ -148,8 +169,8 @@ function addTask() {
       var deadline_error = document.getElementById('task_deadline');
       var email_value = document.getElementById('project_owner').value;
       var task_error = document.getElementById("task_error");
-      task_error.style.display = 'none';
 
+      task_error.style.display = 'none';
       title_error.style.display = 'none';
       descrip_error.style.display = 'none';
       deadline_error.style.display = 'none';
@@ -169,9 +190,8 @@ function addTask() {
       var assigned_to_error = document.getElementById("add_task_users");
       assigned_to_error.style.display = 'none';
 
-      console.log(assignedTo);
-
       var check = true;
+      var includesCheck = true;
       if ($.trim(assignedTo).length !== 0)
         {
             $.each(assignedTo.split(','),function(index,value){
@@ -180,12 +200,24 @@ function addTask() {
             {
                    check = false;
             }
-                });
+
+            else if (!usrOptions['data'].includes(value)){
+                includesCheck = false;
+
+            }
+              });
         }
 
       if (check === false)
       {
-          assigned_to_error.innerHTML = 'One or of the emails is not valid';
+          assigned_to_error.innerHTML = 'One or more of the emails is not valid';
+          assigned_to_error.style.display = 'block';
+          return ;
+      }
+
+      if (includesCheck === false)
+      {
+          assigned_to_error.innerHTML = 'One or more of the users are not added to the proejct.';
           assigned_to_error.style.display = 'block';
           return ;
       }
