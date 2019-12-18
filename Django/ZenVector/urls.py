@@ -2,8 +2,8 @@ from django.conf.urls import url
 from ZenVector import views
 
 urlpatterns = [
-    url(r'^PutTogether/$',views.page_Home),
-    url(r'^PutTogether/Signup/$', views.Signup),
+    url(r'^PutTogether/$',views.page_Home,name='PutTogether'),
+    url(r'^PutTogether/Signup/$', views.Signup,name='SignUP'),
     url(r'^PutTogether/Login/$', views.Login),
     url(r"^PutTogether/PlanBuy/", views.Signup),
     url(r'^PutTogether/Loguout/$', views.Logout),
