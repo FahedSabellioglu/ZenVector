@@ -17,6 +17,15 @@ def CreateProject(request):
     project = Projects(usr_email=usrObj,project_name=data['p_name'][0])
     project.save()
 
+    members = data['members'][0].strip().split(',')
+    for member in members:
+        if len((Users.objects.filter(email=member.strip()))) != 0 and usrObj.email != member:
+            UsrObj = Users.objects.get(email=member.strip())
+            if len(UsrProjects.objects.filter(project_id=project,usr_email=UsrObj)) == 0:
+                UsrProjObj = UsrProjects(project_id=project,usr_email=UsrObj)
+                UsrProjObj.save()
+
+
     # Default lists
     # to_do_list = state(state_name='To Do',project_id=project)
     # doing_list = state(state_name='Doing',project_id=project)
