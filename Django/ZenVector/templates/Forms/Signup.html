@@ -26,7 +26,7 @@
                             <i class="fas fa-user"></i>
                           </div>
                         </div>
-                        <input type="text" required  id ='usr_name' value="fahedshaabani" class="form-control" placeholder="Name...">
+                        <input type="text" required  id ='usr_name'  class="form-control" placeholder="Name...">
                       </div>
                         <label  class="label_control" id="name_error" style="display: none;">provide a meaningful name</label>
                     </div>
@@ -38,7 +38,7 @@
                             <i class="fas fa-envelope"></i>
                           </div>
                         </div>
-                        <input type="email" required id='email' value="fahedshabani@std.sehir.edu.tr" class="form-control" placeholder="Email...">
+                        <input type="email" required id='email' class="form-control" placeholder="Email...">
                       </div>
                         <label class="label_control" id="email_error" style="display: none;">email exists</label>
                     </div>
@@ -49,7 +49,7 @@
                             <i class="fa fa-key" aria-hidden="true"></i>
                           </div>
                         </div>
-                        <input type="password" required   id="password" value="fahedshaabani" placeholder="Password..." class="form-control pass" />
+                        <input type="password" required   id="password" placeholder="Password..." class="form-control pass" />
                       </div>
                         <label class="label_control" id="password_error" style="display: none;">password longer than 8 characters</label>
                     </div>
@@ -60,14 +60,14 @@
                             <i class="fa fa-key" aria-hidden="true"></i>
                           </div>
                         </div>
-                        <input type="password"  required id="password_repeat" value="fahedshaabani"  placeholder="Confirm Password..." class="form-control pass" />
+                        <input type="password"  required id="password_repeat"  placeholder="Confirm Password..." class="form-control pass" />
                       </div>
                         <label class="label_control" id="repeat_error" style="display: none;">passwords do not match</label>
                     </div>
 
                   </div>
                   <div class="modal-footer justify-content-center">
-                    <button type="submit" onclick="Control()" class="btn btn-primary btn-round">Get Started</button>
+                    <button id="SignUpSubmitButton" type="submit" onclick="Control(this)" class="btn btn-primary btn-round">Get Started</button>
                   </div>
                 </form>
               </div>

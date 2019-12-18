@@ -60,12 +60,10 @@ def InviteMembers(response):
         print "DELETE USER"
 
 
-    print len(UsrProjects.objects.filter(project_id=project_obj)),'new'
-
     for user in users:
         if len(Users.objects.filter(email=str(user))) != 0:
             userObj = Users.objects.get(email=str(user))
-            if userObj not in proj_users:
+            if userObj not in proj_users and project_obj.usr_email.email != userObj.email:
                 if len(UsrProjects.objects.filter(project_id=project_obj)) == 5:
                     rtn = JsonResponse({"message": "Not Allow"})
                     rtn.status_code = 200
@@ -107,8 +105,7 @@ def DeleteProject(response):
 @login_required(login_url='/PutTogether/')
 def GetProjectMembers(request):
     project_ID = dict(request.GET)['project_id'][0]
-    user_projects = list(UsrProjects.objects.filter(project_id=Projects.objects.get(project_id=project_ID)))
-    user_projects.append(Projects.objects.get(project_id=project_ID).usr_email)
+    user_projects = [ obj.usr_email for obj in UsrProjects.objects.filter(project_id=Projects.objects.get(project_id=project_ID))]
     serialized_qs = serializers.serialize('json', user_projects)
     rtn = JsonResponse({"message": "added",'users':serialized_qs})
     rtn.status_code = 200

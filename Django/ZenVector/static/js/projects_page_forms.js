@@ -258,17 +258,13 @@ $(document).on('click','#add-user',function () {
         success: function (e) {
            var  div_element = document.getElementsByClassName('tags_container');
            $('.tags_container').empty();
-
           $.each(JSON.parse(e['users']),function(index,value){
-            $('.tags_container').append("<span data-id="+value['fields']['usr_email']+" class='tag'>"+value['fields']['usr_email']+"<span class='close'></span></span>");
+            $('.tags_container').append("<span data-id="+value['pk']+" class='tag'>"+value['pk']+"<span class='close'></span></span>");
           });
 
         },
         error: function (e) {
             console.log("NOT");
-            // error_control.innerHTML  = e.responseJSON.reason;
-            // error_control.style.display = 'block';
-
         }
     });
 });

@@ -24,7 +24,7 @@
                                 <i class="fas fa-user"></i>
                               </div>
                             </div>
-                            <input type="text" required  id ='p_usr_name' value="fahedshaabani" class="form-control" placeholder="Name...">
+                            <input type="text" required  id ='p_usr_name'  class="form-control" placeholder="Name...">
                           </div>
                         </div>
 
@@ -35,7 +35,7 @@
                                     <i class="fas fa-envelope"></i>
                                   </div>
                                 </div>
-                                <input type="email" required id='p_email' value="fahedshabani@std.sehir.edu.tr" class="form-control" placeholder="Email...">
+                                <input type="email" required id='p_email' class="form-control" placeholder="Email...">
                               </div>
                             </div>
                             <div class="form-group">
@@ -45,7 +45,7 @@
                                     <i class="fa fa-key" aria-hidden="true"></i>
                                   </div>
                                 </div>
-                                <input type="password" required   id="p_password" value="fahedshaabani" placeholder="Password..." class="form-control pass" />
+                                <input type="password" required   id="p_password"  placeholder="Password..." class="form-control pass" />
                               </div>
                             </div>
                             <div class="form-group">
@@ -55,7 +55,7 @@
                                     <i class="fa fa-key" aria-hidden="true"></i>
                                   </div>
                                 </div>
-                                <input type="password"  required id="p_password_repeat" value="fahedshaabani"  placeholder="Confirm Password..." class="form-control pass" />
+                                <input type="password"  required id="p_password_repeat" placeholder="Confirm Password..." class="form-control pass" />
                               </div>
                             </div>
 
@@ -75,22 +75,22 @@
                           <div class="form-row">
                             <div class="form-group col-md-6">
                               <label for="secu_num">Security Number</label>
-                              <input type="text" class="form-control own_control" id="p_secu_num">
+                              <input type="text" class="form-control own_control" required id="p_secu_num">
                             </div>
 
                             <div class="form-group col-md-3">
                               <label for="expmonth">Exp.Month</label>
-                              <input type="number" min="0" max="12" class="form-control" id="expmonth">
+                              <input type="number" min="0" max="12" required class="form-control" id="expmonth">
 
                             </div>
                             <div class="form-group col-md-2 ml-auto">
                               <label for="yearExp">Exp.Year</label>
-                              <input type="number" class="form-control" id="yearExp">
+                              <input type="number" min="2020" max="2029" required class="form-control" id="yearExp">
                             </div>
                           </div>
                         <label class="label_control" id="plan_error" style="display: none;padding-bottom:.5rem;padding-top: 1rem">Credit Card is a 16 digit number</label>
 
-                          <button type="submit" class="btn btn-primary btn-round">Sign up</button>
+                          <button id="PricingModalSubmitButton" type="submit" class="btn btn-primary btn-round">Sign up</button>
                         </form>
                   </div>
                 </div>
