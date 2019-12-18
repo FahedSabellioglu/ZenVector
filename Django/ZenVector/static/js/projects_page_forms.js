@@ -228,6 +228,7 @@ $(document).on('click','#deleteId',function () {
     var project_id = $("#edit_project_title").attr('projectid')
 
     $('#deleteConfirmation').data('id',project_id);
+    $('#editModal').modal('hide');
     $('#deleteConfirmation').modal('show');
 });
 

@@ -1,12 +1,12 @@
 
-
-/*.slide-content .scroller {*/
-/*  width: 1024px;*/
-/*}*/
-
-/** {*/
-/*  border: 1px solid #f00 !important;*/
-/*}*/
+.name_project
+{
+    box-shadow: none;
+    animation: none;
+    transition: none;
+    transform: none;
+    -webkit-appearance: none;
+}
 
 .gotopbtn{
   animation: fade_gotobtn 3s ease-in forwards;
