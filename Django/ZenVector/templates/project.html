@@ -12,10 +12,10 @@
      <p id="project_owner" style="display: none">{{ owner }}</p>
      {% if states %}
       <button id="addTask" data-toggle="modal" data-target="#addTaskModal" class="btn btn-default btn-round btn-sm">
-        <i class="material-icons"> add </i>Add New Task</button>
+          <i class="material-icons"> add </i>Add New Task</button>
      {% endif %}
       <button id="addList" data-toggle="modal" data-target="#addListModal" class="btn btn-primary btn-round btn-sm">
-        <i class="material-icons"> add </i> Add New List</button>
+          <i class="material-icons"> add </i>Add New List</button>
   </div>
 </div>
   <div class="container-fluid">
@@ -67,8 +67,7 @@
 
         <div class="card-list" >
           <div class="card-header">
-            <h4 class="card-list-title">{{element.state_name}}</h4>
-
+            <h4 class="card-list-title"><strong>{{element.state_name}}</strong></h4>
               <a data-idstate="{{ element.state_id }}" id="deleteListId" style="position: absolute; width:1.5rem; top:1.5rem; right: 0rem;" data-toggle="modal" data-target="#deleteConfirmation">
                   <i class="fas fa-title">trash-alt</i>
               </a>
@@ -82,13 +81,16 @@
                   {% if item.task_state == element %}
                     <div class="card" id="{{ item.task_id }}" style="max-width: 90rem;">
                         <div  class="card-header card-header-success2" style="background: #{{element.state_color }}">
-                            {{item.task_name}}
+                            <strong>{{item.task_name}}</strong>
                             <button  style="position: absolute; right: 1rem;" type="button" class="btn btn-just-icon btn-sm menu-button" data-id="{{ item.task_id }}" data-toggle="modal" data-target="#detailModal">
                                 <i class="material-icons">menu</i>
                             </button>
                         </div>
                         <div class="card-body" id="{{ item.task_id }}">
-                            <p class="card-text" > Descrip: {{ item.task_descrip }} Deadline: {{ item.task_deadline }} Given by :{{ item.task_given_by.username }}</p>
+                            <pre class="card-text" >{{ item.task_descrip }}
+<small>----------------------------------------------</small>
+<small style="font-size: 12px">Deadline: {{ item.task_deadline }}
+Given by: {{ item.task_given_by.username }}</small></pre>
                         </div>
                     </div>
                   {% endif %}
@@ -108,7 +110,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title card-title" id="edit_task_title" data-taskid="none">Edit Card Title Details</h5>
+                <h5 class="modal-title card-title" id="edit_task_title" data-taskid="none"><strong>Edit Card Details</strong></h5>
 
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <i class="far fa-window-close" style="color: red"></i>
@@ -154,7 +156,7 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
-                            <i class="fas fa-title">stream</i>
+                            <i class="fas fa-info-circle"></i>
                           </div>
                         </div>
                         <input type="text" id="taskDetailsD" class="form-control" placeholder="Details..." required>
@@ -165,7 +167,7 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
-                            <i class="fas fa-title">list</i>
+                            <i class="fas fa-info-circle">list</i>
                           </div>
                         </div>
                         <select id="statusD" class="form-control">
@@ -363,11 +365,11 @@ $(function(){
                     <div class="form-group">
                       <div class="input-group">
                           <div class="input-group-prepend">
-                          <div class="input-group-text">
+                          <div class="input-group-text"">
                             <i class="fas fa-tint"></i>
                           </div>
                         </div>
-                        <input id="headerColor" class="jscolor" value="ab2567">
+                        <input id="headerColor" class="jscolor" value="ab2567" style="margin: 0">
                       </div>
                     </div>
                   </form>
@@ -393,7 +395,7 @@ $(function(){
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title card-title" id="stateId" data-stateid="none">Confirm the Deletion </h5>
+            <h5 class="modal-title card-title" id="stateId" data-stateid="none">Confirm the Deletion</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <i class="far fa-window-close" style="color: red"></i>
             </button>
