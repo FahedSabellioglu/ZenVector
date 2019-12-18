@@ -1,9 +1,8 @@
 {% load staticfiles%}
 
-
-  <nav class="navbar navbar-expand sticky-top bg-white"  style="position: fixed">
+  <nav class="navbar navbar-expand sticky-top bg-white"  id= "navbar" style="position: fixed">
     <div class="container-fluid">
-      <img src= "{% static 'img/Actual_logos/PNG_FORM/puttogether1-04.png' %}" width="10%" onclick="toIndexPage()" alt="">
+      <img  id= "top" style="cursor: pointer" src= "{% static 'img/Actual_logos/PNG_FORM/puttogether1-04.png' %}" width="10%" onclick="toIndexPage()" alt="">
       <!-- <a class="navbar-brand" href="#">Navbar</a> -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -223,9 +222,22 @@
         </div>
       </div>
 
+
 <script>
     function toIndexPage() {
         location.replace("/PutTogether/#Top_background");
     }
+</script>
+<script>
+    var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById("navbar").style.top = "0";
+  } else {
+    document.getElementById("navbar").style.top = "-50px";
+  }
+  prevScrollpos = currentScrollPos;
+}
 </script>
 

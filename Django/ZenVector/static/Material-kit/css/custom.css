@@ -1,3 +1,34 @@
+.gotopbtn{
+  animation: fade_gotobtn 3s ease-in forwards;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  background: #59A61E;
+  bottom: 40px;
+  right: 50px;
+
+  text-decoration: none;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  font-size: 20px;
+}
+
+.gotopbtn :hover{
+    fill: white;
+}
+@keyframes fade_gotobtn {
+    from{
+        opacity: 0;
+        display: none;
+    }
+    to{
+        opacity: .8;
+        display: initial;
+    }
+    
+}
+
 .container-selectbox{
     width:80%;
     margin:150px auto;

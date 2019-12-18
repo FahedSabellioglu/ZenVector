@@ -3,7 +3,6 @@
 {% block content %}
     <link rel='stylesheet' href="{% static 'tagcomplete.css' %}"/>
     <script src= "{% static 'tagcomplete.js' %}"></script>
-
     <div class="container">
     <br>
     <br>
@@ -35,9 +34,9 @@
                             <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar" style="width: {{list.percentage}}%;" aria-valuenow="{{list.percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title" style="position: absolute; top: 0.65rem;"><a  href="{% url 'tasks' p_id=project.project_id %}">
+                           <strong> <h4 class="card-title" style="position: absolute; top: 0.65rem;"><a  href="{% url 'tasks' p_id=project.project_id %}">
                                 {{project.project_name}}</a>
-                            </h4>
+                            </h4></strong>
                             <a data-toggle="dropdown" id="dropdownmenu-click" data-id="{{ project.project_id }}" style="position: absolute; width:1.5rem; top:1.5rem; right: 0rem;" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-title" >ellipsis-v</i>
                             </a>
@@ -49,9 +48,9 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text"> Created By:  {{ project.usr_email.username }}</p>
-                            <p class="card-text"> Num of members: {{ list.user_count }}</p>
-                            <p class="card-text"> Num of tasks:  {{list.total}} </p>
-                            <p class="card-text"> Creation time:  {{ project.creation_date}}  {{ project.creation_time}}</p>
+                            <p class="card-text"> Number of Members: {{ list.user_count }}</p>
+                            <p class="card-text"> Number of Tasks:  {{list.total}} </p>
+                            <small><p class="card-text"> Date & Time Created: {{ project.creation_date}} {{ project.creation_time}}</p></small>
                          </div>
                     </div>
                 </div>
