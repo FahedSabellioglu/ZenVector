@@ -63,13 +63,13 @@
             {% endif %}
 
         </ul>
-        <div class="btn-group ml-auto borderYtoX" >
+        <div class="btn-group ml-auto borderYtoX" style="cursor: pointer" >
           <span class="navbar-link dropdown-toggle ml-auto borderYtoX" style="margin-right: 2.8rem; position: relative; color: inherit; padding: 0.9375rem; font-weight: 400;
                 font-size: 12px; text-transform: uppercase; border-radius: 3px; line-height: 20px;" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-              {{ request.user.username }}
+             <span style="text-decoration: underline orangered; text-decoration-style: double">{{ request.user.username }}</span>
           </span>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" style="cursor: pointer">
                 <a class="nav-link dropdown-item" data-toggle="modal" data-target="#PasswordModal">Change Password</a>
                 <a class="nav-link dropdown-item" data-toggle="modal" data-target="#DeleteModel">Delete Account</a>
                 <a class="nav-link dropdown-item" href="/PutTogether/Loguout/" id="#logOut"> Logout</a>
