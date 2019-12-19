@@ -79,12 +79,6 @@ class UsrProjects(models.Model):
     usr_email = models.ForeignKey(Users,db_column='email')
     project_id = models.ForeignKey(Projects,db_column='project_id')
 
-
-class UsrActivity(models.Model):
-    usr_email = models.ForeignKey(Users,db_column='email')
-    last_login = models.TimeField(auto_now_add=True)
-
-
 class UsrTasks(models.Model):
     usr_email = models.ForeignKey(Users,db_column='email')
     task_id = models.ForeignKey(Tasks,db_column='task_id')

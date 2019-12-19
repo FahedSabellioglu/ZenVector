@@ -54,7 +54,7 @@ $(document).on('click','.menu-button',function () {
 
     var details = element_p.split("<")[0];
 
-    var date = element_p.split('12px">')[1].split('Given by:')[0].split("Deadline: ")[1];
+    var date = element_p.split('12px">')[1].split('Given by:')[0].split("Deadline: ")[1].split("Assigner")[0];
 
     var list_title = $(this).parent().parent().parent().attr("id");
 
@@ -73,7 +73,6 @@ $(document).on('click','.menu-button',function () {
 
                     $('#assignedToTasks').append("<option value='"+value['pk']+"'>"+value['pk']+"</option>");
                   });
-                  console.log("HERRE");
                console.log(e);
                // location.reload(true);
            },
