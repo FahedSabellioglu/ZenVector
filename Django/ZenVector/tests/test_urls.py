@@ -1,10 +1,14 @@
 import unittest
 from django.test import SimpleTestCase
 from django.urls import resolve, reverse
+
 from ZenVector.views import *
 
 
 class TestUrls(SimpleTestCase):
+    """
+    TESTING ALMOST ALL OF THE LINKS WE HAVE ON OUR WEBSITE.
+    """
 
     def test_page_home(self):
         url = reverse("PutTogether")
@@ -67,8 +71,27 @@ class TestUrls(SimpleTestCase):
         called_func = resolve("/PutTogether/Projects/getMembers").func
         self.assertEqual(called_func, GetProjectMembers)
 
+    def test_UpgradeAccount(self):
+        called_func = resolve("/PutTogether/Upgrade/").func
+        self.assertEqual(called_func, UpgradeAccount)
+
+    def test_DowngradeAccount(self):
+        called_func = resolve("/PutTogether/DownGrade/").func
+        self.assertEqual(called_func, DowngradeAccount)
+
+    def test_display_projects(self):
+        called_func = resolve("/PutTogether/Projects/").func
+        self.assertEqual(called_func, display_projects)
 
 
+    def test_page_User(self):
+        called_func = resolve("/PutTogether/User/").func
+        self.assertEqual(called_func, page_User)
+
+
+    def test_contact_us(self):
+        called_func = resolve("/ContactUs/").func
+        self.assertEqual(called_func, contact_us)
 
 
 if __name__ == '__main__':
