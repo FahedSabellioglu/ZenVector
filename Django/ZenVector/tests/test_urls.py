@@ -83,12 +83,6 @@ class TestUrls(SimpleTestCase):
         called_func = resolve("/PutTogether/Projects/").func
         self.assertEqual(called_func, display_projects)
 
-
-    def test_page_User(self):
-        called_func = resolve("/PutTogether/User/").func
-        self.assertEqual(called_func, page_User)
-
-
     def test_contact_us(self):
         called_func = resolve("/ContactUs/").func
         self.assertEqual(called_func, contact_us)

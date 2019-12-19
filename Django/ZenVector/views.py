@@ -9,6 +9,7 @@ from func.PlansHandler import  *
 from func.PasswordHandler import *
 from func.ProjectHandler import  *
 from func.StatesHandler import  *
+from django.http import JsonResponse
 
 
 
@@ -87,8 +88,8 @@ def contact_us(response):
 
 
 
-
-"""TO BE DELETED"""
+#
+# """TO BE DELETED"""
 
 # def ResetPassword(request):
 #     """"
@@ -137,11 +138,11 @@ def contact_us(response):
 #     rtn = JsonResponse({"message":'password changed'})
 #     rtn.status_code = 200
 #     return  rtn
-""""""
-"""Projects functions"""
-@login_required(login_url='/PutTogether/')
-def page_User(response):
-    return render(response,'user.html')
+# """"""
+# """Projects functions"""
+# @login_required(login_url='/PutTogether/')
+# def page_User(response):
+#     return render(response,'user.html')
 #
 # @login_required(login_url='/PutTogether/')
 # def func_delete_account(request):
@@ -158,17 +159,17 @@ def page_User(response):
 #         rtn = JsonResponse({"reason":"Incorrect password"})
 #         rtn.status_code = 400
 #         return rtn
-@login_required(login_url='/PutTogether/')
-def page_User(response):
-    """
-    NOT USED ANY MORE
-    :param response:
-    :return:
-    """""
-    return render(response,'user.html')
-"""Password Rest Functions"""
-
-
+# @login_required(login_url='/PutTogether/')
+# def page_User(response):
+#     """
+#     NOT USED ANY MORE
+#     :param response:
+#     :return:
+#     """""
+#     return render(response,'user.html')
+# """Password Rest Functions"""
+#
+#
 
 
 

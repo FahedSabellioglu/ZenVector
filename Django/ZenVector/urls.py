@@ -41,7 +41,6 @@ urlpatterns = [
 
     url(r'^PutTogether/Projects/(?P<p_id>\d+)/$', views.page_Projects, name='tasks'),
     url(r'^PutTogether/Projects/$', views.display_projects),
-    url(r'^PutTogether/User/$', views.page_User),
     url(r"ContactUs/$",views.contact_us),
 
 

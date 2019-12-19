@@ -173,13 +173,9 @@ $(document).on('click','#editId',function () {
     console.log(nTasks);
     var date = element.getElementsByTagName('p')[3].innerHTML;
     console.log(date);
-    var date = date.split(':  ')[1];
-    // var date_time=date.split('  ');
-    // var date=date_time[0];
-    // var time=date_time[1].split(' ')[0];
-    // console.log(date);
-    // console.log(time);
-    // console.log(date+" "+time);
+    date = date.split('Date &amp; Time Created: ')[1];
+
+    console.log(date);
 
 
     document.getElementById("projectTitle").value = title;
