@@ -23,7 +23,7 @@ class test_Models(unittest.TestCase):
 
     def test_create_project(self):
         new_project,usrObj = self.create_project()
-        self.assertEqual(isinstance(new_project, Projects) and isinstance(usrObj, Users), True)
+        self.assertEqual(isinstance(new_project, Projects) and isinstance(usrObj, Users) and new_project.creation_date == datetime.today().date(), True)
 
 
 
