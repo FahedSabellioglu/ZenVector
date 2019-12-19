@@ -4,7 +4,15 @@ python:
   - "2.7"
 
 script:
+  - cd Django
   - python manage.py test
+
+env:
+  - DJANGO_VERSION=1.11.25
+
+install:
+  - pip install -q Django==$DJANGO_VERSION
+
 notifications:
   email:
     recipients:
