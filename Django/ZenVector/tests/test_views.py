@@ -22,7 +22,14 @@ class TestViews(unittest.TestCase):
         response = client.post("/PutTogether/DeleteAccount/",{"password":"test"})
         self.assertEqual(response.status_code,200)
         urs.delete()
-    
+
+    def test_login(self):
+        client = Client()
+        response = client.post("/PutTogether/Login/",{"mail":"test@gmail.com",'password':"test"})
+        self.assertEqual(response.status_code,403)
+
+
+
 
 
 
