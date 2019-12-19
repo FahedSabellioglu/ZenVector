@@ -61,7 +61,6 @@ def Logout(request):
 @login_required(login_url='/PutTogether/')
 def DeleteAccount(request):
     data = dict(request.POST)
-    print request.user.email
     usr = authenticate(email=request.user.email, password=data['password'][0])
     if usr:
         usr_obj = Users.objects.get(email=usr)
